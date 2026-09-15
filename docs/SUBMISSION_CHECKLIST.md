@@ -14,17 +14,20 @@ Deadline: **20 Sep 2026, 11:59 PM IST** (Devpost). Everything below is ready in 
 | Submission text | `docs/DEVPOST.md` — paste each section into the Devpost form; update the deployed URL and video link | ☐ paste |
 | Pitch deck (optional, strongly recommended) | `docs/deck/Raksha-Pitch.pptx` and `.pdf` | ✅ |
 
-## Deploy (≈ 10 minutes, free, no card)
+## Deploy (free, ≈ 10 minutes)
 
-Hugging Face now requires a PRO plan for Docker Spaces, so the reference host is **Render** (free web service, 512 MB; Raksha needs ~300 MB with the model loaded).
+Hugging Face now requires a PRO plan for Docker Spaces, so pick one of these. The app is a single Docker image (`Dockerfile`); it needs ~300 MB RAM with the model loaded and benefits from a real CPU core for the embedding step.
 
-1. **Moss** (done): the `raksha-playbook` index is seeded in project `9eb21c80…`.
-2. **Render**: sign in at https://dashboard.render.com with GitHub (no card). Then either
-   * *Option A — let Claude do it:* Account settings → API Keys → create key; Workspace settings → copy the workspace/owner ID (starts with `tea-`). Send both; the service is created via the API with `render.yaml` settings and the three secrets.
-   * *Option B — click-through:* New → Blueprint → select `shi1720/YC-Fall-2026-x-Moss` (`main`) → Apply. Then in the service's *Environment* tab add `MOSS_PROJECT_ID`, `MOSS_PROJECT_KEY`, `GROQ_API_KEY`.
-3. First build takes ~6 minutes. Open the service URL: the shield header should read **Moss · in-process**.
-4. **GitHub → Settings → Secrets and variables → Actions → Variables**: `DEPLOY_URL` = the Render URL. The *Keep the deployed shield warm* workflow then pings it every 10 minutes so it never spins down (Render free sleeps after 15 idle minutes).
-5. Paste the URL into `docs/DEVPOST.md` and the Devpost form.
+| Host | Cost | CPU for the embedding step | What Claude needs from you |
+|---|---|---|---|
+| **Railway** (recommended) | $5 one-time trial credit, no card, lasts through judging | full shared vCPU → ~10–20 ms per fragment | Sign in at https://railway.com with GitHub → Account settings → Tokens → create an *account token*; send it. `railway.json` is in the repo. |
+| **Render** | free forever, no card | 0.1 vCPU → ~100 ms per fragment (still in-process, but slower numbers in the Latency lab) | Sign in at https://dashboard.render.com with GitHub → Account settings → API Keys; plus the workspace ID (`tea-…`) from Workspace settings. `render.yaml` is in the repo. Or click New → Blueprint yourself and add the three secrets. |
+| **Google Cloud Run** | free tier (card on file) | 1 vCPU while serving → fastest | A GCP project with billing enabled and a service-account key with Cloud Run + Artifact Registry roles. |
+
+After deploy:
+1. Open the URL: the shield header should read **Moss · in-process** and `/api/health` should show `"mode":"moss"`.
+2. GitHub → Settings → Secrets and variables → Actions → Variables: `DEPLOY_URL` = the URL. The *Keep the deployed shield warm* workflow pings it every 10 minutes.
+3. Paste the URL into `docs/DEVPOST.md`, the README, and the Devpost form.
 
 ## Before you record the video
 
