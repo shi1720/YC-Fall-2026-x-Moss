@@ -1,0 +1,110 @@
+{
+  "id": "digital-arrest",
+  "title": "Digital arrest",
+  "family": "digital_arrest",
+  "expected": "scam",
+  "persona": "Mrs. Sunita Rao, 68, retired teacher, Bengaluru",
+  "blurb": "A \"Mumbai Crime Branch officer\" says a parcel with drugs was sent in her name. Within minutes she is on a video call with a \"CBI DCP\" and being told to move ₹48 lakh to an \"RBI verification account\".",
+  "expectDangerByTurn": 9,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Good afternoon, am I speaking with Mrs. Sunita Rao? This is Rahul Verma from the Mumbai Crime Branch, Andheri East. This call is being recorded."
+    },
+    {
+      "speaker": "user",
+      "text": "Yes... what is this about?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Madam, a case has been registered against your Aadhaar number ending 4471. A parcel booked in your name to Taiwan was seized by customs containing MDMA and five passports. Are you aware?"
+    },
+    {
+      "speaker": "user",
+      "text": "No! I have never sent any parcel. There must be some mistake."
+    },
+    {
+      "speaker": "caller",
+      "text": "Then your identity has been misused, madam. But there is a second matter. An account in Canara Bank, Mumbai, opened with your Aadhaar, has 6 crore 80 lakh of hawala money. This is now with the CBI and the ED. Please download Skype for your statement, the DCP is waiting."
+    },
+    {
+      "speaker": "user",
+      "text": "Skype? I don't know how... my son can help me."
+    },
+    {
+      "speaker": "caller",
+      "text": "Madam, listen carefully. This is a matter of national security under the Official Secrets Act. You cannot tell your son, your husband, anyone. If the gang finds out, they will destroy evidence and you will be the only accused. Do you understand?"
+    },
+    {
+      "speaker": "user",
+      "text": "Okay... okay. I understand."
+    },
+    {
+      "speaker": "caller",
+      "text": "Good. Open the Play Store, type Skype, install, and search for 'CBI Mumbai Official'. Keep your camera on at all times. I'm sending you the FIR and the Supreme Court warrant on WhatsApp."
+    },
+    {
+      "speaker": "user",
+      "text": "I can see a document... with my photo. And it says non-bailable warrant."
+    },
+    {
+      "speaker": "caller",
+      "text": "Mrs. Rao, DCP Anil Deshmukh, CBI. You are under digital arrest from this moment. You will not leave this room, you will not disconnect the video, and every hour you will report to me. Do you accept?",
+      "note": "video, uniform, station backdrop"
+    },
+    {
+      "speaker": "user",
+      "text": "Sir, I am a retired teacher. I have done nothing. Please."
+    },
+    {
+      "speaker": "caller",
+      "text": "If you are innocent you will cooperate and be cleared with a certificate. Tell me — how many bank accounts, how much in FDs, how much in mutual funds?"
+    },
+    {
+      "speaker": "user",
+      "text": "SBI savings about 6 lakh... and FDs of 42 lakh... my late husband's."
+    },
+    {
+      "speaker": "caller",
+      "text": "All of it must be verified by the RBI. Procedure is: you transfer the full amount to the RBI verification account, our audit runs for 24 hours, and the money returns with a clearance certificate. If you refuse, the court treats it as proceeds of crime and freezes it."
+    },
+    {
+      "speaker": "user",
+      "text": "But the FDs are in the bank... I'd have to go there."
+    },
+    {
+      "speaker": "caller",
+      "text": "You will go to the branch, on this call, phone in your handbag, camera facing up. You will tell the manager it is for buying a flat for your son. You will NOT mention this case. Any staff member could be part of the gang."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay. I'm scared, sir."
+    },
+    {
+      "speaker": "caller",
+      "text": "That is natural, madam. We are with you. Note the account: Yes Bank, account number 0091 4457 2210, IFSC YESB0000091, name 'RBI Verification Cell'. RTGS the full 48 lakh. Do it now."
+    },
+    {
+      "speaker": "user",
+      "text": "Sir, the manager said the transfer is done. When will it come back?",
+      "note": "later"
+    },
+    {
+      "speaker": "caller",
+      "text": "The audit has started. However, madam, the ED has just flagged a second account in Hyderabad in your name. To keep the interim bail order, a surety bond of 12 lakh is required by 4 PM today. Do you have gold or any other savings?"
+    },
+    {
+      "speaker": "user",
+      "text": "I have some gold... and my daughter has money, but you said not to tell her."
+    },
+    {
+      "speaker": "caller",
+      "text": "Tell her it's for a medical emergency. Madam, we are very close to closing this. One last step and you receive the certificate. Keep the camera on."
+    },
+    {
+      "speaker": "user",
+      "text": "Alright, I'll ask her. Please don't let them arrest me."
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.1"
+}

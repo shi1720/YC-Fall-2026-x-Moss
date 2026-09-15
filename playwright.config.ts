@@ -1,0 +1,21 @@
+import { defineConfig } from "@playwright/test";
+
+const port = Number(process.env.E2E_PORT ?? 3311);
+
+export default defineConfig({
+  testDir: "tests/e2e",
+  timeout: 90_000,
+  retries: process.env.CI ? 1 : 0,
+  reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
+  use: {
+    baseURL: `http://localhost:${port}`,
+    trace: "retain-on-failure",
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM } : {},
+  },
+  webServer: {
+    command: `PORT=${port} npm run start`,
+    url: `http://localhost:${port}/api/health`,
+    timeout: 120_000,
+    reuseExistingServer: !process.env.CI,
+  },
+});

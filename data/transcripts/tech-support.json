@@ -1,0 +1,92 @@
+{
+  "id": "tech-support",
+  "title": "Tech support remote access",
+  "family": "tech_support",
+  "expected": "scam",
+  "persona": "Mr. Fernandes, 63, Goa",
+  "blurb": "\"Microsoft\" says his computer is sending error messages. He installs AnyDesk; next, his bank app is on the scammer's screen.",
+  "expectDangerByTurn": 10,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hello, this is Kevin from the Windows technical department, Microsoft. We've been receiving error reports from your computer's IP address for the last week. Are you the main user of the computer?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, but it seems fine to me."
+    },
+    {
+      "speaker": "caller",
+      "text": "It seems fine because the malware is hidden, sir. Are you in front of the computer? Press the Windows key and the letter R at the same time."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay, a little box opened."
+    },
+    {
+      "speaker": "caller",
+      "text": "Type e-v-e-n-t-v-w-r and press Enter. Now on the left click 'Windows Logs' and 'Application'. Do you see red and yellow warnings?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, lots of them."
+    },
+    {
+      "speaker": "caller",
+      "text": "Every one of those is a hacker attempt from Russia or China, sir. Your firewall license has expired. Don't turn off the computer, the files will be encrypted."
+    },
+    {
+      "speaker": "user",
+      "text": "What should I do?"
+    },
+    {
+      "speaker": "caller",
+      "text": "I'll fix it remotely. Press Windows and R again, type www.anydesk.com, download and open it. Read me the 9-digit number on the screen."
+    },
+    {
+      "speaker": "user",
+      "text": "It's 4-2-1... 9-8-7... 0-0-3."
+    },
+    {
+      "speaker": "caller",
+      "text": "Accept the request. Now don't touch the mouse. I'm scanning... Sir, I can see the hackers have been in your online banking too. Which bank do you use?"
+    },
+    {
+      "speaker": "user",
+      "text": "Chase."
+    },
+    {
+      "speaker": "caller",
+      "text": "Log in so I can check the account for unauthorized transactions. I'll turn my screen off for privacy."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay, I'm in. I don't see anything strange."
+    },
+    {
+      "speaker": "caller",
+      "text": "The transactions are pending, they haven't posted yet. Sir, we can block them and install a lifetime network firewall. The cost is $299 one time, but because your account is compromised, the payment must be by Target or Google Play gift cards, so the hackers cannot intercept."
+    },
+    {
+      "speaker": "user",
+      "text": "I'd rather pay by card."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, your card is what they're watching. Gift cards are the secure channel used by Microsoft security. Go to the nearest store now, I'll stay on the line; leave the computer on and don't close AnyDesk."
+    },
+    {
+      "speaker": "user",
+      "text": "And what do I tell the cashier if they ask?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Say they're for your grandchildren's birthday. Cashiers are not trained in this and will only delay you."
+    },
+    {
+      "speaker": "user",
+      "text": "Alright... I'm going now."
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.6"
+}

@@ -1,0 +1,94 @@
+{
+  "id": "investment-group",
+  "title": "Investment WhatsApp group",
+  "family": "investment",
+  "expected": "scam",
+  "persona": "Deepak, 45, Hyderabad",
+  "blurb": "A \"SEBI-registered analyst\" with screenshots of members' profits, an app that shows gains, and a withdrawal that needs a \"tax\" first.",
+  "expectDangerByTurn": 12,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hi Vikram, this is Anjali, assistant to Mr. Rakesh Sharma from the VIP Wealth group. You joined last week — have you tried the free tips?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, the IRFC call worked, went up 6 percent."
+    },
+    {
+      "speaker": "caller",
+      "text": "Exactly. Members who used the institutional account made 22 percent on it, because they got the block price. Would you like to open an institutional account? It's free."
+    },
+    {
+      "speaker": "user",
+      "text": "How does that work?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Download the MO Investor Pro app from the link I'll send — not from the Play Store, that one's the retail version. Sir Rakesh personally manages the institutional book."
+    },
+    {
+      "speaker": "user",
+      "text": "Is this SEBI registered?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Of course. His registration is INH000012345; I'll send the certificate. See in the group — Meena withdrew 4.6 lakh yesterday, Rahul 1.1 lakh. Screenshots are all there."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay. Minimum?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Start with 50,000. Transfer to the company account I'll send — it changes daily for compliance, so always confirm with me first. Never transfer to an old account."
+    },
+    {
+      "speaker": "user",
+      "text": "The app shows 50,000 became 71,000. Can I withdraw 20,000 to test?",
+      "note": "two days later"
+    },
+    {
+      "speaker": "caller",
+      "text": "Sure — small withdrawals are instant. See, 20,000 credited? Good. Now, sir Rakesh has an IPO block for members only, guaranteed allotment, 40 percent listing gain. Allocation is 5 lakh minimum, window closes at 3 PM today."
+    },
+    {
+      "speaker": "user",
+      "text": "That's a lot. Let me ask my friend who's a broker."
+    },
+    {
+      "speaker": "caller",
+      "text": "Vikram, honestly, brokers earn commission on retail losses. They'll discourage you. This group is by invitation; if the data speaks, trust the data. Only 3 slots left."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay, I'll take a loan against my FD and do 5 lakh."
+    },
+    {
+      "speaker": "caller",
+      "text": "Congratulations! The allotment listed at 42 percent. Your balance is 9.4 lakh.",
+      "note": "one week later"
+    },
+    {
+      "speaker": "user",
+      "text": "Great, I want to withdraw everything now."
+    },
+    {
+      "speaker": "caller",
+      "text": "For withdrawals above 5 lakh the platform must collect 15 percent capital-gains tax upfront, as per SEBI. That's 1.41 lakh, to the company account, then the full 9.4 lakh releases within 2 hours."
+    },
+    {
+      "speaker": "user",
+      "text": "Can't you just deduct it from the balance?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No sir, the rule says tax must come from a verified external account, it's an AML check. Everyone in the group has done it. If not paid in 48 hours, the account is frozen and reported."
+    },
+    {
+      "speaker": "user",
+      "text": "Fine... sending 1.41 lakh now."
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.4"
+}

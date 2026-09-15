@@ -1,0 +1,101 @@
+[
+  {
+    "id": "digital-arrest",
+    "title": "Digital arrest",
+    "family": "digital_arrest",
+    "expected": "scam",
+    "persona": "Mrs. Sunita Rao, 68, retired teacher, Bengaluru",
+    "blurb": "A \"Mumbai Crime Branch officer\" says a parcel with drugs was sent in her name. Within minutes she is on a video call with a \"CBI DCP\" and being told to move ₹48 lakh to an \"RBI verification account\".",
+    "expectDangerByTurn": 9,
+    "source": "docs/research/scam-corpus.md §5.1",
+    "turns": 24
+  },
+  {
+    "id": "bank-otp",
+    "title": "Bank card OTP",
+    "family": "card_fraud_dept",
+    "expected": "scam",
+    "persona": "Rajesh Kumar, 41, Pune",
+    "blurb": "\"SBI card protection\" calls about a ₹49,999 transaction he never made. To \"cancel\" it he must read out his card number, CVV and the OTP.",
+    "expectDangerByTurn": 7,
+    "source": "docs/research/scam-corpus.md §5.2",
+    "turns": 16
+  },
+  {
+    "id": "courier-parcel",
+    "title": "Courier parcel hand-off",
+    "family": "courier_parcel",
+    "expected": "scam",
+    "persona": "Arjun Mehta, 34, Mumbai",
+    "blurb": "A FedEx IVR, a \"compliance executive\", then a conference call with a \"cyber-crime inspector\": the classic on-ramp to a digital arrest.",
+    "expectDangerByTurn": 12,
+    "source": "docs/research/scam-corpus.md §5.3",
+    "turns": 18
+  },
+  {
+    "id": "investment-group",
+    "title": "Investment WhatsApp group",
+    "family": "investment",
+    "expected": "scam",
+    "persona": "Deepak, 45, Hyderabad",
+    "blurb": "A \"SEBI-registered analyst\" with screenshots of members' profits, an app that shows gains, and a withdrawal that needs a \"tax\" first.",
+    "expectDangerByTurn": 12,
+    "source": "docs/research/scam-corpus.md §5.4",
+    "turns": 20
+  },
+  {
+    "id": "grandparent-voice-clone",
+    "title": "Grandparent voice clone",
+    "family": "family_emergency",
+    "expected": "scam",
+    "persona": "Grandma Lakshmi, 74",
+    "blurb": "\"Grandma, it's me, I've been in an accident, don't tell Mom.\" A cloned voice, then a \"lawyer\" who needs bail money in cash.",
+    "expectDangerByTurn": 8,
+    "source": "docs/research/scam-corpus.md §5.5",
+    "turns": 18
+  },
+  {
+    "id": "tech-support",
+    "title": "Tech support remote access",
+    "family": "tech_support",
+    "expected": "scam",
+    "persona": "Mr. Fernandes, 63, Goa",
+    "blurb": "\"Microsoft\" says his computer is sending error messages. He installs AnyDesk; next, his bank app is on the scammer's screen.",
+    "expectDangerByTurn": 10,
+    "source": "docs/research/scam-corpus.md §5.6",
+    "turns": 20
+  },
+  {
+    "id": "deepfake-cfo",
+    "title": "Deepfake CFO wire request",
+    "family": "ceo_wire_fraud",
+    "expected": "scam",
+    "persona": "Finance manager, multinational (Arup-style)",
+    "blurb": "The \"CFO\" joins a video call about a confidential acquisition and needs three wires today, no loop-in, no callback.",
+    "expectDangerByTurn": 8,
+    "source": "docs/research/scam-corpus.md §5.7",
+    "turns": 16
+  },
+  {
+    "id": "benign-bank",
+    "title": "Genuine bank fraud call",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Rajesh Kumar, 41, Pune",
+    "blurb": "HDFC's real fraud team blocks a card the right way: no OTP, no urgency, and an invitation to call back on the number on the card.",
+    "expectDangerByTurn": null,
+    "source": "docs/research/scam-corpus.md §5.8",
+    "turns": 14
+  },
+  {
+    "id": "benign-hospital",
+    "title": "Genuine hospital call",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Mrs. Lakshmi Iyer, 66, Hyderabad",
+    "blurb": "Apollo confirms an appointment, asks her to bring reports, and says payment happens at the counter after the visit.",
+    "expectDangerByTurn": null,
+    "source": "docs/research/scam-corpus.md §5.9",
+    "turns": 12
+  }
+]

@@ -1,0 +1,79 @@
+{
+  "id": "deepfake-cfo",
+  "title": "Deepfake CFO wire request",
+  "family": "ceo_wire_fraud",
+  "expected": "scam",
+  "persona": "Finance manager, multinational (Arup-style)",
+  "blurb": "The \"CFO\" joins a video call about a confidential acquisition and needs three wires today, no loop-in, no callback.",
+  "expectDangerByTurn": 8,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Morning, Chen. Sorry for the short notice and the dodgy video, I'm on hotel Wi-Fi in London. Can you see me okay?",
+      "note": "deepfake CFO, video"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, a bit choppy but fine. What's up?"
+    },
+    {
+      "speaker": "caller",
+      "text": "We're at the tail end of a strategic acquisition — the target's counsel needs the deposit before their market opens. It's under NDA, so it can't go through Treasury's normal workflow yet. I need you to execute it directly."
+    },
+    {
+      "speaker": "user",
+      "text": "Understood. What's the amount?"
+    },
+    {
+      "speaker": "caller",
+      "text": "HK$200 million, across fifteen transfers to five accounts, to keep it below the counterparty's per-account limits. I'll drop the beneficiary details in the chat now. [Second \"colleague\" on video nods] Mark's here from Legal — Mark, we're cleared?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Cleared. Board resolution is signed; it'll be filed with the paperwork Monday.",
+      "note": "deepfake"
+    },
+    {
+      "speaker": "user",
+      "text": "Normally I'd need a second approver and the vendor set-up in the system."
+    },
+    {
+      "speaker": "caller",
+      "text": "I'm giving you verbal authorisation on a recorded call with Legal present. Consider that your second approval; I'll countersign when I land. Please don't loop in Priya or the Treasury team — they're not read into the deal and I don't want a leak moving the share price."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay. Timing?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Within the hour, ideally. Message me the confirmation numbers directly on WhatsApp, not email, for the same reason."
+    },
+    {
+      "speaker": "user",
+      "text": "Some of these beneficiaries are personal names, not companies."
+    },
+    {
+      "speaker": "caller",
+      "text": "They're the founders' escrow arrangements; counsel structured it that way. It's fine. Chen, I know this is outside process. I'm taking full responsibility — it's why I got on video rather than just emailing."
+    },
+    {
+      "speaker": "user",
+      "text": "Alright. I'll start with the first five."
+    },
+    {
+      "speaker": "caller",
+      "text": "Good man. And Chen — keep this between us until the announcement. If anyone asks, it's a routine supplier settlement."
+    },
+    {
+      "speaker": "user",
+      "text": "Will do."
+    },
+    {
+      "speaker": "caller",
+      "text": "Great, thank you. There's a second tranche tomorrow, same structure. I'll ping you.",
+      "note": "after transfers"
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.7"
+}

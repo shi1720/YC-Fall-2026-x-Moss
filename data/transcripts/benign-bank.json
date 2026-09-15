@@ -1,0 +1,68 @@
+{
+  "id": "benign-bank",
+  "title": "Genuine bank fraud call",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Rajesh Kumar, 41, Pune",
+  "blurb": "HDFC's real fraud team blocks a card the right way: no OTP, no urgency, and an invitation to call back on the number on the card.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hello, this is Meera calling from HDFC Bank's fraud monitoring team. Am I speaking with Mr. Rajesh Kumar? Before we go further: I will not ask you for your OTP, PIN, CVV or full card number on this call, and you're welcome to hang up and call the number on the back of your card instead."
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, this is Rajesh. What's this about?"
+    },
+    {
+      "speaker": "caller",
+      "text": "We flagged a transaction of ₹18,400 at a jewellery store in Jaipur at 2:10 PM today on your credit card ending 3320. Was that you?"
+    },
+    {
+      "speaker": "user",
+      "text": "No, I'm in Pune. I haven't used that card today."
+    },
+    {
+      "speaker": "caller",
+      "text": "Understood. I'm blocking the card right now as a precaution. You'll get an SMS confirming the block within a minute."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay, I got it. What about the ₹18,400?"
+    },
+    {
+      "speaker": "caller",
+      "text": "The transaction was declined by our system, so nothing has debited. If you see anything else you don't recognise, you can dispute it from the app or by calling us."
+    },
+    {
+      "speaker": "user",
+      "text": "Do you need any details from me?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No sir, nothing at all. A replacement card will be couriered to your registered address within 5 to 7 working days. You'll receive the delivery OTP from the courier company; that is only for the delivery agent at your door."
+    },
+    {
+      "speaker": "user",
+      "text": "Should I change anything?"
+    },
+    {
+      "speaker": "caller",
+      "text": "If you'd saved the card on any website, update it when the new card arrives. And please never share any OTP with anyone who calls you — including anyone claiming to be from the bank."
+    },
+    {
+      "speaker": "user",
+      "text": "Thanks. Can I verify this call?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Absolutely. Your service request number is SR-77812. You can call the number on the back of your card or check the request in NetBanking under 'Service Requests'."
+    },
+    {
+      "speaker": "user",
+      "text": "Great, thank you."
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.8"
+}

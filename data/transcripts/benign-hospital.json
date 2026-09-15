@@ -1,0 +1,60 @@
+{
+  "id": "benign-hospital",
+  "title": "Genuine hospital call",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Mrs. Lakshmi Iyer, 66, Hyderabad",
+  "blurb": "Apollo confirms an appointment, asks her to bring reports, and says payment happens at the counter after the visit.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Good morning, this is Kavya from Dr. Mehta's clinic at Apollo, Jubilee Hills. Am I speaking with Mrs. Lakshmi Iyer?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes."
+    },
+    {
+      "speaker": "caller",
+      "text": "I'm calling to confirm your follow-up appointment with Dr. Mehta tomorrow, Thursday, at 4:30 PM. Does that still work for you?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, 4:30 is fine. Do I need to bring anything?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Please bring your previous prescription and the blood-test report from last week. If the lab has emailed it to you, a printout or the PDF on your phone is fine."
+    },
+    {
+      "speaker": "user",
+      "text": "Alright. Is there any payment to be made in advance?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No, ma'am, nothing in advance. Consultation is paid at the reception counter after the visit, and you'll get a printed receipt."
+    },
+    {
+      "speaker": "user",
+      "text": "And parking?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Basement parking, level 2, and the OPD is on the third floor. If you're running late, just call the clinic landline — the number on your appointment card."
+    },
+    {
+      "speaker": "user",
+      "text": "One more thing — the doctor mentioned a scan. Will that be tomorrow?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Dr. Mehta will decide after the consultation. If a scan is needed, we'll schedule it and you can pay at the radiology counter directly."
+    },
+    {
+      "speaker": "user",
+      "text": "Perfect, see you tomorrow. Thanks."
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.9"
+}

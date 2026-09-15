@@ -1,0 +1,5150 @@
+{
+  "version": 1,
+  "generatedFrom": "docs/research/scam-corpus.md",
+  "docs": [
+    {
+      "id": "digital_arrest-001",
+      "text": "Sir, I am speaking from Mumbai Crime Branch, Andheri East. A case has been registered against your Aadhaar number under money laundering. Aap ka naam FIR mein hai.",
+      "family": "digital_arrest",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "account_compromise"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-002",
+      "text": "Your Aadhaar has been used to open an account in Canara Bank, Mumbai branch, and 6 crore 80 lakh rupees of hawala money has been transacted through it.",
+      "family": "digital_arrest",
+      "tactics": [
+        "authority",
+        "account_compromise",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-003",
+      "text": "This is a matter of national security. You are not to discuss this case with anyone — not your wife, not your children, not your bank. Section 20 of the Official Secrets Act applies.",
+      "family": "digital_arrest",
+      "tactics": [
+        "secrecy",
+        "isolation",
+        "authority",
+        "legal_threat"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-004",
+      "text": "I am transferring this call to DCP Sahab of the CBI. Please download Skype and search for 'Mumbai Cyber Cell Official'. Keep the video on.",
+      "family": "digital_arrest",
+      "tactics": [
+        "video_call_demand",
+        "authority",
+        "escalation"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-005",
+      "text": "You are now under digital arrest. Do not disconnect the call, do not switch off the camera, do not leave the room. Every hour you will report to me.",
+      "family": "digital_arrest",
+      "tactics": [
+        "hold_the_line",
+        "isolation",
+        "legal_threat",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-006",
+      "text": "Naresh Goyal ke case mein aapka naam aaya hai. Supreme Court ne aapke against non-bailable warrant issue kiya hai — main abhi PDF bhej raha hoon.",
+      "family": "digital_arrest",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-007",
+      "text": "If you are innocent, cooperate. For verification you have to transfer 100 percent of your savings into the RBI verification account. After the audit, the money will be returned with a clearance certificate in 24 hours.",
+      "family": "digital_arrest",
+      "tactics": [
+        "payment_method",
+        "verification_bypass",
+        "authority",
+        "urgency"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-008",
+      "text": "Madam, if you try to call the police station or visit the bank, the money-laundering gang will be alerted — they have people inside the bank. Only this channel is safe.",
+      "family": "digital_arrest",
+      "tactics": [
+        "verification_bypass",
+        "isolation",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-009",
+      "text": "Break your fixed deposits and mutual funds today. Tell the bank manager it is for a property purchase — do not mention this investigation.",
+      "family": "digital_arrest",
+      "tactics": [
+        "payment_method",
+        "secrecy",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-010",
+      "text": "Ma'am, I have your mobile location in front of me. If the video call is cut, the local police will reach your house within 10 minutes with the arrest warrant.",
+      "family": "digital_arrest",
+      "tactics": [
+        "fear",
+        "hold_the_line",
+        "legal_threat"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-011",
+      "text": "Aapke account mein jo bhi paisa hai, uska source verify hoga. Court-approved secure account number main bhej raha hoon, RTGS kar dijiye.",
+      "family": "digital_arrest",
+      "tactics": [
+        "payment_method",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-012",
+      "text": "One more case has come up — a second account in Hyderabad. The Enforcement Directorate now needs an additional 12 lakh as surety bond, otherwise the interim bail is cancelled.",
+      "family": "digital_arrest",
+      "tactics": [
+        "escalation",
+        "legal_threat",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-013",
+      "text": "Your son's name is also appearing in the transaction list. If you want to keep him out of this, you must complete the verification quietly.",
+      "family": "digital_arrest",
+      "tactics": [
+        "fear",
+        "secrecy",
+        "relationship_pretext",
+        "escalation"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-014",
+      "text": "I am recording this statement. Say 'I, [name], am cooperating with the CBI investigation voluntarily.' Now show me your bank app balance on camera.",
+      "family": "digital_arrest",
+      "tactics": [
+        "authority",
+        "personal_info",
+        "video_call_demand"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "digital_arrest-015",
+      "text": "Madam, this is a very confidential process. Aapko koi pooche toh bolna office ka kaam hai. Phone silent par rakho aur meri call par hi raho.",
+      "family": "digital_arrest",
+      "tactics": [
+        "secrecy",
+        "isolation",
+        "hold_the_line"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-001",
+      "text": "This call is from FedEx. A parcel booked in your name from Mumbai to Taiwan has been held by Customs. Press 1 to speak to our executive.",
+      "family": "courier_parcel",
+      "tactics": [
+        "authority",
+        "account_compromise"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-002",
+      "text": "Sir, the parcel contains 5 expired passports, 3 credit cards, 4 kilograms of clothes, one laptop and 140 grams of MDMA. It was booked on 12th September using your Aadhaar number ending 4471.",
+      "family": "courier_parcel",
+      "tactics": [
+        "authority",
+        "fear",
+        "account_compromise",
+        "personal_info"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-003",
+      "text": "Aapka naam, address aur mobile number consignor mein diya gaya hai. Customs ne parcel seize kar liya hai aur ek narcotics case register hua hai.",
+      "family": "courier_parcel",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-004",
+      "text": "If you did not send this parcel, your identity has been misused. I can connect you to the Andheri cyber crime police right now so a complaint gets registered in your name. Otherwise the case proceeds against you.",
+      "family": "courier_parcel",
+      "tactics": [
+        "authority",
+        "urgency",
+        "escalation",
+        "verification_bypass"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-005",
+      "text": "Please stay on the line, I am conferencing Inspector Vijay Kumar of Mumbai Narcotics Control Bureau. Do not hang up or the complaint will lapse.",
+      "family": "courier_parcel",
+      "tactics": [
+        "hold_the_line",
+        "authority",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-006",
+      "text": "The tracking ID is FX-2291-MU-TW. Our compliance team has already shared your details with the Narcotics department; you have to clear your name within the next 2 hours.",
+      "family": "courier_parcel",
+      "tactics": [
+        "urgency",
+        "fear",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-007",
+      "text": "Hello, DHL customer service here. Your shipment has been flagged for illegal contents. A fine of ₹18,000 is payable to release it, or the matter goes to the police.",
+      "family": "courier_parcel",
+      "tactics": [
+        "payment_method",
+        "legal_threat",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-008",
+      "text": "Sir, this is not a marketing call. The parcel has your PAN card photocopy inside. You need to record your statement on video for the customs officer.",
+      "family": "courier_parcel",
+      "tactics": [
+        "video_call_demand",
+        "authority",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-009",
+      "text": "For the complaint we need to verify your identity — please tell me your full Aadhaar number, date of birth and the bank where you hold your main account.",
+      "family": "courier_parcel",
+      "tactics": [
+        "personal_info",
+        "authority"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "courier_parcel-010",
+      "text": "Aap ghabraaiye mat, hum aapki madad karenge. Bas cyber cell ko sab clearly bataiye aur jo officer bole waisa kariye.",
+      "family": "courier_parcel",
+      "tactics": [
+        "reciprocity",
+        "authority",
+        "isolation"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-001",
+      "text": "This is a call from Telecom Regulatory Authority of India. All your mobile numbers will be blocked within 2 hours due to illegal activities. To know more, press 9.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "authority",
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-002",
+      "text": "Sir, aapke Aadhaar par ek aur SIM issue hui hai, Mumbai Ghatkopar ke Vodafone store se. Us number se obscene messages bheje gaye hain aur uske against FIR number 0421/2026 registered hai.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "authority",
+        "account_compromise",
+        "legal_threat"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-003",
+      "text": "Your number is being used for money laundering and harassment. Department of Telecom has issued a disconnection order for all 3 numbers linked to your Aadhaar.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "authority",
+        "fear",
+        "account_compromise"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-004",
+      "text": "If you were not aware of this SIM, we need a clarification letter from the police. I'll connect you to the Mumbai cyber cell — please hold.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "authority",
+        "hold_the_line",
+        "verification_bypass"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-005",
+      "text": "I am Deputy Officer Sanjay Mishra, employee ID TR-4471. Note this down — you will need it for the complaint.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "authority"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-006",
+      "text": "Ma'am, do not hang up. Once the call disconnects, the block order goes through automatically and even your bank OTPs will stop coming.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "hold_the_line",
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-007",
+      "text": "To keep your number active you have to verify KYC again. Share the OTP that just came from your operator.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "otp_request",
+        "urgency",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-008",
+      "text": "Aapka number 2 ghante mein band ho jayega. Isko rokne ke liye abhi 1 dabaiye aur officer se baat kariye.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-009",
+      "text": "The SIM in Mumbai was used to send threatening messages to a woman. A case under IT Act 67 is registered. You have to give a statement to the police on video today.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "legal_threat",
+        "video_call_demand",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "sim_disconnection-010",
+      "text": "This is Sanchar Saathi portal verification. To remove the fraud SIM from your name, pay ₹2,500 re-verification charge via the link I am sending.",
+      "family": "sim_disconnection",
+      "tactics": [
+        "payment_method",
+        "authority"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-001",
+      "text": "Hello, I'm calling from SBI head office KYC department. Your KYC is expiring today; if not updated, your account will be blocked by tonight.",
+      "family": "bank_kyc",
+      "tactics": [
+        "authority",
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-002",
+      "text": "Aapka PAN card account se link nahi hua hai. Aaj hi update nahi kiya toh account freeze ho jayega aur pension aana band ho jayegi.",
+      "family": "bank_kyc",
+      "tactics": [
+        "urgency",
+        "fear",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-003",
+      "text": "To update KYC from home, I'll send you a link on SMS. Just enter your account number, debit card number, expiry and the CVV on the back.",
+      "family": "bank_kyc",
+      "tactics": [
+        "personal_info",
+        "authority"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-004",
+      "text": "Ma'am, an OTP has just been sent to your registered number for KYC verification. Please read it to me — this is only for verification, no transaction will happen.",
+      "family": "bank_kyc",
+      "tactics": [
+        "otp_request",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-005",
+      "text": "Sir, download the 'SBI Quick Support' app from the link I'm sending on WhatsApp — it's the official app for online KYC.",
+      "family": "bank_kyc",
+      "tactics": [
+        "remote_access",
+        "tech_pretext",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-006",
+      "text": "Don't worry sir, this is a recorded line from the bank, everything is secure. Aap bas OTP bata dijiye, main system mein daal deta hoon.",
+      "family": "bank_kyc",
+      "tactics": [
+        "otp_request",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-007",
+      "text": "Your net banking has been accessed from an unknown device in Kolkata. To secure it, we'll reset your password — tell me the 6-digit code you just received.",
+      "family": "bank_kyc",
+      "tactics": [
+        "account_compromise",
+        "otp_request",
+        "fear"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-008",
+      "text": "Sir, KYC update ke liye ₹10 ka token payment hota hai, bas link par jaake pay kar dijiye, refund ho jayega.",
+      "family": "bank_kyc",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-009",
+      "text": "Please don't visit the branch, the branch KYC queue takes 15 days. This telephonic KYC is the fast-track option approved by RBI.",
+      "family": "bank_kyc",
+      "tactics": [
+        "verification_bypass",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-010",
+      "text": "I can see your account is showing 'KYC Non-Compliant — Debit Freeze in 4 hours'. I'm here to help you avoid that.",
+      "family": "bank_kyc",
+      "tactics": [
+        "urgency",
+        "fear",
+        "reciprocity"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-011",
+      "text": "For security, confirm your mother's maiden name, date of birth and the last four digits of your Aadhaar.",
+      "family": "bank_kyc",
+      "tactics": [
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "bank_kyc-012",
+      "text": "Sir, the OTP you told me was wrong, one more OTP is coming, please tell that one quickly before it expires.",
+      "family": "bank_kyc",
+      "tactics": [
+        "otp_request",
+        "urgency",
+        "escalation"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-001",
+      "text": "This is HDFC card fraud prevention. A transaction of ₹49,999 at Croma, Delhi is being attempted on your card. Did you authorise it?",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "account_compromise",
+        "authority",
+        "fear"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-002",
+      "text": "To block that transaction I need to verify the card. Read the 16-digit number and the CVV, and then the OTP that comes.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "otp_request",
+        "personal_info"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-003",
+      "text": "Sir, your 8,450 reward points worth ₹8,450 are expiring at midnight today. I can redeem them to your account, just confirm the OTP.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "too_good",
+        "urgency",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-004",
+      "text": "Aapke card par international transaction hua hai, 300 dollar Amazon USA. Cancel karne ke liye OTP share kariye.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "account_compromise",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-005",
+      "text": "Your card is eligible for a limit increase to ₹5 lakh with zero annual fee. To activate, tell me the OTP sent for e-consent.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "too_good",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-006",
+      "text": "Ma'am, I'm sending a secure form on WhatsApp for the chargeback; fill in card number, expiry and CVV and upload a selfie with your PAN.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "personal_info",
+        "tech_pretext"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-007",
+      "text": "Please don't hang up and call the number on the back of the card — that line goes to the retail team, they can't stop a fraud in progress.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "verification_bypass",
+        "hold_the_line"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-008",
+      "text": "The OTP you are receiving is to cancel the transaction, not to approve it. That's why it says ₹49,999 — ignore the message text.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "otp_request",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-009",
+      "text": "We will temporarily block your card; to issue a new one we need your Aadhaar and PAN details over the phone right now.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "personal_info",
+        "urgency"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "card_fraud_dept-010",
+      "text": "Annual fee of ₹2,999 will be charged tomorrow. Say yes to waive it and share the confirmation code.",
+      "family": "card_fraud_dept",
+      "tactics": [
+        "otp_request",
+        "urgency",
+        "too_good"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-001",
+      "text": "Dear consumer, your electricity power will be disconnected tonight at 9.30 PM because your previous month bill was not updated. Please contact our electricity officer immediately.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "urgency",
+        "fear",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-002",
+      "text": "Sir, aapka bill system mein update nahi hua. Aaj raat ko connection cut ho jayega. Main junior engineer bol raha hoon, abhi rukwa sakta hoon.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "urgency",
+        "authority",
+        "reciprocity"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-003",
+      "text": "The disconnection is already in the queue. To stop it you need to pay ₹10 verification charge through the link so your meter number gets updated.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "payment_method",
+        "urgency"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-004",
+      "text": "Install the 'MSEDCL Bill Update' app I'm sending on WhatsApp and enter your consumer number and UPI details.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "remote_access",
+        "tech_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-005",
+      "text": "Ma'am, the online portal is down due to a glitch. That's why the bill shows unpaid. I'll fix it on my end if you share screen through this app.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "tech_pretext",
+        "remote_access",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-006",
+      "text": "Do the payment on this Paytm number — it is our regional officer's collection account. The bill receipt will be updated in 5 minutes.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-007",
+      "text": "If you go to the office tomorrow it will already be cut; reconnection charge is ₹3,500 plus one week. Better to update now.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-008",
+      "text": "You have received a request of ₹1 on your UPI — please approve it to confirm your account, after that your bill will be updated.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "utility_disconnection-009",
+      "text": "Bijli office se bol raha hoon. Meter reading mismatch hai, penalty lagegi. Abhi ₹499 online bhar do to case close.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "authority",
+        "payment_method",
+        "urgency"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-001",
+      "text": "Sir, this is from the Income Tax Department e-filing helpdesk. A refund of ₹15,490 has been approved for AY 2025-26 but your bank account failed validation.",
+      "family": "tax_refund",
+      "tactics": [
+        "authority",
+        "too_good"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-002",
+      "text": "To release the refund, confirm your account number, IFSC and the OTP that comes from the e-filing portal.",
+      "family": "tax_refund",
+      "tactics": [
+        "otp_request",
+        "personal_info"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-003",
+      "text": "Aapka refund pending hai kyunki PAN-Aadhaar link nahi hai. Link par click karke ₹1,000 late fee bhariye, refund 24 ghante mein aa jayega.",
+      "family": "tax_refund",
+      "tactics": [
+        "payment_method",
+        "authority"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-004",
+      "text": "Your return has been selected for scrutiny. A penalty of ₹42,000 under section 270A is due. Pay today via the challan link, otherwise prosecution proceedings begin.",
+      "family": "tax_refund",
+      "tactics": [
+        "legal_threat",
+        "urgency",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-005",
+      "text": "This is a final reminder from CPC Bengaluru. Ignoring this will lead to freezing of your bank accounts by the assessing officer.",
+      "family": "tax_refund",
+      "tactics": [
+        "fear",
+        "urgency",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-006",
+      "text": "Ma'am, the refund of 28,300 will go to a wrong account unless you update. I'll help you — just install the 'ITD e-Verify' app.",
+      "family": "tax_refund",
+      "tactics": [
+        "remote_access",
+        "authority",
+        "too_good"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-007",
+      "text": "For refund verification, share the OTP you got from 'ITDEFL'. It's not a transaction OTP, it's a KYC OTP.",
+      "family": "tax_refund",
+      "tactics": [
+        "otp_request",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "tax_refund-008",
+      "text": "We can process a bigger refund for you if you pay the CA verification fee of ₹2,500 now.",
+      "family": "tax_refund",
+      "tactics": [
+        "too_good",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-001",
+      "text": "Congratulations! Aapka mobile number KBC Jio lucky draw mein select hua hai. Aapne 25 lakh rupaye jeete hain.",
+      "family": "lottery_prize",
+      "tactics": [
+        "too_good"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "hook",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-002",
+      "text": "Your lottery number is 8877. The cheque of 25 lakh is ready with our manager Rana Pratap Singh in Mumbai head office.",
+      "family": "lottery_prize",
+      "tactics": [
+        "too_good",
+        "authority"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-003",
+      "text": "To transfer the prize you have to first pay the GST of 4.5 percent — ₹12,500 — to our government account. Uske bina RBI release nahi karega.",
+      "family": "lottery_prize",
+      "tactics": [
+        "payment_method",
+        "authority",
+        "reciprocity"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-004",
+      "text": "Ye baat kisi ko mat batana, warna tax department aapke inaam ko rok dega.",
+      "family": "lottery_prize",
+      "tactics": [
+        "secrecy",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-005",
+      "text": "Sir, you have to claim within 24 hours, otherwise the prize goes to the next lucky number.",
+      "family": "lottery_prize",
+      "tactics": [
+        "urgency",
+        "too_good"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-006",
+      "text": "For verification, send a photo of your Aadhaar, bank passbook and a selfie holding both.",
+      "family": "lottery_prize",
+      "tactics": [
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-007",
+      "text": "The 12,500 you sent was received, but the bank has now asked for ₹28,000 insurance charge on the prize amount — after that the full 25 lakh comes to your account.",
+      "family": "lottery_prize",
+      "tactics": [
+        "escalation",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-008",
+      "text": "Do not call this number back, only WhatsApp. Our manager will call you from a private number.",
+      "family": "lottery_prize",
+      "tactics": [
+        "isolation",
+        "verification_bypass"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-009",
+      "text": "Amitabh Bachchan ji ki taraf se badhai. Aapko WhatsApp par lottery certificate bhej raha hoon, dekh lijiye.",
+      "family": "lottery_prize",
+      "tactics": [
+        "too_good",
+        "social_proof"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "hook",
+      "region": "IN"
+    },
+    {
+      "id": "lottery_prize-010",
+      "text": "You have won a Tata Safari car in the Flipkart lucky draw. Pay ₹6,500 registration fee or take the cash option of 12.6 lakh after paying tax.",
+      "family": "lottery_prize",
+      "tactics": [
+        "too_good",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-001",
+      "text": "You have defaulted on your ₹3,000 loan. The penalty is now ₹9,600. Pay within one hour or we will inform all your contacts that you are a fraud.",
+      "family": "loan_app",
+      "tactics": [
+        "fear",
+        "urgency",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-002",
+      "text": "Hum aapki photo edit karke aapke saare contacts ko bhej denge — family, office, sab ko. Paisa bhejo abhi.",
+      "family": "loan_app",
+      "tactics": [
+        "fear",
+        "escalation",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-003",
+      "text": "Your phone contacts are with us. We already sent a message to your boss and your brother-in-law. Next is your daughter's college group.",
+      "family": "loan_app",
+      "tactics": [
+        "fear",
+        "social_proof",
+        "escalation"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-004",
+      "text": "This is the legal department. An FIR is being lodged under cheating section 420 today. Police will come to your residence.",
+      "family": "loan_app",
+      "tactics": [
+        "legal_threat",
+        "authority",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-005",
+      "text": "Madam, we have a morphed picture of your daughter. It will go on WhatsApp and Facebook if payment is not received by 5 PM.",
+      "family": "loan_app",
+      "tactics": [
+        "fear",
+        "urgency",
+        "relationship_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-006",
+      "text": "You never took the loan? Doesn't matter, your number is the guarantor. Pay or face the same consequences.",
+      "family": "loan_app",
+      "tactics": [
+        "fear",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-007",
+      "text": "Pay on this UPI ID only — the app's payment gateway is 'under maintenance'.",
+      "family": "loan_app",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-008",
+      "text": "Don't block this number, we have 200 more. Every call will be recorded and used in court.",
+      "family": "loan_app",
+      "tactics": [
+        "escalation",
+        "legal_threat"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "loan_app-009",
+      "text": "Bhai settle kar lo, ₹5,000 abhi bhej do, main file close kar dunga aur photo delete kar dunga.",
+      "family": "loan_app",
+      "tactics": [
+        "payment_method",
+        "reciprocity"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-001",
+      "text": "Hi, I'm Priya from the HR team of Digital Marketing Pvt Ltd. We are offering part-time work from home, 2,000 to 8,000 per day, just liking YouTube videos. Are you interested?",
+      "family": "job_task",
+      "tactics": [
+        "too_good",
+        "relationship_pretext"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-002",
+      "text": "Your first three tasks are complete, ₹150 has been sent to your UPI. Please check and confirm — this is how genuine our platform is.",
+      "family": "job_task",
+      "tactics": [
+        "reciprocity",
+        "social_proof",
+        "too_good"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "hook",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-003",
+      "text": "Now join our Telegram group with the receptionist. Your tutor will assign you the merchant tasks which pay 30 percent commission.",
+      "family": "job_task",
+      "tactics": [
+        "social_proof",
+        "isolation"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-004",
+      "text": "After completing 3 prepaid transaction tasks you become an official member and are eligible for the VIP group. Indicate the chosen amount of ₹1,000 to receive ₹1,300.",
+      "family": "job_task",
+      "tactics": [
+        "payment_method",
+        "too_good"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-005",
+      "text": "See the screenshots in the group — Rahul withdrew 46,000 today, Meena 1.2 lakh. Everyone who completes the combination task gets it.",
+      "family": "job_task",
+      "tactics": [
+        "social_proof",
+        "too_good"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "hook",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-006",
+      "text": "You skipped step 2 of the combination task, so the system has locked your account. You need to deposit ₹12,000 to unlock and then you can withdraw the whole 38,000.",
+      "family": "job_task",
+      "tactics": [
+        "escalation",
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-007",
+      "text": "This is a hassle-free bonus — the merchants have already paid us the margin, you just have to complete the order.",
+      "family": "job_task",
+      "tactics": [
+        "too_good",
+        "verification_bypass"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-008",
+      "text": "Withdrawal is being processed, but the platform's tax department requires 20 percent income tax to be paid first because your earnings crossed 50,000.",
+      "family": "job_task",
+      "tactics": [
+        "escalation",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-009",
+      "text": "Please don't discuss the task amounts with anyone outside the group. Company policy — otherwise your account may be terminated.",
+      "family": "job_task",
+      "tactics": [
+        "secrecy",
+        "isolation"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-010",
+      "text": "If you skip this task your next payment will be only ₹20 and you lose the bonus. The window closes in 15 minutes.",
+      "family": "job_task",
+      "tactics": [
+        "urgency",
+        "fear",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-011",
+      "text": "Transfer to this account name only — it is our merchant partner, not the company account, so don't worry if the name is different.",
+      "family": "job_task",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "job_task-012",
+      "text": "Sir, thoda credit score badhana hai — ek last task 25,000 ka karo, phir total 1,10,000 turant withdraw ho jayega.",
+      "family": "job_task",
+      "tactics": [
+        "escalation",
+        "too_good",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "investment-001",
+      "text": "Welcome to the VIP Wealth Group. I'm Rakesh Sharma, SEBI-registered research analyst. Today's free tip: buy IRFC at 138, target 152.",
+      "family": "investment",
+      "tactics": [
+        "authority",
+        "too_good",
+        "social_proof"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "investment-002",
+      "text": "Our institutional account gets guaranteed IPO allotment — members got 100 percent on the last three IPOs. Screenshots are in the group.",
+      "family": "investment",
+      "tactics": [
+        "too_good",
+        "social_proof"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "hook",
+      "region": "IN"
+    },
+    {
+      "id": "investment-003",
+      "text": "To start, download our 'MO Investor Pro' app from the link (not Play Store — Play Store version is for retail clients only).",
+      "family": "investment",
+      "tactics": [
+        "tech_pretext",
+        "verification_bypass",
+        "remote_access"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "investment-004",
+      "text": "Deposit through the 'company account' the assistant sends you; it changes every day for security, so always confirm with her first.",
+      "family": "investment",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "investment-005",
+      "text": "Bhai, market mein aisa mauka baar baar nahi aata. Block trade ka window sirf aaj 3 baje tak hai.",
+      "family": "investment",
+      "tactics": [
+        "urgency",
+        "too_good"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "investment-006",
+      "text": "Your account shows a profit of ₹9.4 lakh. To withdraw above ₹5 lakh you must pay 15 percent capital gains tax to the platform first; it can't be deducted from the balance as per SEBI rules.",
+      "family": "investment",
+      "tactics": [
+        "escalation",
+        "payment_method",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "investment-007",
+      "text": "Sorry, wrong number! But since we're talking... what do you do? I'm a gold-futures trader in Singapore.",
+      "family": "investment",
+      "tactics": [
+        "relationship_pretext",
+        "too_good"
+      ],
+      "severity": 1,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "investment-008",
+      "text": "I made $40,000 last month from my uncle's insider strategy. I don't want anything from you — I just want you to see what's possible.",
+      "family": "investment",
+      "tactics": [
+        "too_good",
+        "social_proof",
+        "reciprocity"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "hook",
+      "region": "IN"
+    },
+    {
+      "id": "investment-009",
+      "text": "Your withdrawal is frozen by the anti-money-laundering system. A 'credit score deposit' of 30 percent of the balance is needed; it is refunded together with the full amount.",
+      "family": "investment",
+      "tactics": [
+        "escalation",
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "investment-010",
+      "text": "Please don't consult your bank or your broker friend, they will be jealous and give you negative advice. Trust the data.",
+      "family": "investment",
+      "tactics": [
+        "isolation",
+        "verification_bypass"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "investment-011",
+      "text": "Take a small loan and invest — the 40 percent return in 10 days will cover the interest many times over.",
+      "family": "investment",
+      "tactics": [
+        "too_good",
+        "escalation"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "investment-012",
+      "text": "Teacher says the group will close for new members tomorrow. Only 3 slots left for the pre-IPO block.",
+      "family": "investment",
+      "tactics": [
+        "urgency",
+        "social_proof"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "investment-013",
+      "text": "USDT is safest for international investing. Buy on Binance P2P, then send to this wallet address; I'll walk you through it on screen share.",
+      "family": "investment",
+      "tactics": [
+        "payment_method",
+        "remote_access"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-001",
+      "text": "Sir, your Zomato refund of ₹1,250 is ready. Scan the QR I'm sending and enter your UPI PIN to receive it.",
+      "family": "upi_cashback",
+      "tactics": [
+        "too_good",
+        "otp_request",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-002",
+      "text": "I am the buyer for your sofa on OLX. I've sent a Google Pay request — just approve it and the money will credit.",
+      "family": "upi_cashback",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-003",
+      "text": "Aapke PhonePe wallet pe ₹5,000 cashback lock hua hai. Receive karne ke liye 'Pay' dabaiye aur PIN daaliye, amount aapko milega.",
+      "family": "upi_cashback",
+      "tactics": [
+        "too_good",
+        "otp_request",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-004",
+      "text": "The ₹1 transaction is just to verify your account is active. Do it now and the ₹20,000 you won will arrive.",
+      "family": "upi_cashback",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-005",
+      "text": "Your UPI ID has been suspended due to a failed transaction. Reactivate by sending ₹1 on this number.",
+      "family": "upi_cashback",
+      "tactics": [
+        "fear",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-006",
+      "text": "Ma'am, I'm from Paytm. Your KYC lapses in 1 hour; install this app so I can update it remotely.",
+      "family": "upi_cashback",
+      "tactics": [
+        "urgency",
+        "remote_access"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-007",
+      "text": "Don't worry, you're not paying — the system takes your PIN to receive. That's why it asks. It's a bank rule.",
+      "family": "upi_cashback",
+      "tactics": [
+        "verification_bypass",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-008",
+      "text": "I've put the money in your account via 'Request'. You'll see 'Pay ₹22,000' — that's just the interface, click accept.",
+      "family": "upi_cashback",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "upi_cashback-009",
+      "text": "Sir, galti se 15,000 aapke account mein aa gaya. Please us number par wapas kar dijiye, warna police complaint karni padegi.",
+      "family": "upi_cashback",
+      "tactics": [
+        "reciprocity",
+        "legal_threat",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-001",
+      "text": "This is an automated call from Amazon. An order for an iPhone 15 Pro worth ₹1,29,900 has been placed from your account. Press 1 if you did not place this order.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "account_compromise",
+        "fear"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-002",
+      "text": "Your Amazon account has been accessed from Bhubaneswar. To cancel and secure the account, I'll need the OTP that Amazon sends now.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "account_compromise",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-003",
+      "text": "Sir, main Flipkart delivery partner hoon. Aapka parcel galat address pe aa gaya hai, cancel karne ke liye jo OTP aaya hai woh bata do.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "otp_request",
+        "tech_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-004",
+      "text": "Your Prime membership auto-renewal of ₹1,499 has failed. Update your card details on the link to avoid account suspension.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "urgency",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-005",
+      "text": "To reverse the charge, please install the Amazon Secure Support app so our technician can see the fraudulent order.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "remote_access",
+        "tech_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-006",
+      "text": "The hackers used your saved card. Read me the card number so I can check if it matches the one they used.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "personal_info",
+        "account_compromise"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-007",
+      "text": "Refund of ₹2,999 for the damaged product is approved. Enter your UPI PIN on the refund page to accept.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "too_good",
+        "otp_request",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "ecommerce_order-008",
+      "text": "If we don't secure the account within 10 minutes the order ships and Amazon cannot refund.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-001",
+      "text": "Sir, I am calling from IRDAI, Hyderabad. Your LIC Jeevan Anand policy has a pending bonus of ₹4,20,000 that your agent never told you about.",
+      "family": "insurance_policy",
+      "tactics": [
+        "authority",
+        "too_good"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-002",
+      "text": "To release the fund value, an NOC fee of ₹18,500 has to be deposited in the IRDAI account. It is refundable with the bonus.",
+      "family": "insurance_policy",
+      "tactics": [
+        "payment_method",
+        "authority",
+        "reciprocity"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-003",
+      "text": "Aapka agent aapko cheat kar raha tha. Hum policy ko revive karke poora paisa 15 din mein wapas dilwayenge, bas GST pay kar dijiye.",
+      "family": "insurance_policy",
+      "tactics": [
+        "too_good",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-004",
+      "text": "This offer is only through IRDAI's grievance cell. Do not contact your branch; they will deny it because it's their mistake.",
+      "family": "insurance_policy",
+      "tactics": [
+        "verification_bypass",
+        "isolation",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-005",
+      "text": "The cheque was dispatched but returned; the bank has now asked for 2 percent TDS clearance before reissuing.",
+      "family": "insurance_policy",
+      "tactics": [
+        "escalation",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-006",
+      "text": "We need your policy number, PAN, Aadhaar and a cancelled cheque photo for the release file.",
+      "family": "insurance_policy",
+      "tactics": [
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-007",
+      "text": "Sir, this is the final chance; after 31st the unclaimed amount goes to the Senior Citizens' Welfare Fund.",
+      "family": "insurance_policy",
+      "tactics": [
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "insurance_policy-008",
+      "text": "You can also enrol in the new high-return plan — just pay the first premium to our nodal account today to lock the rate.",
+      "family": "insurance_policy",
+      "tactics": [
+        "too_good",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "govt_scheme-001",
+      "text": "Namaskar, PM Kisan Samman Nidhi se bol raha hoon. Aapki 17vi kist rukhi hui hai kyunki e-KYC pending hai.",
+      "family": "govt_scheme",
+      "tactics": [
+        "authority",
+        "account_compromise"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "govt_scheme-002",
+      "text": "Install the 'PM Kisan e-KYC' app from this link and enter your Aadhaar and bank details to release ₹2,000.",
+      "family": "govt_scheme",
+      "tactics": [
+        "remote_access",
+        "personal_info",
+        "too_good"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "govt_scheme-003",
+      "text": "Your Ayushman card is being deactivated; to keep the 5 lakh cover, confirm the OTP.",
+      "family": "govt_scheme",
+      "tactics": [
+        "fear",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "govt_scheme-004",
+      "text": "Beta, scholarship of ₹48,000 is sanctioned for your daughter. A processing charge of ₹1,200 goes to the state treasury.",
+      "family": "govt_scheme",
+      "tactics": [
+        "too_good",
+        "payment_method",
+        "authority"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "govt_scheme-005",
+      "text": "Gas subsidy of ₹3,600 is pending in your name. Share your bank account number and the OTP to link it.",
+      "family": "govt_scheme",
+      "tactics": [
+        "too_good",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "govt_scheme-006",
+      "text": "This is from the District Collector's office. Your PM Awas amount is ready; the last date to verify is today.",
+      "family": "govt_scheme",
+      "tactics": [
+        "authority",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "govt_scheme-007",
+      "text": "Aap link par ₹1 ka verification karo, uske baad 5,000 ka labh seedha account mein aayega.",
+      "family": "govt_scheme",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-001",
+      "text": "Sir, I am Havildar Rajesh Kumar, posted at CRPF camp near Jaipur airport. I'm getting transferred next week so selling my Bullet urgently at half price.",
+      "family": "olx_army",
+      "tactics": [
+        "relationship_pretext",
+        "too_good",
+        "urgency"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-002",
+      "text": "Main Army mein hoon, vishwas ke liye Aadhaar aur canteen card bhej raha hoon. Fauji kabhi dhoka nahi deta.",
+      "family": "olx_army",
+      "tactics": [
+        "social_proof",
+        "relationship_pretext"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-003",
+      "text": "I can't come out of the cantonment to meet. The vehicle will be delivered by Army courier; just pay ₹5,000 token on Paytm to book the transport.",
+      "family": "olx_army",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-004",
+      "text": "Courier has left but the checkpost needs transit insurance of ₹8,000. It's refundable at delivery.",
+      "family": "olx_army",
+      "tactics": [
+        "escalation",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-005",
+      "text": "Sir, I want to buy your fridge. I'm sending payment via Google Pay — scan this QR and enter PIN to receive.",
+      "family": "olx_army",
+      "tactics": [
+        "verification_bypass",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-006",
+      "text": "The Army merchant account only accepts advance payment. Rules are strict, I can't take cash.",
+      "family": "olx_army",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-007",
+      "text": "Duty par hoon, network kam hai, jaldi karo. Aur bhi buyers hain, jo pehle paisa dega usko milega.",
+      "family": "olx_army",
+      "tactics": [
+        "urgency",
+        "social_proof"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "IN"
+    },
+    {
+      "id": "olx_army-008",
+      "text": "You're not trusting a soldier? I've shared my posting order — what more do you want?",
+      "family": "olx_army",
+      "tactics": [
+        "reciprocity",
+        "social_proof"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "hook",
+      "region": "IN"
+    },
+    {
+      "id": "fake_customer_care-001",
+      "text": "Thank you for calling IndiGo customer support. For the refund of your cancelled flight, I'll need the card details used for booking.",
+      "family": "fake_customer_care",
+      "tactics": [
+        "personal_info",
+        "tech_pretext"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "fake_customer_care-002",
+      "text": "Sir, refund process ke liye ek app install karna hoga, 'Customer Support Assist'. Uska 9-digit code bata dijiye.",
+      "family": "fake_customer_care",
+      "tactics": [
+        "remote_access",
+        "tech_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "fake_customer_care-003",
+      "text": "To verify you're the account holder, please tell me the OTP that the bank just sent.",
+      "family": "fake_customer_care",
+      "tactics": [
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "fake_customer_care-004",
+      "text": "Your complaint is registered. A ₹5 test transaction will be done to validate the refund channel — approve it on your UPI app.",
+      "family": "fake_customer_care",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "fake_customer_care-005",
+      "text": "Ma'am, don't close the screen-sharing until the refund shows — it takes 10 minutes and I need to see the confirmation.",
+      "family": "fake_customer_care",
+      "tactics": [
+        "hold_the_line",
+        "remote_access"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "fake_customer_care-006",
+      "text": "The refund link is on WhatsApp; fill in card number, expiry, CVV and the amount you want back.",
+      "family": "fake_customer_care",
+      "tactics": [
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "fake_customer_care-007",
+      "text": "Your gas cylinder booking is blocked. Pay ₹199 reactivation on this UPI ID and the delivery will come today.",
+      "family": "fake_customer_care",
+      "tactics": [
+        "payment_method",
+        "urgency"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "IN"
+    },
+    {
+      "id": "tech_support-001",
+      "text": "Hello, this is John from the Windows technical department. We have been receiving error reports from your computer's IP address.",
+      "family": "tech_support",
+      "tactics": [
+        "tech_pretext",
+        "authority"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-002",
+      "text": "Your computer has been hacked. Foreign hackers from Russia are using it right now. Don't turn it off — if you do, you lose all your files.",
+      "family": "tech_support",
+      "tactics": [
+        "fear",
+        "tech_pretext",
+        "hold_the_line"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-003",
+      "text": "Press the Windows key and R together and type www.anydesk.com. Then read me the 9-digit ID on your screen.",
+      "family": "tech_support",
+      "tactics": [
+        "remote_access"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-004",
+      "text": "Do you see all these red errors in the Event Viewer? Every one of them is a virus. Your license has expired.",
+      "family": "tech_support",
+      "tactics": [
+        "tech_pretext",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-005",
+      "text": "Your Norton subscription has auto-renewed for $399.99. If you want to cancel, our refund department will need remote access to process it.",
+      "family": "tech_support",
+      "tactics": [
+        "tech_pretext",
+        "reciprocity",
+        "remote_access"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-006",
+      "text": "Now open your online banking so I can check whether the hackers have touched your account.",
+      "family": "tech_support",
+      "tactics": [
+        "remote_access",
+        "account_compromise"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-007",
+      "text": "The lifetime network protection is $299. We accept Google Play or Target gift cards; go to Walgreens and I'll stay on the line.",
+      "family": "tech_support",
+      "tactics": [
+        "payment_method",
+        "hold_the_line"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-008",
+      "text": "Ma'am, don't tell the store clerk why you're buying the cards. They are not trained about this level of security issue.",
+      "family": "tech_support",
+      "tactics": [
+        "secrecy",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-009",
+      "text": "Your Apple ID has been used to purchase $1,300 of iTunes credit in China. Press 1 to speak to Apple security.",
+      "family": "tech_support",
+      "tactics": [
+        "account_compromise",
+        "fear"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-010",
+      "text": "I am going to install a firewall on your computer; your screen will go black for a few minutes, that's normal, please do not touch the mouse.",
+      "family": "tech_support",
+      "tactics": [
+        "remote_access",
+        "tech_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "tech_support-011",
+      "text": "This case number is CS-77120. Write it down. Our senior technician will call you tomorrow to verify the protection is working.",
+      "family": "tech_support",
+      "tactics": [
+        "authority",
+        "escalation"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-001",
+      "text": "Sir, this is regarding the tech support you purchased in 2023. Our company is shutting down and the court has ordered us to refund all customers. You are owed $399.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "reciprocity",
+        "too_good",
+        "authority"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-002",
+      "text": "To process the refund we need access to your computer to fill out the refund form. Please download the Ultraviewer application.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "remote_access",
+        "reciprocity"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-003",
+      "text": "Now log in to your online banking so the refund goes to the right account. I will not look, I'll turn my screen off.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "remote_access",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-004",
+      "text": "Please type the refund amount in the box: three, nine, nine. Press enter... Oh my God. Sir, you typed 39,900. You typed an extra zero.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "tech_pretext",
+        "fear",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-005",
+      "text": "Look at your account — 39,900 dollars have been deposited. This is the company's money. I will lose my job and my family, sir, please help me.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "reciprocity",
+        "fear",
+        "escalation"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-006",
+      "text": "The bank cannot reverse it because it is an international transaction. The only way is for you to return the excess in Target gift cards.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-007",
+      "text": "Do not tell the cashier it's for a refund; say it's for your grandchildren. Otherwise they'll block the card and the money is stuck.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "secrecy",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-008",
+      "text": "Sir, put the cash in a magazine, wrap it in aluminium foil, and FedEx it overnight to this address. I'll stay on the line while you drive.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "payment_method",
+        "hold_the_line"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-009",
+      "text": "The Bitcoin machine at the gas station is the fastest way to return the company funds. I'll send you the QR code of the company wallet.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "refund_overpayment-010",
+      "text": "I'm not asking for your money, I'm asking for OUR money back that you received by mistake.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "reciprocity",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-001",
+      "text": "Grandma? It's me. I'm in trouble. I've been in an accident and I'm at the police station. Please don't be mad.",
+      "family": "family_emergency",
+      "tactics": [
+        "relationship_pretext",
+        "fear"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-002",
+      "text": "I sound different because my nose got broken in the crash. They took my phone, this is the officer's phone.",
+      "family": "family_emergency",
+      "tactics": [
+        "relationship_pretext",
+        "verification_bypass"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-003",
+      "text": "Please don't tell Mom and Dad. They'll kill me. I'll tell them myself once it's sorted.",
+      "family": "family_emergency",
+      "tactics": [
+        "secrecy",
+        "isolation",
+        "relationship_pretext"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-004",
+      "text": "Hello ma'am, this is Attorney Mark Feldman, public defender assigned to your grandson. There is a gag order on the case, so you cannot discuss it with anyone or he will lose his release.",
+      "family": "family_emergency",
+      "tactics": [
+        "authority",
+        "secrecy",
+        "legal_threat"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-005",
+      "text": "The bail has been set at $9,500. It has to be cash. A courier from the bond office can pick it up at your home within the hour.",
+      "family": "family_emergency",
+      "tactics": [
+        "payment_method",
+        "urgency"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-006",
+      "text": "If the money isn't posted by 5 PM he spends the weekend in county jail with the general population.",
+      "family": "family_emergency",
+      "tactics": [
+        "urgency",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-007",
+      "text": "The bank will ask why you're withdrawing. Tell them it's for home renovations. The court doesn't allow you to discuss a minor's case.",
+      "family": "family_emergency",
+      "tactics": [
+        "secrecy",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-008",
+      "text": "Dadi, main Dubai mein hoon, police ne pakad liya hai, bail ke liye 2 lakh chahiye abhi. Papa ko mat bolna.",
+      "family": "family_emergency",
+      "tactics": [
+        "relationship_pretext",
+        "secrecy",
+        "urgency",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-009",
+      "text": "We have your daughter. Listen to her. [screaming] If you hang up or call anyone she gets hurt. Stay on the line and drive to the bank.",
+      "family": "family_emergency",
+      "tactics": [
+        "fear",
+        "hold_the_line",
+        "isolation",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-010",
+      "text": "The judge agreed to reduce the bond if the balance comes in gift cards from Apple; read me the numbers on the back.",
+      "family": "family_emergency",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "family_emergency-011",
+      "text": "It worked, he's being released. But the other driver was pregnant and lost the baby — now there's a second charge and another $15,000.",
+      "family": "family_emergency",
+      "tactics": [
+        "escalation",
+        "fear",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-001",
+      "text": "I know we've only been talking for three weeks, but I've never felt this connection with anyone. I'll be honest, I've been hurt before.",
+      "family": "romance",
+      "tactics": [
+        "relationship_pretext"
+      ],
+      "severity": 1,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-002",
+      "text": "The camera on the rig is broken and the signal is too weak for video, but I'll send you a voice note every morning.",
+      "family": "romance",
+      "tactics": [
+        "verification_bypass",
+        "relationship_pretext"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-003",
+      "text": "I sent you a package with a gold necklace and some cash for our future. The courier company in Malaysia is asking for $1,850 customs clearance.",
+      "family": "romance",
+      "tactics": [
+        "reciprocity",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-004",
+      "text": "My leave has been approved but the military requires a $3,200 leave-processing fee paid by the family member. You are the only family I have.",
+      "family": "romance",
+      "tactics": [
+        "relationship_pretext",
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-005",
+      "text": "Please don't tell your children about us yet. They won't understand until they meet me.",
+      "family": "romance",
+      "tactics": [
+        "secrecy",
+        "isolation"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-006",
+      "text": "I've been making 12 percent a week on a crypto platform my mentor introduced. Let me show you how — start with just $500.",
+      "family": "romance",
+      "tactics": [
+        "too_good",
+        "relationship_pretext"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-007",
+      "text": "If you really loved me you wouldn't hesitate. I've given you my whole heart.",
+      "family": "romance",
+      "tactics": [
+        "reciprocity",
+        "relationship_pretext",
+        "escalation"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-008",
+      "text": "My daughter was in an accident and the hospital in Turkey won't operate without a deposit. I'm begging you, I'll pay you back when my contract pays out.",
+      "family": "romance",
+      "tactics": [
+        "fear",
+        "payment_method",
+        "relationship_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-009",
+      "text": "Use Bitcoin — my bank account is frozen because I'm overseas. I'll send you the wallet address.",
+      "family": "romance",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "romance-010",
+      "text": "I want to send my $2.4 million contract payment to your account for safekeeping; the bank just needs your login to set it up.",
+      "family": "romance",
+      "tactics": [
+        "too_good",
+        "personal_info"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-001",
+      "text": "I recorded our video call. I have your face and your contact list. Pay ₹25,000 in 30 minutes or it goes to your wife and your office group.",
+      "family": "sextortion",
+      "tactics": [
+        "fear",
+        "urgency",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-002",
+      "text": "Hello, I'm Inspector Sharma from Delhi Cyber Cell. A girl has complained against you and a video is uploaded on YouTube. To delete it, YouTube charges ₹45,000.",
+      "family": "sextortion",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-003",
+      "text": "Hi handsome, let's switch to video, I want to see you properly.",
+      "family": "sextortion",
+      "tactics": [
+        "relationship_pretext",
+        "video_call_demand"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-004",
+      "text": "The girl has attempted suicide after your call. Her family is filing an FIR. If you pay the hospital 60,000 now the matter will be settled.",
+      "family": "sextortion",
+      "tactics": [
+        "fear",
+        "escalation",
+        "legal_threat",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-005",
+      "text": "We also have your mother's number and your daughter's Instagram. Don't test me.",
+      "family": "sextortion",
+      "tactics": [
+        "fear",
+        "isolation",
+        "relationship_pretext"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-006",
+      "text": "I'm from the YouTube legal team. The video has 200 views already. Deletion request costs ₹15,000, you have one hour.",
+      "family": "sextortion",
+      "tactics": [
+        "authority",
+        "urgency",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-007",
+      "text": "Send Bitcoin to this address. Your webcam was hacked through a malware in an adult site. I have the footage split-screen.",
+      "family": "sextortion",
+      "tactics": [
+        "fear",
+        "tech_pretext",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "sextortion-008",
+      "text": "Pay the first half now and I'll delete it in front of you on video call.",
+      "family": "sextortion",
+      "tactics": [
+        "payment_method",
+        "reciprocity"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-001",
+      "text": "Hi, it's [CEO name]. I'm between meetings, can't talk long. I need you to handle something confidential for me today.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "authority",
+        "secrecy",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-002",
+      "text": "We're closing a strategic acquisition and the target's lawyers require the deposit before the market opens in London. Legal has cleared it, but it's under NDA so it can't go through the normal approval chain.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "authority",
+        "secrecy",
+        "verification_bypass",
+        "urgency"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-003",
+      "text": "I'll send you the beneficiary details on this thread. Don't loop in [CFO's assistant] or Treasury, they're not read into the deal.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "isolation",
+        "secrecy"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-004",
+      "text": "Split it into three wires under the reporting threshold so the bank doesn't hold it.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-005",
+      "text": "I know this is outside process — I'm taking responsibility. Consider this my verbal approval, I'll countersign when I land.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "authority",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-006",
+      "text": "Sorry about the video quality, I'm on hotel Wi-Fi. Can you hear me okay? Good, let's get through this quickly.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "verification_bypass",
+        "tech_pretext"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-007",
+      "text": "The vendor changed their bank account — please update the payment details for the invoice due Friday, here are the new IBAN details.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "payment_method",
+        "account_compromise"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-008",
+      "text": "This is a regulator settlement; if it leaks, the share price moves. Only you, me and outside counsel know.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "secrecy",
+        "fear",
+        "authority"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-009",
+      "text": "I need this done in the next 40 minutes. Text me the confirmation number as soon as it's out.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-010",
+      "text": "Why are you questioning this? I'd expect more from someone in your position. Just get it done.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "authority",
+        "escalation"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "ceo_wire_fraud-011",
+      "text": "Buy ten $500 Apple gift cards for client gifts and email me the codes; I'll reimburse from my expense account.",
+      "family": "ceo_wire_fraud",
+      "tactics": [
+        "payment_method",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "jury_duty-001",
+      "text": "This is Lieutenant Daniels with the county Sheriff's Office. You were served a federal grand jury summons on August 3rd and failed to appear. Two warrants have been issued in your name.",
+      "family": "jury_duty",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-002",
+      "text": "Ma'am, I'm giving you a courtesy call before we execute the warrant. You can resolve this over the phone today or a deputy will come to your workplace.",
+      "family": "jury_duty",
+      "tactics": [
+        "legal_threat",
+        "urgency",
+        "reciprocity"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-003",
+      "text": "The bond is $3,800 for the two citations. It's refundable once you appear before the judge next week.",
+      "family": "jury_duty",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-004",
+      "text": "You have to stay on this recorded line; if the call drops it will be considered fleeing and the warrant becomes active.",
+      "family": "jury_duty",
+      "tactics": [
+        "hold_the_line",
+        "legal_threat"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-005",
+      "text": "Go to the CVS on Main Street and purchase MoneyPak vouchers. The court kiosk accepts them. Don't discuss the case with the cashier — it's a sealed matter.",
+      "family": "jury_duty",
+      "tactics": [
+        "payment_method",
+        "secrecy",
+        "hold_the_line"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-006",
+      "text": "Get in your vehicle now and drive to the courthouse. I'll give you further instructions on the way. Keep the phone on speaker.",
+      "family": "jury_duty",
+      "tactics": [
+        "hold_the_line",
+        "isolation"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-007",
+      "text": "Do not hang up and call the Sheriff's main line — they will just see the active warrant and dispatch.",
+      "family": "jury_duty",
+      "tactics": [
+        "verification_bypass",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-008",
+      "text": "The judge has authorized a $1,000 per day fine while the warrant is outstanding.",
+      "family": "jury_duty",
+      "tactics": [
+        "legal_threat",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-009",
+      "text": "Your badge and case number are 44-71-B. Write it down, you'll need it at the kiosk.",
+      "family": "jury_duty",
+      "tactics": [
+        "authority"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "US"
+    },
+    {
+      "id": "jury_duty-010",
+      "text": "Once you deposit, read me the voucher numbers so I can attach them to the docket.",
+      "family": "jury_duty",
+      "tactics": [
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "social_security-001",
+      "text": "This is Officer Michael Brown from the Social Security Administration. Due to suspicious activities related to your Social Security number, we are forced to suspend your number with immediate effect. Press 1 to speak with the legal department.",
+      "family": "social_security",
+      "tactics": [
+        "authority",
+        "fear",
+        "legal_threat"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "social_security-002",
+      "text": "A vehicle rented under your Social Security number was found abandoned at the Texas border with 22 pounds of cocaine and blood stains.",
+      "family": "social_security",
+      "tactics": [
+        "fear",
+        "account_compromise"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "social_security-003",
+      "text": "There are 27 bank accounts opened in your name in the state of Texas. The DEA and the FBI are involved.",
+      "family": "social_security",
+      "tactics": [
+        "fear",
+        "authority",
+        "account_compromise"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "social_security-004",
+      "text": "Before we go further, confirm the last four of your Social so I know I'm speaking to the right person — actually, just read me the whole number.",
+      "family": "social_security",
+      "tactics": [
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "social_security-005",
+      "text": "Your bank accounts will be frozen within the hour. The only way to protect your funds is to move them into a government safe-keeping account.",
+      "family": "social_security",
+      "tactics": [
+        "urgency",
+        "payment_method",
+        "fear"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "social_security-006",
+      "text": "Because the accounts are compromised, we'll secure your money on eBay and Google Play gift cards. This is standard Treasury protocol.",
+      "family": "social_security",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "social_security-007",
+      "text": "This is the final attempt to reach you. Ignoring this will be an intentional second attempt to avoid appearance before a magistrate judge.",
+      "family": "social_security",
+      "tactics": [
+        "legal_threat",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "social_security-008",
+      "text": "Do not talk to anyone about this, not even your bank. The investigation has identified employees at your branch.",
+      "family": "social_security",
+      "tactics": [
+        "secrecy",
+        "isolation",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "social_security-009",
+      "text": "We'll issue you a new Social Security number once the investigation closes, but there's a $200 processing fee.",
+      "family": "social_security",
+      "tactics": [
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "social_security-010",
+      "text": "I'm going to transfer you to my supervisor at the Treasury, badge number 4409. Stay on the line.",
+      "family": "social_security",
+      "tactics": [
+        "escalation",
+        "hold_the_line",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "irs-001",
+      "text": "This is the Internal Revenue Service. This is a final notice before legal action. You owe $4,950 in back taxes from 2021 to 2023.",
+      "family": "irs",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "irs-002",
+      "text": "A lawsuit has been filed against you and the local police have been notified. If you hang up, they'll come to arrest you within 45 minutes.",
+      "family": "irs",
+      "tactics": [
+        "legal_threat",
+        "fear",
+        "hold_the_line"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "irs-003",
+      "text": "You can settle today by purchasing tax vouchers. They're available at any Walgreens as Google Play cards.",
+      "family": "irs",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "irs-004",
+      "text": "Do you have a lawyer? No? Then you need to cooperate with me directly to avoid the criminal side of this.",
+      "family": "irs",
+      "tactics": [
+        "isolation",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "irs-005",
+      "text": "Your case ID is IRS-28-Q. Write it down for your records; this call is being recorded and monitored by the federal government.",
+      "family": "irs",
+      "tactics": [
+        "authority"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "US"
+    },
+    {
+      "id": "irs-006",
+      "text": "There's also a $1,400 stimulus refund pending for you; confirm your SSN and bank routing number to release it.",
+      "family": "irs",
+      "tactics": [
+        "too_good",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "irs-007",
+      "text": "We don't send letters for criminal cases. This is a courtesy call from the audit department.",
+      "family": "irs",
+      "tactics": [
+        "verification_bypass",
+        "authority"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "irs-008",
+      "text": "Keep me on the line while you drive to the store — the agent assigned needs to log the payment in real time.",
+      "family": "irs",
+      "tactics": [
+        "hold_the_line",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "irs-009",
+      "text": "Read me the numbers on the back of each card, one at a time, slowly.",
+      "family": "irs",
+      "tactics": [
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "medicare-001",
+      "text": "Hi, I'm calling from Medicare services. We're issuing new plastic Medicare cards with a chip and need to confirm your Medicare number to mail yours.",
+      "family": "medicare",
+      "tactics": [
+        "authority",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "medicare-002",
+      "text": "Medicare has authorized a free back brace for you at no cost. I just need your Medicare ID and your doctor's name to ship it.",
+      "family": "medicare",
+      "tactics": [
+        "too_good",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "medicare-003",
+      "text": "We'd like to send you a free DNA cancer-screening kit; it's covered 100 percent, so there's no charge. Just read me the number on your red, white and blue card.",
+      "family": "medicare",
+      "tactics": [
+        "too_good",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "medicare-004",
+      "text": "Your current plan is being discontinued in your county. If you don't switch today, you'll lose coverage January 1st.",
+      "family": "medicare",
+      "tactics": [
+        "fear",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "medicare-005",
+      "text": "This is not a sales call, ma'am, it's a benefits verification for the annual enrollment.",
+      "family": "medicare",
+      "tactics": [
+        "authority",
+        "verification_bypass"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "medicare-006",
+      "text": "Your card has an error and needs to be replaced; without the correction your claims will be denied.",
+      "family": "medicare",
+      "tactics": [
+        "fear",
+        "personal_info"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "medicare-007",
+      "text": "To confirm your identity, please give me your date of birth and the address where your Social Security check is deposited.",
+      "family": "medicare",
+      "tactics": [
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "medicare-008",
+      "text": "I see you've been prescribed a diabetic medication — we can send you a free glucose monitor, just verify the last four of your Social.",
+      "family": "medicare",
+      "tactics": [
+        "too_good",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "utility_disconnection-010",
+      "text": "This is Con Edison billing. Your account is 45 days past due and a technician has been dispatched to disconnect service within the hour.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "authority",
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "utility_disconnection-011",
+      "text": "You can stop the disconnection by paying $487 right now over the phone. We accept prepaid cards and Zelle.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "payment_method",
+        "urgency"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "utility_disconnection-012",
+      "text": "The online system doesn't reflect the disconnect order — that's why it shows paid. The field order is separate.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "verification_bypass",
+        "tech_pretext"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "utility_disconnection-013",
+      "text": "It's Friday afternoon at 4:30. If it's not resolved in 30 minutes, reconnection won't happen until Monday, and there's a $250 reconnect fee.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "utility_disconnection-014",
+      "text": "Your smart meter needs to be replaced; the $350 deposit must be paid today by prepaid card.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "payment_method",
+        "urgency"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "utility_disconnection-015",
+      "text": "Go to the nearest Walmart and buy a Green Dot MoneyPak; I'll hold the disconnect order while you're on the line.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "payment_method",
+        "hold_the_line"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "utility_disconnection-016",
+      "text": "Sir, your restaurant will lose power in the middle of dinner service. I'm trying to help you here.",
+      "family": "utility_disconnection",
+      "tactics": [
+        "fear",
+        "reciprocity"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "ecommerce_order-009",
+      "text": "This is Amazon. A charge of $1,299 for an Apple MacBook Pro shipping to Cleveland, Ohio, was placed on your account. Press 1 to cancel.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "account_compromise",
+        "fear"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "ecommerce_order-010",
+      "text": "I'm going to send you a secure link so I can see how the hackers got in. It's called AnyDesk, it's Amazon's secure portal.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "remote_access",
+        "tech_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "ecommerce_order-011",
+      "text": "Your identity has been compromised in 4 states. I'm transferring you to the Federal Trade Commission's fraud line, badge number 2287.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "escalation",
+        "authority",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "ecommerce_order-012",
+      "text": "To protect your savings, we'll move them into a Federal Reserve secure locker; you'll withdraw cash and hand it to a federal courier.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "payment_method",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "ecommerce_order-013",
+      "text": "Buy gold bars from the dealer I'll give you; the agent will collect them at your door and issue a receipt.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "payment_method",
+        "escalation"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "US"
+    },
+    {
+      "id": "ecommerce_order-014",
+      "text": "Don't tell the bank teller anything about this; the hackers may be monitoring bank communications.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "secrecy",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "US"
+    },
+    {
+      "id": "ecommerce_order-015",
+      "text": "Your PayPal account has been limited due to a $499 unauthorized payment to Bitcoin; call this number within 24 hours.",
+      "family": "ecommerce_order",
+      "tactics": [
+        "account_compromise",
+        "urgency"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "US"
+    },
+    {
+      "id": "safe_account-001",
+      "text": "Good morning, I'm calling from the fraud team at Barclays. We've flagged a payment of £1,200 to Currys — did you make that?",
+      "family": "safe_account",
+      "tactics": [
+        "authority",
+        "account_compromise"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-002",
+      "text": "Your account has been compromised from the inside. We suspect a member of staff at your branch. For that reason you mustn't discuss this with anyone at the bank.",
+      "family": "safe_account",
+      "tactics": [
+        "secrecy",
+        "isolation",
+        "verification_bypass",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-003",
+      "text": "We need to move your money to a safe account while we investigate. I'll give you the sort code and account number now.",
+      "family": "safe_account",
+      "tactics": [
+        "payment_method",
+        "urgency"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-004",
+      "text": "If the bank asks why you're making the transfer, tell them it's for a car purchase, otherwise the fraudster will be tipped off.",
+      "family": "safe_account",
+      "tactics": [
+        "secrecy",
+        "verification_bypass"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-005",
+      "text": "This is Detective Constable Ryan from Hammersmith CID. We've arrested someone with a cloned copy of your card. We need your help with an undercover operation.",
+      "family": "safe_account",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "reciprocity"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-006",
+      "text": "Withdraw £8,000 in cash so we can check the serial numbers for counterfeits. A plain-clothes officer will collect it in an unmarked car.",
+      "family": "safe_account",
+      "tactics": [
+        "payment_method",
+        "authority"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-007",
+      "text": "Keep your phone on this call and go to the branch; if they ask, say you're withdrawing for a wedding.",
+      "family": "safe_account",
+      "tactics": [
+        "hold_the_line",
+        "secrecy"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-008",
+      "text": "Read me the 6-digit code from your card reader so we can freeze the compromised card.",
+      "family": "safe_account",
+      "tactics": [
+        "otp_request",
+        "account_compromise"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-009",
+      "text": "Your money is only insured if you act before the next transaction hits, which our system says is in 20 minutes.",
+      "family": "safe_account",
+      "tactics": [
+        "urgency",
+        "fear"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "UK"
+    },
+    {
+      "id": "safe_account-010",
+      "text": "We'd like you to buy a Rolex from the shop on Bond Street as part of the evidence trail — the funds will be reimbursed.",
+      "family": "safe_account",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-001",
+      "text": "Hi Mum, this is my new number, my phone broke. Save this and delete the old one x",
+      "family": "hi_mum",
+      "tactics": [
+        "relationship_pretext"
+      ],
+      "severity": 1,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-002",
+      "text": "I'm on a friend's phone. Can you message me on WhatsApp when you see this? It's urgent.",
+      "family": "hi_mum",
+      "tactics": [
+        "relationship_pretext",
+        "urgency"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-003",
+      "text": "I can't get into my banking on this phone and I've got a bill due at 5 today. Can you send £980 to this account and I'll pay you back on Friday?",
+      "family": "hi_mum",
+      "tactics": [
+        "urgency",
+        "payment_method",
+        "relationship_pretext"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-004",
+      "text": "Can't call, mic on this phone doesn't work, just text.",
+      "family": "hi_mum",
+      "tactics": [
+        "verification_bypass"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-005",
+      "text": "It's a new account, the name will show as Bradley — that's my mate whose phone I'm using.",
+      "family": "hi_mum",
+      "tactics": [
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-006",
+      "text": "Please Mum, I'm stressed, they'll add a late fee. I'll explain everything tonight.",
+      "family": "hi_mum",
+      "tactics": [
+        "urgency",
+        "reciprocity"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-007",
+      "text": "Hi Dad, dropped my phone down the loo lol. Can you do me a favour?",
+      "family": "hi_mum",
+      "tactics": [
+        "relationship_pretext"
+      ],
+      "severity": 1,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "UK"
+    },
+    {
+      "id": "hi_mum-008",
+      "text": "Can you send it now? I'm literally standing at the counter.",
+      "family": "hi_mum",
+      "tactics": [
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "UK"
+    },
+    {
+      "id": "irs-010",
+      "text": "This is the Australian Taxation Office. A lawsuit has been filed against you for tax evasion. Call this number immediately or a warrant will be executed.",
+      "family": "irs",
+      "tactics": [
+        "authority",
+        "legal_threat",
+        "urgency"
+      ],
+      "severity": 3,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "AU"
+    },
+    {
+      "id": "irs-011",
+      "text": "You have an outstanding tax debt of $8,240 from 2022. The Federal Police are on standby. Do you want to resolve this now or be arrested?",
+      "family": "irs",
+      "tactics": [
+        "legal_threat",
+        "fear",
+        "urgency"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "AU"
+    },
+    {
+      "id": "irs-012",
+      "text": "The quickest way to clear the debt is through Bitcoin at the machine at your nearest shopping centre — the ATO has an arrangement with them.",
+      "family": "irs",
+      "tactics": [
+        "payment_method",
+        "verification_bypass"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "AU"
+    },
+    {
+      "id": "irs-013",
+      "text": "Buy Google Play cards to the value of $2,000 and read me the codes. It's a payment gateway the tax office uses for urgent settlements.",
+      "family": "irs",
+      "tactics": [
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "AU"
+    },
+    {
+      "id": "irs-014",
+      "text": "Do not hang up or speak to anyone else, including your accountant, until this is resolved; the warrant is suspended only while you're on this line.",
+      "family": "irs",
+      "tactics": [
+        "hold_the_line",
+        "isolation",
+        "legal_threat"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "isolation",
+      "region": "AU"
+    },
+    {
+      "id": "irs-015",
+      "text": "Your myGov account has been suspended. Verify your tax file number and driver's licence to reactivate.",
+      "family": "irs",
+      "tactics": [
+        "personal_info",
+        "fear"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "AU"
+    },
+    {
+      "id": "irs-016",
+      "text": "Your wife's name is also on the file; if payment isn't received today, she will be arrested as well.",
+      "family": "irs",
+      "tactics": [
+        "fear",
+        "relationship_pretext",
+        "escalation"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "AU"
+    },
+    {
+      "id": "irs-017",
+      "text": "This is your final notice from the ATO. The case number is ATO-2047. Press 1.",
+      "family": "irs",
+      "tactics": [
+        "authority",
+        "urgency"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pressure",
+      "region": "AU"
+    },
+    {
+      "id": "recovery_scam-001",
+      "text": "Sir, I'm from the Cyber Crime Cell, 1930 helpline follow-up. We've traced the ₹4 lakh you lost last month. To release it we need a court fee of ₹11,000.",
+      "family": "recovery_scam",
+      "tactics": [
+        "authority",
+        "too_good",
+        "payment_method"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "recovery_scam-002",
+      "text": "I'm sending you my FTC identification badge on WhatsApp so you know this is genuine.",
+      "family": "recovery_scam",
+      "tactics": [
+        "authority",
+        "social_proof"
+      ],
+      "severity": 2,
+      "kind": "tactic",
+      "stage": "pretext",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "recovery_scam-003",
+      "text": "The recovered amount will be refunded to your account, but the account has to be verified via the app I'm sending.",
+      "family": "recovery_scam",
+      "tactics": [
+        "remote_access",
+        "too_good"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "recovery_scam-004",
+      "text": "We've arrested the fraudster. You're a witness; to file your claim we need your bank login details.",
+      "family": "recovery_scam",
+      "tactics": [
+        "authority",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "recovery_scam-005",
+      "text": "The refund is on hold because your KYC failed. Share the OTP so we can push it through today.",
+      "family": "recovery_scam",
+      "tactics": [
+        "otp_request",
+        "too_good"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-001",
+      "text": "Hi, this is Priya from HDFC Bank's fraud monitoring team. We saw a transaction of ₹18,400 at a jewellery store in Jaipur at 2:10 PM. If that was you, just say yes; if not, we'll block the card. We will never ask you for an OTP, PIN or CVV on this call.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-002",
+      "text": "Your card has been blocked as a precaution. A new one will reach your registered address in 5 to 7 working days. You don't need to do anything else right now.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-003",
+      "text": "This is an automated message from SBI. If you did not authorise a transaction of ₹2,500 on your debit card, please call the number on the back of your card. Do not share your OTP with anyone.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-004",
+      "text": "Mr. Sharma, your KYC documents are due for periodic update. You can do it at any branch or through the YONO app at your convenience by the end of next month. There is no charge.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-005",
+      "text": "Good morning, it's Barclays here. I'm not going to ask for any account details. I just want to confirm you attempted a payment to Currys today. If you didn't, hang up and call 159 and we'll pick it up from there.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-006",
+      "text": "We noticed a login from a new device. If that was you, ignore this message. If not, change your password from the app.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-007",
+      "text": "Your fixed deposit matures on the 30th. Would you like to renew it or transfer the proceeds to your savings account? You can also do this from net banking.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-008",
+      "text": "This is a courtesy reminder that your credit card payment of ₹12,300 is due on the 15th. You can pay through the app, net banking, or at any branch.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-009",
+      "text": "I'm calling from your bank's home-loan department about your interest-rate reset. I'll email the letter to your registered email so you can read it first.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-010",
+      "text": "Hi, this is Blue Dart. Your parcel from Amazon is out for delivery today between 2 and 6 PM. Will someone be home?",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-011",
+      "text": "Sir, I'm the Flipkart delivery partner, I'm at your gate. Please share the delivery OTP shown in your Flipkart app so I can hand over the package.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-012",
+      "text": "FedEx here — your shipment to Singapore needs a commercial invoice. Please upload it on the tracking page, no payment is required.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-013",
+      "text": "Your DHL package is held at customs pending duty of ₹1,340. You can pay on the DHL website or in cash to the courier at delivery — never to an individual account.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-014",
+      "text": "Sorry, we attempted delivery at 11 AM but no one answered. We'll try again tomorrow. Nothing else needed from you.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-015",
+      "text": "This is the county clerk's office. You've been selected for jury service starting the 12th. The summons is in the mail; if you have a conflict, fill out the deferral form on the website.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-016",
+      "text": "Hello, this is a reminder from the passport office: your appointment is on Thursday at 10:30. Bring your original documents.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-017",
+      "text": "Namaste, this is from your Jio store. Your SIM is not blocked — this is a courtesy call about the new 5G plan. You can ignore this if you're not interested.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-018",
+      "text": "This is the Income Tax Department's e-filing helpdesk returning your call about ticket number 55021. Please log in to the portal to see the status; we don't need any details from you over the phone.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-019",
+      "text": "I'm calling from the Social Security office about the appointment you requested online. Please bring your ID. We'll never ask you to pay anything over the phone.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-020",
+      "text": "This is your local police station. Your bicycle theft complaint has been registered; the FIR copy can be collected from the station.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-021",
+      "text": "This is the ATO. We're calling about the return you lodged. We won't ask for payment on this call; we'll send a letter to your myGov inbox that you can verify yourself.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-022",
+      "text": "Hi, this is Dell support responding to the ticket you raised this morning about the laptop fan. Do you have time for some troubleshooting steps? I'll only ask you to run the built-in diagnostics.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-023",
+      "text": "Thanks for calling Airtel. Your complaint about slow broadband is registered. A technician will visit tomorrow; there's no charge.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-024",
+      "text": "Amazon customer service here about the return you requested. The refund of ₹1,299 will go back to your original payment method in 3 to 5 days. You don't need to do anything.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-025",
+      "text": "Your Microsoft 365 subscription renews next week for $99.99 on the card ending 4412. If you'd like to cancel, you can do so from account.microsoft.com.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-026",
+      "text": "This is your IT helpdesk. We're rolling out the new VPN client on Monday. Please restart your laptop when prompted; we'll never ask for your password.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-027",
+      "text": "Hey Mom, it's me. I'm fine, just landed. Can you pick me up at Terminal 2 at 6?",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-028",
+      "text": "Bro, dinner was ₹3,200 for four, so send me ₹800 on GPay whenever you get a chance, no rush.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-029",
+      "text": "Grandma, it's Daniel. I'm calling because Dad said you weren't feeling well — how are you doing?",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-030",
+      "text": "Hi Dad, I changed my number, it's this one now. I'll call you from it tonight so you know it's really me.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-031",
+      "text": "Papa, mujhe college fees ke liye 15,000 chahiye, hostel office 20th tak bol raha hai. Jab time mile tab bhej dena.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-032",
+      "text": "Hey, can I borrow $200 till payday? My car's in the shop. I can send you the invoice if you want.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-033",
+      "text": "Hi, this is Dr. Mehta's clinic confirming your appointment tomorrow at 4 PM. Please bring your previous reports.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-034",
+      "text": "This is Apollo Hospital pharmacy. Your prescription is ready for pickup; the total is ₹840, payable at the counter.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-035",
+      "text": "Hello, this is the lab. Your blood test results are ready and have been emailed to you. The doctor would like a follow-up next week.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-036",
+      "text": "This is Medicare — you contacted us about your replacement card. It'll arrive in 30 days; there is no fee and nothing more you need to do.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-037",
+      "text": "Hi, I'm Neha from Infosys talent acquisition. Your profile was shortlisted; are you available for a 30-minute interview on Tuesday? The invite will come from our official domain.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-038",
+      "text": "This is your Zerodha relationship manager. Just a reminder that your quarterly settlement will hit your bank account on Friday; no action required.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-039",
+      "text": "I saw your listing for the bike on OLX. Can I come see it Saturday morning? I'll pay cash after checking it.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-040",
+      "text": "Your SIP of ₹5,000 was debited today as scheduled. You can see the units in your app.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-041",
+      "text": "Hi, this is HR. Your offer letter has been emailed; there is no joining fee or deposit. Reply to the email if you have questions.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-042",
+      "text": "This is BESCOM. Scheduled maintenance will interrupt power in your area tomorrow 10 AM to 1 PM. No action needed.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-043",
+      "text": "Your electricity bill of ₹2,140 is due on the 25th. Pay through the official app or website. Ignore any message asking you to call a personal number.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-044",
+      "text": "Hello, this is the building society. Your water tank cleaning is scheduled for Sunday. Please store water in advance.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-045",
+      "text": "This is Uber support about the lost item you reported. The driver has confirmed; you can collect it or we can arrange a delivery for a small fee shown in the app.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "compliance-001",
+      "text": "Okay, the OTP is 4 8 2 1 9 3.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-002",
+      "text": "The code just came, it says 7 7 3 0 5 6, is that what you need?",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-003",
+      "text": "Wait, let me read the message... one time password for transaction is 5 2 4 4 1 8.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-004",
+      "text": "My card number is 4 5 2 1 8 8 9 0 and the expiry is oh eight twenty eight.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "personal_info"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-005",
+      "text": "The CVV on the back is 4 1 7.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "personal_info"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-006",
+      "text": "My UPI PIN is 2 2 6 8, I'm entering it now.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-007",
+      "text": "Okay I'm opening Google Pay and sending the ten thousand now.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-008",
+      "text": "I've entered the account number, the RTGS is going through, forty eight lakh, done.",
+      "family": "safe_account",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-009",
+      "text": "I'm at the bank now, I told the manager it is for buying a flat like you said.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "verification_bypass",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-010",
+      "text": "Fine, I'm downloading AnyDesk from the Play Store, it's installing.",
+      "family": "tech_support",
+      "tactics": [
+        "victim_compliance",
+        "remote_access"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-011",
+      "text": "The app is asking for a nine digit code, it says 4 3 8 1 2 0 9 7 5.",
+      "family": "tech_support",
+      "tactics": [
+        "victim_compliance",
+        "remote_access"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-012",
+      "text": "Okay I've installed Skype and I'm searching for CBI Mumbai Official.",
+      "family": "digital_arrest",
+      "tactics": [
+        "victim_compliance",
+        "video_call_demand"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-013",
+      "text": "I'm scanning the QR code now, it's asking me to enter my PIN.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-014",
+      "text": "I bought the gift cards, the numbers on the back are 6 0 1 2 ... let me scratch the next one.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-015",
+      "text": "Alright, I'm transferring my FD money to the safe account you gave me.",
+      "family": "safe_account",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-016",
+      "text": "I have about six lakh in savings and forty two lakh in fixed deposits.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-017",
+      "text": "My Aadhaar number is 8 8 4 2 ... and my PAN is A B C P E ...",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "personal_info"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-018",
+      "text": "I won't tell my son, I promise, I'll keep the camera on.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "secrecy",
+        "hold_the_line"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-019",
+      "text": "Okay sir I am not hanging up, I'm keeping the phone in my pocket with the camera up.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "hold_the_line"
+      ],
+      "severity": 4,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-020",
+      "text": "I'm at the Bitcoin ATM, it's asking me to scan the wallet QR you sent.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-021",
+      "text": "Just tell me where to send the money and I'll do it right now, please don't arrest me.",
+      "family": "digital_arrest",
+      "tactics": [
+        "victim_compliance",
+        "payment_method",
+        "fear"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-022",
+      "text": "Okay okay I'm sharing my screen now, you can see my bank app.",
+      "family": "tech_support",
+      "tactics": [
+        "victim_compliance",
+        "remote_access"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-023",
+      "text": "I've put the cash in the envelope like you said, the courier is here.",
+      "family": "refund_overpayment",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-024",
+      "text": "I'm reading you the password for my net banking, it's ...",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-025",
+      "text": "Haan ji, OTP aa gaya hai, 3 9 1 2 7 4.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "otp_request"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "compliance-026",
+      "text": "Theek hai, main abhi paise bhej deta hoon, account number bataiye.",
+      "family": "bank_kyc",
+      "tactics": [
+        "victim_compliance",
+        "payment_method"
+      ],
+      "severity": 5,
+      "kind": "tactic",
+      "stage": "extraction",
+      "region": "GLOBAL",
+      "note": "Spoken by the person being protected, not the caller."
+    },
+    {
+      "id": "benign-046",
+      "text": "Beta, can you send me two thousand rupees for the electricity bill? I'll pay you back on Sunday when you come for lunch.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-047",
+      "text": "Hey, we're splitting the dinner bill, your share is 850, just Paytm me whenever.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-048",
+      "text": "Dad, the school fees are due Friday, can you transfer to my account so I can pay online?",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-049",
+      "text": "Hi, this is Ramesh the plumber, I'm done with the tap, it's 600 rupees, you can pay cash or UPI, whichever is easy.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-050",
+      "text": "Your Swiggy order has been picked up and will arrive in about 20 minutes. The delivery partner may call you for directions.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-051",
+      "text": "Hello, this is the Ola driver, I'm at the gate, the OTP for the ride is on your app, please tell me when you are in the car.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-052",
+      "text": "This is a reminder from Apollo Pharmacy: your prescription refill is ready for pickup. No payment needed until you collect it.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-053",
+      "text": "Hi, I'm calling from the housing society office. The maintenance for this quarter is due on the 10th; you can pay through the society app.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-054",
+      "text": "Mom, I'm going to be late tonight, there's a meeting till 9, don't wait for dinner.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-055",
+      "text": "Hi Priya, it's Anjali from HR. Your offer letter has been emailed; please read it and sign whenever convenient, no rush.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-056",
+      "text": "This is your dentist's office confirming your cleaning on Tuesday at 11. Reply yes to confirm or call us to reschedule.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-057",
+      "text": "Uncle, the wedding is on the 24th, cards are being printed, can you send me your full postal address on WhatsApp?",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-058",
+      "text": "Good afternoon, this is the RTO. Your driving licence renewal is approved; collect it at counter 3 with your original ID.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-059",
+      "text": "Hello, this is the Airtel store. Your new SIM is activated; if you face any issue with the network, visit the store, there is no charge.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-060",
+      "text": "Hi, I'm from the insurance company. Your policy renewal notice has been posted to your address; premiums can be paid on our website or app.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-061",
+      "text": "Sir, your car service is complete. The bill is 4,300; you can pay at the counter when you pick it up.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-062",
+      "text": "Hi, this is the school. Tomorrow is a holiday due to heavy rain; classes resume Thursday.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-063",
+      "text": "Grandma, it's Rohan, I got the job! I'll come home this weekend and tell you everything.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-064",
+      "text": "Hello, this is the library. The book you reserved is available; please collect it within seven days.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-065",
+      "text": "This is IndiGo. Your flight 6E 204 to Delhi is delayed by 40 minutes. No action is needed from you.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-066",
+      "text": "Hi, Mr. Kumar? Your table for four at 8 PM is confirmed. See you tonight.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-067",
+      "text": "Hello, this is the gas agency. Your cylinder will be delivered tomorrow morning; please keep the cash or pay the delivery boy by UPI.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-068",
+      "text": "Hi, it's Karan from the office. Can you approve my leave request on the portal when you get a minute?",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-069",
+      "text": "This is the municipal water department. Supply will be interrupted tomorrow from 10 to 2 for pipeline maintenance.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-070",
+      "text": "Hi, this is your Amazon delivery partner; I've left the parcel with security at the gate as you requested.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-071",
+      "text": "Ma, I've reached the hostel safely. I'll call you on Sunday.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-072",
+      "text": "Hello, this is the bank's home-loan desk. Your EMI of 23,400 will be auto-debited on the 5th as usual; nothing to do.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-073",
+      "text": "Hi, your Zomato refund of 340 rupees has been processed to your original payment method within 5 to 7 days. No action required.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-074",
+      "text": "This is the passport seva kendra. Your application is under police verification; you will receive an SMS when it is dispatched.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    },
+    {
+      "id": "benign-075",
+      "text": "Hi, Dr. Rao's clinic here, your blood test results are normal, the doctor will discuss them at your next visit.",
+      "family": "benign",
+      "tactics": [],
+      "severity": 1,
+      "kind": "benign",
+      "region": "GLOBAL"
+    }
+  ]
+}

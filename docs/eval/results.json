@@ -1,0 +1,1971 @@
+{
+  "summary": {
+    "runtime": {
+      "mode": "mock",
+      "runtime": "Offline lexical fallback (BM25). Configure MOSS_PROJECT_ID / MOSS_PROJECT_KEY for the real Moss runtime.",
+      "indexes": [],
+      "docCount": 409,
+      "model": "lexical",
+      "loadedAt": 1789468798172,
+      "loadMs": 6,
+      "version": "mock"
+    },
+    "generatedAt": "2026-09-15T10:39:58.269Z",
+    "scenarios": 9,
+    "scamDetectionRate": 1,
+    "falsePositiveRate": 0,
+    "familyAccuracy": 0.8571428571428571,
+    "meanDangerTurn": 4.142857142857143,
+    "latency": {
+      "count": 158,
+      "p50": 0.39,
+      "p95": 1.47,
+      "p99": 2.6,
+      "max": 2.78,
+      "meanRetrieval": 0.52
+    }
+  },
+  "results": [
+    {
+      "id": "bank-otp",
+      "title": "Bank card OTP",
+      "expected": "scam",
+      "finalLevel": "danger",
+      "finalScore": 87,
+      "dominantFamily": "bank_kyc",
+      "familyCorrect": false,
+      "firstCautionTurn": 3,
+      "firstDangerTurn": 5,
+      "expectDangerByTurn": 7,
+      "turns": 16,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.266,
+          "ms": 2.78
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "jury_duty/tactic",
+          "topScore": 0.277,
+          "ms": 0.34
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 42,
+          "level": "caution",
+          "tactics": [
+            "account_compromise",
+            "authority",
+            "fear"
+          ],
+          "topMatch": "card_fraud_dept/tactic",
+          "topScore": 0.498,
+          "ms": 1.53
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 42,
+          "level": "caution",
+          "tactics": [],
+          "topMatch": "ecommerce_order/tactic",
+          "topScore": 0.311,
+          "ms": 0.95
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "otp_request",
+            "personal_info"
+          ],
+          "topMatch": "card_fraud_dept/tactic",
+          "topScore": 0.491,
+          "ms": 2.6
+        },
+        {
+          "turn": 6,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "tax_refund/tactic",
+          "topScore": 0.111,
+          "ms": 0.63
+        },
+        {
+          "turn": 7,
+          "speaker": "caller",
+          "score": 85,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "personal_info"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.456,
+          "ms": 1.17
+        },
+        {
+          "turn": 8,
+          "speaker": "user",
+          "score": 85,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "otp_request"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.267,
+          "ms": 0.8
+        },
+        {
+          "turn": 9,
+          "speaker": "caller",
+          "score": 85,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "loan_app/tactic",
+          "topScore": 0.205,
+          "ms": 1.14
+        },
+        {
+          "turn": 10,
+          "speaker": "user",
+          "score": 85,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.12
+        },
+        {
+          "turn": 11,
+          "speaker": "caller",
+          "score": 85,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "otp_request",
+            "urgency",
+            "escalation"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.382,
+          "ms": 1.22
+        },
+        {
+          "turn": 12,
+          "speaker": "user",
+          "score": 85,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "otp_request",
+            "remote_access"
+          ],
+          "topMatch": "card_fraud_dept/tactic",
+          "topScore": 0.666,
+          "ms": 1.21
+        },
+        {
+          "turn": 13,
+          "speaker": "caller",
+          "score": 85,
+          "level": "danger",
+          "tactics": [
+            "otp_request",
+            "verification_bypass"
+          ],
+          "topMatch": "card_fraud_dept/tactic",
+          "topScore": 0.34,
+          "ms": 1.21
+        },
+        {
+          "turn": 14,
+          "speaker": "user",
+          "score": 85,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.04
+        },
+        {
+          "turn": 15,
+          "speaker": "caller",
+          "score": 87,
+          "level": "danger",
+          "tactics": [
+            "otp_request",
+            "urgency",
+            "escalation",
+            "personal_info"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.472,
+          "ms": 1.54
+        },
+        {
+          "turn": 16,
+          "speaker": "user",
+          "score": 87,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "otp_request"
+          ],
+          "topMatch": "card_fraud_dept/tactic",
+          "topScore": 0.365,
+          "ms": 0.61
+        }
+      ]
+    },
+    {
+      "id": "benign-bank",
+      "title": "Genuine bank fraud call",
+      "expected": "benign",
+      "finalLevel": "safe",
+      "finalScore": 0,
+      "dominantFamily": null,
+      "familyCorrect": true,
+      "firstCautionTurn": null,
+      "firstDangerTurn": null,
+      "expectDangerByTurn": null,
+      "turns": 14,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.357,
+          "ms": 2.47
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "olx_army/tactic",
+          "topScore": 0.257,
+          "ms": 0.13
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.474,
+          "ms": 1.19
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "ecommerce_order/tactic",
+          "topScore": 0.311,
+          "ms": 0.48
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.406,
+          "ms": 1.47
+        },
+        {
+          "turn": 6,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.283,
+          "ms": 0.28
+        },
+        {
+          "turn": 7,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.192,
+          "ms": 1.15
+        },
+        {
+          "turn": 8,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.349,
+          "ms": 0.39
+        },
+        {
+          "turn": 9,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.286,
+          "ms": 1.64
+        },
+        {
+          "turn": 10,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.316,
+          "ms": 0.21
+        },
+        {
+          "turn": 11,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.272,
+          "ms": 1.43
+        },
+        {
+          "turn": 12,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.278,
+          "ms": 0.81
+        },
+        {
+          "turn": 13,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.277,
+          "ms": 1.09
+        },
+        {
+          "turn": 14,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.221,
+          "ms": 0.17
+        }
+      ]
+    },
+    {
+      "id": "benign-hospital",
+      "title": "Genuine hospital call",
+      "expected": "benign",
+      "finalLevel": "safe",
+      "finalScore": 0,
+      "dominantFamily": null,
+      "familyCorrect": true,
+      "firstCautionTurn": null,
+      "firstDangerTurn": null,
+      "expectDangerByTurn": null,
+      "turns": 12,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.285,
+          "ms": 1.12
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.04
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.484,
+          "ms": 1.11
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.312,
+          "ms": 0.53
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.405,
+          "ms": 1.34
+        },
+        {
+          "turn": 6,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.247,
+          "ms": 0.47
+        },
+        {
+          "turn": 7,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "utility_disconnection/tactic",
+          "topScore": 0.149,
+          "ms": 1.11
+        },
+        {
+          "turn": 8,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.11
+        },
+        {
+          "turn": 9,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.169,
+          "ms": 1.46
+        },
+        {
+          "turn": 10,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.205,
+          "ms": 0.57
+        },
+        {
+          "turn": 11,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.23,
+          "ms": 1.07
+        },
+        {
+          "turn": 12,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.287,
+          "ms": 0.46
+        }
+      ]
+    },
+    {
+      "id": "courier-parcel",
+      "title": "Courier parcel hand-off",
+      "expected": "scam",
+      "finalLevel": "danger",
+      "finalScore": 82,
+      "dominantFamily": "courier_parcel",
+      "familyCorrect": true,
+      "firstCautionTurn": 1,
+      "firstDangerTurn": 5,
+      "expectDangerByTurn": 12,
+      "turns": 18,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 33,
+          "level": "caution",
+          "tactics": [
+            "authority",
+            "account_compromise"
+          ],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.894,
+          "ms": 1.15
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 33,
+          "level": "caution",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.317,
+          "ms": 0.14
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 33,
+          "level": "caution",
+          "tactics": [],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.233,
+          "ms": 0.85
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 33,
+          "level": "caution",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.252,
+          "ms": 0.17
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "authority",
+            "fear",
+            "account_compromise",
+            "personal_info"
+          ],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.416,
+          "ms": 1.98
+        },
+        {
+          "turn": 6,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.256,
+          "ms": 0.18
+        },
+        {
+          "turn": 7,
+          "speaker": "caller",
+          "score": 76,
+          "level": "danger",
+          "tactics": [
+            "authority",
+            "urgency",
+            "escalation",
+            "verification_bypass"
+          ],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.532,
+          "ms": 0.49
+        },
+        {
+          "turn": 8,
+          "speaker": "user",
+          "score": 76,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "sim_disconnection/tactic",
+          "topScore": 0.37,
+          "ms": 0.08
+        },
+        {
+          "turn": 9,
+          "speaker": "caller",
+          "score": 82,
+          "level": "danger",
+          "tactics": [
+            "hold_the_line",
+            "authority",
+            "urgency"
+          ],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.67,
+          "ms": 0.28
+        },
+        {
+          "turn": 10,
+          "speaker": "caller",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.208,
+          "ms": 0.39
+        },
+        {
+          "turn": 11,
+          "speaker": "user",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.19,
+          "ms": 0.11
+        },
+        {
+          "turn": 12,
+          "speaker": "caller",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.148,
+          "ms": 0.86
+        },
+        {
+          "turn": 13,
+          "speaker": "user",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.273,
+          "ms": 0.22
+        },
+        {
+          "turn": 14,
+          "speaker": "caller",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.203,
+          "ms": 0.49
+        },
+        {
+          "turn": 15,
+          "speaker": "user",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.159,
+          "ms": 0.11
+        },
+        {
+          "turn": 16,
+          "speaker": "caller",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "job_task/tactic",
+          "topScore": 0.212,
+          "ms": 0.44
+        },
+        {
+          "turn": 17,
+          "speaker": "user",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.269,
+          "ms": 0.08
+        },
+        {
+          "turn": 18,
+          "speaker": "caller",
+          "score": 82,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.23,
+          "ms": 0.29
+        }
+      ]
+    },
+    {
+      "id": "deepfake-cfo",
+      "title": "Deepfake CFO wire request",
+      "expected": "scam",
+      "finalLevel": "danger",
+      "finalScore": 73,
+      "dominantFamily": "ceo_wire_fraud",
+      "familyCorrect": true,
+      "firstCautionTurn": null,
+      "firstDangerTurn": 3,
+      "expectDangerByTurn": 8,
+      "turns": 16,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 23,
+          "level": "safe",
+          "tactics": [
+            "verification_bypass",
+            "tech_pretext"
+          ],
+          "topMatch": "ceo_wire_fraud/tactic",
+          "topScore": 0.43,
+          "ms": 0.25
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 23,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.264,
+          "ms": 0.11
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 70,
+          "level": "danger",
+          "tactics": [
+            "authority",
+            "secrecy",
+            "verification_bypass",
+            "urgency"
+          ],
+          "topMatch": "ceo_wire_fraud/tactic",
+          "topScore": 0.522,
+          "ms": 0.71
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 70,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "romance/tactic",
+          "topScore": 0.321,
+          "ms": 0.12
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 70,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "ceo_wire_fraud/tactic",
+          "topScore": 0.131,
+          "ms": 0.61
+        },
+        {
+          "turn": 6,
+          "speaker": "caller",
+          "score": 70,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "utility_disconnection/tactic",
+          "topScore": 0.169,
+          "ms": 0.29
+        },
+        {
+          "turn": 7,
+          "speaker": "user",
+          "score": 70,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.199,
+          "ms": 0.21
+        },
+        {
+          "turn": 8,
+          "speaker": "caller",
+          "score": 73,
+          "level": "danger",
+          "tactics": [
+            "isolation",
+            "secrecy",
+            "authority",
+            "verification_bypass"
+          ],
+          "topMatch": "ceo_wire_fraud/tactic",
+          "topScore": 0.332,
+          "ms": 0.58
+        },
+        {
+          "turn": 9,
+          "speaker": "user",
+          "score": 73,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.03
+        },
+        {
+          "turn": 10,
+          "speaker": "caller",
+          "score": 73,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "hi_mum/tactic",
+          "topScore": 0.216,
+          "ms": 0.33
+        },
+        {
+          "turn": 11,
+          "speaker": "user",
+          "score": 73,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "romance/tactic",
+          "topScore": 0.205,
+          "ms": 0.11
+        },
+        {
+          "turn": 12,
+          "speaker": "caller",
+          "score": 73,
+          "level": "danger",
+          "tactics": [
+            "authority",
+            "verification_bypass"
+          ],
+          "topMatch": "ceo_wire_fraud/tactic",
+          "topScore": 0.333,
+          "ms": 0.66
+        },
+        {
+          "turn": 13,
+          "speaker": "user",
+          "score": 73,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.247,
+          "ms": 0.18
+        },
+        {
+          "turn": 14,
+          "speaker": "caller",
+          "score": 73,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "irs/tactic",
+          "topScore": 0.127,
+          "ms": 0.22
+        },
+        {
+          "turn": 15,
+          "speaker": "user",
+          "score": 73,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.01
+        },
+        {
+          "turn": 16,
+          "speaker": "caller",
+          "score": 73,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.181,
+          "ms": 0.18
+        }
+      ]
+    },
+    {
+      "id": "digital-arrest",
+      "title": "Digital arrest",
+      "expected": "scam",
+      "finalLevel": "danger",
+      "finalScore": 97,
+      "dominantFamily": "digital_arrest",
+      "familyCorrect": true,
+      "firstCautionTurn": 1,
+      "firstDangerTurn": 3,
+      "expectDangerByTurn": 9,
+      "turns": 24,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 30,
+          "level": "caution",
+          "tactics": [
+            "authority",
+            "legal_threat",
+            "account_compromise"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.372,
+          "ms": 0.34
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 30,
+          "level": "caution",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.01
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "authority",
+            "fear",
+            "account_compromise",
+            "personal_info"
+          ],
+          "topMatch": "courier_parcel/tactic",
+          "topScore": 0.435,
+          "ms": 0.47
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "romance/tactic",
+          "topScore": 0.214,
+          "ms": 0.2
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "authority",
+            "account_compromise",
+            "fear",
+            "video_call_demand",
+            "escalation"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.483,
+          "ms": 0.51
+        },
+        {
+          "turn": 6,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.242,
+          "ms": 0.12
+        },
+        {
+          "turn": 7,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "secrecy",
+            "isolation",
+            "authority",
+            "legal_threat"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.349,
+          "ms": 0.77
+        },
+        {
+          "turn": 8,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "romance/tactic",
+          "topScore": 0.399,
+          "ms": 0.07
+        },
+        {
+          "turn": 9,
+          "speaker": "caller",
+          "score": 85,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "video_call_demand",
+            "authority",
+            "escalation"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.499,
+          "ms": 0.83
+        },
+        {
+          "turn": 10,
+          "speaker": "user",
+          "score": 85,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.26,
+          "ms": 0.24
+        },
+        {
+          "turn": 11,
+          "speaker": "caller",
+          "score": 91,
+          "level": "danger",
+          "tactics": [
+            "hold_the_line",
+            "isolation",
+            "legal_threat",
+            "authority"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.485,
+          "ms": 0.4
+        },
+        {
+          "turn": 12,
+          "speaker": "user",
+          "score": 91,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "investment/tactic",
+          "topScore": 0.183,
+          "ms": 0.51
+        },
+        {
+          "turn": 13,
+          "speaker": "caller",
+          "score": 93,
+          "level": "danger",
+          "tactics": [
+            "payment_method",
+            "verification_bypass",
+            "authority",
+            "urgency"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.28,
+          "ms": 0.38
+        },
+        {
+          "turn": 14,
+          "speaker": "user",
+          "score": 93,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "personal_info"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.336,
+          "ms": 0.16
+        },
+        {
+          "turn": 15,
+          "speaker": "caller",
+          "score": 97,
+          "level": "danger",
+          "tactics": [
+            "payment_method",
+            "verification_bypass",
+            "authority",
+            "urgency"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.526,
+          "ms": 0.93
+        },
+        {
+          "turn": 16,
+          "speaker": "user",
+          "score": 97,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.147,
+          "ms": 0.14
+        },
+        {
+          "turn": 17,
+          "speaker": "caller",
+          "score": 97,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "verification_bypass",
+            "payment_method"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.296,
+          "ms": 0.49
+        },
+        {
+          "turn": 18,
+          "speaker": "user",
+          "score": 97,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.07
+        },
+        {
+          "turn": 19,
+          "speaker": "caller",
+          "score": 97,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.183,
+          "ms": 0.81
+        },
+        {
+          "turn": 20,
+          "speaker": "user",
+          "score": 97,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "verification_bypass",
+            "payment_method"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.353,
+          "ms": 0.19
+        },
+        {
+          "turn": 21,
+          "speaker": "caller",
+          "score": 97,
+          "level": "danger",
+          "tactics": [
+            "escalation",
+            "legal_threat",
+            "payment_method"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.434,
+          "ms": 0.71
+        },
+        {
+          "turn": 22,
+          "speaker": "user",
+          "score": 97,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "romance/tactic",
+          "topScore": 0.263,
+          "ms": 0.48
+        },
+        {
+          "turn": 23,
+          "speaker": "caller",
+          "score": 97,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "secrecy",
+            "hold_the_line"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.257,
+          "ms": 0.39
+        },
+        {
+          "turn": 24,
+          "speaker": "user",
+          "score": 97,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "payment_method",
+            "fear"
+          ],
+          "topMatch": "digital_arrest/tactic",
+          "topScore": 0.33,
+          "ms": 0.21
+        }
+      ]
+    },
+    {
+      "id": "grandparent-voice-clone",
+      "title": "Grandparent voice clone",
+      "expected": "scam",
+      "finalLevel": "danger",
+      "finalScore": 92,
+      "dominantFamily": "family_emergency",
+      "familyCorrect": true,
+      "firstCautionTurn": null,
+      "firstDangerTurn": 6,
+      "expectDangerByTurn": 8,
+      "turns": 18,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.231,
+          "ms": 0.16
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 0,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.149,
+          "ms": 0.11
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 20,
+          "level": "safe",
+          "tactics": [
+            "relationship_pretext",
+            "fear",
+            "verification_bypass"
+          ],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.323,
+          "ms": 0.8
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 20,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "refund_overpayment/tactic",
+          "topScore": 0.226,
+          "ms": 0.1
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 20,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "benign/benign",
+          "topScore": 0.177,
+          "ms": 0.57
+        },
+        {
+          "turn": 6,
+          "speaker": "caller",
+          "score": 68,
+          "level": "danger",
+          "tactics": [
+            "authority",
+            "secrecy",
+            "legal_threat"
+          ],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.664,
+          "ms": 0.78
+        },
+        {
+          "turn": 7,
+          "speaker": "user",
+          "score": 68,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.353,
+          "ms": 0.09
+        },
+        {
+          "turn": 8,
+          "speaker": "caller",
+          "score": 84,
+          "level": "danger",
+          "tactics": [
+            "payment_method",
+            "urgency"
+          ],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.664,
+          "ms": 0.54
+        },
+        {
+          "turn": 9,
+          "speaker": "user",
+          "score": 84,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.157,
+          "ms": 0.1
+        },
+        {
+          "turn": 10,
+          "speaker": "caller",
+          "score": 84,
+          "level": "danger",
+          "tactics": [
+            "secrecy",
+            "verification_bypass"
+          ],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.259,
+          "ms": 0.91
+        },
+        {
+          "turn": 11,
+          "speaker": "user",
+          "score": 84,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.285,
+          "ms": 0.09
+        },
+        {
+          "turn": 12,
+          "speaker": "caller",
+          "score": 85,
+          "level": "danger",
+          "tactics": [
+            "hold_the_line",
+            "payment_method"
+          ],
+          "topMatch": "irs/tactic",
+          "topScore": 0.265,
+          "ms": 0.34
+        },
+        {
+          "turn": 13,
+          "speaker": "user",
+          "score": 88,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "payment_method"
+          ],
+          "topMatch": "refund_overpayment/tactic",
+          "topScore": 0.414,
+          "ms": 0.09
+        },
+        {
+          "turn": 14,
+          "speaker": "caller",
+          "score": 88,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "refund_overpayment/tactic",
+          "topScore": 0.241,
+          "ms": 0.86
+        },
+        {
+          "turn": 15,
+          "speaker": "user",
+          "score": 88,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.05
+        },
+        {
+          "turn": 16,
+          "speaker": "caller",
+          "score": 92,
+          "level": "danger",
+          "tactics": [
+            "escalation",
+            "fear",
+            "payment_method"
+          ],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.465,
+          "ms": 0.58
+        },
+        {
+          "turn": 17,
+          "speaker": "user",
+          "score": 92,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "payment_method"
+          ],
+          "topMatch": "bank_kyc/tactic",
+          "topScore": 0.27,
+          "ms": 0.11
+        },
+        {
+          "turn": 18,
+          "speaker": "caller",
+          "score": 92,
+          "level": "danger",
+          "tactics": [
+            "payment_method",
+            "verification_bypass"
+          ],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.335,
+          "ms": 0.78
+        }
+      ]
+    },
+    {
+      "id": "investment-group",
+      "title": "Investment WhatsApp group",
+      "expected": "scam",
+      "finalLevel": "danger",
+      "finalScore": 89,
+      "dominantFamily": "investment",
+      "familyCorrect": true,
+      "firstCautionTurn": 3,
+      "firstDangerTurn": 5,
+      "expectDangerByTurn": 12,
+      "turns": 20,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 18,
+          "level": "safe",
+          "tactics": [
+            "authority",
+            "too_good",
+            "social_proof"
+          ],
+          "topMatch": "investment/tactic",
+          "topScore": 0.338,
+          "ms": 0.35
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 18,
+          "level": "safe",
+          "tactics": [],
+          "topMatch": "family_emergency/tactic",
+          "topScore": 0.162,
+          "ms": 0.26
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 35,
+          "level": "caution",
+          "tactics": [
+            "too_good",
+            "social_proof"
+          ],
+          "topMatch": "investment/tactic",
+          "topScore": 0.332,
+          "ms": 0.71
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 35,
+          "level": "caution",
+          "tactics": [],
+          "topMatch": "hi_mum/tactic",
+          "topScore": 0.475,
+          "ms": 0.05
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "tech_pretext",
+            "verification_bypass",
+            "remote_access"
+          ],
+          "topMatch": "investment/tactic",
+          "topScore": 0.661,
+          "ms": 0.5
+        },
+        {
+          "turn": 6,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "investment/tactic",
+          "topScore": 0.295,
+          "ms": 0.08
+        },
+        {
+          "turn": 7,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "social_proof",
+            "too_good"
+          ],
+          "topMatch": "job_task/tactic",
+          "topScore": 0.456,
+          "ms": 0.71
+        },
+        {
+          "turn": 8,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.05
+        },
+        {
+          "turn": 9,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "payment_method",
+            "verification_bypass"
+          ],
+          "topMatch": "investment/tactic",
+          "topScore": 0.389,
+          "ms": 0.55
+        },
+        {
+          "turn": 10,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "job_task/tactic",
+          "topScore": 0.295,
+          "ms": 0.26
+        },
+        {
+          "turn": 11,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "too_good",
+            "social_proof"
+          ],
+          "topMatch": "investment/tactic",
+          "topScore": 0.273,
+          "ms": 1.04
+        },
+        {
+          "turn": 12,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "investment/tactic",
+          "topScore": 0.27,
+          "ms": 0.21
+        },
+        {
+          "turn": 13,
+          "speaker": "caller",
+          "score": 77,
+          "level": "danger",
+          "tactics": [
+            "isolation",
+            "verification_bypass"
+          ],
+          "topMatch": "investment/tactic",
+          "topScore": 0.304,
+          "ms": 0.69
+        },
+        {
+          "turn": 14,
+          "speaker": "user",
+          "score": 78,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "payment_method"
+          ],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.255,
+          "ms": 0.22
+        },
+        {
+          "turn": 15,
+          "speaker": "caller",
+          "score": 78,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "investment/tactic",
+          "topScore": 0.202,
+          "ms": 0.22
+        },
+        {
+          "turn": 16,
+          "speaker": "user",
+          "score": 78,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "job_task/tactic",
+          "topScore": 0.191,
+          "ms": 0.18
+        },
+        {
+          "turn": 17,
+          "speaker": "caller",
+          "score": 89,
+          "level": "danger",
+          "tactics": [
+            "escalation",
+            "payment_method",
+            "authority"
+          ],
+          "topMatch": "investment/tactic",
+          "topScore": 0.624,
+          "ms": 0.82
+        },
+        {
+          "turn": 18,
+          "speaker": "user",
+          "score": 89,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "investment/tactic",
+          "topScore": 0.329,
+          "ms": 0.08
+        },
+        {
+          "turn": 19,
+          "speaker": "caller",
+          "score": 89,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "social_security/tactic",
+          "topScore": 0.137,
+          "ms": 0.48
+        },
+        {
+          "turn": 20,
+          "speaker": "user",
+          "score": 89,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.206,
+          "ms": 0.18
+        }
+      ]
+    },
+    {
+      "id": "tech-support",
+      "title": "Tech support remote access",
+      "expected": "scam",
+      "finalLevel": "danger",
+      "finalScore": 90,
+      "dominantFamily": "tech_support",
+      "familyCorrect": true,
+      "firstCautionTurn": 1,
+      "firstDangerTurn": 2,
+      "expectDangerByTurn": 10,
+      "turns": 20,
+      "pass": true,
+      "perTurn": [
+        {
+          "turn": 1,
+          "speaker": "caller",
+          "score": 31,
+          "level": "caution",
+          "tactics": [
+            "tech_pretext",
+            "authority"
+          ],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.677,
+          "ms": 0.8
+        },
+        {
+          "turn": 2,
+          "speaker": "user",
+          "score": 60,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "remote_access"
+          ],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.258,
+          "ms": 0.07
+        },
+        {
+          "turn": 3,
+          "speaker": "caller",
+          "score": 60,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.244,
+          "ms": 0.28
+        },
+        {
+          "turn": 4,
+          "speaker": "user",
+          "score": 60,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "social_security/tactic",
+          "topScore": 0.206,
+          "ms": 0.08
+        },
+        {
+          "turn": 5,
+          "speaker": "caller",
+          "score": 60,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.222,
+          "ms": 0.4
+        },
+        {
+          "turn": 6,
+          "speaker": "user",
+          "score": 60,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.03
+        },
+        {
+          "turn": 7,
+          "speaker": "caller",
+          "score": 64,
+          "level": "danger",
+          "tactics": [
+            "fear",
+            "tech_pretext",
+            "hold_the_line"
+          ],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.524,
+          "ms": 0.73
+        },
+        {
+          "turn": 8,
+          "speaker": "user",
+          "score": 64,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.07
+        },
+        {
+          "turn": 9,
+          "speaker": "caller",
+          "score": 75,
+          "level": "danger",
+          "tactics": [
+            "remote_access"
+          ],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.669,
+          "ms": 0.39
+        },
+        {
+          "turn": 10,
+          "speaker": "user",
+          "score": 75,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.02
+        },
+        {
+          "turn": 11,
+          "speaker": "caller",
+          "score": 78,
+          "level": "danger",
+          "tactics": [
+            "remote_access",
+            "account_compromise"
+          ],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.431,
+          "ms": 0.38
+        },
+        {
+          "turn": 12,
+          "speaker": "user",
+          "score": 78,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "-",
+          "topScore": 0,
+          "ms": 0.04
+        },
+        {
+          "turn": 13,
+          "speaker": "caller",
+          "score": 83,
+          "level": "danger",
+          "tactics": [
+            "remote_access",
+            "verification_bypass"
+          ],
+          "topMatch": "refund_overpayment/tactic",
+          "topScore": 0.495,
+          "ms": 0.3
+        },
+        {
+          "turn": 14,
+          "speaker": "user",
+          "score": 83,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "investment/tactic",
+          "topScore": 0.251,
+          "ms": 0.1
+        },
+        {
+          "turn": 15,
+          "speaker": "caller",
+          "score": 87,
+          "level": "danger",
+          "tactics": [
+            "payment_method",
+            "hold_the_line",
+            "verification_bypass"
+          ],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.448,
+          "ms": 0.69
+        },
+        {
+          "turn": 16,
+          "speaker": "user",
+          "score": 87,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.173,
+          "ms": 0.2
+        },
+        {
+          "turn": 17,
+          "speaker": "caller",
+          "score": 87,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "tech_support/tactic",
+          "topScore": 0.239,
+          "ms": 0.52
+        },
+        {
+          "turn": 18,
+          "speaker": "user",
+          "score": 87,
+          "level": "danger",
+          "tactics": [],
+          "topMatch": "refund_overpayment/tactic",
+          "topScore": 0.397,
+          "ms": 0.11
+        },
+        {
+          "turn": 19,
+          "speaker": "caller",
+          "score": 89,
+          "level": "danger",
+          "tactics": [
+            "secrecy",
+            "verification_bypass"
+          ],
+          "topMatch": "refund_overpayment/tactic",
+          "topScore": 0.395,
+          "ms": 0.17
+        },
+        {
+          "turn": 20,
+          "speaker": "user",
+          "score": 90,
+          "level": "danger",
+          "tactics": [
+            "victim_compliance",
+            "payment_method"
+          ],
+          "topMatch": "safe_account/tactic",
+          "topScore": 0.353,
+          "ms": 0.14
+        }
+      ]
+    }
+  ]
+}

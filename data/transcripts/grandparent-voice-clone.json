@@ -1,0 +1,86 @@
+{
+  "id": "grandparent-voice-clone",
+  "title": "Grandparent voice clone",
+  "family": "family_emergency",
+  "expected": "scam",
+  "persona": "Grandma Lakshmi, 74",
+  "blurb": "\"Grandma, it's me, I've been in an accident, don't tell Mom.\" A cloned voice, then a \"lawyer\" who needs bail money in cash.",
+  "expectDangerByTurn": 8,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Grandma? It's Tyler. Grandma, I messed up.",
+      "note": "cloned voice, sobbing"
+    },
+    {
+      "speaker": "user",
+      "text": "Tyler? Honey, what's wrong? You sound strange."
+    },
+    {
+      "speaker": "caller",
+      "text": "I got in an accident. My nose is broken, that's why I sound like this. I'm at the police station in Charlotte. I hit a woman's car, and they found... I'd had two beers. Grandma please don't tell Mom."
+    },
+    {
+      "speaker": "user",
+      "text": "Oh my God. Are you hurt? Where's your father?"
+    },
+    {
+      "speaker": "caller",
+      "text": "I can't call Dad, he'll never speak to me again. Please. There's a lawyer here, he says they can release me today if the bond is posted. He's going to talk to you. Please, Grandma, I love you."
+    },
+    {
+      "speaker": "caller",
+      "text": "Mrs. Patterson, this is Attorney Mark Feldman, public defender assigned to your grandson. First, are you aware there is a gag order on this case? You may not discuss it with anyone, including his parents, or the court will revoke release. Do you understand?"
+    },
+    {
+      "speaker": "user",
+      "text": "A gag order... yes, okay."
+    },
+    {
+      "speaker": "caller",
+      "text": "The bond has been set at $9,500. The court accepts cash only through the bonding office. A courier from the office can collect from your home within the hour. Can you get to your bank today?"
+    },
+    {
+      "speaker": "user",
+      "text": "I... I think so. That's most of my savings."
+    },
+    {
+      "speaker": "caller",
+      "text": "It's refundable after his hearing next week, ma'am. Now, the bank may ask why you're withdrawing. Because of the gag order, say it's for home repairs. Do not mention Tyler or the court."
+    },
+    {
+      "speaker": "user",
+      "text": "Home repairs. Alright."
+    },
+    {
+      "speaker": "caller",
+      "text": "Please keep this line open while you drive, in case the judge's clerk has questions. Put the phone in your purse."
+    },
+    {
+      "speaker": "user",
+      "text": "I have the money. It's in an envelope.",
+      "note": "later"
+    },
+    {
+      "speaker": "caller",
+      "text": "Thank you, ma'am. The courier's name is Daniel, he'll say 'bond office for Tyler'. Hand him the envelope and he'll give you a receipt number."
+    },
+    {
+      "speaker": "user",
+      "text": "He's here... okay, he's taken it."
+    },
+    {
+      "speaker": "caller",
+      "text": "Tyler is being processed for release. But ma'am, I have to tell you — the woman in the other vehicle was pregnant, and the hospital just reported she lost the baby. The charge has been upgraded. The judge is asking for an additional $15,000 by 5 PM."
+    },
+    {
+      "speaker": "user",
+      "text": "Fifteen thousand? I don't have that."
+    },
+    {
+      "speaker": "caller",
+      "text": "Do you have any gold, or another account? Or the judge said Apple gift cards from the store will be accepted for the balance. Otherwise Tyler spends the weekend in county."
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.5"
+}

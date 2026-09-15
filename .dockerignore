@@ -1,0 +1,11 @@
+node_modules
+.next
+dist
+.git
+.moss-cache
+playwright-report
+test-results
+docs/*.pdf
+docs/deck
+*.log
+.env*

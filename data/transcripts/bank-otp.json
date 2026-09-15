@@ -1,0 +1,76 @@
+{
+  "id": "bank-otp",
+  "title": "Bank card OTP",
+  "family": "card_fraud_dept",
+  "expected": "scam",
+  "persona": "Rajesh Kumar, 41, Pune",
+  "blurb": "\"SBI card protection\" calls about a ₹49,999 transaction he never made. To \"cancel\" it he must read out his card number, CVV and the OTP.",
+  "expectDangerByTurn": 7,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hello sir, Amit calling from SBI card protection department, Mumbai. Am I speaking with Mr. Rajesh Kumar?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, speaking."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, this is regarding a transaction on your credit card ending 3320 — ₹49,999 at Croma, New Delhi, attempted 4 minutes ago. Have you done this?"
+    },
+    {
+      "speaker": "user",
+      "text": "No! I'm in Pune. I haven't used the card today."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, don't worry, that is why we called. We are blocking that transaction right now. But to block it I have to verify you are the card holder. Please confirm the 16-digit number and the expiry."
+    },
+    {
+      "speaker": "user",
+      "text": "It's 4521... 8890... 1123... 3320, expiry 08/28."
+    },
+    {
+      "speaker": "caller",
+      "text": "Thank you sir. And the three digit CVV on the back, for the system to lock the card."
+    },
+    {
+      "speaker": "user",
+      "text": "Are you sure? The bank says not to share that."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, this is the bank's own fraud line, it is a recorded and encrypted call. The CVV is for locking, not for transaction. Every second the fraudster is trying again. Please."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay... 417."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, now an OTP has come to your mobile. That OTP is the cancellation code for the Croma transaction. Please read it to me quickly, it expires in 60 seconds."
+    },
+    {
+      "speaker": "user",
+      "text": "The message says 'OTP for transaction of ₹49,999'... it says don't share."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, that text is auto-generated because it is the SAME transaction we are cancelling. If we don't cancel now, the 49,999 will debit. Just tell me the six digits."
+    },
+    {
+      "speaker": "user",
+      "text": "8-2-3-1-9-4."
+    },
+    {
+      "speaker": "caller",
+      "text": "Done sir, that transaction is cancelled. Sir, one more OTP is coming now, this is for the temporary block on the card. Please tell me that too."
+    },
+    {
+      "speaker": "user",
+      "text": "Wait — I just got a message saying ₹49,999 has been debited. What did you do?"
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.2"
+}

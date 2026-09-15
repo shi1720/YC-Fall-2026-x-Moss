@@ -1,0 +1,86 @@
+{
+  "id": "courier-parcel",
+  "title": "Courier parcel hand-off",
+  "family": "courier_parcel",
+  "expected": "scam",
+  "persona": "Arjun Mehta, 34, Mumbai",
+  "blurb": "A FedEx IVR, a \"compliance executive\", then a conference call with a \"cyber-crime inspector\": the classic on-ramp to a digital arrest.",
+  "expectDangerByTurn": 12,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "This call is from FedEx. A parcel booked in your name has been held by customs. Press 1 to speak to an executive.",
+      "note": "IVR"
+    },
+    {
+      "speaker": "user",
+      "text": "Hello? What parcel?",
+      "note": "presses 1"
+    },
+    {
+      "speaker": "caller",
+      "text": "Good morning, Neha from FedEx compliance, Mumbai hub. May I have your full name for verification?"
+    },
+    {
+      "speaker": "user",
+      "text": "Arjun Mehta."
+    },
+    {
+      "speaker": "caller",
+      "text": "Thank you Mr. Mehta. A consignment, tracking FX-2291-MU-TW, booked on 9th September from Andheri to Taipei, has been seized. Contents declared: four kilos clothes. Contents found: five passports, three credit cards, one laptop, and 140 grams MDMA. Consignor details are your name, this mobile number, and Aadhaar ending 9012."
+    },
+    {
+      "speaker": "user",
+      "text": "That's my Aadhaar... but I have never sent anything to Taiwan."
+    },
+    {
+      "speaker": "caller",
+      "text": "Then, sir, your documents have been misused. Customs has already forwarded the file to Mumbai Narcotics. I can connect you to the cyber crime officer so a complaint is registered in your name today; otherwise the case proceeds against you as consignor."
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, please, connect me. What do I need?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Just stay on the line, do not disconnect or the complaint slot lapses. Conferencing Inspector Vijay Kumar now."
+    },
+    {
+      "speaker": "caller",
+      "text": "Inspector Vijay Kumar, Cyber Crime, Andheri. Mr. Mehta, your case ID is MH-CR-8891. Have you shared your Aadhaar with anyone recently? A SIM shop? A hotel?"
+    },
+    {
+      "speaker": "user",
+      "text": "I gave a copy for a hotel booking in Goa in July."
+    },
+    {
+      "speaker": "caller",
+      "text": "That is likely the leak. There are 17 such cases against this gang. Sir, for the complaint we need to verify you are not involved. I'll need your PAN, your bank names, and current balances."
+    },
+    {
+      "speaker": "user",
+      "text": "Why do you need my bank balance for a complaint?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Because the gang moves money through victims' accounts, sir. If a transaction has gone through yours, you become a suspect. We check, we clear you. Also, we must record your statement on video — download Skype."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay, I have SBI and HDFC, roughly 9 lakh total."
+    },
+    {
+      "speaker": "caller",
+      "text": "Noted. Sir, this is confidential. Do not discuss with family or colleagues, and do not call any other police number — this case is under central jurisdiction and local police will simply detain you."
+    },
+    {
+      "speaker": "user",
+      "text": "I understand. What happens next?"
+    },
+    {
+      "speaker": "caller",
+      "text": "My senior, DCP Deshmukh, will join on video to explain the verification of your funds. Keep the phone charged and camera on."
+    }
+  ],
+  "source": "docs/research/scam-corpus.md §5.3"
+}
