@@ -14,7 +14,9 @@
     "moss:status": "tsx scripts/moss-status.ts",
     "eval": "tsx scripts/eval.ts",
     "eval:bench": "tsx scripts/bench.ts",
-    "docs:pdf": "node scripts/render-docs.mjs"
+    "docs:pdf": "node scripts/render-docs.mjs",
+    "engine:readme": "tsx scripts/engine-readme.ts",
+    "eval:load": "tsx scripts/loadtest.ts"
   },
   "dependencies": {
     "@moss-js/moss": "^1.10.0",

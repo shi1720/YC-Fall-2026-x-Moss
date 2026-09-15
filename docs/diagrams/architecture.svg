@@ -67,7 +67,7 @@
     <text x="508" y="472" font-size="14" fill="#e8ebf3" font-weight="600">Moss runtime (in-process)</text>
     <text x="508" y="492" font-size="12" fill="#8f97ad">● loaded index  raksha-playbook   autoRefresh, hot-swap</text>
     <text x="508" y="510" font-size="12" fill="#8f97ad">● loaded index  raksha-intel        queryMultiIndex, one top-K</text>
-    <text x="508" y="528" font-size="12" fill="#8f97ad">● per-call session  raksha-call-{id}   addDocs / query, never pushed</text>
+    <text x="508" y="528" font-size="12" fill="#8f97ad">● memory session (one per process)   turns tagged callId · filtered query · never pushed</text>
     <text x="508" y="548" font-size="12" fill="#6ee7b7">queryMultiIndex · alpha 1.0 → raw cosine · topK 6</text>
     <rect x="492" y="574" width="364" height="120" rx="10" fill="#151c2e" stroke="#ffffff" stroke-opacity="0.1"/>
     <text x="508" y="596" font-size="14" fill="#e8ebf3" font-weight="600">Risk engine (pure, unit-tested)</text>
@@ -99,7 +99,7 @@
     <rect x="474" y="728" width="652" height="100" rx="12" fill="#151c2e" stroke="#ffffff" stroke-opacity="0.1"/>
     <text x="490" y="752" font-size="14" fill="#e8ebf3" font-weight="600">Call manager</text>
     <text x="490" y="772" font-size="12" fill="#8f97ad">per-call state in RAM: transcript · risk state · interventions · advice · latency p50/p95/p99</text>
-    <text x="490" y="790" font-size="12" fill="#8f97ad">events → shield + guardians  ·  guardian.ask → session.query  ·  call end → summary, session closed, memory gone</text>
+    <text x="490" y="790" font-size="12" fill="#8f97ad">events → shield + guardians  ·  guardian.ask → memory.query(filter callId)  ·  call end → summary, turns deleted</text>
     <text x="490" y="812" font-size="12" fill="#5b637a">REST: /api/health · /api/playbook?q= · /api/scenarios · /api/transcribe · /api/eval</text>
   </g>
 

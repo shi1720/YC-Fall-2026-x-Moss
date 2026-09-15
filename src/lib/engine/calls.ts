@@ -1,14 +1,14 @@
 /**
  * CallManager — owns every live call in this process.
  *
- * Per call we keep: the transcript, the fast-path RiskState, a Moss *session* (a local,
- * in-memory index of the call's own turns — the "live-call context" pattern), the
- * interventions raised, and the coach's advice. Nothing is persisted; when the call
- * ends the session is closed and the memory is gone unless the person chooses to report.
+ * Per call we keep: the transcript, the fast-path RiskState, the call's turns in the
+ * process's shared Moss *session* (a local, in-memory index; each turn is tagged with the
+ * callId and recalled with a metadata filter — the "live-call context" pattern), the
+ * interventions raised, and the coach's advice. Nothing is persisted; when the call ends
+ * its turns are deleted from the session and the memory is gone unless the person reports.
  */
 import { EventEmitter } from "node:events";
 import { randomUUID } from "node:crypto";
-import type { SessionIndex } from "@moss-js/moss";
 import { FAMILY_INFO, TACTIC_INFO } from "@/lib/data/families";
 import { LatencyTracker } from "@/lib/engine/latency";
 import { analyzeUtterance, applyCoachVerdict, createRiskState, DEFAULT_RISK_CONFIG } from "@/lib/engine/risk";
@@ -25,7 +25,8 @@ export interface CallRecord {
   interventions: Intervention[];
   advice: CoachAdvice[];
   latency: LatencyTracker;
-  session: SessionIndex | null;
+  /** Ids of this call's turns in the shared memory session (deleted at call end). */
+  memoryDocIds: string[];
   endedAt?: number;
   summary?: string;
   /** Guardian messages pushed into the call. */
@@ -78,7 +79,7 @@ export class CallManager extends EventEmitter<CallEvents> {
       interventions: [],
       advice: [],
       latency: new LatencyTracker(),
-      session: null,
+      memoryDocIds: [],
       guardianMessages: [],
       lastCoachAt: 0,
       coachInFlight: false,
@@ -86,24 +87,7 @@ export class CallManager extends EventEmitter<CallEvents> {
       lastInterventionAt: -1e9,
     };
     this.calls.set(meta.callId, record);
-    // Open the per-call Moss session in the background; the fast path never waits on it.
-    void this.openSession(record);
     return record;
-  }
-
-  private async openSession(record: CallRecord) {
-    try {
-      const rt = await getMossRuntime();
-      if (!rt.client) return;
-      const session = await rt.client.session(`raksha-call-${record.meta.callId}`);
-      if (record.endedAt) {
-        await session.close();
-        return;
-      }
-      record.session = session;
-    } catch (err) {
-      console.warn("[calls] could not open Moss session:", (err as Error).message);
-    }
   }
 
   async analyze(callId: string, input: { text: string; speaker: Utterance["speaker"]; final: boolean; t?: number }): Promise<UtteranceAnalysis | null> {
@@ -151,12 +135,21 @@ export class CallManager extends EventEmitter<CallEvents> {
     return analysis;
   }
 
+  /**
+   * Index a turn into the shared memory session, tagged with the call id. Only the caller's
+   * substantive turns are indexed: they are what a guardian asks about, and every indexed
+   * turn costs one embedding (~10 ms of the process's single embedding executor).
+   */
   private async indexTurn(record: CallRecord, u: Utterance) {
-    if (!record.session) return;
+    if (u.speaker === "user" || u.text.split(/\s+/).length < 6) return;
     try {
-      await record.session.addDocs([{ id: u.id, text: u.text, metadata: { speaker: u.speaker, t: String(u.t) } }]);
+      const rt = await getMossRuntime();
+      if (!rt.memory || record.endedAt) return;
+      const id = `${record.meta.callId}:${u.id}`;
+      await rt.memory.addDocs([{ id, text: u.text, metadata: { callId: record.meta.callId, speaker: u.speaker, t: String(u.t) } }]);
+      record.memoryDocIds.push(id);
     } catch (err) {
-      console.warn("[calls] session addDocs failed:", (err as Error).message);
+      console.warn("[calls] memory addDocs failed:", (err as Error).message);
     }
   }
 
@@ -234,9 +227,10 @@ export class CallManager extends EventEmitter<CallEvents> {
     const record = this.calls.get(callId);
     if (!record) return { hits: [], latencyMs: 0 };
     const t0 = performance.now();
-    if (record.session) {
+    const rt = await getMossRuntime();
+    if (rt.memory && record.memoryDocIds.length > 0) {
       try {
-        const res = await record.session.query(question, { topK: 4 });
+        const res = await rt.memory.query(question, { topK: 4, filter: { field: "callId", condition: { $eq: callId } } });
         return {
           hits: res.docs.map((d) => ({
             text: d.text,
@@ -272,10 +266,12 @@ export class CallManager extends EventEmitter<CallEvents> {
     if (!record || record.endedAt) return record;
     record.endedAt = Date.now();
     record.summary = await summarizeCall(record.transcript, record.risk);
-    if (record.session) {
-      const s = record.session;
-      record.session = null;
-      void s.close().catch(() => {});
+    // Forget the call's memory: delete its turns from the shared session.
+    if (record.memoryDocIds.length) {
+      const ids = record.memoryDocIds.splice(0);
+      void getMossRuntime()
+        .then((rt) => rt.memory?.deleteDocs(ids))
+        .catch(() => {});
     }
     this.emit("ended", callId, record);
     // Keep the record briefly so a guardian can still read the summary, then forget it.

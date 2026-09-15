@@ -10,7 +10,7 @@
  */
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import type { MossClient } from "@moss-js/moss";
+import type { MossClient, SessionIndex } from "@moss-js/moss";
 import { validatePlaybook } from "@/lib/data/playbook";
 import { MockRetriever } from "@/lib/engine/mockRetriever";
 import type { Retriever } from "@/lib/engine/retriever";
@@ -36,6 +36,12 @@ export interface MossRuntime {
   client: MossClient | null;
   info: RuntimeInfo;
   playbook: PlaybookDoc[];
+  /**
+   * One Moss session per process for call memory. Opening a session loads an embedding
+   * model instance (~2 s CPU), so we open exactly one and tag every turn with its callId;
+   * metadata filtering keeps recall strictly per call. Never pushed to the cloud.
+   */
+  memory: SessionIndex | null;
 }
 
 const KEY = "__raksha_moss_runtime__";
@@ -59,6 +65,7 @@ async function build(): Promise<MossRuntime> {
     return {
       retriever,
       client: null,
+      memory: null,
       playbook,
       info: {
         mode: "mock",
@@ -84,7 +91,9 @@ async function build(): Promise<MossRuntime> {
   const docCounts: Record<string, number> = {};
   let model = "moss-minilm";
 
-  await client.loadIndex(INDEX_PLAYBOOK, { autoRefresh: true, pollingIntervalInSeconds });
+  // cachePath: reuse the on-disk snapshot when the cloud version is unchanged (no egress on restart).
+  const cachePath = process.env.MOSS_CACHE_PATH ?? path.join(process.cwd(), ".moss-cache");
+  await client.loadIndex(INDEX_PLAYBOOK, { autoRefresh: true, pollingIntervalInSeconds, cachePath });
   indexes.push(INDEX_PLAYBOOK);
   try {
     const info = await client.getIndex(INDEX_PLAYBOOK);
@@ -97,7 +106,7 @@ async function build(): Promise<MossRuntime> {
   try {
     const intel = await client.getIndex(INDEX_INTEL);
     if (intel && intel.docCount > 0) {
-      await client.loadIndex(INDEX_INTEL, { autoRefresh: true, pollingIntervalInSeconds });
+      await client.loadIndex(INDEX_INTEL, { autoRefresh: true, pollingIntervalInSeconds, cachePath });
       indexes.push(INDEX_INTEL);
       docCounts[INDEX_INTEL] = intel.docCount;
     }
@@ -114,9 +123,16 @@ async function build(): Promise<MossRuntime> {
   });
   // Warm the embedding path so the first real utterance is not the slow one.
   await retriever.search("hello, who is calling?");
+  let memory: SessionIndex | null = null;
+  try {
+    memory = await client.session(`raksha-memory-${process.env.RAKSHA_DEVICE_ID ?? "server"}-${Date.now().toString(36)}`);
+  } catch (err) {
+    console.warn("[moss] call-memory session unavailable:", (err as Error).message);
+  }
   return {
     retriever,
     client,
+    memory,
     playbook,
     info: {
       mode: "moss",
@@ -131,15 +147,61 @@ async function build(): Promise<MossRuntime> {
   };
 }
 
+function buildFallback(playbook: PlaybookDoc[], reason: string, t0: number): MossRuntime {
+  const retriever = new MockRetriever(playbook);
+  return {
+    retriever,
+    client: null,
+    memory: null,
+    playbook,
+    info: {
+      mode: "mock",
+      runtime: `${retriever.runtime} (Moss unavailable: ${reason.slice(0, 120)})`,
+      indexes: [],
+      docCount: retriever.docCount(),
+      model: "lexical",
+      loadedAt: Date.now(),
+      loadMs: Date.now() - t0,
+      version: "mock",
+    },
+  };
+}
+
+/**
+ * Process-wide runtime. If Moss Cloud cannot be reached at boot (credit limit, network,
+ * bad key) the app degrades to the offline retriever and retries Moss in the background
+ * every two minutes, swapping it in once it loads — the shield never goes dark.
+ */
 export function getMossRuntime(): Promise<MossRuntime> {
   const g = globalThis as G;
   if (!g[KEY]) {
+    const t0 = Date.now();
     g[KEY] = build().catch((err) => {
-      g[KEY] = undefined;
-      throw err;
+      const reason = (err as Error).message ?? String(err);
+      console.warn("[moss] runtime unavailable, using offline fallback:", reason.slice(0, 200));
+      const fallback = buildFallback(loadPlaybookFromDisk(), reason, t0);
+      if (hasMossCredentials()) scheduleRetry(g);
+      return fallback;
     });
   }
   return g[KEY];
+}
+
+let retryTimer: ReturnType<typeof setTimeout> | null = null;
+function scheduleRetry(g: G) {
+  if (retryTimer) return;
+  retryTimer = setTimeout(async () => {
+    retryTimer = null;
+    try {
+      const rt = await build();
+      g[KEY] = Promise.resolve(rt);
+      console.log("[moss] runtime recovered:", rt.info.runtime);
+    } catch (err) {
+      console.warn("[moss] retry failed:", ((err as Error).message ?? "").slice(0, 120));
+      scheduleRetry(g);
+    }
+  }, Number(process.env.MOSS_RETRY_SECONDS ?? 120) * 1000);
+  retryTimer.unref?.();
 }
 
 /** Whether the community-intel index is currently part of the multi-index query. */

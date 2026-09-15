@@ -14,6 +14,7 @@
   <a href="docs/PRD.md">PRD</a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a> ·
   <a href="docs/eval/REPORT.md">Evaluation</a> ·
+  <a href="docs/PRIVACY.md">Privacy</a> ·
   <a href="docs/VIDEO_SCRIPT.md">Video script</a> ·
   <a href="docs/DEVPOST.md">Submission</a>
 </p>
@@ -54,7 +55,7 @@ Raksha listens with you during a call and checks **every spoken fragment** again
 |---|---|
 | Loaded index, in-process query (`loadIndex`, `query`, `alpha: 1.0`) | The hot path. Raw cosine scores calibrated into tactic confidence. |
 | Auto-refresh hot-swap (`autoRefresh`) | Playbook and community intel stay fresh with zero query downtime. |
-| Sessions (`client.session`, `addDocs`, `query`) | One local session per call = the call's memory; the guardian asks it questions. Never pushed. |
+| Sessions (`client.session`, `addDocs`, `query` + metadata filter, `deleteDocs`) | One local session per process holds every live call's turns tagged by call id; the guardian asks it questions; a call's turns are deleted at call end. Never pushed. |
 | Multi-index search (`queryMultiIndex`) | Curated playbook + community intel, one global top-K. |
 | Metadata filtering fields | `family`, `tactics`, `severity`, `kind` (tactic / benign look-alike), `stage`, `region`. |
 
@@ -111,7 +112,7 @@ src/lib/llm/     coach (provider-agnostic chat client)
 data/            playbook.json (409 lines, 31 scam families), 18 scenario transcripts
 scripts/         seed / status / eval / build
 tests/           unit + e2e
-docs/            PRD, architecture, evaluation, research, video script, deck
+docs/            PRD, architecture, privacy, evaluation, research, video script, deck
 ```
 
 ## Demo scripts (for judges)

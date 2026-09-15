@@ -140,7 +140,7 @@ export default function Home() {
           <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
             {[
               { icon: Gauge, title: "Loaded playbook index", body: "The curated scam playbook lives in a Moss cloud index, loaded into the process at boot and queried in-memory with a raw cosine score for every fragment." },
-              { icon: Sparkles, title: "Per-call session", body: "Each call opens a Moss session: a local, in-memory index of the call’s own turns. The guardian can ask “what did they ask for?” and get semantic recall in milliseconds. Sessions are never pushed — call memory dies with the call." },
+              { icon: Sparkles, title: "Call memory in a Moss session", body: "Every turn of a live call is written into a local, in-process Moss session tagged with the call id. The guardian can ask “what did they ask for?” and get filtered semantic recall in milliseconds. Never pushed to the cloud — a call’s turns are deleted the moment it ends." },
               { icon: Users, title: "Community intel with hot-swap", body: "When someone reports a call, the caller’s flagged lines are upserted into a second index. Every running shield has it loaded with auto-refresh, so a new script variant reaches every device without a redeploy." },
               { icon: Lock, title: "Multi-index, one query", body: "Playbook and community intel are searched together in one call for a single global top-K, and legitimate look-alikes in the index suppress false alarms." },
             ].map((s) => (

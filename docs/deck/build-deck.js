@@ -178,7 +178,7 @@ async function icon(name, color, size = 256) {
     title(s, "Four ways the retrieval layer does real work here.", { size: 32, h: 1.0 });
     const cards = [
       ["gauge", "Loaded index, in-process query", "raksha-playbook (409 lines) loaded at boot. Every fragment embedded and searched locally via queryMultiIndex (raw cosine, calibrated). The entire hot path ≈ 10 ms, unmetered."],
-      ["sparkles", "A session per call", "client.session() opens a local index of the call's own turns. The guardian's “what did they ask for?” is a semantic query over it. Never pushed — memory dies with the call."],
+      ["sparkles", "Call memory in a session", "Every live turn goes into one in-process Moss session tagged by call id; the guardian's “what did they ask for?” is a filtered semantic query over it. Never pushed — a call's turns are deleted when it ends."],
       ["refresh", "Auto-refresh hot-swap", "Reported caller lines are upserted into raksha-intel. Every running shield polls and hot-swaps the new version in with zero query downtime. No redeploy."],
       ["layers", "Multi-index, one top-K", "queryMultiIndex searches the curated playbook and community intel together. Metadata (family, tactics, severity, kind, stage) lets the engine reason over tactics, not text."],
     ];

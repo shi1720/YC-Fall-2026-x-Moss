@@ -17,6 +17,8 @@ interface Conn {
   callId?: string;
   familyCode?: string;
   name?: string;
+  /** Messages from one socket are handled strictly in order (call.start before utterances). */
+  queue: Promise<void>;
 }
 
 const guardians = new Map<string, Set<Conn>>(); // familyCode → guardian connections
@@ -76,7 +78,7 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
   });
 
   wss.on("connection", async (ws) => {
-    const conn: Conn = { ws, role: "unknown" };
+    const conn: Conn = { ws, role: "unknown", queue: Promise.resolve() };
     try {
       const rt = await getMossRuntime();
       const llm = llmConfig();
@@ -96,12 +98,10 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
       } catch {
         return send(ws, { type: "error", message: "Malformed message" });
       }
-      try {
-        await handle(conn, msg);
-      } catch (err) {
+      conn.queue = conn.queue.then(() => handle(conn, msg)).catch((err) => {
         console.error("[ws] handler error", err);
         send(ws, { type: "error", message: (err as Error).message });
-      }
+      });
     });
 
     ws.on("close", () => {

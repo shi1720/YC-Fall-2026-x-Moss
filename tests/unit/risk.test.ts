@@ -119,3 +119,21 @@ describe("applyCoachVerdict", () => {
     expect(applyCoachVerdict(s, "benign", 0.99).level).toBe("danger");
   });
 });
+
+describe("community-intel containment", () => {
+  it("a single poisoned community line can add at most one tactic and cannot reach DANGER on its own", () => {
+    const poisoned = match(["payment_method"], 1, { source: "community", severity: 4, text: "please pay the delivery charge at the door" });
+    let s = createRiskState();
+    for (let i = 0; i < 5; i++) s = analyzeUtterance(s, utt(`the courier says pay the delivery charge at the door ${i}`), [poisoned], lat).risk;
+    expect(Object.keys(s.tactics)).toEqual(["payment_method"]);
+    expect(s.level).not.toBe("danger");
+  });
+  it("a community line never suppresses a benign look-alike (benign lines live only in the curated playbook)", () => {
+    const { credited, suppressed } = creditMatches([
+      match([], 0.9, { kind: "benign", family: "benign", score: 0.7, text: "we will never ask for your OTP" }),
+      match(["otp_request"], 0.9, { source: "community", score: 0.69 }),
+    ]);
+    expect(suppressed).toBe(true);
+    expect(credited).toHaveLength(0);
+  });
+});

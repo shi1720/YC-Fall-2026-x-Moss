@@ -69,7 +69,7 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 **Non-goals (MVP)**
 
 * Deepfake audio detection (roadmap; complementary, not substitutable).
-* Native telephony integration (Android call-audio capture, telco SIP hooks) — the web app is the reference implementation of the runtime; the phone app is the distribution vehicle.
+* Native telephony integration (Android call-audio capture, telco SIP hooks). **The MVP is a web app:** simulations and recordings work in any browser; the live-microphone mode needs a browser with the Web Speech API (Chrome, Edge, Safari) and a phone on speaker next to it. The phone app is the distribution vehicle and is the first roadmap item.
 * Languages beyond English/Hinglish transcripts (playbook lines include Hinglish; STT language is configurable).
 * Accounts, storage of calls, analytics.
 
@@ -105,7 +105,7 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 | F5 | Speaker-aware crediting (person's words = compliance only) | P0 | ✅ |
 | F6 | Intervention ladder with spoken output and rate limiting | P0 | ✅ |
 | F7 | LLM coach on transitions with JSON contract and template fallback | P1 | ✅ Groq / any OpenAI-compatible |
-| F8 | Guardian rooms by family code; replay state on late join; speak-through; ask-the-call | P1 | ✅ Moss session query |
+| F8 | Guardian rooms by family code; replay state on late join; speak-through; ask-the-call | P1 | ✅ Moss session query with call-id filter |
 | F9 | Community intel: opt-in report → upsert → hot-swap on all instances | P1 | ✅ `raksha-intel`, autoRefresh |
 | F10 | Nine scripted scenarios incl. two benign controls, playable with voices | P0 | ✅ |
 | F11 | Live microphone mode (Chrome/Edge/Safari) with region-aware STT language | P1 | ✅ |
@@ -142,12 +142,12 @@ The 0–100 score is a **noisy-OR over persuasion tactics**: each retrieval hit'
 |---|---|---|
 | Live audio | Stays in the browser's speech engine (Chrome/Edge: vendor speech service; Safari: on-device). Never sent to Raksha. | Not retained by Raksha |
 | Uploaded recordings | Streamed to Whisper on Groq for transcription over TLS | Not stored by Raksha; Groq does not retain audio |
-| Transcript text | Raksha server RAM, per call; Moss *session* (local, in-process) for recall | Discarded at call end (10-minute grace for the guardian summary) |
+| Transcript text | Raksha server RAM, per call; the process's Moss *session* (local, in-process, turns tagged by call id) for recall | Turns deleted from the session at call end; record discarded after a 10-minute grace for the guardian summary |
 | Coach prompts | Recent transcript text + risk summary to the LLM provider over TLS, only on risk transitions | Not stored by Raksha |
 | Community reports | Caller's flagged lines only, opt-in, into the `raksha-intel` Moss index | Retained (shared knowledge); no personal data of the protected person |
 | Identity | None. No accounts, cookies or analytics; family codes are random capability tokens | — |
 
-Compliance posture: data minimisation by design (India DPDP Act 2023 principles), consent-gated sharing, encryption in transit, secrets only on the server. A production app would add a DPA with the STT/LLM providers and a regional processing option.
+Full privacy and threat model: [PRIVACY.md](PRIVACY.md).
 
 ## 5. Success metrics
 

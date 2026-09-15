@@ -23,8 +23,8 @@ Hence a **fast path** (Moss + a small deterministic risk engine, on every fragme
 | Speech → text | Browser (Web Speech API), or Groq Whisper for recordings | Streams interim + final fragments. Nothing is stored. |
 | Shield UI | Browser (`/shield`) | Risk dial, transcript with tactic chips, playbook matches, coach card, full-screen intervention with spoken coaching. Modes: simulation (scripted call with two TTS voices), live microphone, uploaded recording. |
 | WebSocket gateway | `server/ws.ts` | One socket per protected phone or guardian. Routes utterances in, fans engine events out. Guardian rooms keyed by family code, with state replay on late join. |
-| Call manager | `src/lib/engine/calls.ts` | Per-call state in RAM: transcript, `RiskState`, interventions, coach advice, latency percentiles. Owns the per-call Moss session. |
-| **Moss runtime** | `src/lib/moss/runtime.ts` | Loads `raksha-playbook` (and `raksha-intel` when it exists) into the process at boot with `autoRefresh`; opens a `SessionIndex` per call; answers every query in-process. |
+| Call manager | `src/lib/engine/calls.ts` | Per-call state in RAM: transcript, `RiskState`, interventions, coach advice, latency percentiles. Writes each turn into the shared memory session tagged with the call id, and deletes them at call end. |
+| **Moss runtime** | `src/lib/moss/runtime.ts` | Loads `raksha-playbook` (and `raksha-intel` when it exists) into the process at boot with `autoRefresh`; opens one `SessionIndex` for call memory; answers every query in-process. |
 | Retriever abstraction | `src/lib/engine/retriever.ts` | `Retriever` interface with two implementations: `MossRetriever` (production) and `MockRetriever` (TF-IDF cosine, zero credentials, used by CI). |
 | Risk engine | `src/lib/engine/risk.ts` | Pure functions, unit-tested. Turns retrieval hits into a 0–100 score and a level (safe / caution / danger). |
 | LLM coach | `src/lib/llm/coach.ts` | OpenAI-compatible chat call (Groq by default) returning `{verdict, explanation, say_this, action}`. Template fallback when no key is configured. |
@@ -58,7 +58,7 @@ sequenceDiagram
     end
     P->>G: utterance {final:true}
     G->>C: analyze(...)  (same path)
-    C->>M: session.addDocs([turn])   (call memory, local)
+    C->>M: memory.addDocs([turn tagged callId])   (call memory, local)
     C-->>P: analysis + risk + latency stats
     C-->>D: analysis + risk
     opt level changed, or 5 utterances since last coach
@@ -70,7 +70,7 @@ sequenceDiagram
     end
     D->>G: guardian.ask("what did they ask for?")
     G->>C: ask(callId, question)
-    C->>M: session.query(question, {topK:4})
+    C->>M: memory.query(question, {topK:4, filter: callId})
     M-->>D: top turns (≈ ms)
 ```
 
@@ -103,7 +103,7 @@ Levels: safe < 25 ≤ caution < 60 ≤ danger. The dominant scam family is the o
 |---|---|---|
 | **Loaded cloud index** (`loadIndex`, `query`) | `raksha-playbook` (409 lines) loaded at boot, queried for every fragment with raw cosine scores. | The entire hot path is in-process: no vector DB, no network; ≈ 10 ms end-to-end including embedding. |
 | **Auto-refresh with hot-swap** (`autoRefresh`, `pollingIntervalInSeconds`) | Both indexes poll every 120 s; newer versions swap in with zero query downtime. | New scam variants reach every running shield without a redeploy. |
-| **Sessions** (`client.session`, `addDocs`, `query`) | One `SessionIndex` per call holds the call's own turns. The guardian's "ask the call" is a semantic query over it. | Live-call context with no persistence: memory dies with the call unless the user reports it. |
+| **Sessions** (`client.session`, `addDocs`, `query` with a metadata filter, `deleteDocs`) | One `SessionIndex` per process holds every live call's turns, each tagged `callId`; the guardian's "ask the call" is a filtered semantic query over it, and a call's turns are deleted when it ends. | Live-call context with no persistence, at the cost of one embedding-model instance per process instead of one per call (opening a session costs ~2 s of CPU). |
 | **Multi-index search** (`queryMultiIndex`) | Playbook + community intel searched in one call for a single global top-K. | Curated and crowd-sourced knowledge without merging indexes. |
 | **Metadata** | Every line carries `family`, `tactics`, `severity`, `kind` (tactic / benign), `stage`, `region`. | The engine reasons over tactics, not raw text; benign look-alikes live in the same index. |
 | **Server-side embedding on ingest** (`createIndex`, `addDocs` upsert) | Seeding and community reports embed in Moss Cloud. | The API routes never need the model in memory. |
@@ -128,8 +128,8 @@ The `Latency lab` page measures the Moss numbers live against the running instan
 
 The single-process design is a deployment convenience, not an architectural limit:
 
-* **Stateless by construction.** A container holds only (a) the loaded playbook/intel indexes, which every container loads identically from Moss Cloud, and (b) the state of the calls whose WebSockets it currently serves. There is no shared database to contend on.
-* **Horizontal scaling** is therefore *N identical containers behind a WebSocket-aware load balancer with connection affinity*. A call lives entirely on the container that accepted its socket (its Moss session included), so nothing needs to be sharded.
+* **Stateless by construction.** A container holds only (a) the loaded playbook/intel indexes, which every container loads identically from Moss Cloud, (b) one memory session, and (c) the state of the calls whose WebSockets it currently serves. There is no shared database to contend on.
+* **Horizontal scaling** is therefore *N identical containers behind a WebSocket-aware load balancer with connection affinity*. A call lives entirely on the container that accepted its socket (its memory turns included), so nothing needs to be sharded.
 * **Guardian rooms** are the one cross-container concern: a guardian's socket may land on a different container than the protected phone's. Roadmap: publish call events to a pub/sub channel (Redis or NATS) keyed by family code; each container subscribes for the codes it serves. Until then, affinity by family code (hash the code in the LB) keeps both sockets on one container.
 * **Capacity.** Retrieval is ~10 ms of CPU per fragment; at ~0.5 fragments/s per active call, one vCPU sustains on the order of 100–200 concurrent calls, and memory is ~300 MB base plus a few KB per call. The `Latency lab` and `npm run eval:bench` report the numbers for the host you are on.
 * **Failure isolation.** A crash takes down only the calls on that container; clients reconnect (exponential back-off in `useRakshaSocket`) and start a fresh call. Health checks (`/api/health`) gate traffic until the index is loaded.
@@ -151,6 +151,7 @@ Implemented in `src/lib/moss/intel.ts` and wired to the `call.report` WebSocket 
 * **Host:** any Docker host. The reference deployment is a Render free web service (`render.yaml`, 512 MB; the process needs ~300 MB with the model loaded). `keepalive.yml` pings `/api/health` every 10 minutes so judges never hit a cold start.
 * **State:** none outside the process except the Moss Cloud indexes. `MOSS_MODEL_CACHE_DIR` keeps the embedding model on the container's disk between restarts.
 * **Config:** see `.env.example`. Without Moss credentials the app runs on the offline lexical fallback (so CI and forks work); without a Groq key the coach uses templates.
+* **Degradation:** if Moss Cloud is unreachable at boot (network, credit limit, revoked key) the server starts on the offline retriever, reports the reason in `/api/health` and the shield header, and retries Moss every two minutes, swapping the real runtime in without a restart. Loaded indexes are cached on disk (`MOSS_CACHE_PATH`) so a restart only checks the version instead of re-downloading.
 
 ## 8. Security & privacy
 
@@ -160,6 +161,10 @@ Implemented in `src/lib/moss/intel.ts` and wired to the `call.report` WebSocket 
 * Community reporting is opt-in per call and shares only the *caller's* flagged lines, never the protected person's words.
 * The Moss project key lives on the server only. Family codes are capability tokens with no personal data behind them.
 * No accounts, no cookies, no analytics.
+
+## 8b. Privacy
+
+See [PRIVACY.md](PRIVACY.md) for the full data-handling table and threat model.
 
 ## 9. Repository map
 
