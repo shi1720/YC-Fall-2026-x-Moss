@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { readFileSync, appendFileSync, writeFileSync } from "node:fs";
 const key = process.env.GROQ_API_KEY;
-const out = "/tmp/claude-0/-home-user-YC-Fall-2026-x-Moss/2881a0c2-b091-5f80-bf82-8a9e661e2a78/scratchpad/judge1.md";
+const out = "/tmp/claude-0/-home-user-YC-Fall-2026-x-Moss/2881a0c2-b091-5f80-bf82-8a9e661e2a78/scratchpad/judge2.md";
 writeFileSync(out, "");
 const rubric = `Hackathon: YC Fall 2026 x Moss — Zero Latency Builder Sprint. Build production-ready AI applications inspired by YC's Fall 2026 RFS using Moss for sub-10ms semantic search without a traditional vector DB. Judging criteria: (1) Product and User Experience — real problem, compelling experience; (2) Technical Execution — architecture and AI pipeline; (3) Speed and Latency — Moss used effectively for a fast, responsive experience; (4) Demo and Presentation — clearly show what was built and why it matters. Required: architecture diagram, PRD, GitHub repo, deployed link, video demo explaining how Moss contributes. Judge: Deepak Chawla, founder of HiDevs (Bengaluru). Winning entries are unique, have a story, and are commercially viable.`;
 const docs = [

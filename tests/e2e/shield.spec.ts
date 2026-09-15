@@ -34,7 +34,7 @@ test("a simulated digital-arrest call is stopped and the guardian sees it", asyn
 
   await guardian.getByPlaceholder("What did they ask for?").fill("what money did they ask for");
   await guardian.getByRole("button", { name: "Ask", exact: true }).click();
-  await expect(guardian.getByText("what money did they ask for")).toBeVisible();
+  await expect(guardian.getByText("“what money did they ask for”")).toBeVisible({ timeout: 15_000 });
 
   await page.getByRole("button", { name: "I hung up" }).click();
   await expect(page.getByText(/Call ended · \d/)).toBeVisible({ timeout: 20_000 });

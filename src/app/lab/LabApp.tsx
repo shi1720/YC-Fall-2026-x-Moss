@@ -16,6 +16,7 @@ interface EvalResults {
     runtime: { mode: string; runtime: string; docCount: number; model: string };
   };
   results: Array<{ id: string; title: string; expected: string; finalLevel: string; finalScore: number; firstDangerTurn: number | null; expectDangerByTurn: number | null; pass: boolean; dominantFamily: string | null; turns: number }>;
+  bench?: { hardware: { cpu: string; vcpus: number; threads: string }; queries: number; embedPlusSearchMs: { p50: number; p95: number; p99: number }; shortFragmentsMs: { p50: number }; longFragmentsMs: { p50: number } } | null;
 }
 
 const PROBES = [
@@ -162,6 +163,16 @@ export function LabApp() {
                 <Metric label="Eval p50 / p95" value={`${fmtMs(evalData.summary.latency.p50)} / ${fmtMs(evalData.summary.latency.p95)}`} accent />
                 <Metric label="Utterances" value={String(evalData.summary.latency.count)} />
               </div>
+              {evalData.bench && (
+                <div className="mt-3 rounded-xl border border-line bg-white/[0.03] p-3 text-xs text-muted">
+                  <div className="text-[11px] uppercase tracking-wider text-faint">Committed benchmark · npm run eval:bench</div>
+                  <div className="mt-1">
+                    {evalData.bench.queries} queries on {evalData.bench.hardware.cpu} × {evalData.bench.hardware.vcpus} vCPU: embed + search p50 <span className="mono text-moss">{fmtMs(evalData.bench.embedPlusSearchMs.p50)}</span>, p95{" "}
+                    <span className="mono text-moss">{fmtMs(evalData.bench.embedPlusSearchMs.p95)}</span>, p99 <span className="mono text-moss">{fmtMs(evalData.bench.embedPlusSearchMs.p99)}</span>. Short fragments p50{" "}
+                    <span className="mono text-text">{fmtMs(evalData.bench.shortFragmentsMs.p50)}</span>, long p50 <span className="mono text-text">{fmtMs(evalData.bench.longFragmentsMs.p50)}</span>.
+                  </div>
+                </div>
+              )}
               <table className="mt-4 w-full text-left text-xs">
                 <thead className="text-faint">
                   <tr>
