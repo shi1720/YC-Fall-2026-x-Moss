@@ -114,7 +114,7 @@ export function LabApp() {
             <div className="h-3 overflow-hidden rounded-full bg-white/[0.06]">
               <motion.div className="h-full rounded-full bg-moss" animate={{ width: `${Math.max(0.5, Math.min(100, (stats.w95 / sentenceMs) * 100))}%` }} />
             </div>
-            <div className="mt-1 text-xs text-faint">For comparison, a 350 ms cloud vector-DB round-trip would consume 14% of the sentence; a 900 ms LLM classifier, 36%.</div>
+            <div className="mt-1 text-xs text-faint">Embed + search, measured on this server. For comparison, a 350 ms cloud vector-DB round-trip would consume 14% of the sentence; a 900 ms LLM classifier, 36%.</div>
           </div>
           <div className="scrollbar-thin mt-4 max-h-64 overflow-y-auto">
             <table className="w-full text-left text-xs">

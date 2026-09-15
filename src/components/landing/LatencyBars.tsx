@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 
 const rows = [
-  { label: "Moss, in-process (this app)", ms: 4, note: "embed + search, p95 on a laptop", color: "var(--moss)" },
+  { label: "Moss, in-process (this app)", ms: 14, note: "embed + search, p50 measured on a 4-vCPU container", color: "var(--moss)" },
   { label: "Cloud vector database round-trip", ms: 350, note: "typical p50 incl. network", color: "var(--caution)" },
   { label: "LLM classifier per sentence", ms: 900, note: "small model, hosted", color: "var(--danger)" },
   { label: "One spoken sentence", ms: 2500, note: "~7 words at conversational pace", color: "rgba(255,255,255,0.35)" },
@@ -33,7 +33,7 @@ export function LatencyBars() {
           </div>
         </div>
       ))}
-      <p className="text-xs text-faint">Reference points: Moss’s published benchmark (100k docs, p95 4.3 ms) vs. hosted vector DBs (p50 350–600 ms). Our own numbers are measured live in the Latency lab.</p>
+      <p className="text-xs text-faint">Reference points: our committed evaluation (158 utterances) and Moss’s published benchmark (100k docs, p95 4.3 ms search) vs. hosted vector DBs (p50 350–600 ms). Measure it yourself in the Latency lab.</p>
     </div>
   );
 }

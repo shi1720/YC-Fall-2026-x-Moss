@@ -59,7 +59,7 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 
 **Goals (MVP)**
 
-1. Recognise a scam script from a live transcript **within one spoken sentence** of the first "ask", with the retrieval step in **< 10 ms**.
+1. Recognise a scam script from a live transcript **within one spoken sentence** of the first "ask", with retrieval in the **low tens of milliseconds** including on-device embedding (search itself sub-millisecond).
 2. Intervene in a way a stressed, older person can act on: one headline, one sentence to say, one action, spoken aloud.
 3. Never cry wolf on the calls that resemble scams most (a genuine bank fraud call, a courier, a hospital).
 4. Break the isolation: a trusted person sees risk live and can speak into the call.
@@ -118,7 +118,7 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 
 | Area | Requirement | How it is met |
 |---|---|---|
-| Latency | Retrieval + scoring ≤ 10 ms p95 on a laptop-class CPU; intervention visible within one sentence | Moss in-process; risk engine O(tactics); interim fragments; measured in Latency lab and eval |
+| Latency | Retrieval + scoring in the low tens of milliseconds p95 on a shared 4-vCPU container (search itself < 1 ms); intervention visible within one sentence | Moss in-process; risk engine O(tactics); interim fragments; measured in Latency lab and eval |
 | Cost | Zero marginal cost per fragment; LLM only on transitions (≤ ~6 calls per call) | Local Moss queries unmetered; coach gated; free tiers sufficient for MVP |
 | Privacy | No audio leaves the device in live mode; transcript in RAM only; reports share caller lines only; no accounts | Architecture §8 |
 | Reliability | Runs with any subset of credentials; reconnecting WebSocket; call ends cleanly on disconnect | Fallbacks + tests |
@@ -129,10 +129,10 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 
 | Metric | Target (MVP) | Measured |
 |---|---|---|
-| Scam scenarios reaching DANGER | 100% of 7 | see [eval/REPORT.md](eval/REPORT.md) |
-| Benign scenarios reaching DANGER | 0% of 2 | see report |
+| Scam scenarios reaching DANGER | 100% of 7 | 100% ([eval/REPORT.md](eval/REPORT.md)) |
+| Benign scenarios reaching DANGER | 0% of 2 | 0% |
 | Turns from first "ask" to DANGER | ≤ 1 | see report |
-| Retrieval p95 (embed + search) | < 10 ms | see report / Latency lab |
+| Retrieval p95 (embed + search) | < 30 ms on a shared container | 26.7 ms (see report / Latency lab) |
 | Demo-ability | Any judge can watch a scam stopped in ≤ 60 s with no setup | `/shield?scenario=digital-arrest` |
 
 North-star metric for the product: **₹ of transfers prevented per 1,000 protected calls**, measured by bank partners.

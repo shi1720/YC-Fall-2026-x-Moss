@@ -6,7 +6,7 @@
 
 <p align="center">
   <em>Every scam follows a script. Now your phone knows the script.</em><br/>
-  Sub-10 ms scam-script recognition during a live call, powered by <a href="https://moss.dev">Moss</a>.
+  Scam-script recognition in about 10 ms during a live call, powered by <a href="https://moss.dev">Moss</a>.
 </p>
 
 <p align="center">
@@ -24,6 +24,8 @@ Built for the **YC Fall 2026 × Moss: Zero Latency Builder Sprint** (theme: Real
 
 > **Deployed agent:** see the link in [docs/DEVPOST.md](docs/DEVPOST.md) (updated at submission).
 
+**Measured on the committed evaluation (real Moss runtime, 158 utterances):** 7/7 scam calls caught, 0/2 genuine calls flagged, retrieval p50 13.8 ms / p95 26.7 ms including on-device embedding. See [docs/eval/REPORT.md](docs/eval/REPORT.md).
+
 ## The problem
 
 Indians reported **₹22,845 crore** lost to cyber fraud in 2024 — ten times the figure two years earlier. "Digital arrest" alone took ~₹1,900 crore from 1.23 lakh people. In the US, phone calls carry the highest median loss of any scam channel, and 41% of the biggest losses by older adults began with a call. ([sources](docs/research/market-facts.md))
@@ -39,7 +41,7 @@ Raksha listens with you during a call and checks **every spoken fragment** again
 | ![Shield](docs/screenshots/shield-intervention.png) | ![Guardian](docs/screenshots/guardian.png) |
 | **The shield** stops a digital-arrest call mid-sentence: what script it is, one sentence to say, the helpline to call. | **The guardian** sees the risk of a parent's call live, speaks through the shield, and can ask the call's memory a question. |
 
-* **Fast path (every fragment, ≈ 3 ms):** Moss holds a 409-line scam playbook in memory. Each fragment is embedded and matched in-process — no vector database, no round-trip. A small, unit-tested risk engine credits persuasion tactics (authority, urgency, secrecy, the ask…) and a noisy-OR model decides *safe / caution / danger*.
+* **Fast path (every fragment, ≈ 10 ms end-to-end, search < 1 ms):** Moss holds a 409-line scam playbook in memory. Each fragment is embedded and matched in-process — no vector database, no round-trip. A small, unit-tested risk engine credits persuasion tactics (authority, urgency, secrecy, the ask…) and a noisy-OR model decides *safe / caution / danger*.
 * **Slow path (only on risk transitions):** an LLM coach explains in plain words, gives the exact sentence to say, and can veto a false alarm. It never sits on the critical path.
 * **Circle of trust:** a family code links a phone to a guardian's dashboard. Human and agent share the same call session.
 * **Community intel:** report a call and its flagged lines are upserted into a second Moss index; every running shield hot-swaps it in. New scam variants propagate without a redeploy.
@@ -95,7 +97,7 @@ Without Moss credentials the app still runs, on an offline lexical fallback (so 
 
 ### Deploy
 
-`Dockerfile` builds a single self-contained image (port 7860, non-root, health-checked). The reference deployment is a Hugging Face Space; `.github/workflows/sync-to-hf.yml` mirrors `main` to it and `keepalive.yml` pings it every 30 minutes. Set the secrets/variables `HF_TOKEN`, `HF_SPACE`, `DEPLOY_URL` in the repository, and `MOSS_PROJECT_ID`, `MOSS_PROJECT_KEY`, `GROQ_API_KEY` in the Space.
+`Dockerfile` builds a single self-contained image (non-root, health-checked, ~300 MB RSS with the model loaded). `render.yaml` is a Render Blueprint for the free tier; `keepalive.yml` pings the deployed URL every 10 minutes so it never sleeps. Any Docker host works: set `MOSS_PROJECT_ID`, `MOSS_PROJECT_KEY`, `GROQ_API_KEY` and `PORT`.
 
 ## Repository
 

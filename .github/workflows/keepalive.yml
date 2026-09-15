@@ -1,9 +1,9 @@
-# Free hosting sleeps after inactivity; a health ping every 30 minutes keeps the
+# Free hosting sleeps after inactivity; a health ping every 10 minutes keeps the
 # demo instantly available for judges. Set DEPLOY_URL in repository variables.
 name: Keep the deployed shield warm
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 jobs:
   ping:

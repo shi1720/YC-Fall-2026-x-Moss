@@ -61,7 +61,7 @@ async function icon(name, color, size = 256) {
       { text: "Every scam follows a script.", options: { color: C.text, breakLine: true } },
       { text: "Now your phone knows the script.", options: { color: C.saffron2 } },
     ], { x: 0.7, y: 2.1, w: 12, h: 2.4, fontFace: H, fontSize: 44, isTextBox: true, margin: 0, valign: "top", lineSpacingMultiple: 1.05 });
-    s.addText("The real-time scam-call shield. Sub-10 ms script recognition during a live call, powered by Moss. It interrupts before the OTP leaves your mouth, tells you what to say, and alerts someone you trust.", { x: 0.7, y: 4.75, w: 9.2, h: 1.1, fontFace: B, fontSize: 17, color: C.muted, isTextBox: true, margin: 0 });
+    s.addText("The real-time scam-call shield. Script recognition in about 10 ms during a live call, powered by Moss. It interrupts before the OTP leaves your mouth, tells you what to say, and alerts someone you trust.", { x: 0.7, y: 4.75, w: 9.2, h: 1.1, fontFace: B, fontSize: 17, color: C.muted, isTextBox: true, margin: 0 });
     s.addText("Shivam Gupta · with Claude  ·  github.com/shi1720/YC-Fall-2026-x-Moss", { x: 0.7, y: 6.3, w: 11, h: 0.4, fontFace: B, fontSize: 13, color: C.faint, isTextBox: true, margin: 0 });
     s.addText("YC Fall 2026 × Moss · Zero Latency Builder Sprint · Real-Time Voice & Conversational AI", { x: 0.7, y: 6.65, w: 11, h: 0.35, fontFace: B, fontSize: 11, color: C.faint, isTextBox: true, margin: 0 });
     s.addNotes("Open with the phone ringing. Raksha means 'protection' — the thread on Raksha Bandhan. The product is that thread for a parent's phone.");
@@ -121,7 +121,7 @@ async function icon(name, color, size = 256) {
     s.addImage({ path: path.join(REPO, "docs/screenshots/shield-intervention.png"), x: 0.6, y: 1.85, w: 7.6, h: 4.75, rounding: true });
     const pts = [
       ["ear", "Every fragment, even mid-sentence", "Speech becomes text on the device; each fragment is a query."],
-      ["gauge", "Recognised in ≈ 3 ms", "Matched against 409 real scam lines in-process with Moss. No vector DB, no round-trip."],
+      ["gauge", "Recognised in ≈ 10 ms", "Matched against 409 real scam lines in-process with Moss, including on-device embedding. No vector DB, no round-trip."],
       ["quote", "One sentence to say", "It names the script, gives the exact words to end the call, and speaks them aloud."],
     ];
     pts.forEach(([ic, h, d], i) => {
@@ -140,7 +140,7 @@ async function icon(name, color, size = 256) {
     title(s, "A fast path that never waits for the cloud. A slow path that knows what to say.", { size: 30, h: 1.2 });
     // fast
     card(s, 0.6, 1.9, 7.3, 4.75, { line: C.moss });
-    s.addText("FAST PATH · EVERY FRAGMENT · ≈ 3 MS", { x: 0.85, y: 2.05, w: 6.8, h: 0.3, fontFace: B, fontSize: 10, bold: true, color: C.moss, charSpacing: 2, isTextBox: true, margin: 0 });
+    s.addText("FAST PATH · EVERY FRAGMENT · ≈ 10 MS", { x: 0.85, y: 2.05, w: 6.8, h: 0.3, fontFace: B, fontSize: 10, bold: true, color: C.moss, charSpacing: 2, isTextBox: true, margin: 0 });
     const fast = [
       "Moss runtime, in-process: the playbook index is loaded at boot and queried with raw cosine scores (alpha 1.0, top-6).",
       "Cosine → calibrated confidence. Benign look-alikes in the same index out-vote tactic lines (“we will never ask for your OTP” stays quiet).",
@@ -177,7 +177,7 @@ async function icon(name, color, size = 256) {
     kicker(s, "Moss in the loop", C.moss);
     title(s, "Four ways the retrieval layer does real work here.", { size: 32, h: 1.0 });
     const cards = [
-      ["gauge", "Loaded index, in-process query", "raksha-playbook (409 lines) loaded at boot. Every fragment embedded and searched locally. Raw cosine, calibrated. The entire hot path, ≈ 3 ms, unmetered."],
+      ["gauge", "Loaded index, in-process query", "raksha-playbook (409 lines) loaded at boot. Every fragment embedded and searched locally via queryMultiIndex (raw cosine, calibrated). The entire hot path ≈ 10 ms, unmetered."],
       ["sparkles", "A session per call", "client.session() opens a local index of the call's own turns. The guardian's “what did they ask for?” is a semantic query over it. Never pushed — memory dies with the call."],
       ["refresh", "Auto-refresh hot-swap", "Reported caller lines are upserted into raksha-intel. Every running shield polls and hot-swaps the new version in with zero query downtime. No redeploy."],
       ["layers", "Multi-index, one top-K", "queryMultiIndex searches the curated playbook and community intel together. Metadata (family, tactics, severity, kind, stage) lets the engine reason over tactics, not text."],
@@ -199,7 +199,7 @@ async function icon(name, color, size = 256) {
     kicker(s, "Speed & latency", C.moss);
     title(s, "A scam is won or lost inside one sentence.", { size: 34, h: 0.9 });
     s.addText("“Read me the six digits, quickly” takes ~2.5 s to say. How much of that sentence is gone before the shield has an answer?", { x: 0.6, y: 1.35, w: 12, h: 0.5, fontFace: B, fontSize: 15, color: C.muted, isTextBox: true, margin: 0 });
-    s.addChart(pres.ChartType.bar, [{ name: "Latency (ms)", labels: ["Moss, in-process (Raksha)", "Cloud vector DB round-trip", "LLM classifier per sentence", "One spoken sentence"], values: [4, 350, 900, 2500] }], {
+    s.addChart(pres.ChartType.bar, [{ name: "Latency (ms)", labels: ["Moss, in-process (Raksha)", "Cloud vector DB round-trip", "LLM classifier per sentence", "One spoken sentence"], values: [14, 350, 900, 2500] }], {
       x: 0.6, y: 2.0, w: 7.8, h: 4.6, barDir: "bar",
       chartColors: [C.moss, C.saffron, C.danger, "3A4460"],
       showValue: true, dataLabelPosition: "outEnd", dataLabelColor: C.text, dataLabelFontSize: 12, dataLabelFormatCode: "#,##0 \"ms\"",
@@ -208,7 +208,7 @@ async function icon(name, color, size = 256) {
       plotArea: { fill: { color: C.ink } }, chartArea: { fill: { color: C.ink } },
     });
     const facts = [
-      ["≈ 0.2%", "of the sentence consumed by Moss retrieval (p95 ≈ 5 ms)"],
+      ["≈ 1%", "of the sentence consumed by Moss retrieval (p95 ≈ 27 ms measured)"],
       ["14%", "consumed by a 350 ms cloud vector-DB round-trip"],
       ["36%", "consumed by a 900 ms LLM classifier — the OTP is already out"],
       ["₹0", "marginal cost per fragment: local Moss queries are unmetered"],

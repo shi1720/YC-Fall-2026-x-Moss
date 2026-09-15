@@ -62,13 +62,13 @@
 
     <!-- fast path -->
     <rect x="474" y="410" width="400" height="300" rx="14" fill="#0f1523" stroke="#34d399" stroke-opacity="0.55"/>
-    <text x="492" y="436" font-size="12" fill="#34d399" letter-spacing="2.5" font-weight="700">FAST PATH · EVERY FRAGMENT · ≈ 3 MS</text>
+    <text x="492" y="436" font-size="12" fill="#34d399" letter-spacing="2.5" font-weight="700">FAST PATH · EVERY FRAGMENT · ≈ 10 MS</text>
     <rect x="492" y="450" width="364" height="112" rx="10" fill="#151c2e" stroke="#34d399" stroke-opacity="0.35"/>
     <text x="508" y="472" font-size="14" fill="#e8ebf3" font-weight="600">Moss runtime (in-process)</text>
     <text x="508" y="492" font-size="12" fill="#8f97ad">● loaded index  raksha-playbook   autoRefresh, hot-swap</text>
     <text x="508" y="510" font-size="12" fill="#8f97ad">● loaded index  raksha-intel        queryMultiIndex, one top-K</text>
     <text x="508" y="528" font-size="12" fill="#8f97ad">● per-call session  raksha-call-{id}   addDocs / query, never pushed</text>
-    <text x="508" y="548" font-size="12" fill="#6ee7b7">embed + search locally · alpha 1.0 → raw cosine · topK 6</text>
+    <text x="508" y="548" font-size="12" fill="#6ee7b7">queryMultiIndex · alpha 1.0 → raw cosine · topK 6</text>
     <rect x="492" y="574" width="364" height="120" rx="10" fill="#151c2e" stroke="#ffffff" stroke-opacity="0.1"/>
     <text x="508" y="596" font-size="14" fill="#e8ebf3" font-weight="600">Risk engine (pure, unit-tested)</text>
     <text x="508" y="616" font-size="12" fill="#8f97ad">calibrate cosine → confidence · benign look-alike suppression</text>
@@ -141,6 +141,6 @@
   <g>
     <rect x="60" y="878" width="1480" height="52" rx="14" fill="#0f1523" stroke="#ffffff" stroke-opacity="0.12"/>
     <text x="84" y="899" font-size="12" fill="#8f97ad" letter-spacing="2.5" font-weight="700">LATENCY BUDGET FOR ONE SPOKEN SENTENCE (≈ 2,500 MS)</text>
-    <text x="84" y="919" font-size="13" fill="#e8ebf3">speech → text ≈ 200–400 ms (streaming)   ·   <tspan fill="#6ee7b7">Moss embed + search ≈ 2–5 ms</tspan>   ·   risk engine &lt; 0.1 ms   ·   WebSocket round-trip ≈ 20–80 ms   ·   coach (async) ≈ 300–800 ms, off the critical path</text>
+    <text x="84" y="919" font-size="13" fill="#e8ebf3">speech → text ≈ 200–400 ms (streaming)   ·   <tspan fill="#6ee7b7">Moss embed + search ≈ 10–18 ms (search &lt; 1 ms)</tspan>   ·   risk engine &lt; 0.1 ms   ·   WebSocket round-trip ≈ 20–80 ms   ·   coach (async) ≈ 300–800 ms, off the critical path</text>
   </g>
 </svg>

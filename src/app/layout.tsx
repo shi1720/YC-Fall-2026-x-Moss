@@ -11,11 +11,11 @@ const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["lati
 export const metadata: Metadata = {
   title: { default: "Raksha — the real-time scam-call shield", template: "%s · Raksha" },
   description:
-    "Every scam follows a script. Raksha listens with you, recognises the script in under 10 milliseconds with Moss, and steps in before you share the OTP.",
+    "Every scam follows a script. Raksha listens with you, recognises the script in about 10 milliseconds with Moss, and steps in before you share the OTP.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   openGraph: {
     title: "Raksha — the real-time scam-call shield",
-    description: "Sub-10 ms scam-script recognition during a live call, powered by Moss.",
+    description: "Scam-script recognition in about 10 ms during a live call, powered by Moss.",
     type: "website",
   },
 };

@@ -1,0 +1,27 @@
+# Render Blueprint — deploys Raksha as a single Docker web service on the free tier.
+# Dashboard → New → Blueprint → pick this repo. Then add the three secrets in the service's Environment tab.
+services:
+  - type: web
+    name: raksha
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: HOSTNAME
+        value: "0.0.0.0"
+      - key: MOSS_MODEL_CACHE_DIR
+        value: /tmp/moss-models
+      - key: MOSS_CACHE_PATH
+        value: /tmp/moss-cache
+      - key: MOSS_EMBEDDING_INTRA_OP_THREADS
+        value: "2"
+      - key: MOSS_PROJECT_ID
+        sync: false
+      - key: MOSS_PROJECT_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false

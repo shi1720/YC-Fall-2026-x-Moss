@@ -18,7 +18,7 @@ export default function Home() {
               <span className="text-saffron-2">Now your phone knows the script.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              Raksha listens with you during a call, recognises the scam playbook in <span className="mono text-moss">under 10 ms</span> with Moss, and steps in before you
+              Raksha listens with you during a call, recognises the scam playbook in <span className="mono text-moss">about 10 ms</span> with Moss, and steps in before you
               read out the OTP. It coaches you with the exact words to say, and quietly alerts someone you trust.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -87,8 +87,8 @@ export default function Home() {
               },
               {
                 icon: Gauge,
-                title: "2 · Recognise, in single-digit milliseconds",
-                body: "Moss holds a 400-line scam playbook in memory. Each fragment is embedded and matched in-process — no vector database, no round-trip. The engine credits persuasion tactics (authority, urgency, secrecy, the ask) and a noisy-OR risk model decides.",
+                title: "2 · Recognise, in about ten milliseconds",
+                body: "Moss holds a 400-line scam playbook in memory. Each fragment is embedded and matched in-process — no vector database, no round-trip — in roughly 10 ms end-to-end, with the search itself under a millisecond. The engine credits persuasion tactics (authority, urgency, secrecy, the ask) and a noisy-OR risk model decides.",
               },
               {
                 icon: ShieldAlert,
@@ -114,7 +114,7 @@ export default function Home() {
             <h2 className="display mt-3 text-4xl leading-tight text-text">A scam is won or lost inside one sentence.</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
               “Read me the six digits, quickly.” takes about two and a half seconds to say. A cloud vector search spends a third of that on the network before it has an
-              answer; an LLM classifier spends all of it. Moss answers in the time it takes to say one syllable, so the shield can interrupt <em>while</em> the request is being
+              answer; an LLM classifier spends all of it. Moss answers in the time it takes to say a syllable, so the shield can interrupt <em>while</em> the request is being
               made, and it can do that for every fragment of every call at zero marginal cost, because local queries are never metered.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

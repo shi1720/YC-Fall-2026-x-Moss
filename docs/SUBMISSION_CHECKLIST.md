@@ -9,20 +9,22 @@ Deadline: **20 Sep 2026, 11:59 PM IST** (Devpost). Everything below is ready in 
 | Architecture diagram | `docs/diagrams/architecture.png` (SVG source alongside; also in README and deck) | ✅ |
 | PRD | `docs/PRD.md` · PDF: `docs/pdf/Raksha-PRD.pdf` | ✅ |
 | GitHub repository | https://github.com/shi1720/YC-Fall-2026-x-Moss (merge the branch to `main` before submitting) | ☐ merge |
-| Deployed link of the agent | Hugging Face Space (see *Deploy* below) | ☐ needs keys |
+| Deployed link of the agent | Render free web service (see *Deploy* below) | ☐ needs Render account |
 | Video demo | Record with `docs/VIDEO_SCRIPT.md` (3-minute cut + 60-second teaser); upload to YouTube (unlisted is fine) | ☐ record |
 | Submission text | `docs/DEVPOST.md` — paste each section into the Devpost form; update the deployed URL and video link | ☐ paste |
 | Pitch deck (optional, strongly recommended) | `docs/deck/Raksha-Pitch.pptx` and `.pdf` | ✅ |
 
-## Deploy (≈ 10 minutes, all free tiers)
+## Deploy (≈ 10 minutes, free, no card)
 
-1. **Moss**: portal.usemoss.dev → create project → copy Project ID → API Keys → create key.
-2. **Groq**: console.groq.com → API Keys → create.
-3. **Hugging Face**: huggingface.co/new-space → name `raksha`, SDK **Docker**, hardware **CPU basic (free)**, visibility public. Then *Settings → Variables and secrets* → add secrets `MOSS_PROJECT_ID`, `MOSS_PROJECT_KEY`, `GROQ_API_KEY`.
-4. **Seed the index once** from your laptop (or let Claude do it): `npm run moss:seed` with the same two Moss variables in `.env`.
-5. **GitHub → Settings → Secrets and variables → Actions**: secret `HF_TOKEN` (write token), variables `HF_SPACE` = `<your-hf-username>/raksha`, `DEPLOY_URL` = `https://<your-hf-username>-raksha.hf.space`.
-6. Merge to `main`. The *Deploy to Hugging Face Space* workflow pushes the code; the Space builds the Docker image (~5 min). The *Keep the deployed shield warm* workflow pings it every 30 minutes.
-7. Open the Space URL → the shield header should read **Moss · in-process** (not "offline fallback"). Run `/lab` once and `npm run eval` locally with Moss credentials, then commit the regenerated `docs/eval/` so the numbers in the README, lab and deck reflect the real runtime.
+Hugging Face now requires a PRO plan for Docker Spaces, so the reference host is **Render** (free web service, 512 MB; Raksha needs ~300 MB with the model loaded).
+
+1. **Moss** (done): the `raksha-playbook` index is seeded in project `9eb21c80…`.
+2. **Render**: sign in at https://dashboard.render.com with GitHub (no card). Then either
+   * *Option A — let Claude do it:* Account settings → API Keys → create key; Workspace settings → copy the workspace/owner ID (starts with `tea-`). Send both; the service is created via the API with `render.yaml` settings and the three secrets.
+   * *Option B — click-through:* New → Blueprint → select `shi1720/YC-Fall-2026-x-Moss` (`main`) → Apply. Then in the service's *Environment* tab add `MOSS_PROJECT_ID`, `MOSS_PROJECT_KEY`, `GROQ_API_KEY`.
+3. First build takes ~6 minutes. Open the service URL: the shield header should read **Moss · in-process**.
+4. **GitHub → Settings → Secrets and variables → Actions → Variables**: `DEPLOY_URL` = the Render URL. The *Keep the deployed shield warm* workflow then pings it every 10 minutes so it never spins down (Render free sleeps after 15 idle minutes).
+5. Paste the URL into `docs/DEVPOST.md` and the Devpost form.
 
 ## Before you record the video
 

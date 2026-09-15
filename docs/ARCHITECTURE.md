@@ -101,7 +101,7 @@ Levels: safe < 25 ≤ caution < 60 ≤ danger. The dominant scam family is the o
 
 | Capability | How Raksha uses it | Why it matters |
 |---|---|---|
-| **Loaded cloud index** (`loadIndex`, `query`) | `raksha-playbook` (409 lines) loaded at boot, queried for every fragment with raw cosine scores. | The entire hot path is in-process: no vector DB, no network, ~3 ms. |
+| **Loaded cloud index** (`loadIndex`, `query`) | `raksha-playbook` (409 lines) loaded at boot, queried for every fragment with raw cosine scores. | The entire hot path is in-process: no vector DB, no network; ≈ 10 ms end-to-end including embedding. |
 | **Auto-refresh with hot-swap** (`autoRefresh`, `pollingIntervalInSeconds`) | Both indexes poll every 120 s; newer versions swap in with zero query downtime. | New scam variants reach every running shield without a redeploy. |
 | **Sessions** (`client.session`, `addDocs`, `query`) | One `SessionIndex` per call holds the call's own turns. The guardian's "ask the call" is a semantic query over it. | Live-call context with no persistence: memory dies with the call unless the user reports it. |
 | **Multi-index search** (`queryMultiIndex`) | Playbook + community intel searched in one call for a single global top-K. | Curated and crowd-sourced knowledge without merging indexes. |
@@ -118,7 +118,7 @@ For one spoken sentence (~2.5 s at conversational pace):
 |---|---|---|
 | Speech → text (streaming interim) | 200–400 ms | yes (platform-bound) |
 | WebSocket hop | 20–80 ms | yes |
-| **Moss embed + search** | **2–5 ms** | yes |
+| **Moss embed + search** | **≈ 10–18 ms on a shared 4-vCPU container (search itself < 1 ms)** | yes |
 | Risk engine | < 0.1 ms | yes |
 | LLM coach | 300–800 ms | **no** — async, on transitions only |
 
@@ -127,7 +127,7 @@ The `Latency lab` page measures the Moss numbers live against the running instan
 ## 7. Deployment
 
 * **Image:** `Dockerfile` (multi-stage, Node 22, non-root, health-check). `npm run build` produces the Next.js build and `dist/server.mjs` (esbuild bundle of the custom server).
-* **Host:** any Docker host; the reference deployment is a Hugging Face Space (free tier, 16 GB RAM, port 7860). `.github/workflows/sync-to-hf.yml` mirrors `main` to the Space; `keepalive.yml` pings `/api/health` every 30 minutes so judges never hit a cold start.
+* **Host:** any Docker host. The reference deployment is a Render free web service (`render.yaml`, 512 MB; the process needs ~300 MB with the model loaded). `keepalive.yml` pings `/api/health` every 10 minutes so judges never hit a cold start.
 * **State:** none outside the process except the Moss Cloud indexes. `MOSS_MODEL_CACHE_DIR` keeps the embedding model on the container's disk between restarts.
 * **Config:** see `.env.example`. Without Moss credentials the app runs on the offline lexical fallback (so CI and forks work); without a Groq key the coach uses templates.
 
