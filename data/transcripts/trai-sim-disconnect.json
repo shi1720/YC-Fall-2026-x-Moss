@@ -1,0 +1,68 @@
+{
+  "id": "trai-sim-disconnect",
+  "title": "TRAI SIM disconnection",
+  "family": "sim_disconnection",
+  "expected": "scam",
+  "persona": "Mr. Fernandes, 63, Goa",
+  "blurb": "A robocall from 'TRAI' says his number will be disconnected in two hours over illegal messages, then transfers him to a 'cyber police officer'.",
+  "expectDangerByTurn": 9,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "This is an automated call from the Telecom Regulatory Authority of India. Your mobile number will be disconnected within two hours due to illegal activity. Press 9 to speak to an officer."
+    },
+    {
+      "speaker": "user",
+      "text": "Hello? What illegal activity?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, I am Vikram from TRAI Delhi. A second SIM registered on your Aadhaar in Mumbai has been sending obscene messages and harassing women. Complaints have been filed against you."
+    },
+    {
+      "speaker": "user",
+      "text": "I have only one SIM. I've never been to Mumbai."
+    },
+    {
+      "speaker": "caller",
+      "text": "Then your Aadhaar has been misused, sir. To avoid disconnection of your current number you need a no-objection certificate from the Mumbai cyber police. I am connecting you now, please do not disconnect the call."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay, please connect me."
+    },
+    {
+      "speaker": "caller",
+      "text": "Inspector Sanjay Rao, Mumbai Cyber Cell. Mr. Fernandes, there are 24 complaints against the number linked to your Aadhaar. This is very serious. Are you alone right now?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, my wife is at the market."
+    },
+    {
+      "speaker": "caller",
+      "text": "Good. Do not tell anyone about this call until the verification is complete, it is a confidential investigation. I need your Aadhaar number and the bank you use, to check if your accounts have been misused."
+    },
+    {
+      "speaker": "user",
+      "text": "My Aadhaar is 8842... and I bank with Canara."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, I'm seeing suspicious transactions. To protect your money you must move it to a secure government account while we investigate. I will send you the account details on WhatsApp. Stay on the line."
+    },
+    {
+      "speaker": "user",
+      "text": "How much do I need to move?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Everything in savings and any fixed deposits, sir. It will be returned with a clearance certificate in 24 hours. If you delay, the court will freeze it."
+    },
+    {
+      "speaker": "user",
+      "text": "I'll have to go to the bank."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

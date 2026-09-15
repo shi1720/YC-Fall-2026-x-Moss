@@ -154,7 +154,7 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
         const id = conn.callId ?? [...shields.entries()].find(([, c]) => c === conn)?.[0];
         if (!id) return send(conn.ws, { type: "error", message: "No call to report." });
         const rec = calls.get(id);
-        const result = await reportToCommunity({ lines: calls.flaggedLines(id), region: rec?.meta.region });
+        const result = await reportToCommunity({ lines: calls.flaggedLines(id), region: rec?.meta.region, callId: id });
         return send(conn.ws, { type: "call.reported", callId: id, ...result });
       }
 

@@ -9,6 +9,7 @@
  */
 import "dotenv/config";
 import { readdirSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { cpus } from "node:os";
 import path from "node:path";
 import { analyzeUtterance, createRiskState } from "../src/lib/engine/risk";
 import { LatencyTracker } from "../src/lib/engine/latency";
@@ -97,6 +98,21 @@ async function main() {
     console.log(`${pass ? "✔" : "✘"} ${sc.title.padEnd(34)} ${state.level.padEnd(8)} ${String(state.score).padStart(3)}  danger@${firstDanger ?? "-"} (expect ≤${sc.expectDangerByTurn ?? "never"})  family=${state.dominantFamily ?? "-"}`);
   }
 
+  // Fragment-level false-credit test: everyday sentences that are not in the index.
+  const fragments = (JSON.parse(readFileSync(path.join(process.cwd(), "data", "benign-fragments.json"), "utf8")) as { fragments: string[] }).fragments;
+  let credited = 0;
+  const creditedExamples: Array<{ text: string; tactics: string[]; top: string; score: number }> = [];
+  for (const [i, text] of fragments.entries()) {
+    const { matches } = await rt.retriever.search(text);
+    const a = analyzeUtterance(createRiskState(), { id: `frag-${i}`, speaker: "caller", text, t: 0, final: true }, matches, { retrievalMs: 0, totalMs: 0 });
+    if (a.tactics.length > 0) {
+      credited++;
+      creditedExamples.push({ text, tactics: a.tactics, top: matches[0]?.text ?? "", score: Number((matches[0]?.score ?? 0).toFixed(3)) });
+    }
+  }
+  const fragmentTest = { total: fragments.length, credited, rate: credited / Math.max(1, fragments.length), examples: creditedExamples };
+  console.log(`\nBenign fragments: ${credited}/${fragments.length} credited with a tactic (${(fragmentTest.rate * 100).toFixed(1)}%)`);
+
   const stats = latency.stats();
   const scams = results.filter((r) => r.expected === "scam");
   const benign = results.filter((r) => r.expected === "benign");
@@ -112,6 +128,8 @@ async function main() {
     familyAccuracy: famAcc / Math.max(1, scams.length),
     meanDangerTurn: scams.filter((r) => r.firstDangerTurn).reduce((s, r) => s + (r.firstDangerTurn ?? 0), 0) / Math.max(1, detected),
     latency: stats,
+    benignFragments: fragmentTest,
+    hardware: { cpu: cpus()[0]?.model ?? "unknown", vcpus: cpus().length, embeddingThreads: process.env.MOSS_EMBEDDING_INTRA_OP_THREADS ?? "2" },
   };
   console.log("\nSummary:", JSON.stringify({ ...summary, runtime: summary.runtime.mode }, null, 1));
 
@@ -127,7 +145,15 @@ function pct(n: number) {
   return `${Math.round(n * 100)}%`;
 }
 
-function renderReport(summary: Record<string, unknown> & { latency: ReturnType<LatencyTracker["stats"]>; runtime: { mode: string; runtime: string; docCount: number; model: string } }, results: ScenarioResult[]) {
+function renderReport(
+  summary: Record<string, unknown> & {
+    latency: ReturnType<LatencyTracker["stats"]>;
+    runtime: { mode: string; runtime: string; docCount: number; model: string };
+    benignFragments: { total: number; credited: number; rate: number; examples: Array<{ text: string; tactics: string[]; top: string; score: number }> };
+    hardware: { cpu: string; vcpus: number; embeddingThreads: string };
+  },
+  results: ScenarioResult[],
+) {
   const lines: string[] = [];
   lines.push(`# Raksha evaluation report`);
   lines.push(``);
@@ -142,6 +168,17 @@ function renderReport(summary: Record<string, unknown> & { latency: ReturnType<L
   lines.push(`| Retrieval latency p50 / p95 / p99 (ms, end-to-end incl. embedding) | ${summary.latency.p50} / ${summary.latency.p95} / ${summary.latency.p99} |`);
   lines.push(`| Mean engine-reported search time (ms) | ${summary.latency.meanRetrieval} |`);
   lines.push(`| Utterances analysed | ${summary.latency.count} |`);
+  lines.push(`| Benign everyday fragments (not in the index) credited with any tactic | ${summary.benignFragments.credited} / ${summary.benignFragments.total} (${(summary.benignFragments.rate * 100).toFixed(1)}%) |`);
+  lines.push(`| Hardware | ${summary.hardware.cpu} × ${summary.hardware.vcpus} vCPU, embedding threads ${summary.hardware.embeddingThreads} |`);
+  lines.push(``);
+  lines.push(`Scenario counts: ${results.filter((r) => r.expected === "scam").length} scam calls, ${results.filter((r) => r.expected === "benign").length} genuine calls. Latency is wall-clock around \`retriever.search()\` (query embedding + multi-index cosine search + metadata decode); it excludes speech-to-text and network. See \`docs/eval/latency.json\` (\`npm run eval:bench\`) for the dedicated benchmark.`);
+  lines.push(``);
+  lines.push(`**Limitations.** Scenarios are scripted reconstructions paraphrased from public advisories, not recordings of real calls; accents, background noise and speech-recognition errors are not modelled here (the live-microphone mode exercises them). The benign fragment set is small (${summary.benignFragments.total} sentences) and English/Hinglish only.`);
+  if (summary.benignFragments.examples.length) {
+    lines.push(``);
+    lines.push(`Benign fragments that were credited (to fix next):`);
+    for (const e of summary.benignFragments.examples) lines.push(`- "${e.text}" → ${e.tactics.join(", ")} (top match ${e.score}: "${e.top.slice(0, 70)}")`);
+  }
   lines.push(``);
   lines.push(`## Scenarios`);
   lines.push(``);

@@ -31,7 +31,7 @@ export default function Home() {
             </div>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-faint">
               <span>No account needed</span>
-              <span>Nothing is recorded</span>
+              <span>Nothing is stored</span>
               <span>Works in any browser</span>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function Home() {
               {
                 icon: Ear,
                 title: "1 · Listen",
-                body: "Speech becomes text on the device (Web Speech API, or Whisper for recordings). Every fragment, even mid-sentence, is a query.",
+                body: "Speech becomes text in the browser (its built-in speech engine; Whisper for uploaded recordings). Raksha's server only ever sees text, holds it in memory for the call, and forgets it. Every fragment, even mid-sentence, is a query.",
               },
               {
                 icon: Gauge,

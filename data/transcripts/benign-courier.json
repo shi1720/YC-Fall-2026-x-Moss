@@ -1,0 +1,60 @@
+{
+  "id": "benign-courier",
+  "title": "Genuine courier delivery",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Arjun Mehta, 34, Mumbai",
+  "blurb": "A real Blue Dart delivery partner confirms the slot, asks for the gate number and collects the app OTP at the door — the one OTP that is fine to share.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hello sir, this is Ramesh from Blue Dart. I have a parcel for Arjun Mehta from Amazon, will you be home between 2 and 4 today?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, I'll be home. Which building are you at?"
+    },
+    {
+      "speaker": "caller",
+      "text": "I'm near the main gate of Sea View Apartments, which wing and flat number?"
+    },
+    {
+      "speaker": "user",
+      "text": "B wing, flat 703. The lift is on the left."
+    },
+    {
+      "speaker": "caller",
+      "text": "Okay sir, I'm coming up now. Please keep the delivery OTP from your Amazon app ready, I'll need it at the door."
+    },
+    {
+      "speaker": "user",
+      "text": "Sure, it's on the app. Do I need to pay anything?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No sir, it's prepaid, nothing to pay. Just the OTP at the door and a signature."
+    },
+    {
+      "speaker": "user",
+      "text": "Great, see you in a minute."
+    },
+    {
+      "speaker": "caller",
+      "text": "I'm outside 703 now sir, the parcel is a bit heavy, one box."
+    },
+    {
+      "speaker": "user",
+      "text": "Coming. Here, the OTP on the app says 4471."
+    },
+    {
+      "speaker": "caller",
+      "text": "Thank you sir, delivered. Have a good day."
+    },
+    {
+      "speaker": "user",
+      "text": "Thanks, you too."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

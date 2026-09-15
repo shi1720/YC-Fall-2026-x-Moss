@@ -248,7 +248,7 @@ async function icon(name, color, size = 256) {
     const s = pres.addSlide(); base(s);
     kicker(s, "Evidence", C.moss);
     title(s, "Measured, not claimed.", { size: 36, h: 0.9 });
-    s.addText("Nine full call transcripts replayed through the real engine — seven scams, two genuine calls — plus a live benchmark page anyone can run against the deployed instance.", { x: 0.6, y: 1.35, w: 12, h: 0.6, fontFace: B, fontSize: 15, color: C.muted, isTextBox: true, margin: 0 });
+    s.addText("Eighteen full call transcripts replayed through the real Moss runtime — ten scams, eight genuine calls — plus a live benchmark page anyone can run against the deployed instance.", { x: 0.6, y: 1.35, w: 12, h: 0.6, fontFace: B, fontSize: 15, color: C.muted, isTextBox: true, margin: 0 });
     const ev = JSON.parse(fs.readFileSync(path.join(REPO, "docs/eval/results.json"), "utf8")).summary;
     const pct = (n) => Math.round(n * 100) + "%";
     const tiles = [
@@ -303,7 +303,7 @@ async function icon(name, color, size = 256) {
     kicker(s, "What's next");
     title(s, "Every phone, not just a Pixel.", { size: 36, h: 0.9 });
     const steps = [
-      ["Now", "Web reference implementation, deployed. 9 scenarios, live mic, recordings, guardian, community intel, eval."],
+      ["Now", "Web reference implementation, deployed. 18 scenarios, live mic, recordings, guardian, community intel, eval."],
       ["+4 weeks", "Android app with in-call audio; Hindi / Tamil / Telugu playbooks; bank “transfer hold” webhook."],
       ["+3 months", "Hot path fully on-device with Moss mobile/browser SDKs; deepfake-voice liveness fused into the risk model; pilot with one bank and one senior-living network."],
       ["+6 months", "Federated playbook across partners; one-tap 1930 / NCRP reporting; regional script variants."],

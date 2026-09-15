@@ -1,0 +1,52 @@
+{
+  "id": "benign-bank-loan",
+  "title": "Genuine bank loan follow-up",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Deepak, 45, Hyderabad",
+  "blurb": "HDFC's home-loan desk calls about an interest-rate reset, offers to email the letter first, and asks for nothing on the call.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Good afternoon, this is Suresh from HDFC Bank's home loan department. Am I speaking with Mr. Deepak?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes. What is this regarding?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, your home loan is due for its annual interest-rate reset next month. The rate is moving from 8.7 to 8.5 percent, so your EMI will come down slightly."
+    },
+    {
+      "speaker": "user",
+      "text": "That's good news. Do I need to do anything?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Nothing at all. I'll email the revised repayment schedule to your registered email so you can read it first. If you have questions you can reply to that email or visit the branch."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay. You don't need any details from me?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No sir, we already have everything on file. I'll never ask you for account details or OTPs on a call. This is only an information call."
+    },
+    {
+      "speaker": "user",
+      "text": "Alright, please send the email."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sending it now. It will come from the hdfcbank.com domain. Thank you for your time, sir."
+    },
+    {
+      "speaker": "user",
+      "text": "Thank you."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

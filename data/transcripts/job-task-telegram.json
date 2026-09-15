@@ -1,0 +1,68 @@
+{
+  "id": "job-task-telegram",
+  "title": "Telegram task job scam",
+  "family": "job_task",
+  "expected": "scam",
+  "persona": "Priya, 24, Bengaluru",
+  "blurb": "Part-time 'like and subscribe' work pays small amounts, then 'prepaid tasks' need deposits to unlock; the dashboard shows profits she can never withdraw.",
+  "expectDangerByTurn": 8,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hi Priya, this is Kavya, HR from the Amazon marketing partner team. You responded to our part-time job message on WhatsApp."
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, I did. What is the work?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Very simple. You like and subscribe to YouTube videos we send, 50 rupees per video, three to five thousand a day. Payment is instant to your UPI."
+    },
+    {
+      "speaker": "user",
+      "text": "That sounds easy. How do I start?"
+    },
+    {
+      "speaker": "caller",
+      "text": "I've added you to our Telegram group. Do the first three tasks and you'll receive 150 rupees right away as proof."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay, I did them. Oh, I actually got 150 rupees!"
+    },
+    {
+      "speaker": "caller",
+      "text": "See? Now you're eligible for the premium merchant tasks. You prepay 2,000 to buy a task and receive 2,600 back within 30 minutes, guaranteed. Members in the group have already made lakhs."
+    },
+    {
+      "speaker": "user",
+      "text": "Prepay? I thought this was a job."
+    },
+    {
+      "speaker": "caller",
+      "text": "It's a merchant investment task, Priya. The 2,000 is fully refundable with 30 percent profit. Everyone in the group is doing it, look at their screenshots. Do it now, only 5 slots left today."
+    },
+    {
+      "speaker": "user",
+      "text": "Fine, I've sent 2,000."
+    },
+    {
+      "speaker": "caller",
+      "text": "Great, your dashboard shows 2,600 already. To withdraw you need to complete the set of three tasks, the next one is 6,000. If you stop now the account freezes and you lose the balance."
+    },
+    {
+      "speaker": "user",
+      "text": "But I don't have 6,000 right now."
+    },
+    {
+      "speaker": "caller",
+      "text": "Borrow from a friend or use a credit card, Priya, you'll have it back by evening. Don't discuss this outside the group, the tasks are confidential."
+    },
+    {
+      "speaker": "user",
+      "text": "Let me think..."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

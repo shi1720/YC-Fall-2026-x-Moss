@@ -1,0 +1,60 @@
+{
+  "id": "upi-qr-refund",
+  "title": "UPI QR 'refund' scam",
+  "family": "upi_cashback",
+  "expected": "scam",
+  "persona": "Deepak, 45, Hyderabad",
+  "blurb": "A 'Swiggy support agent' says a refund is stuck and sends a collect request: enter your UPI PIN to receive it. The PIN sends money instead.",
+  "expectDangerByTurn": 8,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hello sir, I'm calling from Swiggy customer support regarding your complaint about the wrong order last night."
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, the order was completely wrong. I asked for a refund."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, the refund of 1,340 rupees has been approved, but it is stuck because your UPI ID is not verified in our system."
+    },
+    {
+      "speaker": "user",
+      "text": "Oh. What do I need to do?"
+    },
+    {
+      "speaker": "caller",
+      "text": "I am sending a refund request to your PhonePe now. You will see a request for 1,340 rupees. Just accept it and enter your UPI PIN, the amount will be credited instantly."
+    },
+    {
+      "speaker": "user",
+      "text": "Wait, why do I need to enter my PIN to receive money?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, this is the new RBI verification process for refunds above one thousand. Every customer does this. Please do it now, the request expires in two minutes."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay... I see the request. It says 'pay 1,340 to Swiggy Refund'."
+    },
+    {
+      "speaker": "caller",
+      "text": "Yes sir, that is the refund verification. Enter your PIN and you will get the money back with a bonus coupon."
+    },
+    {
+      "speaker": "user",
+      "text": "Alright, I'm entering the PIN now."
+    },
+    {
+      "speaker": "caller",
+      "text": "Sir, it shows failed on my side. Please try once more with the second request I'm sending, for 13,400, it will reverse both."
+    },
+    {
+      "speaker": "user",
+      "text": "Thirteen thousand? That's not right."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

@@ -124,6 +124,27 @@ For one spoken sentence (~2.5 s at conversational pace):
 
 The `Latency lab` page measures the Moss numbers live against the running instance; `docs/eval/REPORT.md` records them for the committed evaluation.
 
+## 6b. Scaling beyond one container
+
+The single-process design is a deployment convenience, not an architectural limit:
+
+* **Stateless by construction.** A container holds only (a) the loaded playbook/intel indexes, which every container loads identically from Moss Cloud, and (b) the state of the calls whose WebSockets it currently serves. There is no shared database to contend on.
+* **Horizontal scaling** is therefore *N identical containers behind a WebSocket-aware load balancer with connection affinity*. A call lives entirely on the container that accepted its socket (its Moss session included), so nothing needs to be sharded.
+* **Guardian rooms** are the one cross-container concern: a guardian's socket may land on a different container than the protected phone's. Roadmap: publish call events to a pub/sub channel (Redis or NATS) keyed by family code; each container subscribes for the codes it serves. Until then, affinity by family code (hash the code in the LB) keeps both sockets on one container.
+* **Capacity.** Retrieval is ~10 ms of CPU per fragment; at ~0.5 fragments/s per active call, one vCPU sustains on the order of 100–200 concurrent calls, and memory is ~300 MB base plus a few KB per call. The `Latency lab` and `npm run eval:bench` report the numbers for the host you are on.
+* **Failure isolation.** A crash takes down only the calls on that container; clients reconnect (exponential back-off in `useRakshaSocket`) and start a fresh call. Health checks (`/api/health`) gate traffic until the index is loaded.
+
+## 6c. Community intel: the pipeline in detail
+
+Implemented in `src/lib/moss/intel.ts` and wired to the `call.report` WebSocket message:
+
+1. **Consent.** Reporting is a deliberate tap on the post-call card, never automatic.
+2. **Selection.** Only the *caller's* lines that were credited with a tactic are eligible (never the protected person's words); lines under 4 words are dropped.
+3. **Abuse controls.** One report per call, a global budget per hour (`RAKSHA_INTEL_REPORTS_PER_HOUR`, default 60), and exact-duplicate suppression after normalisation, so a hostile client cannot flood the index.
+4. **Write.** Lines are upserted into `raksha-intel` with metadata `{family, tactics, severity: 4, kind: tactic, source: community, reportedAt}`; Moss Cloud embeds them and publishes a new immutable index version.
+5. **Propagation.** Every running container has `raksha-intel` loaded with `autoRefresh` (poll interval `MOSS_REFRESH_SECONDS`, default 120 s). When a newer version is detected it is hot-swapped atomically, so propagation latency is bounded by the poll interval plus the build time (typically under three minutes end to end).
+6. **Containment.** Community lines carry `source: community` and a fixed severity, and they share top-K slots with the curated playbook; a poisoned line can add at most one credited tactic per fragment and can never suppress a benign look-alike. Roadmap: a moderation queue and per-reporter reputation before promotion into the curated playbook.
+
 ## 7. Deployment
 
 * **Image:** `Dockerfile` (multi-stage, Node 22, non-root, health-check). `npm run build` produces the Next.js build and `dist/server.mjs` (esbuild bundle of the custom server).
@@ -133,8 +154,9 @@ The `Latency lab` page measures the Moss numbers live against the running instan
 
 ## 8. Security & privacy
 
-* Audio never leaves the device in live mode; the server receives text fragments only, holds them in RAM for the duration of the call, and discards them at call end.
-* Recordings uploaded in "Recording" mode are streamed to Whisper and not stored.
+* **Speech-to-text** happens in the browser via the Web Speech API. Chrome and Edge send audio to the vendor's speech service; Safari transcribes on-device. Raksha's server never receives audio in live mode, only text fragments, which it holds in RAM for the duration of the call and discards at call end. Roadmap: an on-device Whisper build (WebGPU) for browsers, and platform STT in the mobile app, so no audio leaves the phone at all.
+* Recordings uploaded in "Recording" mode are streamed to Whisper on Groq for transcription (Groq's API does not retain audio) and are not stored by Raksha.
+* The LLM coach receives only the recent transcript text and the risk summary, never audio, and only on risk transitions.
 * Community reporting is opt-in per call and shares only the *caller's* flagged lines, never the protected person's words.
 * The Moss project key lives on the server only. Family codes are capability tokens with no personal data behind them.
 * No accounts, no cookies, no analytics.

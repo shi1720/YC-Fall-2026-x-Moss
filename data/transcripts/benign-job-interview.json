@@ -1,0 +1,52 @@
+{
+  "id": "benign-job-interview",
+  "title": "Genuine job interview scheduling",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Rajesh Kumar, 41, Pune",
+  "blurb": "A recruiter schedules an interview, sends a calendar invite from a company domain, and confirms there is no fee of any kind.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hi Rajesh, this is Ananya from the talent team at Zensar. You applied for the senior analyst role last week. Do you have two minutes?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, hi Ananya."
+    },
+    {
+      "speaker": "caller",
+      "text": "Great. The hiring manager would like to interview you. Would Thursday at 11 AM or Friday at 3 PM work for a video call?"
+    },
+    {
+      "speaker": "user",
+      "text": "Thursday at 11 works."
+    },
+    {
+      "speaker": "caller",
+      "text": "Perfect. I'll send a calendar invite from my zensar.com email with the Teams link. Please have your updated resume handy."
+    },
+    {
+      "speaker": "user",
+      "text": "Is there any registration or processing fee?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No, never. We don't charge candidates anything at any stage. If anyone asks you for money in our name, please report it to us."
+    },
+    {
+      "speaker": "user",
+      "text": "Good to know. Anything else I should prepare?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Just be ready to talk through your last two projects. The interview is 45 minutes. All the best!"
+    },
+    {
+      "speaker": "user",
+      "text": "Thank you, Ananya."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

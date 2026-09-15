@@ -97,5 +97,104 @@
     "expectDangerByTurn": null,
     "source": "docs/research/scam-corpus.md §5.9",
     "turns": 12
+  },
+  {
+    "id": "benign-courier",
+    "title": "Genuine courier delivery",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Arjun Mehta, 34, Mumbai",
+    "blurb": "A real Blue Dart delivery partner confirms the slot, asks for the gate number and collects the app OTP at the door — the one OTP that is fine to share.",
+    "expectDangerByTurn": null,
+    "turns": 12,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "benign-hospital-billing",
+    "title": "Genuine hospital billing call",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Mr. Fernandes, 63, Goa",
+    "blurb": "Manipal Hospital's billing desk explains the insurance pre-authorisation and says payment happens at the counter after discharge, with a receipt.",
+    "expectDangerByTurn": null,
+    "turns": 12,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "benign-family",
+    "title": "Genuine family call about money",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Grandma Lakshmi, 74",
+    "blurb": "Her grandson calls from college: he needs money for a hostel fee, says take your time, and will send the receipt — everything a scammer never does.",
+    "expectDangerByTurn": null,
+    "turns": 12,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "benign-bank-loan",
+    "title": "Genuine bank loan follow-up",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Deepak, 45, Hyderabad",
+    "blurb": "HDFC's home-loan desk calls about an interest-rate reset, offers to email the letter first, and asks for nothing on the call.",
+    "expectDangerByTurn": null,
+    "turns": 10,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "benign-telecom",
+    "title": "Genuine telecom plan upgrade",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Mrs. Lakshmi Iyer, 66, Hyderabad",
+    "blurb": "Airtel's store calls about a 5G plan. Sales pressure is mild, there is no threat, and she is told to decide at her convenience.",
+    "expectDangerByTurn": null,
+    "turns": 10,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "benign-job-interview",
+    "title": "Genuine job interview scheduling",
+    "family": "benign",
+    "expected": "benign",
+    "persona": "Rajesh Kumar, 41, Pune",
+    "blurb": "A recruiter schedules an interview, sends a calendar invite from a company domain, and confirms there is no fee of any kind.",
+    "expectDangerByTurn": null,
+    "turns": 10,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "upi-qr-refund",
+    "title": "UPI QR 'refund' scam",
+    "family": "upi_cashback",
+    "expected": "scam",
+    "persona": "Deepak, 45, Hyderabad",
+    "blurb": "A 'Swiggy support agent' says a refund is stuck and sends a collect request: enter your UPI PIN to receive it. The PIN sends money instead.",
+    "expectDangerByTurn": 8,
+    "turns": 12,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "job-task-telegram",
+    "title": "Telegram task job scam",
+    "family": "job_task",
+    "expected": "scam",
+    "persona": "Priya, 24, Bengaluru",
+    "blurb": "Part-time 'like and subscribe' work pays small amounts, then 'prepaid tasks' need deposits to unlock; the dashboard shows profits she can never withdraw.",
+    "expectDangerByTurn": 8,
+    "turns": 14,
+    "source": "authored for evaluation (paraphrased from public advisories)"
+  },
+  {
+    "id": "trai-sim-disconnect",
+    "title": "TRAI SIM disconnection",
+    "family": "sim_disconnection",
+    "expected": "scam",
+    "persona": "Mr. Fernandes, 63, Goa",
+    "blurb": "A robocall from 'TRAI' says his number will be disconnected in two hours over illegal messages, then transfers him to a 'cyber police officer'.",
+    "expectDangerByTurn": 9,
+    "turns": 14,
+    "source": "authored for evaluation (paraphrased from public advisories)"
   }
 ]

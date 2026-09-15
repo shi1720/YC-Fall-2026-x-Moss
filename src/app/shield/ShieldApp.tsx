@@ -413,7 +413,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
 
             {mode === "live" && (
               <div className="mt-4 space-y-3">
-                <p className="text-sm text-muted">Put the phone on speaker next to this device. Everything said is checked against the playbook as it is spoken. Nothing is recorded.</p>
+                <p className="text-sm text-muted">Put the phone on speaker next to this device. Your browser turns speech into text; only text reaches the shield, and it is forgotten when the call ends. Nothing is stored.</p>
                 <label className="block text-xs text-muted">
                   Region
                   <select className="input mt-1" value={region} onChange={(e) => setRegion(e.target.value as CallMeta["region"])} disabled={active}>
@@ -438,7 +438,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
 
             {mode === "upload" && (
               <div className="mt-4 space-y-3">
-                <p className="text-sm text-muted">Upload a call recording (mp3, m4a, wav, webm). It is transcribed with Whisper and replayed through the shield. Audio is not stored.</p>
+                <p className="text-sm text-muted">Upload a call recording (mp3, m4a, wav, webm). It is transcribed by Whisper (hosted on Groq) and replayed through the shield. The audio is not stored by Raksha.</p>
                 {micError && <div className="rounded-xl border border-danger/40 bg-danger/10 p-2 text-xs text-danger-2">{micError}</div>}
                 <label className={cn("btn btn-primary w-full cursor-pointer", (active || uploadBusy) && "pointer-events-none opacity-50")}>
                   <FileAudio className="h-4 w-4" /> {uploadBusy ? "Transcribing…" : "Choose a recording"}

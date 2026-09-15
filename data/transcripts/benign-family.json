@@ -1,0 +1,60 @@
+{
+  "id": "benign-family",
+  "title": "Genuine family call about money",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Grandma Lakshmi, 74",
+  "blurb": "Her grandson calls from college: he needs money for a hostel fee, says take your time, and will send the receipt — everything a scammer never does.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Hi Ajji, it's Rohan. How are you? Did you take your medicines today?"
+    },
+    {
+      "speaker": "user",
+      "text": "Rohan! Yes yes, I took them. How are your classes?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Going well. Ajji, one small thing. The hostel mess fee for this semester is due next week, 18 thousand. Dad said to ask you because he's travelling."
+    },
+    {
+      "speaker": "user",
+      "text": "Of course, beta. How do I send it?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No hurry at all, it's due next Friday. You can send it to my usual SBI account, the one you sent Diwali money to. Or I can come home this weekend and we can do it together at the bank."
+    },
+    {
+      "speaker": "user",
+      "text": "Come home this weekend, I'll make your favourite bisi bele bath."
+    },
+    {
+      "speaker": "caller",
+      "text": "Deal. And I'll show you the fee receipt from the college portal so you can see where it went."
+    },
+    {
+      "speaker": "user",
+      "text": "You're a good boy. Is the hostel food okay?"
+    },
+    {
+      "speaker": "caller",
+      "text": "It's fine, Ajji, but nothing like yours. Okay, I have a lab now. I'll call you Sunday morning."
+    },
+    {
+      "speaker": "user",
+      "text": "Call from your own number only, okay?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Always, Ajji. Bye, love you."
+    },
+    {
+      "speaker": "user",
+      "text": "Bye beta."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

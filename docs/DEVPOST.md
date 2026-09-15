@@ -32,7 +32,7 @@ Raksha is a shield that runs during a phone call. Every fragment of speech (even
 
 A **family code** links the phone to a guardian's dashboard: a daughter sees her mother's call risk live, can speak through the shield (her words are read aloud over the scammer's), and can ask the call's memory a question. After the call, one tap reports the caller's lines to a community index that every running shield picks up within minutes.
 
-Anyone can try it in 60 seconds: nine scripted calls with two synthetic voices (seven scams, two genuine calls), a live-microphone mode, and a recording-upload mode.
+Anyone can try it in 60 seconds: eighteen scripted calls with two synthetic voices (ten scams, eight genuine calls), a live-microphone mode, and a recording-upload mode.
 
 ## How we built it
 
@@ -42,6 +42,7 @@ Anyone can try it in 60 seconds: nine scripted calls with two synthetic voices (
 * **Moss sessions.** Each call opens a `SessionIndex`; turns are added locally; the guardian's "what did they ask for?" is a semantic query over it. Sessions are never pushed — call memory dies with the call.
 * **Moss auto-refresh + multi-index.** Reported lines are upserted into `raksha-intel`; both indexes are loaded with `autoRefresh` and searched with `queryMultiIndex`, so new variants hot-swap into every instance with zero downtime.
 * **Stack.** Next.js 16 with a custom server and WebSockets (one process, one URL), Tailwind, Web Speech API + Groq Whisper, Docker on Render, Playwright + vitest, GitHub Actions.
+* **Measured, reproducibly.** `npm run eval` replays 18 scripted calls (10 scams, 8 genuine) plus 80 everyday sentences through the real engine and writes the report; `npm run eval:bench` records embed + search latency with the hardware it ran on.
 
 ## Challenges we ran into
 
@@ -53,10 +54,10 @@ Anyone can try it in 60 seconds: nine scripted calls with two synthetic voices (
 ## Accomplishments that we're proud of
 
 * Retrieval + scoring in about 10 ms including on-device embedding, measured live in the app and in a committed evaluation, not claimed.
-* On the committed evaluation: every scam scenario caught, both benign scenarios stay green (see `docs/eval/REPORT.md`).
+* On the committed evaluation (18 scripted calls on the real Moss runtime): all ten scam scenarios caught, none of the eight genuine calls escalated (see `docs/eval/REPORT.md`).
 * An intervention a frightened 70-year-old can act on: one headline, one sentence, one action, spoken.
 * Multiplayer by design — human and agent in the same session.
-* A product with a buyer: from 2027 RBI makes banks compensate scam losses; the runtime costs about ₹0.02 per protected call.
+* A product with a buyer: from 2027 RBI makes banks compensate scam losses. Unit cost is about ₹0.02 per protected call: local Moss queries are unmetered, speech-to-text runs in the browser, and the coach makes at most ~6 small LLM calls per call (≈ 6k tokens on gpt-oss-20b).
 
 ## What we learned
 

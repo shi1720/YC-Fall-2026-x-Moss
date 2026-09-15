@@ -1,0 +1,52 @@
+{
+  "id": "benign-telecom",
+  "title": "Genuine telecom plan upgrade",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Mrs. Lakshmi Iyer, 66, Hyderabad",
+  "blurb": "Airtel's store calls about a 5G plan. Sales pressure is mild, there is no threat, and she is told to decide at her convenience.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Namaste ma'am, this is Priya calling from the Airtel store in Jubilee Hills. Is this a good time?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, tell me."
+    },
+    {
+      "speaker": "caller",
+      "text": "Ma'am, your current plan is 599 per month. There's a new 5G plan at 649 with unlimited data and a free OTT subscription. Would you like me to explain?"
+    },
+    {
+      "speaker": "user",
+      "text": "Is my number going to be disconnected if I don't change?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Not at all, ma'am. Your existing plan continues as it is. This is only an offer; you can ignore it if you're not interested."
+    },
+    {
+      "speaker": "user",
+      "text": "How would I change it, if I wanted to?"
+    },
+    {
+      "speaker": "caller",
+      "text": "You can do it yourself in the Airtel Thanks app under 'Plans', or visit the store with your ID. There's no charge for changing plans."
+    },
+    {
+      "speaker": "user",
+      "text": "Let me think about it and ask my daughter."
+    },
+    {
+      "speaker": "caller",
+      "text": "Of course, ma'am, take your time. The offer is available all month. Thank you and have a nice day."
+    },
+    {
+      "speaker": "user",
+      "text": "Thank you."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

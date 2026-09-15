@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-09-15T14:14:26.050Z",
+  "runtime": {
+    "mode": "moss",
+    "runtime": "Moss runtime (in-process, 1 index loaded)",
+    "indexes": [
+      "raksha-playbook"
+    ],
+    "docCount": 409,
+    "model": "moss-minilm",
+    "loadedAt": 1789481662654,
+    "loadMs": 4797,
+    "version": "@moss-js/moss"
+  },
+  "hardware": {
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "vcpus": 4,
+    "ramGB": 17,
+    "threads": "2"
+  },
+  "queries": 300,
+  "embedPlusSearchMs": {
+    "p50": 10.71,
+    "p95": 14.41,
+    "p99": 17.48,
+    "max": 20.46
+  },
+  "shortFragmentsMs": {
+    "p50": 7.284134000000449,
+    "p95": 8.088450000000194
+  },
+  "longFragmentsMs": {
+    "p50": 10.844804999999724,
+    "p95": 14.438955999999962
+  },
+  "note": "Wall-clock around retriever.search(): query embedding (moss-minilm, on-device) + multi-index cosine search + metadata decode. Excludes speech-to-text and network."
+}

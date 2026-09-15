@@ -77,7 +77,7 @@ export function LabApp() {
         <h1 className="display text-3xl text-text sm:text-4xl">Latency lab</h1>
         <p className="mt-2 text-muted">
           Measured, not claimed. Fire real queries at the running retrieval layer and see how much of a spoken sentence the shield needs before it can answer. Then read the
-          committed evaluation over nine full call transcripts.
+          committed evaluation over eighteen full call transcripts.
         </p>
       </div>
 

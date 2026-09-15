@@ -119,20 +119,45 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 | Area | Requirement | How it is met |
 |---|---|---|
 | Latency | Retrieval + scoring in the low tens of milliseconds p95 on a shared 4-vCPU container (search itself < 1 ms); intervention visible within one sentence | Moss in-process; risk engine O(tactics); interim fragments; measured in Latency lab and eval |
-| Cost | Zero marginal cost per fragment; LLM only on transitions (≤ ~6 calls per call) | Local Moss queries unmetered; coach gated; free tiers sufficient for MVP |
-| Privacy | No audio leaves the device in live mode; transcript in RAM only; reports share caller lines only; no accounts | Architecture §8 |
+| Cost | Retrieval has zero marginal cost per fragment (local Moss queries are unmetered); the coach adds ≈ ₹0.02 per call (≤ ~6 LLM calls on transitions) | Coach gated; free tiers sufficient for MVP |
+| Privacy | Server receives text only (browser STT); transcript in RAM only; recordings transcribed by Whisper and not stored; reports share caller lines only; no accounts | Architecture §8 and §4.7 below |
 | Reliability | Runs with any subset of credentials; reconnecting WebSocket; call ends cleanly on disconnect | Fallbacks + tests |
 | Accessibility | Large type, high contrast, spoken output, single-action buttons | Design system |
 | Portability | One container, any Docker host; Node 22 | `Dockerfile` |
+
+### 4.5 Onboarding flow (no accounts)
+
+1. The protected person opens the shield once; a six-character **family code** is generated and stored on that device only.
+2. They tap *Copy link* and send it to a trusted person on WhatsApp, or read the code out.
+3. The guardian opens the link; their browser joins the code's room and stays subscribed. Late joiners receive a replay of the current call state.
+4. Every later call on the protected device broadcasts to that room automatically. Either side can rotate the code at any time; there is nothing to revoke because there is nothing stored.
+
+### 4.6 How the score is computed
+
+The 0–100 score is a **noisy-OR over persuasion tactics**: each retrieval hit's cosine similarity (from Moss, alpha 1.0) is calibrated to a 0–1 confidence, credited to the tactics tagged on that playbook line (after benign-look-alike suppression and speaker checks), and the per-tactic maximum is kept for the whole call. Two rules override the arithmetic: *pressure + ask* ⇒ at least 60 (Danger), and *the person begins to comply under pressure* ⇒ at least 85. Full definition, weights and unit tests: [ARCHITECTURE.md §4](ARCHITECTURE.md#4-the-risk-model).
+
+### 4.7 Data handling
+
+| Data | Where it goes | Retention |
+|---|---|---|
+| Live audio | Stays in the browser's speech engine (Chrome/Edge: vendor speech service; Safari: on-device). Never sent to Raksha. | Not retained by Raksha |
+| Uploaded recordings | Streamed to Whisper on Groq for transcription over TLS | Not stored by Raksha; Groq does not retain audio |
+| Transcript text | Raksha server RAM, per call; Moss *session* (local, in-process) for recall | Discarded at call end (10-minute grace for the guardian summary) |
+| Coach prompts | Recent transcript text + risk summary to the LLM provider over TLS, only on risk transitions | Not stored by Raksha |
+| Community reports | Caller's flagged lines only, opt-in, into the `raksha-intel` Moss index | Retained (shared knowledge); no personal data of the protected person |
+| Identity | None. No accounts, cookies or analytics; family codes are random capability tokens | — |
+
+Compliance posture: data minimisation by design (India DPDP Act 2023 principles), consent-gated sharing, encryption in transit, secrets only on the server. A production app would add a DPA with the STT/LLM providers and a regional processing option.
 
 ## 5. Success metrics
 
 | Metric | Target (MVP) | Measured |
 |---|---|---|
-| Scam scenarios reaching DANGER | 100% of 7 | 100% ([eval/REPORT.md](eval/REPORT.md)) |
-| Benign scenarios reaching DANGER | 0% of 2 | 0% |
+| Scam scenarios reaching DANGER | 100% of 10 | 100% ([eval/REPORT.md](eval/REPORT.md)) |
+| Genuine-call scenarios reaching DANGER | 0% of 8 | 0% |
+| Everyday sentences (not in the index) credited with any tactic | < 5% | 1.2% (1/80) |
 | Turns from first "ask" to DANGER | ≤ 1 | see report |
-| Retrieval p95 (embed + search) | < 30 ms on a shared container | 26.7 ms (see report / Latency lab) |
+| Retrieval p95 (embed + search) | < 30 ms on a shared container | 18.4 ms (see report / Latency lab) |
 | Demo-ability | Any judge can watch a scam stopped in ≤ 60 s with no setup | `/shield?scenario=digital-arrest` |
 
 North-star metric for the product: **₹ of transfers prevented per 1,000 protected calls**, measured by bank partners.
@@ -155,7 +180,18 @@ North-star metric for the product: **₹ of transfers prevented per 1,000 protec
 | LLM coach (≤ 6 calls × ~600 tokens on a 20B model) | ≈ ₹0.02 |
 | Hosting | one small container serves thousands of concurrent calls |
 
-**≈ ₹0.02 per protected call.** A single prevented ₹1.5-lakh digital-arrest transfer pays for ~7 million protected calls.
+**≈ ₹0.02 per protected call.** Worked example for the coach: ≤ 6 calls × ~900 input + ~150 output tokens ≈ 6,300 tokens; at gpt-oss-20b list pricing (≈ $0.10 per million input, $0.50 per million output tokens on Groq) that is ≈ $0.00024 ≈ ₹0.02. A single prevented ₹1.5-lakh digital-arrest transfer pays for ~7 million protected calls.
+
+**Pricing tiers (proposed)**
+
+| Tier | Who | Price | Includes |
+|---|---|---|---|
+| Free | Individuals | ₹0 | Shield with simulations, live mic, one guardian |
+| Family circle | Families protecting parents | ₹99 / month | Up to 5 protected phones, unlimited guardians, call summaries, priority coach |
+| Protected line | Telco / OEM bundle | ₹49–99 / subscriber / month (wholesale ₹15–30) | White-label shield, carrier caller-context, regional playbooks |
+| Bank shield | Banks and payment apps | ₹5–15 / protected customer / month | Transfer-hold webhook, fraud-desk console, reimbursement analytics |
+
+Go-to-market: start B2C in India with the family circle (the emotional wedge: *protect your parents*), use the resulting call intel to sign one bank pilot on the transfer-hold signal, then bundle through a telco.
 
 ## 7. Competitive positioning
 

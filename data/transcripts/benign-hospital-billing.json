@@ -1,0 +1,60 @@
+{
+  "id": "benign-hospital-billing",
+  "title": "Genuine hospital billing call",
+  "family": "benign",
+  "expected": "benign",
+  "persona": "Mr. Fernandes, 63, Goa",
+  "blurb": "Manipal Hospital's billing desk explains the insurance pre-authorisation and says payment happens at the counter after discharge, with a receipt.",
+  "expectDangerByTurn": null,
+  "turns": [
+    {
+      "speaker": "caller",
+      "text": "Good morning, this is Neha from the billing desk at Manipal Hospital. Am I speaking with Mr. Fernandes, the attendant for Mrs. Fernandes in room 412?"
+    },
+    {
+      "speaker": "user",
+      "text": "Yes, that's me. Is everything alright?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Yes sir, she is doing well. I'm calling about the insurance. The pre-authorisation from Star Health has been approved for 1 lakh 40 thousand, so most of the bill is covered."
+    },
+    {
+      "speaker": "user",
+      "text": "Oh good. Will there be anything for me to pay?"
+    },
+    {
+      "speaker": "caller",
+      "text": "Only the non-medical items, roughly 6 to 8 thousand. You can pay at the billing counter on the ground floor at the time of discharge, by card, UPI or cash, and you'll get a printed receipt."
+    },
+    {
+      "speaker": "user",
+      "text": "Do you need my card details now to block the amount?"
+    },
+    {
+      "speaker": "caller",
+      "text": "No sir, we don't take any card details on the phone. Everything is done at the counter in person."
+    },
+    {
+      "speaker": "user",
+      "text": "Okay. When is the discharge likely?"
+    },
+    {
+      "speaker": "caller",
+      "text": "The doctor will decide on rounds tomorrow morning. We'll message you the final bill summary on WhatsApp so you can check it before you come down."
+    },
+    {
+      "speaker": "user",
+      "text": "Perfect. Thank you for calling."
+    },
+    {
+      "speaker": "caller",
+      "text": "You're welcome sir. If you have any questions, the billing desk number is on the admission slip."
+    },
+    {
+      "speaker": "user",
+      "text": "Got it, thanks."
+    }
+  ],
+  "source": "authored for evaluation (paraphrased from public advisories)"
+}

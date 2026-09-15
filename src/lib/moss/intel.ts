@@ -13,9 +13,27 @@ export interface IntelReport {
   region?: string;
 }
 
-export async function reportToCommunity(report: IntelReport): Promise<{ ok: boolean; added: number; message: string }> {
+/** Abuse controls: one report per call, a global budget per hour, and no duplicate lines. */
+const MAX_REPORTS_PER_HOUR = Number(process.env.RAKSHA_INTEL_REPORTS_PER_HOUR ?? 60);
+const MAX_LINES_PER_REPORT = 25;
+const recentReports: number[] = [];
+const reportedCalls = new Set<string>();
+const seenLines = new Set<string>();
+
+function normalise(text: string) {
+  return text.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+export async function reportToCommunity(report: IntelReport & { callId?: string }): Promise<{ ok: boolean; added: number; message: string }> {
   const rt = await getMossRuntime();
-  const lines = report.lines.filter((l) => l.text.trim().length > 12).slice(0, 25);
+  const now = Date.now();
+  while (recentReports.length && now - recentReports[0] > 3600_000) recentReports.shift();
+  if (recentReports.length >= MAX_REPORTS_PER_HOUR) return { ok: false, added: 0, message: "Community reporting is busy right now; please try again later." };
+  if (report.callId && reportedCalls.has(report.callId)) return { ok: false, added: 0, message: "This call has already been reported. Thank you." };
+  const lines = report.lines
+    .filter((l) => l.text.trim().length > 12 && l.text.trim().split(/\s+/).length >= 4)
+    .filter((l) => !seenLines.has(normalise(l.text)))
+    .slice(0, MAX_LINES_PER_REPORT);
   if (lines.length === 0) return { ok: false, added: 0, message: "Nothing flagged in this call to report." };
   if (!rt.client) {
     return { ok: true, added: lines.length, message: `Recorded ${lines.length} lines locally (mock runtime — Moss credentials not configured).` };
@@ -44,6 +62,9 @@ export async function reportToCommunity(report: IntelReport): Promise<{ ok: bool
     }
     if (exists) await rt.client.addDocs(INDEX_INTEL, docs, { upsert: true });
     else await rt.client.createIndex(INDEX_INTEL, docs, { modelId: "moss-minilm" });
+    recentReports.push(now);
+    if (report.callId) reportedCalls.add(report.callId);
+    for (const l of lines) seenLines.add(normalise(l.text));
     await reloadIntelIndex();
     return { ok: true, added: docs.length, message: `${docs.length} caller lines added to community intel. Every Raksha device picks them up on its next auto-refresh.` };
   } catch (err) {

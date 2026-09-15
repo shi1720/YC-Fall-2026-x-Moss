@@ -24,7 +24,7 @@ Built for the **YC Fall 2026 × Moss: Zero Latency Builder Sprint** (theme: Real
 
 > **Deployed agent:** see the link in [docs/DEVPOST.md](docs/DEVPOST.md) (updated at submission).
 
-**Measured on the committed evaluation (real Moss runtime, 158 utterances):** 7/7 scam calls caught, 0/2 genuine calls flagged, retrieval p50 13.8 ms / p95 26.7 ms including on-device embedding. See [docs/eval/REPORT.md](docs/eval/REPORT.md).
+**Measured on the committed evaluation (real Moss runtime, 18 scripted calls, 264 utterances, plus 80 everyday sentences):** 10/10 scam calls caught, 0/8 genuine calls flagged, 1/80 everyday sentences credited with any tactic, retrieval p50 9.3 ms / p95 18.4 ms including on-device embedding. See [docs/eval/REPORT.md](docs/eval/REPORT.md).
 
 ## The problem
 
@@ -45,7 +45,8 @@ Raksha listens with you during a call and checks **every spoken fragment** again
 * **Slow path (only on risk transitions):** an LLM coach explains in plain words, gives the exact sentence to say, and can veto a false alarm. It never sits on the critical path.
 * **Circle of trust:** a family code links a phone to a guardian's dashboard. Human and agent share the same call session.
 * **Community intel:** report a call and its flagged lines are upserted into a second Moss index; every running shield hot-swaps it in. New scam variants propagate without a redeploy.
-* **Three ways to try it:** replay one of nine scripted calls with two synthetic voices, use your own microphone (phone on speaker), or upload a recording (transcribed by Whisper).
+* **Three ways to try it:** replay one of eighteen scripted calls (ten scams, eight genuine) with two synthetic voices, use your own microphone (phone on speaker), or upload a recording (transcribed by Whisper).
+* **Privacy, precisely:** speech becomes text in the browser (Chrome uses Google's speech service, Safari transcribes on-device); the Raksha server receives text only, keeps it in RAM for the duration of the call, and discards it. Uploaded recordings go to Whisper on Groq for transcription and are not stored. Community reports are opt-in and contain only the caller's flagged lines.
 
 ## How Moss is used
 
@@ -57,7 +58,7 @@ Raksha listens with you during a call and checks **every spoken fragment** again
 | Multi-index search (`queryMultiIndex`) | Curated playbook + community intel, one global top-K. |
 | Metadata filtering fields | `family`, `tactics`, `severity`, `kind` (tactic / benign look-alike), `stage`, `region`. |
 
-Measured on the committed evaluation (nine full call transcripts, 158 utterances): see [docs/eval/REPORT.md](docs/eval/REPORT.md). The **Latency lab** page benchmarks the running instance live.
+Measured on the committed evaluation (18 full call transcripts): see [docs/eval/REPORT.md](docs/eval/REPORT.md) and `npm run eval:bench` (writes `docs/eval/latency.json` with hardware details). The **Latency lab** page benchmarks the running instance live.
 
 ![Architecture](docs/diagrams/architecture.png)
 
@@ -81,7 +82,7 @@ Without Moss credentials the app still runs, on an offline lexical fallback (so 
 | `npm run build && npm start` | Production build and server (what the Docker image runs) |
 | `npm run moss:seed [-- --reset]` | Create / upsert the playbook index from `data/playbook.json` |
 | `npm run moss:status` | List indexes in the Moss project |
-| `npm run eval` | Replay all scenarios through the engine → `docs/eval/REPORT.md` |
+| `npm run eval` · `npm run eval:bench` | Replay all scenarios through the engine → `docs/eval/REPORT.md` · retrieval latency benchmark → `docs/eval/latency.json` |
 | `npm test` · `npm run test:e2e` | Unit tests (vitest) · end-to-end (Playwright, offline runtime) |
 | `npm run lint` · `npm run typecheck` | ESLint · `tsc --noEmit` |
 
@@ -107,7 +108,7 @@ src/app/         pages (/, /shield, /guardian, /playbook, /lab) and /api routes
 src/lib/engine/  risk engine, call manager, retriever interface, offline fallback
 src/lib/moss/    Moss runtime, retriever, community intel
 src/lib/llm/     coach (provider-agnostic chat client)
-data/            playbook.json (409 lines, 31 scam families), 9 scenario transcripts
+data/            playbook.json (409 lines, 31 scam families), 18 scenario transcripts
 scripts/         seed / status / eval / build
 tests/           unit + e2e
 docs/            PRD, architecture, evaluation, research, video script, deck
@@ -118,7 +119,7 @@ docs/            PRD, architecture, evaluation, research, video script, deck
 * **60 seconds:** open `/shield?scenario=digital-arrest`, voices on, *Start the call*. Watch the dial, the tactic chips on each line, and the intervention at the first "ask". Click *Keep listening* to see the targeted "Do NOT transfer" warnings.
 * **Multiplayer:** copy the guardian link from the shield page into a second window before starting. Send a message from the guardian; it is spoken on the shield. Ask "what money did they ask for?".
 * **Latency:** open `/lab`, run 5 × 10 queries. Open `/playbook` and type anything a scammer might say.
-* **Robustness:** run the *Genuine bank fraud call* scenario. It stays green: the bank says "we will never ask for your OTP", and the benign look-alike lines in the index keep the shield quiet.
+* **Robustness:** run the *Genuine bank fraud call* or *Genuine courier delivery* scenario. They stay green: the bank says "we will never ask for your OTP", the courier asks for the app's delivery OTP at the door, and the benign look-alike lines in the index plus the benign-marker rules keep the shield quiet.
 
 ## Credits
 
