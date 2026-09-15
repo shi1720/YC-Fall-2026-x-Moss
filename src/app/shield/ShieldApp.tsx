@@ -130,13 +130,13 @@ function randomCode() {
   return Array.from({ length: 6 }, () => alphabet[Math.floor(Math.random() * alphabet.length)]).join("");
 }
 
-export function ShieldApp({ initialScenario }: { initialScenario?: string }) {
+export function ShieldApp({ initialScenario, initialSilent = false, initialFast = false }: { initialScenario?: string; initialSilent?: boolean; initialFast?: boolean }) {
   const [state, dispatch] = useReducer(reducer, initial);
   const [mode, setMode] = useState<Mode>("simulation");
   const [scenarios, setScenarios] = useState<ScenarioMeta[]>([]);
   const [scenarioId, setScenarioId] = useState<string | undefined>(initialScenario);
-  const [audio, setAudio] = useState(true);
-  const [fast, setFast] = useState(false);
+  const [audio, setAudio] = useState(!initialSilent);
+  const [fast, setFast] = useState(initialFast);
   const [paused, setPaused] = useState(false);
   const [storedCode, setStoredCode] = useStoredState("raksha.familyCode", "");
   const familyCode = storedCode || "";

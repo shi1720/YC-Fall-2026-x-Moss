@@ -17,7 +17,7 @@ test("playbook search returns tactic matches with latency", async ({ request }) 
 });
 
 test("a simulated digital-arrest call is stopped and the guardian sees it", async ({ page, context }) => {
-  await page.goto("/shield?scenario=digital-arrest");
+  await page.goto("/shield?scenario=digital-arrest&silent=1&fast=1");
   await expect(page.getByText("connected")).toBeVisible({ timeout: 20_000 });
   const code = await page.getByLabel("Family code").inputValue();
   expect(code.length).toBeGreaterThanOrEqual(3);
@@ -26,8 +26,6 @@ test("a simulated digital-arrest call is stopped and the guardian sees it", asyn
   await guardian.goto(`/guardian?code=${code}`);
   await expect(guardian.getByText(`watching ${code}`)).toBeVisible({ timeout: 20_000 });
 
-  await page.getByText("voices on").click(); // silent
-  await page.getByText("real-time").click(); // fast
   await page.getByRole("button", { name: "Start the call" }).click();
 
   await expect(page.getByText("scam detected", { exact: false })).toBeVisible({ timeout: 45_000 });
@@ -35,20 +33,18 @@ test("a simulated digital-arrest call is stopped and the guardian sees it", asyn
   await expect(guardian.getByText("Danger").first()).toBeVisible();
 
   await guardian.getByPlaceholder("What did they ask for?").fill("what money did they ask for");
-  await guardian.getByRole("button", { name: "Ask" }).click();
+  await guardian.getByRole("button", { name: "Ask", exact: true }).click();
   await expect(guardian.getByText("what money did they ask for")).toBeVisible();
 
   await page.getByRole("button", { name: "I hung up" }).click();
-  await expect(page.getByText("Call ended", { exact: false })).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText(/Call ended · \d/)).toBeVisible({ timeout: 20_000 });
 });
 
 test("a genuine hospital call never triggers the overlay", async ({ page }) => {
-  await page.goto("/shield?scenario=benign-hospital");
+  await page.goto("/shield?scenario=benign-hospital&silent=1&fast=1");
   await expect(page.getByText("connected")).toBeVisible({ timeout: 20_000 });
-  await page.getByText("voices on").click();
-  await page.getByText("real-time").click();
   await page.getByRole("button", { name: "Start the call" }).click();
-  await expect(page.getByText("Call ended", { exact: false })).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText(/Call ended · \d/)).toBeVisible({ timeout: 60_000 });
   await expect(page.getByText("scam detected", { exact: false })).toHaveCount(0);
   await expect(page.getByText("Safe").first()).toBeVisible();
 });

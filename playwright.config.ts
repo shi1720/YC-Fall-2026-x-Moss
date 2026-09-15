@@ -11,6 +11,7 @@ export default defineConfig({
     baseURL: `http://localhost:${port}`,
     trace: "retain-on-failure",
     launchOptions: process.env.PLAYWRIGHT_CHROMIUM ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM } : {},
+    headless: true,
   },
   webServer: {
     command: `PORT=${port} npm run start`,

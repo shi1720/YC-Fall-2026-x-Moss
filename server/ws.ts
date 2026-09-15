@@ -106,8 +106,8 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
 
     ws.on("close", () => {
       if (conn.role === "shield" && conn.callId) {
-        shields.delete(conn.callId);
-        void calls.end(conn.callId);
+        const id = conn.callId;
+        void calls.end(id).finally(() => shields.delete(id));
       }
       if (conn.role === "guardian" && conn.familyCode) guardians.get(conn.familyCode)?.delete(conn);
     });
@@ -144,9 +144,9 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
       case "call.end": {
         if (!conn.callId) return;
         const id = conn.callId;
+        await calls.end(id); // emits call.ended to this socket before we forget it
         conn.callId = undefined;
         shields.delete(id);
-        await calls.end(id);
         return;
       }
 
