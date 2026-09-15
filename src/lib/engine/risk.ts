@@ -41,19 +41,45 @@ export interface RiskConfig {
   triadConfidence: number;
   /** Max number of matches credited per utterance. */
   creditTopN: number;
+  /** Only hits whose raw score is within this band of the best tactic hit are credited. */
+  creditBand: number;
   /** Fragments shorter than this (in words) are never credited — "yes", "okay sir". */
   minWords: number;
 }
 
 export const DEFAULT_RISK_CONFIG: RiskConfig = {
-  minConfidence: 0.2,
-  benignMargin: 0.02,
+  minConfidence: 0.3,
+  benignMargin: 0.05,
   levels: { caution: 25, danger: 60 },
   singleTacticCap: 0.32,
   triadConfidence: 0.45,
   creditTopN: 3,
+  creditBand: 0.06,
   minWords: 4,
 };
+
+/**
+ * Phrases that mark a *legitimate* caller: inviting independent verification, declining
+ * details, deferring to an official channel. Embeddings do not model negation ("we will
+ * never ask for your OTP" sits next to "read me the OTP"), so these are explicit rules.
+ */
+export const BENIGN_MARKERS: RegExp[] = [
+  /\b(will|would|do|does|don'?t|won'?t|shall)\s+(never|not)\s+(ask|need|require|request)\b/i,
+  /\bnever\s+(share|give|tell|read out)\b.*\b(otp|pin|cvv|password|code)/i,
+  /\bdo not share\b.*\b(otp|pin|cvv|password)/i,
+  /\b(no|nothing)\s+(payment|fee|charge|advance)\b.*\b(required|needed|to be made|in advance)/i,
+  /\b(you\s+)?(don'?t|do not|won'?t) (need|have) to (do|share|pay|send) anything\b/i,
+  /\bcall (us|back|the number)\b.*\b(on|from|at) (the )?(back of|official|card|website|app|number on)/i,
+  /\bhang up and call\b/i,
+  /\b(at your convenience|whenever (is )?convenient|no rush|no hurry)\b/i,
+  /\bthrough the (official|app|website|portal|counter)\b/i,
+  /\bpay(able)? at the (counter|reception|desk|branch|store)\b/i,
+  /\bwe (will|'ll) (send|post|email|mail) (you )?(a|the) (letter|notice|copy)\b/i,
+];
+
+export function hasBenignMarker(text: string): boolean {
+  return BENIGN_MARKERS.some((re) => re.test(text));
+}
 
 const PRESSURE = new Set<Tactic>(
   (Object.keys(TACTIC_INFO) as Tactic[]).filter((t) => TACTIC_INFO[t].pressure),
@@ -109,7 +135,11 @@ export function creditMatches(
       reason: `Sounds like a legitimate call: "${bestBenign.text.slice(0, 80)}"`,
     };
   }
+  // The top hit is what the fragment *is*; other hits count only if they are nearly as
+  // close (within the band), otherwise a single sentence would collect tactics from
+  // three loosely related scripts.
   const credited = tacticHits
+    .filter((m) => m.score >= bestTactic.score - cfg.creditBand)
     .slice(0, cfg.creditTopN)
     .map((m, i) => ({ ...m, confidence: m.confidence * (RANK_DISCOUNT[i] ?? 0.5) }))
     .filter((m) => m.confidence >= cfg.minConfidence);
@@ -166,7 +196,12 @@ export function analyzeUtterance(
     timeline: [...prev.timeline],
   };
   const tooShort = utterance.text.trim().split(/\s+/).length < cfg.minWords;
-  const { credited, suppressed, reason } = tooShort ? { credited: [], suppressed: false, reason: undefined } : creditMatches(matches, cfg, utterance.speaker);
+  const benignMarker = utterance.speaker !== "user" && hasBenignMarker(utterance.text);
+  const { credited, suppressed, reason } = tooShort
+    ? { credited: [], suppressed: false, reason: undefined }
+    : benignMarker
+      ? { credited: [], suppressed: true, reason: "The caller invited verification or declined details — the opposite of a scam script." }
+      : creditMatches(matches, cfg, utterance.speaker);
   const creditedTactics = new Set<Tactic>();
 
   for (const m of credited) {

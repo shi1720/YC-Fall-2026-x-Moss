@@ -38,7 +38,7 @@ Anyone can try it in 60 seconds: nine scripted calls with two synthetic voices (
 
 * **Fast path — Moss, in-process.** The playbook lives in a Moss cloud index, loaded into the Node process at boot and queried for every fragment with raw cosine scores (`alpha: 1.0`), typically in 2–5 ms including embedding. No vector database, no network on the hot path, and local queries are unmetered, so we can afford to check *everything*.
 * **Risk engine.** Pure, unit-tested TypeScript: cosine → calibrated confidence; benign look-alike suppression (75 legitimate lines live in the same index so "we will never ask for your OTP" stays quiet); speaker-aware crediting; a noisy-OR over 21 tactics with persistent evidence; two hard rules — *pressure + ask* ⇒ danger, and *victim about to comply* ⇒ intervene now.
-* **Slow path — LLM coach.** Only on risk transitions, an 8B model on Groq returns a JSON `{verdict, explanation, say_this, action}`. It never blocks the fast path and can veto a false alarm (but never override danger).
+* **Slow path — LLM coach.** Only on risk transitions, a 20B open-weight model on Groq returns a JSON `{verdict, explanation, say_this, action}`. It never blocks the fast path and can veto a false alarm (but never override danger).
 * **Moss sessions.** Each call opens a `SessionIndex`; turns are added locally; the guardian's "what did they ask for?" is a semantic query over it. Sessions are never pushed — call memory dies with the call.
 * **Moss auto-refresh + multi-index.** Reported lines are upserted into `raksha-intel`; both indexes are loaded with `autoRefresh` and searched with `queryMultiIndex`, so new variants hot-swap into every instance with zero downtime.
 * **Stack.** Next.js 16 with a custom server and WebSockets (one process, one URL), Tailwind, Web Speech API + Groq Whisper, Docker on a Hugging Face Space, Playwright + vitest, GitHub Actions.
@@ -68,7 +68,7 @@ An Android app with in-call audio capture; Hindi, Tamil and Telugu playbooks; a 
 
 ## Built with
 
-TypeScript · Next.js 16 · React 19 · Tailwind CSS 4 · `@moss-js/moss` (Moss runtime: loaded indexes, sessions, multi-index, auto-refresh) · WebSockets (`ws`) · Web Speech API · Groq (Llama 3.1 8B coach, Whisper STT) · Zod · Motion · Vitest · Playwright · Docker · Hugging Face Spaces · GitHub Actions
+TypeScript · Next.js 16 · React 19 · Tailwind CSS 4 · `@moss-js/moss` (Moss runtime: loaded indexes, sessions, multi-index, auto-refresh) · WebSockets (`ws`) · Web Speech API · Groq (gpt-oss-20b coach, Whisper STT) · Zod · Motion · Vitest · Playwright · Docker · Hugging Face Spaces · GitHub Actions
 
 ## Team
 

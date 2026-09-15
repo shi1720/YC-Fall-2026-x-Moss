@@ -1,5 +1,5 @@
 // Renders docs/*.md into styled PDFs in docs/pdf/ using Chromium (Playwright).
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, mkdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import { marked } from "marked";
 import { chromium } from "@playwright/test";

@@ -42,10 +42,10 @@ export class MossRetriever implements Retriever {
       alpha: opts.alpha ?? this.cfg.alpha,
     };
     const t0 = performance.now();
-    const result =
-      this.cfg.indexes.length > 1
-        ? await this.client.queryMultiIndex(this.cfg.indexes, text, options)
-        : await this.client.query(this.cfg.indexes[0], text, options);
+    // Always go through queryMultiIndex: with alpha 1.0 it returns raw cosine similarity,
+    // which is comparable across queries and therefore calibratable. Single-index `query`
+    // returns rank-normalised scores (1.000, 0.969, 0.939…) that carry no absolute signal.
+    const result = await this.client.queryMultiIndex(this.cfg.indexes, text, options);
     const wallMs = performance.now() - t0;
     const engineMs = typeof result.timeTakenInMs === "number" ? result.timeTakenInMs : wallMs;
     const matches: Match[] = result.docs.map((d) => {

@@ -153,7 +153,7 @@ async function icon(name, color, size = 256) {
     card(s, 8.2, 1.9, 4.5, 4.75, { line: C.saffron });
     s.addText("SLOW PATH · ASYNC · ON TRANSITIONS", { x: 8.45, y: 2.05, w: 4.0, h: 0.3, fontFace: B, fontSize: 10, bold: true, color: C.saffron, charSpacing: 2, isTextBox: true, margin: 0 });
     const slow = [
-      "An 8B model (Groq) returns a JSON contract: verdict · explanation · say this · action.",
+      "A 20B model (Groq) returns a JSON contract: verdict · explanation · say this · action.",
       "Only when risk changes, never per fragment: ≈ 300–800 ms, off the critical path.",
       "A confident “benign” verdict can veto CAUTION. It can never override DANGER.",
       "Template fallback: the product works with no LLM key at all.",
@@ -290,7 +290,7 @@ async function icon(name, color, size = 256) {
     card(s, 8.8, 1.55, 3.9, 4.35, { fill: "1A1608", line: C.saffron });
     s.addText("UNIT COST PER PROTECTED CALL", { x: 9.05, y: 1.75, w: 3.5, h: 0.3, fontFace: B, fontSize: 10, bold: true, color: C.saffron, charSpacing: 2, isTextBox: true, margin: 0 });
     s.addText("≈ ₹0.02", { x: 9.05, y: 2.1, w: 3.5, h: 0.9, fontFace: H, fontSize: 44, color: C.saffron2, isTextBox: true, margin: 0, valign: "middle" });
-    const cost = ["Moss local queries: ₹0 (unmetered)", "STT on device: ₹0", "LLM coach, ≤ 6 calls on an 8B model: ≈ ₹0.02", "One small container serves thousands of concurrent calls"];
+    const cost = ["Moss local queries: ₹0 (unmetered)", "STT on device: ₹0", "LLM coach, ≤ 6 calls on a 20B model: ≈ ₹0.02", "One small container serves thousands of concurrent calls"];
     s.addText(cost.map((t, i) => ({ text: t, options: { bullet: true, breakLine: i < cost.length - 1, paraSpaceAfter: 6 } })), { x: 9.05, y: 3.1, w: 3.5, h: 1.9, fontFace: B, fontSize: 12, color: C.text, isTextBox: true, margin: 0, valign: "top" });
     s.addText("One prevented ₹1.5-lakh digital-arrest transfer pays for ~7 million protected calls.", { x: 9.05, y: 5.05, w: 3.5, h: 0.8, fontFace: B, fontSize: 11.5, italic: true, color: C.saffron2, isTextBox: true, margin: 0 });
     s.addText("“Truecaller tells you who is calling. Raksha tells you what they are doing to you — and what to say back.”", { x: 0.6, y: 6.15, w: 12, h: 0.6, fontFace: H, fontSize: 16, color: C.text, italic: true, isTextBox: true, margin: 0 });

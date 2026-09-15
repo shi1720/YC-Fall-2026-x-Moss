@@ -11,25 +11,41 @@ import { FAMILY_INFO, TACTIC_INFO } from "@/lib/data/families";
 import { describeRisk } from "@/lib/engine/risk";
 import type { CoachAdvice, Family, Match, RiskState, Utterance } from "@/lib/engine/types";
 import { FAMILIES } from "@/lib/engine/types";
-import { chat, llmConfig } from "@/lib/llm/client";
+import { chat, extractJson, llmConfig } from "@/lib/llm/client";
+
+const ADVICE_JSON_SCHEMA = {
+  type: "object",
+  properties: {
+    verdict: { type: "string", enum: ["scam", "suspicious", "benign"] },
+    confidence: { type: "number" },
+    explanation: { type: "string" },
+    say_this: { type: "string" },
+    action: { type: "string" },
+    family: { type: ["string", "null"] },
+  },
+  required: ["verdict", "confidence", "explanation", "say_this", "action", "family"],
+  additionalProperties: false,
+};
 
 const AdviceSchema = z.object({
   verdict: z.enum(["scam", "suspicious", "benign"]),
   confidence: z.number().min(0).max(1),
-  explanation: z.string().min(1).max(400),
-  say_this: z.string().min(1).max(240),
-  action: z.string().min(1).max(160),
+  explanation: z.string().min(1).max(700),
+  say_this: z.string().min(1).max(300),
+  action: z.string().min(1).max(240),
   family: z.string().nullable().optional(),
 });
 
 const SYSTEM = `You are Raksha, a calm, protective coach sitting next to someone who is on a phone call that may be a scam.
-You receive: (1) the recent transcript, (2) the fast-path risk analysis (which scam script it matches and which persuasion tactics were detected), (3) the closest lines from a playbook of real scam scripts.
+You receive: (1) the recent transcript, (2) a FAST-PATH analysis from a pattern matcher (which scam script it resembles and which persuasion tactics it detected), (3) the closest lines from a playbook of real scam scripts.
+The fast path is quick but literal: it matches wording, not meaning, and it over-reacts to legitimate calls that merely sound like scams. Judge the transcript on its own merits.
+Signs of a LEGITIMATE call (weigh these heavily): the caller says they will never ask for an OTP/PIN/CVV; invites the person to hang up and call the official number; asks for nothing; blocks a card or resolves an issue without needing codes, transfers or app installs; defers payment to an official channel; no urgency beyond ordinary business.
+Signs of a SCAM: authority + fear + urgency; secrecy ("tell no one"); keeping the person on the line or on video; a request for an OTP, PIN, card details, remote-access app, gift cards, crypto, or a transfer to a "safe"/"verification" account; "digital arrest" (which does not exist); discouraging verification.
 Your job:
-- Decide: "scam" (the caller is running a known script), "suspicious" (worrying but not conclusive), or "benign" (a normal call).
+- Decide: "scam" (a known script is being run), "suspicious" (worrying but not conclusive), or "benign" (a normal call).
 - Explain in at most 2 short sentences, in simple words a 70-year-old can understand while stressed. No jargon.
-- Give ONE exact sentence the person can say right now to the caller ("say_this"). It must end the pressure without arguing, e.g. "I will call the bank myself on the number on my card. Goodbye."
-- Give ONE concrete next action ("action"), e.g. "Hang up and call 1930." Prefer the official helpline for the region.
-Rules: Banks, police, courts, tax or telecom authorities never ask for OTPs, remote-access apps, gift cards, or transfers to a "safe account" on a call. "Digital arrest" does not exist. If the person is about to share a code or send money, be direct: tell them to stop.
+- Give ONE exact sentence the person can say right now ("say_this"). It must end the pressure without arguing, e.g. "I will call the bank myself on the number on my card. Goodbye." For a benign call, a normal polite sentence is fine.
+- Give ONE concrete next action ("action"), e.g. "Hang up and call 1930." Use the official helpline for the region (India: 1930).
 Respond ONLY with JSON: {"verdict":"scam|suspicious|benign","confidence":0..1,"explanation":"...","say_this":"...","action":"...","family":"<family id or null>"}`;
 
 export interface CoachInput {
@@ -91,8 +107,12 @@ ${recent || "(nothing yet)"}
 CLOSEST PLAYBOOK LINES:
 ${matches || "(none)"}`;
   try {
-    const res = await chat([{ role: "system", content: SYSTEM }, { role: "user", content: user }], { json: true, maxTokens: 350 });
-    const parsed = AdviceSchema.parse(JSON.parse(res.text));
+    const res = await chat([{ role: "system", content: SYSTEM }, { role: "user", content: user }], {
+      schema: { name: "raksha_advice", schema: ADVICE_JSON_SCHEMA },
+      maxTokens: 900,
+      reasoningEffort: "low",
+    });
+    const parsed = AdviceSchema.parse(JSON.parse(extractJson(res.text)));
     return {
       verdict: parsed.verdict,
       confidence: parsed.confidence,
@@ -122,7 +142,7 @@ export async function summarizeCall(transcript: Utterance[], risk: RiskState): P
         { role: "system", content: "Summarise this phone call for a worried family member in 2 sentences: what the caller wanted and whether the person shared anything sensitive. Plain words, no markdown." },
         { role: "user", content: transcript.map((u) => `${u.speaker === "user" ? "PERSON" : "CALLER"}: ${u.text}`).join("\n") + `\n\nRisk analysis: ${describeRisk(risk)}` },
       ],
-      { maxTokens: 160 },
+      { maxTokens: 600, reasoningEffort: "low" },
     );
     return res.text.trim();
   } catch {

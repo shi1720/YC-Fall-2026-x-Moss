@@ -72,6 +72,8 @@ async function build(): Promise<MossRuntime> {
       },
     };
   }
+  // Two intra-op threads gave the best p50/p95 for the embedding step on 2–4 vCPU hosts.
+  process.env.MOSS_EMBEDDING_INTRA_OP_THREADS ??= "2";
   const { MossClient } = await import("@moss-js/moss");
   const client = new MossClient(process.env.MOSS_PROJECT_ID!, process.env.MOSS_PROJECT_KEY!, {
     cachePath: process.env.MOSS_CACHE_PATH ?? path.join(process.cwd(), ".moss-cache"),
@@ -104,8 +106,8 @@ async function build(): Promise<MossRuntime> {
   }
   const retriever = new MossRetriever(client, {
     indexes,
-    floor: Number(process.env.RAKSHA_SCORE_FLOOR ?? 0.42),
-    ceil: Number(process.env.RAKSHA_SCORE_CEIL ?? 0.78),
+    floor: Number(process.env.RAKSHA_SCORE_FLOOR ?? 0.38),
+    ceil: Number(process.env.RAKSHA_SCORE_CEIL ?? 0.72),
     alpha: Number(process.env.RAKSHA_ALPHA ?? 1.0),
     topK: Number(process.env.RAKSHA_TOPK ?? 6),
     docCounts,

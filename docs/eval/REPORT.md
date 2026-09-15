@@ -1,30 +1,30 @@
 # Raksha evaluation report
 
-Generated 2026-09-15T10:39:58.269Z · runtime **Offline lexical fallback (BM25). Configure MOSS_PROJECT_ID / MOSS_PROJECT_KEY for the real Moss runtime.** · 409 playbook docs · model `lexical`
+Generated 2026-09-15T13:59:32.595Z · runtime **Moss runtime (in-process, 1 index loaded)** · 409 playbook docs · model `moss-minilm`
 
 | Metric | Value |
 |---|---|
 | Scam scenarios detected (reached DANGER) | 100% |
 | Benign scenarios wrongly escalated to DANGER | 0% |
-| Scam family identified correctly | 86% |
-| Mean turn at which DANGER fired | 4.1 |
-| Retrieval latency p50 / p95 / p99 (ms, end-to-end incl. embedding) | 0.39 / 1.47 / 2.6 |
-| Mean engine-reported search time (ms) | 0.52 |
+| Scam family identified correctly | 100% |
+| Mean turn at which DANGER fired | 4.3 |
+| Retrieval latency p50 / p95 / p99 (ms, end-to-end incl. embedding) | 13.85 / 26.74 / 31.55 |
+| Mean engine-reported search time (ms) | 14.78 |
 | Utterances analysed | 158 |
 
 ## Scenarios
 
 | Scenario | Expected | Result | Score | DANGER at turn | Expected by | Family |
 |---|---|---|---|---|---|---|
-| Bank card OTP | scam | ✅ danger | 87 | 5 | 7 | Bank KYC / account block |
+| Bank card OTP | scam | ✅ danger | 89 | 5 | 7 | Card fraud department |
 | Genuine bank fraud call | benign | ✅ safe | 0 | never | never | — |
 | Genuine hospital call | benign | ✅ safe | 0 | never | never | — |
-| Courier parcel hand-off | scam | ✅ danger | 82 | 5 | 12 | Courier / parcel |
-| Deepfake CFO wire request | scam | ✅ danger | 73 | 3 | 8 | CEO / CFO wire fraud (deepfake) |
-| Digital arrest | scam | ✅ danger | 97 | 3 | 9 | Digital arrest |
-| Grandparent voice clone | scam | ✅ danger | 92 | 6 | 8 | Family emergency / voice clone |
-| Investment WhatsApp group | scam | ✅ danger | 89 | 5 | 12 | Investment / trading |
-| Tech support remote access | scam | ✅ danger | 90 | 2 | 10 | Tech support |
+| Courier parcel hand-off | scam | ✅ danger | 93 | 5 | 12 | Courier / parcel |
+| Deepfake CFO wire request | scam | ✅ danger | 81 | 3 | 8 | CEO / CFO wire fraud (deepfake) |
+| Digital arrest | scam | ✅ danger | 98 | 3 | 9 | Digital arrest |
+| Grandparent voice clone | scam | ✅ danger | 96 | 6 | 8 | Family emergency / voice clone |
+| Investment WhatsApp group | scam | ✅ danger | 92 | 5 | 12 | Investment / trading |
+| Tech support remote access | scam | ✅ danger | 92 | 3 | 10 | Tech support |
 
 ## Turn-by-turn
 
@@ -32,203 +32,203 @@ Generated 2026-09-15T10:39:58.269Z · runtime **Offline lexical fallback (BM25).
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 0 | safe | — | benign/benign | 0.266 | 2.78 |
-| 2 | user | 0 | safe | — | jury_duty/tactic | 0.277 | 0.34 |
-| 3 | caller | 42 | caution | account_compromise, authority, fear | card_fraud_dept/tactic | 0.498 | 1.53 |
-| 4 | user | 42 | caution | — | ecommerce_order/tactic | 0.311 | 0.95 |
-| 5 | caller | 75 | danger | otp_request, personal_info | card_fraud_dept/tactic | 0.491 | 2.6 |
-| 6 | user | 75 | danger | — | tax_refund/tactic | 0.111 | 0.63 |
-| 7 | caller | 85 | danger | victim_compliance, personal_info | bank_kyc/tactic | 0.456 | 1.17 |
-| 8 | user | 85 | danger | victim_compliance, otp_request | bank_kyc/tactic | 0.267 | 0.8 |
-| 9 | caller | 85 | danger | — | loan_app/tactic | 0.205 | 1.14 |
-| 10 | user | 85 | danger | — | - | 0 | 0.12 |
-| 11 | caller | 85 | danger | victim_compliance, otp_request, urgency, escalation | bank_kyc/tactic | 0.382 | 1.22 |
-| 12 | user | 85 | danger | victim_compliance, otp_request, remote_access | card_fraud_dept/tactic | 0.666 | 1.21 |
-| 13 | caller | 85 | danger | otp_request, verification_bypass | card_fraud_dept/tactic | 0.34 | 1.21 |
-| 14 | user | 85 | danger | — | - | 0 | 0.04 |
-| 15 | caller | 87 | danger | otp_request, urgency, escalation, personal_info | bank_kyc/tactic | 0.472 | 1.54 |
-| 16 | user | 87 | danger | victim_compliance, otp_request | card_fraud_dept/tactic | 0.365 | 0.61 |
+| 1 | caller | 0 | safe | — | benign/benign | 0.562 | 14.55 |
+| 2 | user | 0 | safe | — | ceo_wire_fraud/tactic | 0.219 | 7.32 |
+| 3 | caller | 48 | caution | account_compromise, authority, fear | card_fraud_dept/tactic | 0.848 | 18.01 |
+| 4 | user | 48 | caution | — | card_fraud_dept/tactic | 0.463 | 11.66 |
+| 5 | caller | 78 | danger | otp_request, personal_info, verification_bypass, hold_the_line | card_fraud_dept/tactic | 0.671 | 23.46 |
+| 6 | user | 85 | danger | victim_compliance, personal_info | bank_kyc/tactic | 0.564 | 14.81 |
+| 7 | caller | 85 | danger | otp_request, account_compromise, personal_info | safe_account/tactic | 0.583 | 12.55 |
+| 8 | user | 85 | danger | — | digital_arrest/tactic | 0.572 | 11.15 |
+| 9 | caller | 85 | danger | otp_request, personal_info, authority | card_fraud_dept/tactic | 0.617 | 21.7 |
+| 10 | user | 85 | danger | — | social_security/tactic | 0.429 | 7.99 |
+| 11 | caller | 88 | danger | otp_request, urgency, escalation, verification_bypass | bank_kyc/tactic | 0.634 | 22.52 |
+| 12 | user | 88 | danger | — | card_fraud_dept/tactic | 0.75 | 13.76 |
+| 13 | caller | 88 | danger | — | tech_support/tactic | 0.522 | 19.78 |
+| 14 | user | 88 | danger | — | bank_kyc/tactic | 0.42 | 10.47 |
+| 15 | caller | 89 | danger | otp_request, verification_bypass, urgency, escalation | card_fraud_dept/tactic | 0.673 | 17.43 |
+| 16 | user | 89 | danger | — | benign/benign | 0.73 | 14.85 |
 
 ### Genuine bank fraud call (benign)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 0 | safe | — | benign/benign | 0.357 | 2.47 |
-| 2 | user | 0 | safe | — | olx_army/tactic | 0.257 | 0.13 |
-| 3 | caller | 0 | safe | — | benign/benign | 0.474 | 1.19 |
-| 4 | user | 0 | safe | — | ecommerce_order/tactic | 0.311 | 0.48 |
-| 5 | caller | 0 | safe | — | benign/benign | 0.406 | 1.47 |
-| 6 | user | 0 | safe | — | benign/benign | 0.283 | 0.28 |
-| 7 | caller | 0 | safe | — | benign/benign | 0.192 | 1.15 |
-| 8 | user | 0 | safe | — | benign/benign | 0.349 | 0.39 |
-| 9 | caller | 0 | safe | — | benign/benign | 0.286 | 1.64 |
-| 10 | user | 0 | safe | — | benign/benign | 0.316 | 0.21 |
-| 11 | caller | 0 | safe | — | benign/benign | 0.272 | 1.43 |
-| 12 | user | 0 | safe | — | benign/benign | 0.278 | 0.81 |
-| 13 | caller | 0 | safe | — | benign/benign | 0.277 | 1.09 |
-| 14 | user | 0 | safe | — | benign/benign | 0.221 | 0.17 |
+| 1 | caller | 0 | safe | — | benign/benign | 0.765 | 31.55 |
+| 2 | user | 0 | safe | — | govt_scheme/tactic | 0.458 | 10.79 |
+| 3 | caller | 0 | safe | — | benign/benign | 0.688 | 19.73 |
+| 4 | user | 0 | safe | — | card_fraud_dept/tactic | 0.45 | 11.47 |
+| 5 | caller | 0 | safe | — | card_fraud_dept/tactic | 0.611 | 16.43 |
+| 6 | user | 0 | safe | — | benign/benign | 0.578 | 10.32 |
+| 7 | caller | 0 | safe | — | benign/benign | 0.626 | 19.66 |
+| 8 | user | 0 | safe | — | hi_mum/tactic | 0.325 | 7.97 |
+| 9 | caller | 0 | safe | — | benign/benign | 0.616 | 26.74 |
+| 10 | user | 0 | safe | — | ceo_wire_fraud/tactic | 0.226 | 20.06 |
+| 11 | caller | 0 | safe | — | fake_customer_care/tactic | 0.598 | 20.04 |
+| 12 | user | 0 | safe | — | medicare/tactic | 0.44 | 7.87 |
+| 13 | caller | 0 | safe | — | card_fraud_dept/tactic | 0.506 | 18.85 |
+| 14 | user | 0 | safe | — | ceo_wire_fraud/tactic | 0.329 | 7.6 |
 
 ### Genuine hospital call (benign)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 0 | safe | — | benign/benign | 0.285 | 1.12 |
-| 2 | user | 0 | safe | — | - | 0 | 0.04 |
-| 3 | caller | 0 | safe | — | benign/benign | 0.484 | 1.11 |
-| 4 | user | 0 | safe | — | benign/benign | 0.312 | 0.53 |
-| 5 | caller | 0 | safe | — | benign/benign | 0.405 | 1.34 |
-| 6 | user | 0 | safe | — | safe_account/tactic | 0.247 | 0.47 |
-| 7 | caller | 0 | safe | — | utility_disconnection/tactic | 0.149 | 1.11 |
-| 8 | user | 0 | safe | — | - | 0 | 0.11 |
-| 9 | caller | 0 | safe | — | benign/benign | 0.169 | 1.46 |
-| 10 | user | 0 | safe | — | bank_kyc/tactic | 0.205 | 0.57 |
-| 11 | caller | 0 | safe | — | benign/benign | 0.23 | 1.07 |
-| 12 | user | 0 | safe | — | benign/benign | 0.287 | 0.46 |
+| 1 | caller | 0 | safe | — | benign/benign | 0.474 | 16.23 |
+| 2 | user | 0 | safe | — | job_task/tactic | 0.222 | 6.55 |
+| 3 | caller | 0 | safe | — | benign/benign | 0.759 | 16.1 |
+| 4 | user | 0 | safe | — | benign/benign | 0.45 | 11.84 |
+| 5 | caller | 0 | safe | — | benign/benign | 0.691 | 17.91 |
+| 6 | user | 0 | safe | — | olx_army/tactic | 0.527 | 11 |
+| 7 | caller | 0 | safe | — | medicare/tactic | 0.491 | 15.69 |
+| 8 | user | 0 | safe | — | benign/benign | 0.298 | 6.56 |
+| 9 | caller | 0 | safe | — | benign/benign | 0.39 | 18.11 |
+| 10 | user | 0 | safe | — | benign/benign | 0.569 | 13.85 |
+| 11 | caller | 0 | safe | — | benign/benign | 0.704 | 15.93 |
+| 12 | user | 0 | safe | — | benign/benign | 0.46 | 7.82 |
 
 ### Courier parcel hand-off (scam)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 33 | caution | authority, account_compromise | courier_parcel/tactic | 0.894 | 1.15 |
-| 2 | user | 33 | caution | — | benign/benign | 0.317 | 0.14 |
-| 3 | caller | 33 | caution | — | courier_parcel/tactic | 0.233 | 0.85 |
-| 4 | user | 33 | caution | — | benign/benign | 0.252 | 0.17 |
-| 5 | caller | 75 | danger | authority, fear, account_compromise, personal_info | courier_parcel/tactic | 0.416 | 1.98 |
-| 6 | user | 75 | danger | — | benign/benign | 0.256 | 0.18 |
-| 7 | caller | 76 | danger | authority, urgency, escalation, verification_bypass | courier_parcel/tactic | 0.532 | 0.49 |
-| 8 | user | 76 | danger | — | sim_disconnection/tactic | 0.37 | 0.08 |
-| 9 | caller | 82 | danger | hold_the_line, authority, urgency | courier_parcel/tactic | 0.67 | 0.28 |
-| 10 | caller | 82 | danger | — | courier_parcel/tactic | 0.208 | 0.39 |
-| 11 | user | 82 | danger | — | safe_account/tactic | 0.19 | 0.11 |
-| 12 | caller | 82 | danger | — | courier_parcel/tactic | 0.148 | 0.86 |
-| 13 | user | 82 | danger | — | courier_parcel/tactic | 0.273 | 0.22 |
-| 14 | caller | 82 | danger | — | digital_arrest/tactic | 0.203 | 0.49 |
-| 15 | user | 82 | danger | — | bank_kyc/tactic | 0.159 | 0.11 |
-| 16 | caller | 82 | danger | — | job_task/tactic | 0.212 | 0.44 |
-| 17 | user | 82 | danger | — | bank_kyc/tactic | 0.269 | 0.08 |
-| 18 | caller | 82 | danger | — | digital_arrest/tactic | 0.23 | 0.29 |
+| 1 | caller | 33 | caution | authority, account_compromise | courier_parcel/tactic | 0.791 | 14.63 |
+| 2 | user | 33 | caution | — | benign/benign | 0.505 | 7.57 |
+| 3 | caller | 33 | caution | authority, account_compromise | courier_parcel/tactic | 0.525 | 12.03 |
+| 4 | user | 33 | caution | — | bank_kyc/tactic | 0.414 | 6.02 |
+| 5 | caller | 60 | danger | authority, fear, account_compromise, personal_info | courier_parcel/tactic | 0.505 | 35.69 |
+| 6 | user | 60 | danger | — | courier_parcel/tactic | 0.601 | 11.79 |
+| 7 | caller | 70 | danger | hold_the_line, authority, urgency, legal_threat, account_compromise, escalation, verification_bypass | courier_parcel/tactic | 0.629 | 24.92 |
+| 8 | user | 70 | danger | — | benign/benign | 0.314 | 9.29 |
+| 9 | caller | 70 | danger | hold_the_line, authority, urgency | courier_parcel/tactic | 0.641 | 15.6 |
+| 10 | caller | 76 | danger | authority, legal_threat, account_compromise | digital_arrest/tactic | 0.785 | 24.33 |
+| 11 | user | 76 | danger | — | courier_parcel/tactic | 0.446 | 9.22 |
+| 12 | caller | 89 | danger | secrecy, isolation, verification_bypass, fear, payment_method | safe_account/tactic | 0.62 | 21.06 |
+| 13 | user | 89 | danger | — | safe_account/tactic | 0.559 | 9.35 |
+| 14 | caller | 89 | danger | verification_bypass, isolation, fear | digital_arrest/tactic | 0.552 | 20.35 |
+| 15 | user | 90 | danger | victim_compliance, personal_info | bank_kyc/tactic | 0.487 | 10.32 |
+| 16 | caller | 90 | danger | hold_the_line, isolation, legal_threat, authority | digital_arrest/tactic | 0.57 | 18.26 |
+| 17 | user | 90 | danger | — | benign/benign | 0.284 | 7.75 |
+| 18 | caller | 93 | danger | fear, urgency, payment_method, authority, personal_info, video_call_demand | sextortion/tactic | 0.629 | 14.82 |
 
 ### Deepfake CFO wire request (scam)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 23 | safe | verification_bypass, tech_pretext | ceo_wire_fraud/tactic | 0.43 | 0.25 |
-| 2 | user | 23 | safe | — | benign/benign | 0.264 | 0.11 |
-| 3 | caller | 70 | danger | authority, secrecy, verification_bypass, urgency | ceo_wire_fraud/tactic | 0.522 | 0.71 |
-| 4 | user | 70 | danger | — | romance/tactic | 0.321 | 0.12 |
-| 5 | caller | 70 | danger | — | ceo_wire_fraud/tactic | 0.131 | 0.61 |
-| 6 | caller | 70 | danger | — | utility_disconnection/tactic | 0.169 | 0.29 |
-| 7 | user | 70 | danger | — | family_emergency/tactic | 0.199 | 0.21 |
-| 8 | caller | 73 | danger | isolation, secrecy, authority, verification_bypass | ceo_wire_fraud/tactic | 0.332 | 0.58 |
-| 9 | user | 73 | danger | — | - | 0 | 0.03 |
-| 10 | caller | 73 | danger | — | hi_mum/tactic | 0.216 | 0.33 |
-| 11 | user | 73 | danger | — | romance/tactic | 0.205 | 0.11 |
-| 12 | caller | 73 | danger | authority, verification_bypass | ceo_wire_fraud/tactic | 0.333 | 0.66 |
-| 13 | user | 73 | danger | — | safe_account/tactic | 0.247 | 0.18 |
-| 14 | caller | 73 | danger | — | irs/tactic | 0.127 | 0.22 |
-| 15 | user | 73 | danger | — | - | 0 | 0.01 |
-| 16 | caller | 73 | danger | — | benign/benign | 0.181 | 0.18 |
+| 1 | caller | 26 | caution | verification_bypass, tech_pretext | ceo_wire_fraud/tactic | 0.644 | 15.6 |
+| 2 | user | 26 | caution | — | ceo_wire_fraud/tactic | 0.289 | 9.87 |
+| 3 | caller | 73 | danger | authority, secrecy, verification_bypass, urgency | ceo_wire_fraud/tactic | 0.724 | 25.05 |
+| 4 | user | 73 | danger | — | romance/tactic | 0.366 | 7.72 |
+| 5 | caller | 73 | danger | — | fake_customer_care/tactic | 0.472 | 26.76 |
+| 6 | caller | 73 | danger | — | insurance_policy/tactic | 0.412 | 11.21 |
+| 7 | user | 73 | danger | — | ceo_wire_fraud/tactic | 0.403 | 11.27 |
+| 8 | caller | 76 | danger | authority, verification_bypass, secrecy, fear | ceo_wire_fraud/tactic | 0.59 | 27.83 |
+| 9 | user | 76 | danger | — | benign/benign | 0.326 | 7.06 |
+| 10 | caller | 80 | danger | isolation, verification_bypass, relationship_pretext, urgency | lottery_prize/tactic | 0.556 | 14.3 |
+| 11 | user | 80 | danger | — | job_task/tactic | 0.458 | 9.75 |
+| 12 | caller | 80 | danger | — | ceo_wire_fraud/tactic | 0.42 | 24.39 |
+| 13 | user | 80 | danger | — | social_security/tactic | 0.365 | 9.19 |
+| 14 | caller | 81 | danger | secrecy, fear, authority | ceo_wire_fraud/tactic | 0.527 | 13.9 |
+| 15 | user | 81 | danger | — | ceo_wire_fraud/tactic | 0.393 | 6.02 |
+| 16 | caller | 81 | danger | — | benign/benign | 0.436 | 13.24 |
 
 ### Digital arrest (scam)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 30 | caution | authority, legal_threat, account_compromise | digital_arrest/tactic | 0.372 | 0.34 |
-| 2 | user | 30 | caution | — | - | 0 | 0.01 |
-| 3 | caller | 75 | danger | authority, fear, account_compromise, personal_info | courier_parcel/tactic | 0.435 | 0.47 |
-| 4 | user | 75 | danger | — | romance/tactic | 0.214 | 0.2 |
-| 5 | caller | 75 | danger | authority, account_compromise, fear, video_call_demand, escalation | digital_arrest/tactic | 0.483 | 0.51 |
-| 6 | user | 75 | danger | — | digital_arrest/tactic | 0.242 | 0.12 |
-| 7 | caller | 75 | danger | secrecy, isolation, authority, legal_threat | digital_arrest/tactic | 0.349 | 0.77 |
-| 8 | user | 75 | danger | — | romance/tactic | 0.399 | 0.07 |
-| 9 | caller | 85 | danger | victim_compliance, video_call_demand, authority, escalation | digital_arrest/tactic | 0.499 | 0.83 |
-| 10 | user | 85 | danger | — | digital_arrest/tactic | 0.26 | 0.24 |
-| 11 | caller | 91 | danger | hold_the_line, isolation, legal_threat, authority | digital_arrest/tactic | 0.485 | 0.4 |
-| 12 | user | 91 | danger | — | investment/tactic | 0.183 | 0.51 |
-| 13 | caller | 93 | danger | payment_method, verification_bypass, authority, urgency | digital_arrest/tactic | 0.28 | 0.38 |
-| 14 | user | 93 | danger | victim_compliance, personal_info | bank_kyc/tactic | 0.336 | 0.16 |
-| 15 | caller | 97 | danger | payment_method, verification_bypass, authority, urgency | digital_arrest/tactic | 0.526 | 0.93 |
-| 16 | user | 97 | danger | — | safe_account/tactic | 0.147 | 0.14 |
-| 17 | caller | 97 | danger | victim_compliance, verification_bypass, payment_method | bank_kyc/tactic | 0.296 | 0.49 |
-| 18 | user | 97 | danger | — | - | 0 | 0.07 |
-| 19 | caller | 97 | danger | — | safe_account/tactic | 0.183 | 0.81 |
-| 20 | user | 97 | danger | victim_compliance, verification_bypass, payment_method | bank_kyc/tactic | 0.353 | 0.19 |
-| 21 | caller | 97 | danger | escalation, legal_threat, payment_method | digital_arrest/tactic | 0.434 | 0.71 |
-| 22 | user | 97 | danger | — | romance/tactic | 0.263 | 0.48 |
-| 23 | caller | 97 | danger | victim_compliance, secrecy, hold_the_line | bank_kyc/tactic | 0.257 | 0.39 |
-| 24 | user | 97 | danger | victim_compliance, payment_method, fear | digital_arrest/tactic | 0.33 | 0.21 |
+| 1 | caller | 54 | caution | secrecy, isolation, hold_the_line, authority, legal_threat, account_compromise | digital_arrest/tactic | 0.567 | 19.37 |
+| 2 | user | 54 | caution | — | card_fraud_dept/tactic | 0.214 | 8.43 |
+| 3 | caller | 75 | danger | authority, fear, account_compromise, personal_info | courier_parcel/tactic | 0.644 | 20.43 |
+| 4 | user | 85 | danger | victim_compliance, payment_method | courier_parcel/tactic | 0.605 | 10.52 |
+| 5 | caller | 85 | danger | authority, account_compromise, fear | digital_arrest/tactic | 0.823 | 29.63 |
+| 6 | user | 85 | danger | — | hi_mum/tactic | 0.434 | 12.47 |
+| 7 | caller | 85 | danger | secrecy, isolation, authority, legal_threat | digital_arrest/tactic | 0.521 | 26.33 |
+| 8 | user | 85 | danger | — | romance/tactic | 0.304 | 8.22 |
+| 9 | caller | 91 | danger | video_call_demand, authority, escalation | digital_arrest/tactic | 0.755 | 23.7 |
+| 10 | user | 91 | danger | — | jury_duty/tactic | 0.535 | 13.65 |
+| 11 | caller | 93 | danger | hold_the_line, isolation, legal_threat, authority | digital_arrest/tactic | 0.63 | 24.21 |
+| 12 | user | 93 | danger | — | benign/benign | 0.351 | 10.16 |
+| 13 | caller | 95 | danger | payment_method, verification_bypass, authority, urgency | safe_account/tactic | 0.529 | 16.55 |
+| 14 | user | 96 | danger | victim_compliance, personal_info | bank_kyc/tactic | 0.686 | 16.1 |
+| 15 | caller | 98 | danger | payment_method, verification_bypass, authority, urgency | digital_arrest/tactic | 0.921 | 24.84 |
+| 16 | user | 98 | danger | victim_compliance, payment_method | safe_account/tactic | 0.511 | 12.39 |
+| 17 | caller | 98 | danger | — | family_emergency/tactic | 0.477 | 23.66 |
+| 18 | user | 98 | danger | — | bank_kyc/tactic | 0.278 | 8.82 |
+| 19 | caller | 98 | danger | payment_method, verification_bypass, authority, urgency | digital_arrest/tactic | 0.666 | 24.63 |
+| 20 | user | 98 | danger | — | benign/benign | 0.379 | 11.91 |
+| 21 | caller | 98 | danger | escalation, legal_threat, payment_method | digital_arrest/tactic | 0.72 | 25.74 |
+| 22 | user | 98 | danger | — | digital_arrest/tactic | 0.46 | 13.48 |
+| 23 | caller | 98 | danger | — | sextortion/tactic | 0.474 | 18.19 |
+| 24 | user | 98 | danger | victim_compliance, payment_method, fear | digital_arrest/tactic | 0.501 | 12.59 |
 
 ### Grandparent voice clone (scam)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 0 | safe | — | family_emergency/tactic | 0.231 | 0.16 |
-| 2 | user | 0 | safe | — | family_emergency/tactic | 0.149 | 0.11 |
-| 3 | caller | 20 | safe | relationship_pretext, fear, verification_bypass | family_emergency/tactic | 0.323 | 0.8 |
-| 4 | user | 20 | safe | — | refund_overpayment/tactic | 0.226 | 0.1 |
-| 5 | caller | 20 | safe | — | benign/benign | 0.177 | 0.57 |
-| 6 | caller | 68 | danger | authority, secrecy, legal_threat | family_emergency/tactic | 0.664 | 0.78 |
-| 7 | user | 68 | danger | — | family_emergency/tactic | 0.353 | 0.09 |
-| 8 | caller | 84 | danger | payment_method, urgency | family_emergency/tactic | 0.664 | 0.54 |
-| 9 | user | 84 | danger | — | bank_kyc/tactic | 0.157 | 0.1 |
-| 10 | caller | 84 | danger | secrecy, verification_bypass | family_emergency/tactic | 0.259 | 0.91 |
-| 11 | user | 84 | danger | — | safe_account/tactic | 0.285 | 0.09 |
-| 12 | caller | 85 | danger | hold_the_line, payment_method | irs/tactic | 0.265 | 0.34 |
-| 13 | user | 88 | danger | victim_compliance, payment_method | refund_overpayment/tactic | 0.414 | 0.09 |
-| 14 | caller | 88 | danger | — | refund_overpayment/tactic | 0.241 | 0.86 |
-| 15 | user | 88 | danger | — | - | 0 | 0.05 |
-| 16 | caller | 92 | danger | escalation, fear, payment_method | family_emergency/tactic | 0.465 | 0.58 |
-| 17 | user | 92 | danger | victim_compliance, payment_method | bank_kyc/tactic | 0.27 | 0.11 |
-| 18 | caller | 92 | danger | payment_method, verification_bypass | family_emergency/tactic | 0.335 | 0.78 |
+| 1 | caller | 0 | safe | — | family_emergency/tactic | 0.561 | 9.43 |
+| 2 | user | 0 | safe | — | benign/benign | 0.264 | 11.05 |
+| 3 | caller | 35 | caution | relationship_pretext, fear | family_emergency/tactic | 0.732 | 27.72 |
+| 4 | user | 35 | caution | — | benign/benign | 0.462 | 11.13 |
+| 5 | caller | 35 | caution | — | jury_duty/tactic | 0.503 | 26.11 |
+| 6 | caller | 74 | danger | authority, secrecy, legal_threat | family_emergency/tactic | 0.928 | 25.81 |
+| 7 | user | 74 | danger | — | olx_army/tactic | 0.284 | 10.09 |
+| 8 | caller | 87 | danger | payment_method, urgency | family_emergency/tactic | 0.734 | 21.48 |
+| 9 | user | 87 | danger | — | ecommerce_order/tactic | 0.421 | 11.57 |
+| 10 | caller | 90 | danger | secrecy, verification_bypass | family_emergency/tactic | 0.634 | 24.04 |
+| 11 | user | 90 | danger | — | benign/benign | 0.372 | 8.84 |
+| 12 | caller | 94 | danger | hold_the_line, isolation | jury_duty/tactic | 0.669 | 15.27 |
+| 13 | user | 96 | danger | victim_compliance, payment_method | refund_overpayment/tactic | 0.676 | 10.76 |
+| 14 | caller | 96 | danger | — | refund_overpayment/tactic | 0.586 | 20.18 |
+| 15 | user | 96 | danger | — | refund_overpayment/tactic | 0.304 | 11.25 |
+| 16 | caller | 96 | danger | escalation, fear, payment_method | family_emergency/tactic | 0.623 | 26.76 |
+| 17 | user | 96 | danger | — | bank_kyc/tactic | 0.371 | 9.88 |
+| 18 | caller | 96 | danger | payment_method, verification_bypass | family_emergency/tactic | 0.636 | 19.18 |
 
 ### Investment WhatsApp group (scam)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 18 | safe | authority, too_good, social_proof | investment/tactic | 0.338 | 0.35 |
-| 2 | user | 18 | safe | — | family_emergency/tactic | 0.162 | 0.26 |
-| 3 | caller | 35 | caution | too_good, social_proof | investment/tactic | 0.332 | 0.71 |
-| 4 | user | 35 | caution | — | hi_mum/tactic | 0.475 | 0.05 |
-| 5 | caller | 75 | danger | tech_pretext, verification_bypass, remote_access | investment/tactic | 0.661 | 0.5 |
-| 6 | user | 75 | danger | — | investment/tactic | 0.295 | 0.08 |
-| 7 | caller | 75 | danger | social_proof, too_good | job_task/tactic | 0.456 | 0.71 |
-| 8 | user | 75 | danger | — | - | 0 | 0.05 |
-| 9 | caller | 75 | danger | payment_method, verification_bypass | investment/tactic | 0.389 | 0.55 |
-| 10 | user | 75 | danger | — | job_task/tactic | 0.295 | 0.26 |
-| 11 | caller | 75 | danger | too_good, social_proof | investment/tactic | 0.273 | 1.04 |
-| 12 | user | 75 | danger | — | investment/tactic | 0.27 | 0.21 |
-| 13 | caller | 77 | danger | isolation, verification_bypass | investment/tactic | 0.304 | 0.69 |
-| 14 | user | 78 | danger | victim_compliance, payment_method | safe_account/tactic | 0.255 | 0.22 |
-| 15 | caller | 78 | danger | — | investment/tactic | 0.202 | 0.22 |
-| 16 | user | 78 | danger | — | job_task/tactic | 0.191 | 0.18 |
-| 17 | caller | 89 | danger | escalation, payment_method, authority | investment/tactic | 0.624 | 0.82 |
-| 18 | user | 89 | danger | — | investment/tactic | 0.329 | 0.08 |
-| 19 | caller | 89 | danger | — | social_security/tactic | 0.137 | 0.48 |
-| 20 | user | 89 | danger | — | tech_support/tactic | 0.206 | 0.18 |
+| 1 | caller | 0 | safe | — | investment/tactic | 0.545 | 17.01 |
+| 2 | user | 0 | safe | — | investment/tactic | 0.41 | 9.49 |
+| 3 | caller | 14 | safe | too_good, social_proof | investment/tactic | 0.551 | 21.2 |
+| 4 | user | 14 | safe | — | job_task/tactic | 0.296 | 7.35 |
+| 5 | caller | 75 | danger | tech_pretext, verification_bypass, remote_access | investment/tactic | 0.699 | 18.08 |
+| 6 | user | 75 | danger | — | benign/benign | 0.404 | 8.33 |
+| 7 | caller | 75 | danger | social_proof, too_good | job_task/tactic | 0.674 | 22.86 |
+| 8 | user | 75 | danger | — | benign/benign | 0.279 | 6.46 |
+| 9 | caller | 75 | danger | — | romance/tactic | 0.468 | 17.48 |
+| 10 | user | 75 | danger | — | benign/benign | 0.472 | 11.6 |
+| 11 | caller | 75 | danger | — | investment/tactic | 0.443 | 23.88 |
+| 12 | user | 75 | danger | — | investment/tactic | 0.611 | 12.01 |
+| 13 | caller | 75 | danger | isolation, verification_bypass | investment/tactic | 0.505 | 18.6 |
+| 14 | user | 85 | danger | victim_compliance, personal_info | bank_kyc/tactic | 0.602 | 11.79 |
+| 15 | caller | 85 | danger | — | safe_account/tactic | 0.491 | 12.1 |
+| 16 | user | 85 | danger | — | safe_account/tactic | 0.457 | 8.5 |
+| 17 | caller | 92 | danger | escalation, payment_method, authority | investment/tactic | 0.801 | 22.51 |
+| 18 | user | 92 | danger | — | recovery_scam/tactic | 0.442 | 9.84 |
+| 19 | caller | 92 | danger | escalation, payment_method | job_task/tactic | 0.498 | 22.42 |
+| 20 | user | 92 | danger | victim_compliance, payment_method | safe_account/tactic | 0.555 | 12.35 |
 
 ### Tech support remote access (scam)
 
 | # | Who | Score | Level | Tactics credited | Top match | Top score | ms |
 |---|---|---|---|---|---|---|---|
-| 1 | caller | 31 | caution | tech_pretext, authority | tech_support/tactic | 0.677 | 0.8 |
-| 2 | user | 60 | danger | victim_compliance, remote_access | tech_support/tactic | 0.258 | 0.07 |
-| 3 | caller | 60 | danger | — | tech_support/tactic | 0.244 | 0.28 |
-| 4 | user | 60 | danger | — | social_security/tactic | 0.206 | 0.08 |
-| 5 | caller | 60 | danger | — | tech_support/tactic | 0.222 | 0.4 |
-| 6 | user | 60 | danger | — | - | 0 | 0.03 |
-| 7 | caller | 64 | danger | fear, tech_pretext, hold_the_line | tech_support/tactic | 0.524 | 0.73 |
-| 8 | user | 64 | danger | — | - | 0 | 0.07 |
-| 9 | caller | 75 | danger | remote_access | tech_support/tactic | 0.669 | 0.39 |
-| 10 | user | 75 | danger | — | - | 0 | 0.02 |
-| 11 | caller | 78 | danger | remote_access, account_compromise | tech_support/tactic | 0.431 | 0.38 |
-| 12 | user | 78 | danger | — | - | 0 | 0.04 |
-| 13 | caller | 83 | danger | remote_access, verification_bypass | refund_overpayment/tactic | 0.495 | 0.3 |
-| 14 | user | 83 | danger | — | investment/tactic | 0.251 | 0.1 |
-| 15 | caller | 87 | danger | payment_method, hold_the_line, verification_bypass | tech_support/tactic | 0.448 | 0.69 |
-| 16 | user | 87 | danger | — | safe_account/tactic | 0.173 | 0.2 |
-| 17 | caller | 87 | danger | — | tech_support/tactic | 0.239 | 0.52 |
-| 18 | user | 87 | danger | — | refund_overpayment/tactic | 0.397 | 0.11 |
-| 19 | caller | 89 | danger | secrecy, verification_bypass | refund_overpayment/tactic | 0.395 | 0.17 |
-| 20 | user | 90 | danger | victim_compliance, payment_method | safe_account/tactic | 0.353 | 0.14 |
+| 1 | caller | 31 | caution | tech_pretext, authority | tech_support/tactic | 0.89 | 20.15 |
+| 2 | user | 31 | caution | — | ceo_wire_fraud/tactic | 0.261 | 7.95 |
+| 3 | caller | 60 | danger | fear, tech_pretext, hold_the_line | tech_support/tactic | 0.486 | 15.74 |
+| 4 | user | 60 | danger | — | refund_overpayment/tactic | 0.329 | 8.46 |
+| 5 | caller | 60 | danger | — | tech_support/tactic | 0.478 | 19.12 |
+| 6 | user | 60 | danger | — | loan_app/tactic | 0.208 | 7.65 |
+| 7 | caller | 61 | danger | fear, tech_pretext, hold_the_line | tech_support/tactic | 0.753 | 18.39 |
+| 8 | user | 61 | danger | — | family_emergency/tactic | 0.317 | 7.07 |
+| 9 | caller | 75 | danger | remote_access | tech_support/tactic | 0.767 | 17.4 |
+| 10 | user | 75 | danger | — | bank_kyc/tactic | 0.46 | 13.35 |
+| 11 | caller | 80 | danger | remote_access, account_compromise | tech_support/tactic | 0.813 | 19.7 |
+| 12 | user | 80 | danger | — | social_security/tactic | 0.25 | 5.94 |
+| 13 | caller | 80 | danger | remote_access, account_compromise | tech_support/tactic | 0.643 | 11.98 |
+| 14 | user | 80 | danger | — | tech_support/tactic | 0.376 | 9.88 |
+| 15 | caller | 90 | danger | payment_method, verification_bypass | social_security/tactic | 0.702 | 25.92 |
+| 16 | user | 90 | danger | — | irs/tactic | 0.415 | 8.52 |
+| 17 | caller | 92 | danger | secrecy, verification_bypass | tech_support/tactic | 0.654 | 22.07 |
+| 18 | user | 92 | danger | — | refund_overpayment/tactic | 0.528 | 9.63 |
+| 19 | caller | 92 | danger | secrecy, verification_bypass | refund_overpayment/tactic | 0.59 | 13.76 |
+| 20 | user | 92 | danger | — | benign/benign | 0.388 | 8.64 |
 
 _Pass rule: scam scenarios must reach DANGER no later than 4 turns after the script's first extraction ask; benign scenarios must never reach DANGER._

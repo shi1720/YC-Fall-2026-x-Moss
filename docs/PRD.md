@@ -152,7 +152,7 @@ North-star metric for the product: **₹ of transfers prevented per 1,000 protec
 | Moss local queries | ₹0 (unmetered) |
 | Moss index storage/egress | fractions of a paisa amortised |
 | STT | on-device (free) in the app; Whisper for recordings only |
-| LLM coach (≤ 6 calls × ~600 tokens on an 8B model) | ≈ ₹0.02 |
+| LLM coach (≤ 6 calls × ~600 tokens on a 20B model) | ≈ ₹0.02 |
 | Hosting | one small container serves thousands of concurrent calls |
 
 **≈ ₹0.02 per protected call.** A single prevented ₹1.5-lakh digital-arrest transfer pays for ~7 million protected calls.

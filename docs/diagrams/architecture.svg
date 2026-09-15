@@ -81,7 +81,7 @@
     <rect x="894" y="410" width="232" height="180" rx="14" fill="#0f1523" stroke="#f5a524" stroke-opacity="0.5" stroke-dasharray="6 5"/>
     <text x="912" y="436" font-size="12" fill="#f5a524" letter-spacing="2.5" font-weight="700">SLOW PATH · ASYNC</text>
     <text x="912" y="460" font-size="14" fill="#e8ebf3" font-weight="600">LLM coach</text>
-    <text x="912" y="480" font-size="12" fill="#8f97ad">Groq · llama-3.1-8b</text>
+    <text x="912" y="480" font-size="12" fill="#8f97ad">Groq · gpt-oss-20b</text>
     <text x="912" y="498" font-size="12" fill="#8f97ad">only on risk transitions</text>
     <text x="912" y="516" font-size="12" fill="#8f97ad">≈ 300–800 ms, never blocks</text>
     <text x="912" y="540" font-size="12" fill="#8f97ad">verdict · explanation</text>

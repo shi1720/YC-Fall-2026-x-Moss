@@ -6,7 +6,8 @@ ENV NODE_ENV=production \
     PORT=7860 \
     HOSTNAME=0.0.0.0 \
     MOSS_MODEL_CACHE_DIR=/data/moss-models \
-    MOSS_CACHE_PATH=/data/moss-cache
+    MOSS_CACHE_PATH=/data/moss-cache \
+    MOSS_EMBEDDING_INTRA_OP_THREADS=2
 WORKDIR /app
 
 FROM base AS deps
