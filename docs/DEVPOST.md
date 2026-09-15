@@ -1,0 +1,75 @@
+# Devpost submission — Raksha
+
+> Copy each section into the corresponding Devpost field. Replace the deployment URL placeholder once the Space is live.
+
+**Project name:** Raksha — the real-time scam-call shield
+
+**Tagline (≤ 200 chars):** Every scam follows a script. Raksha listens with you during a call, recognises the script in under 10 ms with Moss, and steps in before you read out the OTP.
+
+**Links**
+
+* Deployed agent: `https://<hf-username>-raksha.hf.space` ← *update at submission*
+* GitHub: https://github.com/shi1720/YC-Fall-2026-x-Moss
+* Architecture diagram: `docs/diagrams/architecture.png` (also in the README)
+* PRD: `docs/PRD.md` (PDF in `docs/pdf/`)
+* Video: *(YouTube link)*
+
+**Theme:** Real-Time Voice & Conversational AI · inspired by YC RFS *Proving You're Human* and *AI for the Aging Population*
+
+---
+
+## Inspiration
+
+In 2024 Indians reported ₹22,845 crore lost to cyber fraud — ten times the figure two years earlier. The "digital arrest" alone took ₹1,900 crore from 1.23 lakh people: fake CBI officers on a video call, a retired teacher told not to tell her son, her fixed deposits moved to an "RBI verification account". The Supreme Court has taken suo motu cognisance. The Prime Minister devoted a Mann Ki Baat to it.
+
+What struck us reading the case reconstructions was how *identical* they are. Authority, fear, secrecy, then the ask. The numbers change; the script never does. And every protection on the market — Truecaller, telco spam labels, iOS call screening — is caller-ID. It tells you who is calling. Nobody tells you what they are doing to you, *while they are doing it*.
+
+We wanted to build the thing that speaks up inside the sentence.
+
+## What it does
+
+Raksha is a shield that runs during a phone call. Every fragment of speech (even mid-sentence) is checked against a playbook of 409 real scam-script lines across 31 families, tagged with the persuasion tactic each one carries. A small risk engine credits tactics and decides *safe / caution / danger*. When pressure meets an ask, Raksha interrupts: it names the script, gives the person one sentence to say, tells them what to do, and says it out loud.
+
+A **family code** links the phone to a guardian's dashboard: a daughter sees her mother's call risk live, can speak through the shield (her words are read aloud over the scammer's), and can ask the call's memory a question. After the call, one tap reports the caller's lines to a community index that every running shield picks up within minutes.
+
+Anyone can try it in 60 seconds: nine scripted calls with two synthetic voices (seven scams, two genuine calls), a live-microphone mode, and a recording-upload mode.
+
+## How we built it
+
+* **Fast path — Moss, in-process.** The playbook lives in a Moss cloud index, loaded into the Node process at boot and queried for every fragment with raw cosine scores (`alpha: 1.0`), typically in 2–5 ms including embedding. No vector database, no network on the hot path, and local queries are unmetered, so we can afford to check *everything*.
+* **Risk engine.** Pure, unit-tested TypeScript: cosine → calibrated confidence; benign look-alike suppression (75 legitimate lines live in the same index so "we will never ask for your OTP" stays quiet); speaker-aware crediting; a noisy-OR over 21 tactics with persistent evidence; two hard rules — *pressure + ask* ⇒ danger, and *victim about to comply* ⇒ intervene now.
+* **Slow path — LLM coach.** Only on risk transitions, an 8B model on Groq returns a JSON `{verdict, explanation, say_this, action}`. It never blocks the fast path and can veto a false alarm (but never override danger).
+* **Moss sessions.** Each call opens a `SessionIndex`; turns are added locally; the guardian's "what did they ask for?" is a semantic query over it. Sessions are never pushed — call memory dies with the call.
+* **Moss auto-refresh + multi-index.** Reported lines are upserted into `raksha-intel`; both indexes are loaded with `autoRefresh` and searched with `queryMultiIndex`, so new variants hot-swap into every instance with zero downtime.
+* **Stack.** Next.js 16 with a custom server and WebSockets (one process, one URL), Tailwind, Web Speech API + Groq Whisper, Docker on a Hugging Face Space, Playwright + vitest, GitHub Actions.
+
+## Challenges we ran into
+
+* **False alarms are the real enemy.** A genuine bank fraud call says "we noticed a suspicious transaction" — semantically very close to the scam. Putting benign look-alikes *in the index* and letting them out-vote tactic lines fixed most of it; making the engine speaker-aware (the victim's own words are only ever evidence of compliance) fixed the rest.
+* **Reacting inside the sentence.** Final speech segments arrive too late. We analyse interim fragments every ~400 ms and let a fragment alone raise the alarm.
+* **Naming the script without flip-flopping.** Courier-parcel calls *become* digital arrests. Hysteresis on the dominant family keeps the label steady.
+* **Running everything in one process** so the Moss runtime, the sessions and the WebSocket handlers share memory, while Next.js bundles route handlers separately — solved with process-wide singletons.
+
+## Accomplishments that we're proud of
+
+* Retrieval + scoring in single-digit milliseconds, measured live in the app, not claimed.
+* On the committed evaluation: every scam scenario caught, both benign scenarios stay green (see `docs/eval/REPORT.md`).
+* An intervention a frightened 70-year-old can act on: one headline, one sentence, one action, spoken.
+* Multiplayer by design — human and agent in the same session.
+* A product with a buyer: from 2027 RBI makes banks compensate scam losses; the runtime costs about ₹0.02 per protected call.
+
+## What we learned
+
+That latency changes *what* you can build, not just how it feels. When retrieval is free and instant you stop asking "which sentences should we check?" and check every fragment. And that the hardest part of a safety product is not catching the bad thing — it's staying quiet on the good things that look like it.
+
+## What's next for Raksha
+
+An Android app with in-call audio capture; Hindi, Tamil and Telugu playbooks; a bank-side "transfer hold" webhook; the hot path fully on-device with Moss's mobile/browser SDKs so no text leaves the phone; a deepfake-voice liveness signal fused into the risk model; and a pilot with one bank and one senior-living network.
+
+## Built with
+
+TypeScript · Next.js 16 · React 19 · Tailwind CSS 4 · `@moss-js/moss` (Moss runtime: loaded indexes, sessions, multi-index, auto-refresh) · WebSockets (`ws`) · Web Speech API · Groq (Llama 3.1 8B coach, Whisper STT) · Zod · Motion · Vitest · Playwright · Docker · Hugging Face Spaces · GitHub Actions
+
+## Team
+
+Shivam Gupta (product, engineering, data) — with Claude as a build partner.
