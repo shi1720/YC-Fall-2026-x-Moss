@@ -42,7 +42,14 @@ for (const [src, out] of docs) {
   // Inline images as file URLs and drop Mermaid blocks (rendered as code in PDF).
   const base = path.resolve(path.dirname(src));
   let html = marked.parse(md, { gfm: true });
-  html = html.replace(/src="([^"]+)"/g, (m, p) => (p.startsWith("http") ? m : `src="file://${path.resolve(base, p)}"`));
+  html = html.replace(/src="([^"]+)"/g, (m, p) => {
+    if (p.startsWith("http") || p.startsWith("data:")) return m;
+    const file = path.resolve(base, p);
+    if (!existsSync(file)) return m;
+    const ext = path.extname(file).slice(1).toLowerCase();
+    const mime = ext === "svg" ? "image/svg+xml" : ext === "jpg" ? "image/jpeg" : `image/${ext}`;
+    return `src="data:${mime};base64,${readFileSync(file).toString("base64")}"`;
+  });
   const page = await browser.newPage();
   await page.setContent(`<html><head><meta charset="utf-8"><style>${css}</style></head><body>${html}</body></html>`, { waitUntil: "load" });
   await page.pdf({
