@@ -33,7 +33,7 @@ A synthetic WAV containing the demo's opening sentence was submitted to the host
 
 ## Submission readiness
 
-The story, architecture, PRD, video metadata and judge instructions are included in `docs/submission`. Devpost and HiDevs completion must be verified separately. HiDevs currently requires the participant to complete their personal profile, resume and LinkedIn sync.
+The story, video metadata and judge instructions are included in `docs/submission`; current architecture and product requirements are in `docs/ARCHITECTURE.md` and `docs/PRD.md`. Devpost confirmed submission at https://devpost.com/software/raksha-0g1hyf. HiDevs profile completion, LinkedIn connection and hackathon registration are verified. HiDevs also saved the architecture and PRD as the current Raksha submission at 1:12 PM IST on 16 September. Final project and Dr. Agent repository submissions still await GitHub OAuth approval; see `devpost-fields.md` for current status.
 
 ## Final rollout dependency
 
