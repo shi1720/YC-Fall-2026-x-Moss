@@ -8,7 +8,7 @@
 
 **Links**
 
-* Deployed agent: *(Render URL, updated at submission)*
+* Deployed agent: *(Cloud Run URL, updated at submission)*
 * GitHub: https://github.com/shi1720/YC-Fall-2026-x-Moss
 * Architecture diagram: `docs/diagrams/architecture.png` (also in the README)
 * PRD: `docs/PRD.md` (PDF in `docs/pdf/`)
@@ -41,8 +41,8 @@ Anyone can try it in 60 seconds: eighteen scripted calls with two synthetic voic
 * **Slow path — LLM coach.** Only on risk transitions, a 20B open-weight model on Groq returns a JSON `{verdict, explanation, say_this, action}`. It never blocks the fast path and can veto a false alarm (but never override danger).
 * **Moss sessions.** The process opens one `SessionIndex`; every turn of every live call is added locally, tagged with its call id; the guardian's "what did they ask for?" is a metadata-filtered semantic query over it. Turns are deleted at call end and the session is never pushed — call memory dies with the call. (We started with a session per call; opening one costs ~2 s of CPU, so 100 simultaneous calls fell over. The shared, filtered session was the fix, found by load-testing.)
 * **Moss auto-refresh + multi-index.** Reported lines are upserted into `raksha-intel`; both indexes are loaded with `autoRefresh` and searched with `queryMultiIndex`, so new variants hot-swap into every instance with zero downtime.
-* **Stack.** Next.js 16 with a custom server and WebSockets (one process, one URL), Tailwind, Web Speech API + Groq Whisper, Docker on Render, Playwright + vitest, GitHub Actions.
-* **Measured, reproducibly.** `npm run eval` replays 18 scripted calls (10 scams, 8 genuine) plus 80 everyday sentences through the real engine and writes the report; `npm run eval:bench` records embed + search latency with the hardware it ran on.
+* **Stack.** Next.js 16 with a custom server and WebSockets (one process, one URL), Tailwind, Web Speech API + Groq Whisper, Docker on Google Cloud Run, Playwright + vitest, GitHub Actions.
+* **Measured, reproducibly.** `npm run eval` replays 18 scripted calls (10 scams, 8 genuine) plus 80 everyday sentences through the real engine and writes the report; `npm run eval:bench` records embed + search latency with the hardware it ran on; `npm run eval:load` drives 100 concurrent conversational calls over WebSocket (zero errors, server-side analysis p50 12.8 ms).
 
 ## Challenges we ran into
 
@@ -69,7 +69,7 @@ An Android app with in-call audio capture; Hindi, Tamil and Telugu playbooks; a 
 
 ## Built with
 
-TypeScript · Next.js 16 · React 19 · Tailwind CSS 4 · `@moss-js/moss` (Moss runtime: loaded indexes, sessions, multi-index, auto-refresh) · WebSockets (`ws`) · Web Speech API · Groq (gpt-oss-20b coach, Whisper STT) · Zod · Motion · Vitest · Playwright · Docker · Render · GitHub Actions
+TypeScript · Next.js 16 · React 19 · Tailwind CSS 4 · `@moss-js/moss` (Moss runtime: loaded indexes, sessions, multi-index, auto-refresh) · WebSockets (`ws`) · Web Speech API · Groq (gpt-oss-20b coach, Whisper STT) · Zod · Motion · Vitest · Playwright · Docker · Google Cloud Run · GitHub Actions
 
 ## Team
 

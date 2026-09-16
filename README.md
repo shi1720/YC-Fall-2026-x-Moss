@@ -25,7 +25,7 @@ Built for the **YC Fall 2026 × Moss: Zero Latency Builder Sprint** (theme: Real
 
 > **Deployed agent:** see the link in [docs/DEVPOST.md](docs/DEVPOST.md) (updated at submission).
 
-**Measured on the committed evaluation (real Moss runtime, 18 scripted calls, 264 utterances, plus 80 everyday sentences):** 10/10 scam calls caught, 0/8 genuine calls flagged, 1/80 everyday sentences credited with any tactic, retrieval p50 9.3 ms / p95 18.4 ms including on-device embedding. See [docs/eval/REPORT.md](docs/eval/REPORT.md).
+**Measured on the committed evaluation (real Moss runtime, 18 scripted calls, 264 utterances, plus 80 everyday sentences):** 10/10 scam calls caught, 0/8 genuine calls flagged, 1/80 everyday sentences credited with any tactic, retrieval p50 8.0 ms / p95 14.9 ms including on-device embedding. See [docs/eval/REPORT.md](docs/eval/REPORT.md). Under load (`npm run eval:load`, 100 concurrent conversational calls on one 4-vCPU container): zero errors, server-side analysis p50 12.8 ms / p95 58.0 ms.
 
 ## The problem
 
@@ -99,7 +99,7 @@ Without Moss credentials the app still runs, on an offline lexical fallback (so 
 
 ### Deploy
 
-`Dockerfile` builds a single self-contained image (non-root, health-checked, ~300 MB RSS with the model loaded). `render.yaml` is a Render Blueprint for the free tier; `keepalive.yml` pings the deployed URL every 10 minutes so it never sleeps. Any Docker host works: set `MOSS_PROJECT_ID`, `MOSS_PROJECT_KEY`, `GROQ_API_KEY` and `PORT`.
+One command to Google Cloud Run: `./deploy/gcloud.sh` (see [deploy/README.md](deploy/README.md)). `Dockerfile` builds a single self-contained image (non-root, health-checked, ~300 MB RSS with the model loaded); `render.yaml` and `railway.json` cover other hosts; `keepalive.yml` pings the deployed URL every 10 minutes so it never sleeps.
 
 ## Repository
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T14:14:26.050Z",
+  "generatedAt": "2026-09-16T03:58:26.159Z",
   "runtime": {
     "mode": "moss",
     "runtime": "Moss runtime (in-process, 1 index loaded)",
@@ -8,30 +8,30 @@
     ],
     "docCount": 409,
     "model": "moss-minilm",
-    "loadedAt": 1789481662654,
-    "loadMs": 4797,
+    "loadedAt": 1789531104064,
+    "loadMs": 3957,
     "version": "@moss-js/moss"
   },
   "hardware": {
-    "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
     "vcpus": 4,
     "ramGB": 17,
     "threads": "2"
   },
   "queries": 300,
   "embedPlusSearchMs": {
-    "p50": 10.71,
-    "p95": 14.41,
-    "p99": 17.48,
-    "max": 20.46
+    "p50": 6.69,
+    "p95": 8.57,
+    "p99": 10.06,
+    "max": 14.39
   },
   "shortFragmentsMs": {
-    "p50": 7.284134000000449,
-    "p95": 8.088450000000194
+    "p50": 3.7516050000003816,
+    "p95": 5.102049000000079
   },
   "longFragmentsMs": {
-    "p50": 10.844804999999724,
-    "p95": 14.438955999999962
+    "p50": 6.801398999999947,
+    "p95": 8.77891499999987
   },
   "note": "Wall-clock around retriever.search(): query embedding (moss-minilm, on-device) + multi-index cosine search + metadata decode. Excludes speech-to-text and network."
 }

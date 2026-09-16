@@ -121,7 +121,8 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 | Latency | Retrieval + scoring in the low tens of milliseconds p95 on a shared 4-vCPU container (search itself < 1 ms); intervention visible within one sentence | Moss in-process; risk engine O(tactics); interim fragments; measured in Latency lab and eval |
 | Cost | Retrieval has zero marginal cost per fragment (local Moss queries are unmetered); the coach adds ≈ ₹0.02 per call (≤ ~6 LLM calls on transitions) | Coach gated; free tiers sufficient for MVP |
 | Privacy | Server receives text only (browser STT); transcript in RAM only; recordings transcribed by Whisper and not stored; reports share caller lines only; no accounts | Architecture §8 and §4.7 below |
-| Reliability | Runs with any subset of credentials; reconnecting WebSocket; call ends cleanly on disconnect | Fallbacks + tests |
+| Reliability | Runs with any subset of credentials; reconnecting WebSocket; call ends cleanly on disconnect; degrades to the offline retriever if Moss Cloud is unreachable and retries | Fallbacks + tests |
+| Capacity | ≥ 100 concurrent conversational calls per 4-vCPU container with zero errors | Measured: 100 calls, p50 12.8 ms / p95 58.0 ms, 0 errors (`npm run eval:load`) |
 | Accessibility | Large type, high contrast, spoken output, single-action buttons | Design system |
 | Portability | One container, any Docker host; Node 22 | `Dockerfile` |
 
@@ -157,7 +158,7 @@ Full privacy and threat model: [PRIVACY.md](PRIVACY.md).
 | Genuine-call scenarios reaching DANGER | 0% of 8 | 0% |
 | Everyday sentences (not in the index) credited with any tactic | < 5% | 1.2% (1/80) |
 | Turns from first "ask" to DANGER | ≤ 1 | see report |
-| Retrieval p95 (embed + search) | < 30 ms on a shared container | 18.4 ms (see report / Latency lab) |
+| Retrieval p95 (embed + search) | < 30 ms on a shared container | 14.9 ms (see report / Latency lab) |
 | Demo-ability | Any judge can watch a scam stopped in ≤ 60 s with no setup | `/shield?scenario=digital-arrest` |
 
 North-star metric for the product: **₹ of transfers prevented per 1,000 protected calls**, measured by bank partners.

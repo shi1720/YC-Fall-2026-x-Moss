@@ -131,7 +131,14 @@ The single-process design is a deployment convenience, not an architectural limi
 * **Stateless by construction.** A container holds only (a) the loaded playbook/intel indexes, which every container loads identically from Moss Cloud, (b) one memory session, and (c) the state of the calls whose WebSockets it currently serves. There is no shared database to contend on.
 * **Horizontal scaling** is therefore *N identical containers behind a WebSocket-aware load balancer with connection affinity*. A call lives entirely on the container that accepted its socket (its memory turns included), so nothing needs to be sharded.
 * **Guardian rooms** are the one cross-container concern: a guardian's socket may land on a different container than the protected phone's. Roadmap: publish call events to a pub/sub channel (Redis or NATS) keyed by family code; each container subscribes for the codes it serves. Until then, affinity by family code (hash the code in the LB) keeps both sockets on one container.
-* **Capacity.** Retrieval is ~10 ms of CPU per fragment; at ~0.5 fragments/s per active call, one vCPU sustains on the order of 100–200 concurrent calls, and memory is ~300 MB base plus a few KB per call. The `Latency lab` and `npm run eval:bench` report the numbers for the host you are on.
+* **Capacity, measured** (`npm run eval:load`, client and server on one 4-vCPU container, each call sending one fragment every ~3 s like a real conversation; the process has a single embedding executor, so this is the honest ceiling per container):
+
+| Concurrent calls (1 fragment / 3 s each) | Fragments/s | Server analysis p50 / p95 / p99 (ms) | Round-trip p50 / p95 (ms) | Errors |
+|---|---|---|---|---|
+| 50 | 14.8 | 11.9 / 36.7 / 57.6 | 13.5 / 43.7 | 0 |
+| 100 | 29.2 | 12.8 / 58.0 / 97.6 | 18.1 / 87.9 | 0 |
+
+  Memory is ~300 MB base plus a few KB per call. Beyond ~100 concurrent calls per container, add containers. An earlier design opened a Moss session per call and collapsed at 25 calls (p50 1.4 s) because each session loads its own model instance; the shared, call-id-filtered session fixed it.
 * **Failure isolation.** A crash takes down only the calls on that container; clients reconnect (exponential back-off in `useRakshaSocket`) and start a fresh call. Health checks (`/api/health`) gate traffic until the index is loaded.
 
 ## 6c. Community intel: the pipeline in detail
@@ -148,7 +155,7 @@ Implemented in `src/lib/moss/intel.ts` and wired to the `call.report` WebSocket 
 ## 7. Deployment
 
 * **Image:** `Dockerfile` (multi-stage, Node 22, non-root, health-check). `npm run build` produces the Next.js build and `dist/server.mjs` (esbuild bundle of the custom server).
-* **Host:** any Docker host. The reference deployment is a Render free web service (`render.yaml`, 512 MB; the process needs ~300 MB with the model loaded). `keepalive.yml` pings `/api/health` every 10 minutes so judges never hit a cold start.
+* **Host:** any Docker host. The reference deployment is Google Cloud Run (`deploy/gcloud.sh`: Cloud Build + Cloud Run, session affinity for WebSockets, 1 vCPU / 1 GiB, asia-south1). `keepalive.yml` pings `/api/health` every 10 minutes so judges never hit a cold start.
 * **State:** none outside the process except the Moss Cloud indexes. `MOSS_MODEL_CACHE_DIR` keeps the embedding model on the container's disk between restarts.
 * **Config:** see `.env.example`. Without Moss credentials the app runs on the offline lexical fallback (so CI and forks work); without a Groq key the coach uses templates.
 * **Degradation:** if Moss Cloud is unreachable at boot (network, credit limit, revoked key) the server starts on the offline retriever, reports the reason in `/api/health` and the shield header, and retries Moss every two minutes, swapping the real runtime in without a restart. Loaded indexes are cached on disk (`MOSS_CACHE_PATH`) so a restart only checks the version instead of re-downloading.

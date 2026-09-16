@@ -1,0 +1,58 @@
+{
+  "runs": [
+    {
+      "generatedAt": "2026-09-16T03:57:47.497Z",
+      "concurrentCalls": 50,
+      "fragmentsPerCall": 10,
+      "paceMs": 3000,
+      "errors": 0,
+      "missingAnalyses": 0,
+      "fragmentsAnalysed": 500,
+      "elapsedSeconds": 33.9,
+      "fragmentsPerSecond": 14.8,
+      "serverAnalysisMs": {
+        "p50": 11.86,
+        "p95": 36.66,
+        "p99": 57.63,
+        "max": 64.17
+      },
+      "roundTripMs": {
+        "p50": 13.5,
+        "p95": 43.7,
+        "p99": 81.5
+      },
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+        "vcpus": 4
+      },
+      "note": "Client and server on the same host. Each call sends one fragment every ~paceMs (conversational). Round-trip = WebSocket + JSON + queueing behind other calls' fragments; server analysis = retrieval + scoring for one fragment, including time queued for the process's embedding executor."
+    },
+    {
+      "generatedAt": "2026-09-16T03:59:27.010Z",
+      "concurrentCalls": 100,
+      "fragmentsPerCall": 10,
+      "paceMs": 3000,
+      "errors": 0,
+      "missingAnalyses": 0,
+      "fragmentsAnalysed": 1000,
+      "elapsedSeconds": 34.3,
+      "fragmentsPerSecond": 29.2,
+      "serverAnalysisMs": {
+        "p50": 12.83,
+        "p95": 58.02,
+        "p99": 97.61,
+        "max": 166.37
+      },
+      "roundTripMs": {
+        "p50": 18.1,
+        "p95": 87.9,
+        "p99": 133
+      },
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+        "vcpus": 4
+      },
+      "note": "Client and server on the same host. Each call sends one fragment every ~paceMs (conversational). Round-trip = WebSocket + JSON + queueing behind other calls' fragments; server analysis = retrieval + scoring for one fragment, including time queued for the process's embedding executor."
+    }
+  ]
+}
