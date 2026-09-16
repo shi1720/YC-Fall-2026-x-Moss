@@ -159,7 +159,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
     if (msg.type === "call.started") { callReady.current?.resolve(); callReady.current = null; }
     if (msg.type === "error") {
       callReady.current?.reject(new Error(msg.message)); callReady.current = null;
-      if (/Connection lost|reconnecting/.test(msg.message)) {
+      if (/Connection lost|reconnecting|Moss session/.test(msg.message)) {
         player.current.cancelled = true;
         recognition.current?.stop(); recognition.current = null;
         stopSpeaking();

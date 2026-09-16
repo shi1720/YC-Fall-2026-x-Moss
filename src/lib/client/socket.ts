@@ -92,7 +92,16 @@ export function useRakshaSocket(onMessage: (msg: ServerMessage) => void) {
   const send = useCallback((msg: ClientMessage) => {
     const data = JSON.stringify(msg);
     const ws = wsRef.current;
-    if (ws && ws.readyState === WebSocket.OPEN) ws.send(data);
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      if (msg.type === "call.start") {
+        // Re-check on every start, including tabs opened before settings changed.
+        void fetch("/api/moss", { cache: "no-store" }).then(r => { if (!r.ok) throw new Error("Could not check Moss settings. Please retry."); return r.json(); }).then(settings => {
+          if (["connecting", "error", "expired"].includes(settings.status)) throw new Error("Your Moss session is not ready. Reconnect or disconnect in Settings before starting a call.");
+          if (wsRef.current !== ws || ws.readyState !== WebSocket.OPEN) throw new Error("The shield is reconnecting. Please try again.");
+          ws.send(JSON.stringify({ ...msg, runtimeToken: settings.token }));
+        }).catch(error => handler.current({ type: "error", message: error.message }));
+      } else ws.send(data);
+    }
     else handler.current({ type: "error", message: "The shield is reconnecting. Please wait and try again." });
   }, []);
 

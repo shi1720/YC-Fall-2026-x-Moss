@@ -40,3 +40,15 @@ test("Moss settings API rejects cross-site requests, missing consent and oversiz
   expect(response.headers()["cache-control"]).toContain("no-store");
   expect(await response.json()).toMatchObject({ status: "disconnected" });
 });
+
+test("an already-open Shield rechecks the selected project before starting a new call", async ({ page }) => {
+  let selected = false;
+  await page.route("**/api/moss", route => route.fulfill({ json: selected ? { status: "ready", token: "f".repeat(64), sharedMode: "mock" } : { status: "disconnected", sharedMode: "mock" } }));
+  await page.goto("/shield?scenario=digital-arrest&silent=1&fast=1");
+  const start = page.getByRole("button", { name: "Start the call", exact: true });
+  await expect(start).toBeEnabled();
+  selected = true;
+  await start.click();
+  await expect(page.getByRole("alert").filter({ hasText: "Moss session ended" })).toBeVisible();
+  await expect(start).toBeEnabled();
+});

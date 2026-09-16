@@ -21,7 +21,7 @@ export interface CallMeta {
 // ---- client → server ----
 export type ClientMessage =
   | { type: "runtime.select"; token?: string }
-  | { type: "call.start"; mode: CallMode; scenarioId?: string; familyCode?: string; region?: CallMeta["region"]; displayName?: string }
+  | { type: "call.start"; runtimeToken?: string; mode: CallMode; scenarioId?: string; familyCode?: string; region?: CallMeta["region"]; displayName?: string }
   | { type: "utterance"; text: string; speaker: Speaker; final: boolean; t?: number }
   | { type: "call.end" }
   | { type: "call.report"; consent: true }
@@ -63,7 +63,7 @@ export function encode(msg: ServerMessage | ClientMessage): string {
 /** Validate every untrusted socket message before it reaches the engine. */
 export const clientMessageSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("runtime.select"), token: z.string().regex(/^[a-f0-9]{64}$/).optional() }),
-  z.object({ type: z.literal("call.start"), mode: z.enum(["live", "simulation", "upload"]), scenarioId: z.string().max(100).optional(), familyCode: z.string().regex(/^[A-Z0-9]{6,8}$/i).optional(), region: z.enum(["IN", "US", "UK", "AU", "GLOBAL"]).optional(), displayName: z.string().max(80).optional() }),
+  z.object({ type: z.literal("call.start"), runtimeToken: z.string().regex(/^[a-f0-9]{64}$/).optional(), mode: z.enum(["live", "simulation", "upload"]), scenarioId: z.string().max(100).optional(), familyCode: z.string().regex(/^[A-Z0-9]{6,8}$/i).optional(), region: z.enum(["IN", "US", "UK", "AU", "GLOBAL"]).optional(), displayName: z.string().max(80).optional() }),
   z.object({ type: z.literal("utterance"), text: z.string().min(1).max(4000), speaker: z.enum(["caller", "user", "unknown"]), final: z.boolean(), t: z.number().finite().min(0).max(86400000).optional() }),
   z.object({ type: z.literal("call.end") }),
   z.object({ type: z.literal("call.report"), consent: z.literal(true) }),

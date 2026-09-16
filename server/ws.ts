@@ -115,9 +115,15 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
       conn.queue = conn.queue.then(async () => {
         await ready;
         if (ws.readyState === WebSocket.OPEN) await handle(conn, msg);
-      }).catch((err) => {
+      }).catch(async (err) => {
         console.warn("[ws] request could not be completed");
         send(ws, { type: "error", message: err instanceof MossSettingsError ? err.message : "The request could not be completed. Please try again." });
+        if (err instanceof MossSettingsError && conn.callId) {
+          const id = conn.callId;
+          conn.callId = undefined;
+          await calls.end(id);
+          shields.delete(id);
+        }
       }).finally(() => { conn.pending--; });
     });
 
@@ -144,6 +150,10 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
 
       case "call.start": {
         if (conn.role === "guardian") return send(conn.ws, { type: "error", message: "Open the Shield page to start a call." });
+        const rt = await runtimeForToken(msg.runtimeToken);
+        conn.runtimeToken = msg.runtimeToken;
+        const llm = llmConfig();
+        send(conn.ws, { type: "hello", selected: true, runtime: { mode: rt.info.mode, runtime: rt.info.runtime, docCount: rt.info.docCount, indexes: rt.info.indexes, model: rt.info.model, source: rt.info.source }, llm: { enabled: llm.enabled, model: llm.enabled ? llm.model : "template" } });
         if (conn.callId) { await calls.end(conn.callId); shields.delete(conn.callId); }
         const record = await calls.start({
           mode: msg.mode,
