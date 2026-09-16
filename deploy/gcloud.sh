@@ -33,6 +33,16 @@ echo "▲ Deploying ${SERVICE} to Cloud Run — project ${PROJECT}, region ${REG
 gcloud config set project "${PROJECT}" >/dev/null
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com --quiet
 
+# On new projects Cloud Build runs as the default compute service account, which lacks
+# the roles it needs to read the uploaded source, push the image and write logs.
+PROJECT_NUMBER="$(gcloud projects describe "${PROJECT}" --format 'value(projectNumber)')"
+BUILD_SA="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
+echo "Granting build roles to ${BUILD_SA}"
+for role in roles/cloudbuild.builds.builder roles/run.builder roles/artifactregistry.writer roles/storage.objectAdmin roles/logging.logWriter; do
+  gcloud projects add-iam-policy-binding "${PROJECT}" --member "serviceAccount:${BUILD_SA}" --role "${role}" --quiet >/dev/null 2>&1 || true
+done
+sleep 10  # IAM propagation
+
 # Build with Cloud Build (no local Docker needed) and deploy in one step.
 # - session affinity + 1h timeout keep WebSockets stable
 # - 1 vCPU / 1 GiB fits the Moss runtime (~300 MB RSS with the model loaded)
