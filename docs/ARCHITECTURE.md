@@ -1,194 +1,95 @@
-# Raksha. Architecture
+# Raksha architecture
 
-> One utterance in, one verdict out, in single-digit milliseconds. This document explains how the pieces fit, why the retrieval layer sits where it does, and what the latency budget looks like.
+Raksha is a browser-based scam-call decision aid. It analyses transcript fragments, explains recognised pressure tactics and connects the person with a trusted guardian. It does not intercept cellular calls or hang up for the person.
 
-![Raksha system architecture](diagrams/architecture.png)
+Live app: https://raksha-app.web.app
 
-## 1. The shape of the problem
+## Current deployment and retrieval status
 
-A phone scam is a *conversation with a script*. The words change per family (digital arrest, bank OTP, courier parcel, deepfake CFO…) but the arc is constant: **pretext → pressure → isolation → the ask**. The victim is put into an emotional state where judgement shuts down (AARP calls it "the ether"), and the whole con is won or lost in the few seconds around the ask: *"read me the six digits, quickly."*
+The demo runs in one Google Cloud Run instance in `asia-south1`, with 2 CPU and 1 GiB RAM. Firebase Hosting provides the public URL and forwards HTTP. The browser reads `/api/config` and connects directly to Cloud Run for WebSockets because Firebase Hosting does not proxy that connection.
 
-That fixes three design constraints:
+The real Moss runtime was verified on an earlier hosted revision. During final rollout on 16 September 2026, Moss Cloud returned credit-exhausted errors. The shared deployment now intentionally uses offline TF-IDF (`RAKSHA_DEMO_OFFLINE=1`). Visitors can connect a funded personal Moss project in Settings. Fallback results and timings are not Moss benchmarks; restoring shared-project credits is not required for a visitor to test Moss.
 
-1. **Every fragment must be checked, not every sentence.** By the time a sentence has ended, the OTP may have been read out. We analyse interim speech-recognition fragments every ~400 ms as well as final segments.
-2. **The check must cost nothing.** Hundreds of fragments per call, thousands of concurrent calls: a per-fragment cloud round-trip or LLM call is both too slow and too expensive. Local Moss queries are unmetered.
-3. **The verdict must be explainable to a frightened 70-year-old, in one sentence, with one thing to say.**
+![Raksha system architecture](submission/assets/architecture.png)
 
-Hence a **fast path** (Moss + a small deterministic risk engine, on every fragment) and a **slow path** (an LLM coach, only on risk transitions).
+## Personal Moss settings
 
-## 2. Components
+`POST /api/moss` accepts a project ID, project key, index name and explicit consent. It starts a bounded asynchronous setup job and sets an HttpOnly, SameSite=Strict session cookie, secure on HTTPS. Firebase Hosting forwards the specially named `__session` cookie. No key is returned to the browser or written to files or application logs.
 
-| Component | Where | Responsibility |
-|---|---|---|
-| Speech → text | Browser (Web Speech API), or Groq Whisper for recordings | Streams interim + final fragments. Audio is not written to disk by Raksha. |
-| Shield UI | Browser (`/shield`) | Risk dial, transcript with tactic chips, playbook matches, coach card, full-screen intervention with spoken coaching. Modes: simulation (scripted call with two TTS voices), live microphone, uploaded recording. |
-| WebSocket gateway | `server/ws.ts` | One socket per protected phone or guardian. Routes utterances in, fans engine events out. Guardian rooms keyed by family code, with state replay on late join. |
-| Call manager | `src/lib/engine/calls.ts` | Per-call state in RAM: transcript, `RiskState`, interventions, coach advice, latency percentiles. Writes each turn into the shared memory session tagged with the call id, and deletes them at call end. |
-| **Moss runtime** | `src/lib/moss/runtime.ts` | Loads `raksha-playbook` (and `raksha-intel` when it exists) into the process at boot with `autoRefresh`; opens one `SessionIndex` for call memory; answers every query in-process. |
-| Retriever abstraction | `src/lib/engine/retriever.ts` | `Retriever` interface with two implementations: `MossRetriever` (production) and `MockRetriever` (TF-IDF cosine, zero credentials, used by CI). |
-| Risk engine | `src/lib/engine/risk.ts` | Pure functions, unit-tested. Turns retrieval hits into a 0–100 score and a level (safe / caution / danger). |
-| LLM coach | `src/lib/llm/coach.ts` | OpenAI-compatible chat call (Groq by default) returning `{verdict, explanation, say_this, action}`. Template fallback when no key is configured. |
-| Community intel | `src/lib/moss/intel.ts` | On consent, upserts a call's flagged caller lines into `raksha-intel`; every running instance hot-swaps the new version in. |
-| Eval harness | `scripts/eval.ts` | Replays nine scripted calls through the real engine and writes `docs/eval/REPORT.md`. |
+A visitor can explicitly create a new named playbook index, using their own Moss credits. Existing indexes are never overwritten. Setup verifies all 409 documents and metadata with the moss-minilm model, loads the index without refresh or disk caching, warms the calibrated multi-index retrieval path and opens isolated call memory. The HTTP Playbook and Lab routes select the runtime from the cookie. The direct Cloud Run socket receives a separate runtime-selection message with a random session capability, never the Moss key or a credential in its URL.
 
-Everything runs in **one Node process** (custom Next.js server + `ws`). That is deliberate: the Moss runtime, the loaded indexes and the per-call sessions must live in the same memory as the WebSocket handlers. It also means one container, one URL, no infrastructure.
+The process holds at most two personal runtimes. Sessions expire after 30 minutes, on disconnect or process restart. Calls keep their own runtime selection, so guardian recall uses the protected call's project. An expired selection fails with an actionable error instead of silently querying another visitor's project. Community publishing is disabled for personal sessions. Cloud indexes created with consent remain in the visitor's Moss project after disconnect.
 
-## 3. The life of one utterance
+Pending setup has a three-minute deadline, bounded input and connection-attempt limits. Provider error messages are sanitized. A failed or cancelled client is closed, and a late setup result cannot reactivate a removed session. This is a prototype control set, not an independent security assessment.
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant P as Protected phone (browser)
-    participant G as WS gateway
-    participant C as Call manager
-    participant M as Moss runtime (in-process)
-    participant R as Risk engine
-    participant L as LLM coach (async)
-    participant D as Guardian (browser)
+## Components
 
-    P->>G: utterance {text, speaker, final:false}  (interim, every ~400 ms)
-    G->>C: analyze(callId, fragment)
-    C->>M: query(playbook [+ intel], text, {topK:6, alpha:1.0})
-    M-->>C: matches + timeTakenInMs (≈ 2–5 ms)
-    C->>R: analyzeUtterance(prevState, utterance, matches)
-    R-->>C: RiskState (score, level, tactics, family, reasons)
-    alt interim crosses into DANGER
-        C-->>P: intervention (overlay + spoken "STOP")
-        C-->>D: intervention
-    end
-    P->>G: utterance {final:true}
-    G->>C: analyze(...)  (same path)
-    C->>M: memory.addDocs([turn tagged callId])   (call memory, local)
-    C-->>P: analysis + risk + latency stats
-    C-->>D: analysis + risk
-    opt level changed, or 5 utterances since last coach
-        C->>L: coach({transcript, risk, topMatches})
-        L-->>C: {verdict, explanation, say_this, action}  (≈ 300–800 ms)
-        C->>R: applyCoachVerdict()   (benign veto dampens CAUTION only)
-        C-->>P: coach
-        C-->>D: coach
-    end
-    D->>G: guardian.ask("what did they ask for?")
-    G->>C: ask(callId, question)
-    C->>M: memory.query(question, {topK:4, filter: callId})
-    M-->>D: top turns (≈ ms)
-```
+| Component | Responsibility |
+|---|---|
+| Next.js and React browser UI | Simulations, microphone/recording inputs, risk evidence, interventions and guardian controls |
+| Custom Node.js HTTP server | Next.js pages, configuration, health, search, benchmark and transcription routes |
+| WebSocket gateway (`server/ws.ts`) | Schema, payload and origin validation; phone and guardian event routing |
+| Call manager (`src/lib/engine/calls.ts`) | Bounded call state, transcript, risk history, guardian replay and cleanup |
+| Retriever interface (`src/lib/engine/retriever.ts`) | Separates Moss retrieval from the offline TF-IDF implementation |
+| Moss runtime (`src/lib/moss/runtime.ts`) | Loads indexes, performs in-process queries, maintains call memory and handles recovery |
+| Risk engine (`src/lib/engine/risk.ts`) | Combines tactic evidence into safe, caution or danger with explainable reasons |
+| Coach (`src/lib/llm/coach.ts`) | Optional explanation; deterministic exit sentences and next steps remain authoritative |
+| Community reporting (`src/lib/moss/intel.ts`) | Explicitly shared caller lines, duplicate suppression and reporting budget |
 
-## 4. The risk model
+The custom server, WebSocket handlers, retrieval and call memory share one process. Credentials stay on the server. No distributed database, Redis layer or authenticated account system is implemented.
 
-The engine is intentionally small and inspectable (see `src/lib/engine/risk.ts`, 100% covered by `tests/unit/risk.test.ts`).
+## Transcript-to-warning flow
 
-**Calibration.** Moss is queried with `alpha: 1.0` so scores are raw cosine similarities and comparable across queries. A score is mapped to a confidence with a linear ramp between a floor (noise) and a ceiling (near-paraphrase): `RAKSHA_SCORE_FLOOR` / `RAKSHA_SCORE_CEIL`, tuned by the eval harness.
+1. The browser sends a scripted line, an interim/final speech-recognition fragment, or a segment from a transcribed recording.
+2. The gateway validates the message and call context. The call manager enforces state and resource bounds.
+3. Retrieval compares text against the 409-line playbook. Metadata describes tactic, family, severity and benign look-alikes.
+4. The deterministic engine credits relevant tactics, accounts for the speaker and suppresses recognised benign look-alikes. Pressure combined with a request for money, codes, access or information can trigger danger. Compliance under pressure triggers a targeted intervention.
+5. Risk, evidence and intervention events reach the protected browser and connected guardians.
+6. Optional Groq coaching runs separately from detection. A provider failure leaves the deterministic warning and template guidance available.
 
-**Crediting.** For one fragment we take the top hits, apply benign suppression (if a *legitimate look-alike* line scores as high as the best tactic line, the fragment is ignored. this is how *"we will never ask for your OTP"* stays quiet), apply a rank discount (the top hit is what the fragment *is*; the rest is what it *resembles*), and make it speaker-aware: the protected person's own words can only ever be evidence of **compliance** (reading an OTP, agreeing to transfer), never of the caller's pressure tactics. and vice-versa.
+Safe means no recognised concerning pattern was found. It does not verify the caller. Scripted fixtures are regression checks, not evidence of real-world fraud detection accuracy.
 
-**Accumulating.** Each of 21 tactics keeps the best confidence seen in the call (evidence persists; a scam does not un-happen because the caller went quiet). The base score is a noisy-OR:
+## Moss integration
 
-```
-score = 100 · (1 − Π_t (1 − w_t · cap · conf_t))
-```
+| Capability | Use |
+|---|---|
+| Loaded index | `raksha-playbook` is loaded into process memory for local embedding and search |
+| Metadata | Tactics and benign examples support interpretable scoring |
+| Session memory | Transcript turns carry a call identifier; guardian questions query the relevant call |
+| Multi-index retrieval | Optional `raksha-intel` reports can be searched with the curated playbook |
+| Index refresh | Cloud updates can be loaded without rebuilding the application |
 
-so one strong tactic alone tops out around 30 (a bank *does* say "this is the bank"), while several distinct tactics compound quickly. Two hard rules mirror how scams actually end:
+The offline retriever keeps demonstrations usable when Moss cannot load. Lexical matching is a different method and must not be presented as equivalent semantic retrieval. Community reporting and cloud index updates depend on Moss availability.
 
-* **The triad.** A *pressure* tactic (authority, fear, urgency, secrecy, isolation, legal threat, hold-the-line…) plus an *ask* (OTP, payment, remote access, personal info) ⇒ at least **DANGER**.
-* **Victim compliance.** If the person starts reading out a code or says "I'm transferring now" while any pressure tactic is active ⇒ score ≥ 85 and an immediate, targeted intervention (*"Do NOT read out the OTP."*).
+## Guardian access and state
 
-Levels: safe < 25 ≤ caution < 60 ≤ danger. The dominant scam family is the one with the largest confidence mass, with hysteresis so the label does not flip between sibling scripts (courier parcel → digital arrest) every turn.
+A family-code link grants access to the associated calls. A guardian receives transcript/risk updates, can send a message to the shield and can search current-call context. Rejoining replays state without duplicate interventions. Ending a call prevents new utterances and guardian messages for that ended session.
 
-**Slow path veto.** A confident *benign* verdict from the coach halves a CAUTION score. It never overrides DANGER: by then the triad has fired and the cost of a miss is someone's savings.
+Family codes are capability tokens, not authenticated identities or signed invitations. Share them only with trusted people. Stronger invitation and revocation controls are future work.
 
-## 5. Where Moss does real work
+The deployment is capped at one instance because calls and guardian rooms are in RAM. A process restart loses that state. Horizontal scaling requires shared routing or cross-instance event/state handling before enabling more instances. That capability is not currently implemented.
 
-| Capability | How Raksha uses it | Why it matters |
-|---|---|---|
-| **Loaded cloud index** (`loadIndex`, `query`) | `raksha-playbook` (409 lines) loaded at boot, queried for every fragment with raw cosine scores. | The entire hot path is in-process: no vector DB, no network; ≈ 10 ms end-to-end including embedding. |
-| **Auto-refresh with hot-swap** (`autoRefresh`, `pollingIntervalInSeconds`) | Both indexes poll every 120 s; newer versions swap in with zero query downtime. | New scam variants reach every running shield without a redeploy. |
-| **Sessions** (`client.session`, `addDocs`, `query` with a metadata filter, `deleteDocs`) | One `SessionIndex` per process holds every live call's turns, each tagged `callId`; the guardian's "ask the call" is a filtered semantic query over it, and a call's turns are deleted when it ends. | Live-call context with no persistence, at the cost of one embedding-model instance per process instead of one per call (opening a session costs ~2 s of CPU). |
-| **Multi-index search** (`queryMultiIndex`) | Playbook + community intel searched in one call for a single global top-K. | Curated and crowd-sourced knowledge without merging indexes. |
-| **Metadata** | Every line carries `family`, `tactics`, `severity`, `kind` (tactic / benign), `stage`, `region`. | The engine reasons over tactics, not raw text; benign look-alikes live in the same index. |
-| **Server-side embedding on ingest** (`createIndex`, `addDocs` upsert) | Seeding and community reports embed in Moss Cloud. | The API routes never need the model in memory. |
+## Data handling and controls
 
-Not used, on purpose: `pushIndex` (call memory must not persist by default), and the browser/WASM SDK for the hot path (its current release cannot use a delegated authenticator, so the project key would have to ship to the browser; the interface in `retriever.ts` is designed so the hot path can move on-device the day that lands).
+- Browser speech recognition may send audio to the browser vendor. Raksha receives transcript text in live mode.
+- Uploaded recordings pass through the server to Groq transcription and are not written to disk by Raksha. Provider handling is governed by the provider's policies.
+- Optional coaching sends relevant transcript context to the configured model provider.
+- Completed records remain in RAM up to ten minutes for summary/reporting; call retrieval memory is cleaned up at call end.
+- Community reporting requires an explicit action and shares flagged caller lines with Moss Cloud. Reports are separate from ephemeral call memory and should exclude personal information.
+- Socket schemas, allowed origins, payload/rate bounds, upload validation, timeouts and process budgets limit malformed or excessive requests. These are not an independent security audit.
 
-## 6. Latency budget
+See [Privacy and threat model](PRIVACY.md).
 
-For one spoken sentence (~2.5 s at conversational pace):
+## Validation and timing
 
-| Stage | Typical | On the critical path? |
-|---|---|---|
-| Speech → text (streaming interim) | 200–400 ms | yes (platform-bound) |
-| WebSocket hop | 20–80 ms | yes |
-| **Moss embed + search** | **≈ 10–18 ms on a shared 4-vCPU container (search itself < 1 ms)** | yes |
-| Risk engine | < 0.1 ms | yes |
-| LLM coach | 300–800 ms | **no**. async, on transitions only |
+Release verification includes the earlier 29 unit tests and 8 browser E2E tests against both a fresh local build and the hosted app, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine fixtures may reach caution.
 
-The `Latency lab` page measures the Moss numbers live against the running instance; `docs/eval/REPORT.md` records them for the committed evaluation.
+Earlier real-Moss hosted evaluation recorded server-analysis p50 of 16.89 ms and p95 of 82.87 ms on the then-running 1-CPU revision with mixed test traffic. The final fallback evaluation recorded p50 of 0.58 ms and p95 of 2.13 ms. These differ in environment and retrieval mode. They are not a direct performance comparison or latency guarantee. Server analysis also differs from retrieval-only latency and browser round-trip time.
 
-## 6b. Scaling beyond one container
+The live latency lab identifies the engine and separates measurement categories. Real acoustic microphone quality across devices, languages and accents was not validated by this release pass.
 
-The single-process design is a deployment convenience, not an architectural limit:
+Evidence: [release verification](submission/verification.md), [real-Moss evaluation](submission/hosted-moss-evaluation.json), [fallback evaluation](submission/hosted-fallback-evaluation.json), [judge testing instructions](submission/testing.md).
 
-* **Stateless by construction.** A container holds only (a) the loaded playbook/intel indexes, which every container loads identically from Moss Cloud, (b) one memory session, and (c) the state of the calls whose WebSockets it currently serves. There is no shared database to contend on.
-* **Horizontal scaling** is therefore *N identical containers behind a WebSocket-aware load balancer with connection affinity*. A call lives entirely on the container that accepted its socket (its memory turns included), so nothing needs to be sharded.
-* **Guardian rooms** are the one cross-container concern: a guardian's socket may land on a different container than the protected phone's. Roadmap: publish call events to a pub/sub channel (Redis or NATS) keyed by family code; each container subscribes for the codes it serves. Until then, affinity by family code (hash the code in the LB) keeps both sockets on one container.
-* **Capacity, measured** (`npm run eval:load`, client and server on one 4-vCPU container, each call sending one fragment every ~3 s like a real conversation; the process has a single embedding executor, so this is the honest ceiling per container):
+## Next engineering steps
 
-| Concurrent calls (1 fragment / 3 s each) | Fragments/s | Server analysis p50 / p95 / p99 (ms) | Round-trip p50 / p95 (ms) | Errors |
-|---|---|---|---|---|
-| 50 | 14.8 | 11.9 / 36.7 / 57.6 | 13.5 / 43.7 | 0 |
-| 100 | 29.2 | 12.8 / 58.0 / 97.6 | 18.1 / 87.9 | 0 |
-
-  Memory is ~300 MB base plus a few KB per call. Beyond ~100 concurrent calls per container, add containers. An earlier design opened a Moss session per call and collapsed at 25 calls (p50 1.4 s) because each session loads its own model instance; the shared, call-id-filtered session fixed it.
-* **Failure isolation.** A crash takes down only the calls on that container; clients reconnect (exponential back-off in `useRakshaSocket`) and start a fresh call. Health checks (`/api/health`) gate traffic until the index is loaded.
-
-## 6c. Community intel: the pipeline in detail
-
-Implemented in `src/lib/moss/intel.ts` and wired to the `call.report` WebSocket message:
-
-1. **Consent.** Reporting is a deliberate tap on the post-call card, never automatic.
-2. **Selection.** Only the *caller's* lines that were credited with a tactic are eligible (never the protected person's words); lines under 4 words are dropped.
-3. **Abuse controls.** One report per call, a global budget per hour (`RAKSHA_INTEL_REPORTS_PER_HOUR`, default 60), and exact-duplicate suppression after normalisation, so a hostile client cannot flood the index.
-4. **Write.** Lines are upserted into `raksha-intel` with metadata `{family, tactics, severity: 4, kind: tactic, source: community, reportedAt}`; Moss Cloud embeds them and publishes a new immutable index version.
-5. **Propagation.** Every running container has `raksha-intel` loaded with `autoRefresh` (poll interval `MOSS_REFRESH_SECONDS`, default 120 s). When a newer version is detected it is hot-swapped atomically, so propagation latency is bounded by the poll interval plus the build time (typically under three minutes end to end).
-6. **Containment.** Community lines carry `source: community` and a fixed severity, and they share top-K slots with the curated playbook; a poisoned line can add at most one credited tactic per fragment and can never suppress a benign look-alike. Roadmap: a moderation queue and per-reporter reputation before promotion into the curated playbook.
-
-## 7. Deployment
-
-* **Image:** `Dockerfile` (multi-stage, Node 22, non-root, health-check). `npm run build` produces the Next.js build and `dist/server.mjs` (esbuild bundle of the custom server).
-* **Host:** any Docker host. The reference deployment is Google Cloud Run (`deploy/gcloud.sh`: Cloud Build + Cloud Run, session affinity for WebSockets, 1 vCPU / 1 GiB, asia-south1). `keepalive.yml` pings `/api/health` every 10 minutes so judges never hit a cold start.
-* **State:** none outside the process except the Moss Cloud indexes. `MOSS_MODEL_CACHE_DIR` keeps the embedding model on the container's disk between restarts.
-* **Config:** see `.env.example`. Without Moss credentials the app runs on the offline lexical fallback (so CI and forks work); without a Groq key the coach uses templates.
-* **Degradation:** if Moss Cloud is unreachable at boot (network, credit limit, revoked key) the server starts on the offline retriever, reports the reason in `/api/health` and the shield header, and retries Moss every two minutes, swapping the real runtime in without a restart. Loaded indexes are cached on disk (`MOSS_CACHE_PATH`) so a restart only checks the version instead of re-downloading.
-
-## 8. Security & privacy
-
-* **Speech-to-text** happens in the browser via the Web Speech API. Chrome and Edge send audio to the vendor's speech service; On-device support varies. Raksha's server never receives audio in live mode, only text fragments, which it holds in RAM for the duration of the call and retains in RAM for up to ten minutes after call end. Roadmap: an on-device Whisper build (WebGPU) for browsers, and platform STT in the mobile app, so no audio leaves the phone at all.
-* Recordings uploaded in "Recording" mode are streamed to Whisper on Groq for transcription (Groq's API does not retain audio) and are not stored by Raksha.
-* The LLM coach receives only the recent transcript text and the risk summary, never audio, and only on risk transitions.
-* Community reporting is opt-in per call and shares only the *caller's* flagged lines, never the protected person's words.
-* The Moss project key lives on the server only. Family codes are capability tokens with no personal data behind them.
-* No accounts, no cookies, no analytics.
-
-## 8b. Privacy
-
-See [PRIVACY.md](PRIVACY.md) for the full data-handling table and threat model.
-
-## 9. Repository map
-
-```
-server/            custom Next.js + WebSocket server (ws.ts routes, index.ts boot)
-src/app/           pages: / shield guardian playbook lab, and /api/* route handlers
-src/lib/engine/    types, risk engine, call manager, retriever interface, mock retriever, latency
-src/lib/moss/      Moss runtime (loading, sessions), MossRetriever, community intel
-src/lib/llm/       provider-agnostic chat client, coach prompts
-src/lib/data/      playbook codec, family + tactic catalogue
-data/              playbook.json (409 lines), transcripts/ (9 scenarios)
-scripts/           seed-moss, moss-status, eval, build-server
-tests/             unit (vitest) and e2e (Playwright)
-docs/              PRD, this document, eval report, research, video script, deck
-```
-
-
-## Public demo deployment boundary
-
-Firebase Hosting serves the public HTTPS URL; WebSockets connect directly to Cloud Run through `/api/config`. The demo runs one Cloud Run instance. Calls, guardians and Moss sessions are in process memory, so a multi-instance deployment must add shared state and explicit session routing. Input schemas, message budgets, size limits and explicit report consent protect the public demo boundary. These are prototype controls, not a production security certification.
+Verify a funded visitor project through the new settings flow; evaluate consented conversations beyond fixtures; add signed guardian invitations and report moderation; design shared routing/state before scaling; test speech services and languages on real devices. Native phone integration and fully on-device operation are separate future projects.

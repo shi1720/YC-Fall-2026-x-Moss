@@ -33,7 +33,7 @@ A synthetic WAV containing the demo's opening sentence was submitted to the host
 
 ## Submission readiness
 
-The story, architecture, PRD, video metadata and judge instructions are included in `docs/submission`. Devpost and HiDevs completion must be verified separately. HiDevs currently requires the participant to complete their personal profile, resume and LinkedIn sync.
+The story, video metadata and judge instructions are included in `docs/submission`; current architecture and product requirements are in `docs/ARCHITECTURE.md` and `docs/PRD.md`. Devpost confirmed submission at https://devpost.com/software/raksha-0g1hyf. HiDevs profile completion, LinkedIn connection and hackathon registration are verified. HiDevs also saved the architecture and PRD as the current Raksha submission at 1:12 PM IST on 16 September. Final project and Dr. Agent repository submissions still await GitHub OAuth approval; see `devpost-fields.md` for current status.
 
 ## Final rollout dependency
 
@@ -54,3 +54,11 @@ The final detector replay passed all 18 scenarios and 264 utterances in disclose
 Video verification: 116.76 seconds, 1920 x 1080 H.264, AAC narration, burned captions and an embedded English subtitle track. Peak audio level -1.4 dB. Key frames were visually reviewed. The narration and on-screen labels disclose fallback mode.
 
 The public video is https://www.youtube.com/watch?v=yy0Ek4Ot_mE. YouTube reported no copyright or Community Guidelines issues, and playback was verified. GitHub CI passed for the release changes.
+
+## Personal Moss settings release
+
+The shared demo intentionally uses `RAKSHA_DEMO_OFFLINE=1`. Judges can connect their own funded Moss project in Settings, with optional consent to create a new playbook. Existing indexes are validated against the complete dataset and never overwritten. Credentials remain in a bounded server-memory session; community publishing is disabled for visitor projects.
+
+Local validation: 39 unit tests, eleven E2E tests, ESLint, TypeScript and a production build pass. New tests cover session isolation, expiry, cancellation, bounded setup, credential sanitization, SDK setup and index validation, private call/guardian runtime selection, connection consent, no key storage in the browser, request origins and bounded request bodies. Browser layout checks now include Settings. A real Moss request with deliberately invalid test credentials returned the expected sanitized rejection, and disconnect restored demo mode.
+
+Positive SDK orchestration is verified with test doubles. No newly funded visitor-project credentials were available, so a successful live BYO connection is not claimed. Earlier hosted real-Moss evidence remains separate. Hosted checks for this release are recorded after deployment.

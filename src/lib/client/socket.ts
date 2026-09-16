@@ -48,15 +48,24 @@ export function useRakshaSocket(onMessage: (msg: ServerMessage) => void) {
       wsRef.current = ws;
       ws.onopen = () => {
         attempts.current = 0;
-
-
+        void fetch("/api/moss", { cache: "no-store" }).then(r => { if (!r.ok) throw new Error("Settings unavailable"); return r.json(); }).then(settings => {
+          if (ws.readyState !== WebSocket.OPEN) return;
+          if (["connecting", "error", "expired"].includes(settings.status)) {
+            handler.current({ type: "error", message: "Your Moss session is not ready. Open Settings to reconnect or disconnect for demo mode." });
+            return;
+          }
+          ws.send(JSON.stringify({ type: "runtime.select", token: settings.token }));
+        }).catch(() => handler.current({ type: "error", message: "Could not check Moss settings. Reload the page to reconnect." }));
       };
       ws.onmessage = (ev) => {
         try {
           const message = JSON.parse(ev.data as string) as ServerMessage;
           // The TCP connection can open while Moss is still warming up.
           // Enable call controls only after the server confirms its runtime is ready.
-          if (message.type === "hello") setStatus("open");
+          if (message.type === "hello") {
+            if (!message.selected) return;
+            setStatus("open");
+          }
           handler.current(message);
         } catch (err) {
           console.warn("bad message", err);
@@ -83,7 +92,16 @@ export function useRakshaSocket(onMessage: (msg: ServerMessage) => void) {
   const send = useCallback((msg: ClientMessage) => {
     const data = JSON.stringify(msg);
     const ws = wsRef.current;
-    if (ws && ws.readyState === WebSocket.OPEN) ws.send(data);
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      if (msg.type === "call.start") {
+        // Re-check on every start, including tabs opened before settings changed.
+        void fetch("/api/moss", { cache: "no-store" }).then(r => { if (!r.ok) throw new Error("Could not check Moss settings. Please retry."); return r.json(); }).then(settings => {
+          if (["connecting", "error", "expired"].includes(settings.status)) throw new Error("Your Moss session is not ready. Reconnect or disconnect in Settings before starting a call.");
+          if (wsRef.current !== ws || ws.readyState !== WebSocket.OPEN) throw new Error("The shield is reconnecting. Please try again.");
+          ws.send(JSON.stringify({ ...msg, runtimeToken: settings.token }));
+        }).catch(error => handler.current({ type: "error", message: error.message }));
+      } else ws.send(data);
+    }
     else handler.current({ type: "error", message: "The shield is reconnecting. Please wait and try again." });
   }, []);
 

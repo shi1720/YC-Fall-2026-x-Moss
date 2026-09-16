@@ -9,12 +9,14 @@ import { getCallManager, type CallRecord } from "@/lib/engine/calls";
 import { llmConfig } from "@/lib/llm/client";
 import { reportToCommunity } from "@/lib/moss/intel";
 import { getMossRuntime } from "@/lib/moss/runtime";
+import { runtimeForToken, MossSettingsError } from "@/lib/moss/visitor";
 import { clientMessageSchema, type ClientMessage, type ServerMessage } from "@/lib/protocol";
 
 interface Conn {
   ws: WebSocket;
   role: "shield" | "guardian" | "unknown";
   callId?: string;
+  runtimeToken?: string;
   lastCallId?: string;
   pending: number;
   messages: number;
@@ -113,9 +115,15 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
       conn.queue = conn.queue.then(async () => {
         await ready;
         if (ws.readyState === WebSocket.OPEN) await handle(conn, msg);
-      }).catch((err) => {
-        console.error("[ws] handler error", err);
-        send(ws, { type: "error", message: "The request could not be completed. Please try again." });
+      }).catch(async (err) => {
+        console.warn("[ws] request could not be completed");
+        send(ws, { type: "error", message: err instanceof MossSettingsError ? err.message : "The request could not be completed. Please try again." });
+        if (err instanceof MossSettingsError && conn.callId) {
+          const id = conn.callId;
+          conn.callId = undefined;
+          await calls.end(id);
+          shields.delete(id);
+        }
       }).finally(() => { conn.pending--; });
     });
 
@@ -130,11 +138,22 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
 
   async function handle(conn: Conn, msg: ClientMessage) {
     switch (msg.type) {
+      case "runtime.select": {
+        if (conn.role !== "unknown") return send(conn.ws, { type: "error", message: "Start a new connection to change Moss settings." });
+        const rt = await runtimeForToken(msg.token);
+        conn.runtimeToken = msg.token;
+        const llm = llmConfig();
+        return send(conn.ws, { type: "hello", selected: true, runtime: { mode: rt.info.mode, runtime: rt.info.runtime, docCount: rt.info.docCount, indexes: rt.info.indexes, model: rt.info.model, source: rt.info.source }, llm: { enabled: llm.enabled, model: llm.enabled ? llm.model : "template" } });
+      }
       case "ping":
         return send(conn.ws, { type: "pong", t: Date.now() });
 
       case "call.start": {
         if (conn.role === "guardian") return send(conn.ws, { type: "error", message: "Open the Shield page to start a call." });
+        const rt = await runtimeForToken(msg.runtimeToken);
+        conn.runtimeToken = msg.runtimeToken;
+        const llm = llmConfig();
+        send(conn.ws, { type: "hello", selected: true, runtime: { mode: rt.info.mode, runtime: rt.info.runtime, docCount: rt.info.docCount, indexes: rt.info.indexes, model: rt.info.model, source: rt.info.source }, llm: { enabled: llm.enabled, model: llm.enabled ? llm.model : "template" } });
         if (conn.callId) { await calls.end(conn.callId); shields.delete(conn.callId); }
         const record = await calls.start({
           mode: msg.mode,
@@ -142,7 +161,7 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
           familyCode: msg.familyCode ? normaliseCode(msg.familyCode) : undefined,
           region: msg.region ?? "IN",
           displayName: msg.displayName,
-        });
+        }, conn.runtimeToken);
         conn.role = "shield";
         conn.callId = record.meta.callId;
         shields.set(record.meta.callId, conn);
@@ -171,6 +190,7 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
         const id = conn.callId ?? conn.lastCallId;
         if (!id) return send(conn.ws, { type: "error", message: "No call to report." });
         const rec = calls.get(id);
+        if (rec?.runtimeToken) return send(conn.ws, { type: "call.reported", callId: id, ok: false, added: 0, message: "Community publishing is disabled for personal Moss sessions. No caller text was shared to a cloud index." });
         const result = await reportToCommunity({ lines: calls.flaggedLines(id), region: rec?.meta.region, callId: id });
         return send(conn.ws, { type: "call.reported", callId: id, ...result });
       }

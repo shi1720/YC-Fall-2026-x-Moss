@@ -29,6 +29,7 @@ export interface RuntimeInfo {
   loadedAt: number;
   loadMs: number;
   version: string;
+  source?: "visitor" | "shared";
 }
 
 export interface MossRuntime {
@@ -54,7 +55,7 @@ export function loadPlaybookFromDisk(): PlaybookDoc[] {
 }
 
 export function hasMossCredentials(): boolean {
-  return Boolean(process.env.MOSS_PROJECT_ID && process.env.MOSS_PROJECT_KEY);
+  return process.env.RAKSHA_DEMO_OFFLINE !== "1" && Boolean(process.env.MOSS_PROJECT_ID && process.env.MOSS_PROJECT_KEY);
 }
 
 async function build(): Promise<MossRuntime> {
@@ -86,6 +87,7 @@ async function build(): Promise<MossRuntime> {
     cachePath: process.env.MOSS_CACHE_PATH ?? path.join(process.cwd(), ".moss-cache"),
     identity: { deviceId: process.env.RAKSHA_DEVICE_ID ?? "raksha-server" },
   });
+  try {
   const pollingIntervalInSeconds = Number(process.env.MOSS_REFRESH_SECONDS ?? 120);
   const indexes: string[] = [];
   const docCounts: Record<string, number> = {};
@@ -145,6 +147,10 @@ async function build(): Promise<MossRuntime> {
       version: "@moss-js/moss",
     },
   };
+  } catch (error) {
+    await client.close().catch(() => {});
+    throw error;
+  }
 }
 
 function buildFallback(playbook: PlaybookDoc[], reason: string, t0: number): MossRuntime {

@@ -16,6 +16,9 @@ test("ended call remains reportable and malformed socket input does not break th
   ws.on("message", raw => messages.push(JSON.parse(raw.toString())));
   await new Promise<void>((resolve, reject) => { ws.on("open", resolve); ws.on("error", reject); });
   try {
+    ws.send(JSON.stringify({ type: "call.start", mode: "simulation", runtimeToken: "f".repeat(64) }));
+    await expect.poll(() => messages.some(m => m.type === "error" && String(m.message).includes("Moss session ended"))).toBe(true);
+    expect(messages.some(m => m.type === "call.started")).toBe(false);
     ws.send(JSON.stringify({ type: "call.start", mode: "simulation", familyCode: "TEST2345" }));
     await expect.poll(() => messages.some(m => m.type === "call.started")).toBe(true);
     ws.send('{"type":"utterance","text":42}');
@@ -30,7 +33,7 @@ test("ended call remains reportable and malformed socket input does not break th
 
 test("mobile pages fit the viewport and the live entry link selects the microphone", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ["/", "/shield", "/guardian", "/playbook", "/lab"]) {
+  for (const route of ["/", "/shield", "/guardian", "/playbook", "/lab", "/settings"]) {
     await page.goto(route);
     await expect(page.locator("h1")).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), route).toBe(true);

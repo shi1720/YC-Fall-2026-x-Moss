@@ -6,7 +6,7 @@
 
 <p align="center">
   <em>Every scam follows a script. Now your phone knows the script.</em><br/>
-  Scam-script recognition in about 10 ms during a live call, powered by <a href="https://moss.dev">Moss</a>.
+  A second listener for scam calls, built around <a href="https://moss.dev">Moss</a> retrieval.
 </p>
 
 <p align="center">
@@ -25,29 +25,31 @@ Built for the **YC Fall 2026 × Moss: Zero Latency Builder Sprint** (theme: Real
 
 > **Live:** https://raksha-app.web.app. try [the digital-arrest scenario](https://raksha-app.web.app/shield?scenario=digital-arrest) · [health](https://raksha-app.web.app/api/health)
 
-**Measured on the committed evaluation (real Moss runtime, 18 scripted calls, 264 utterances, plus 80 everyday sentences):** 10/10 scam calls caught, 0/8 genuine calls flagged, 1/80 everyday sentences credited with any tactic, retrieval p50 8.0 ms / p95 14.9 ms including on-device embedding. See [docs/eval/REPORT.md](docs/eval/REPORT.md). Under load (`npm run eval:load`, 100 concurrent conversational calls on one 4-vCPU container): zero errors, server-side analysis p50 12.8 ms / p95 58.0 ms.
+**Current runtime:** the shared demo intentionally uses an offline TF-IDF detector. Connect your own funded Moss project in [Settings](https://raksha-app.web.app/settings) to test live semantic retrieval. Demo timings are not Moss benchmarks.
+
+**Release verification:** 29 unit tests, 8 E2E tests against both local and hosted builds, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine calls can reach caution. These are fixture results, not real-world accuracy claims. Earlier real-Moss and final fallback measurements are documented separately in [release verification](docs/submission/verification.md). Historical development measurements remain in [the evaluation report](docs/eval/REPORT.md).
+
+[Submitted Devpost project](https://devpost.com/software/raksha-0g1hyf) · [Narrated demo with captions](https://www.youtube.com/watch?v=yy0Ek4Ot_mE)
 
 ## The problem
 
-Indians reported **₹22,845 crore** lost to cyber fraud in 2024. ten times the figure two years earlier. "Digital arrest" alone took ~₹1,900 crore from 1.23 lakh people. In the US, phone calls carry the highest median loss of any scam channel, and 41% of the biggest losses by older adults began with a call. ([sources](docs/research/market-facts.md))
-
-Every one of those calls followed a script: *authority → fear → secrecy → the ask*. Yet scam protection today is **number reputation** (Truecaller, Airtel, Jio, iOS call screening). By the time a number is flagged, the crew has a new one. The words never change. The only products that analyse what is actually *said* on a call ship on < 1% of Indian phones (Pixel 9+) or in the US only (Hiya, $9.99/month).
+A scam caller can combine authority, fear, urgency and isolation before asking for money, a code or device access. Someone under pressure needs a clear action and a trusted person. Raksha explores how transcript evidence and fast retrieval can help at that moment.
 
 ## What Raksha does
 
-Raksha listens with you during a call and checks **every spoken fragment** against a playbook of real scam scripts. When pressure meets an ask, it interrupts. before the OTP leaves your mouth. tells you exactly what to say, and quietly alerts someone you trust.
+Raksha checks supported transcript fragments against a curated playbook, explains recognised pressure tactics and offers words to end the call. A connected guardian can follow the same evidence and send a message. The browser prototype uses simulations, microphone input or uploaded recordings. It does not intercept cellular calls, hang up automatically or guarantee that a risky action will be prevented.
 
 | | |
 |---|---|
 | ![Shield](docs/screenshots/shield-intervention.png) | ![Guardian](docs/screenshots/guardian.png) |
-| **The shield** stops a digital-arrest call mid-sentence: what script it is, one sentence to say, the helpline to call. | **The guardian** sees the risk of a parent's call live, speaks through the shield, and can ask the call's memory a question. |
+| **The shield** explains a detected tactic and gives one sentence to say. | **The guardian** follows the call, sends a message through the shield and searches its context. |
 
-* **Fast path (every fragment, ≈ 10 ms end-to-end, search < 1 ms):** Moss holds a 409-line scam playbook in memory. Each fragment is embedded and matched in-process. no vector database, no round-trip. A small, unit-tested risk engine credits persuasion tactics (authority, urgency, secrecy, the ask…) and a noisy-OR model decides *safe / caution / danger*.
-* **Slow path (only on risk transitions):** an LLM coach explains in plain words, gives the exact sentence to say, and can veto a false alarm. It never sits on the critical path.
+* **Detection path:** Moss loads a 409-line playbook for in-process embedding and search. A deterministic engine credits tactics and recognised benign look-alikes to compute safe, caution or danger. The disclosed TF-IDF fallback is active when Moss cannot load.
+* **Asynchronous coaching:** an optional model explains the evidence outside the detection path. Exit sentences and safe next steps are fixed in code; template guidance remains available on provider failure.
 * **Circle of trust:** a family code links a phone to a guardian's dashboard. Human and agent share the same call session.
 * **Community intel:** report a call and its flagged lines are upserted into a second Moss index; every running shield hot-swaps it in. New scam variants propagate without a redeploy.
 * **Three ways to try it:** replay one of eighteen scripted calls (ten scams, eight genuine) with two synthetic voices, use your own microphone (phone on speaker), or upload a recording (transcribed by Whisper).
-* **Privacy, precisely:** speech becomes text in the browser (Chrome uses Google's speech service, on-device availability depends on the browser and operating system); the Raksha server receives text only, keeps it in RAM for the duration of the call, and retains completed records in RAM for up to ten minutes. Uploaded recordings go to Whisper on Groq for transcription and are not stored. Community reports are opt-in and contain only the caller's flagged lines.
+* **Privacy, precisely:** live speech recognition can use the browser vendor's speech service. Raksha receives the resulting transcript and retains completed call records in RAM for up to ten minutes. Uploaded recordings pass through Raksha to Groq transcription and are not written to disk by Raksha. Optional coaching sends transcript context to the model provider. Community reports explicitly share flagged caller lines with Moss Cloud. See the [privacy details](docs/PRIVACY.md) before using personal conversations.
 
 ## How Moss is used
 
@@ -99,7 +101,7 @@ Without Moss credentials the app still runs, on an offline lexical fallback (so 
 
 ### Deploy
 
-One command to Google Cloud Run: `./deploy/gcloud.sh`, then `./deploy/firebase.sh` for a clean `*.web.app` URL in front of it (see [deploy/README.md](deploy/README.md)). `Dockerfile` builds a single self-contained image (non-root, health-checked, ~300 MB RSS with the model loaded); `render.yaml` and `railway.json` cover other hosts; `keepalive.yml` pings the deployed URL every 10 minutes so it never sleeps.
+Use `./deploy/gcloud.sh`, then `./deploy/firebase.sh` for a clean `*.web.app` URL. Use `./deploy/update.sh` for the documented update flow. See [deployment instructions](deploy/README.md). The public demo is capped at one Cloud Run instance because calls and guardian state are in RAM. A restart loses that state; cold starts remain possible.
 
 ## Repository
 
@@ -120,7 +122,7 @@ docs/            PRD, architecture, privacy, evaluation, research, video script,
 * **60 seconds:** open `/shield?scenario=digital-arrest`, voices on, *Start the call*. Watch the dial, the tactic chips on each line, and the intervention at the first "ask". Click *Keep listening* to see the targeted "Do NOT transfer" warnings.
 * **Multiplayer:** copy the guardian link from the shield page into a second window before starting. Send a message from the guardian; it is spoken on the shield. Ask "what money did they ask for?".
 * **Latency:** open `/lab`, run 5 × 10 queries. Open `/playbook` and type anything a scammer might say.
-* **Robustness:** run the *Genuine bank fraud call* or *Genuine courier delivery* scenario. They stay green: the bank says "we will never ask for your OTP", the courier asks for the app's delivery OTP at the door, and the benign look-alike lines in the index plus the benign-marker rules keep the shield quiet.
+* **Robustness:** run a genuine-call scenario and inspect its benign evidence. The committed genuine fixtures do not reach danger; some can reach caution. A safe result does not verify the caller's identity.
 
 ## Credits
 
@@ -144,6 +146,12 @@ A safe score means no recognised scam pattern, not that a caller is verified. Sc
 
 ### Current hosted service status
 
-The release is live at https://raksha-app.web.app. Moss cloud credits were exhausted during the final rollout on 16 September 2026, so the app currently labels and uses its offline detector. Restore the existing Moss project credits for automatic recovery. Fallback timings are not Moss benchmarks. See [release verification](docs/submission/verification.md) for both runs and remaining submission prerequisites.
+The release is live at https://raksha-app.web.app. No shared credit top-up is required: judges can connect a funded personal Moss project in Settings. The guided demo remains available without a key. See [release verification](docs/submission/verification.md) for evidence and verification limits.
 
 Demo with narration and captions: https://www.youtube.com/watch?v=yy0Ek4Ot_mE
+
+## Test with your own Moss project
+
+Open [Moss settings](https://raksha-app.web.app/settings). Enter your project ID and project API key, select an existing current Raksha playbook or explicitly create a new one, and wait for the connected state. Creating a playbook uploads the 409 curated lines and may consume your own project credits. Keys are used only for a temporary server-memory session, lasting up to 30 minutes or until disconnect or restart. A session cookie connects this browser to its private runtime. Existing indexes are never overwritten; created cloud indexes remain after disconnect.
+
+Shield calls, guardian recall, Playbook search and the Lab then use that runtime. Personal sessions cannot publish community reports. The shared demo intentionally stays in offline mode via `RAKSHA_DEMO_OFFLINE=1`; no shared credit top-up is required. Full steps and current verification limits are in [testing instructions](docs/submission/testing.md).

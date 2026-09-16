@@ -15,11 +15,13 @@ import { LatencyTracker } from "@/lib/engine/latency";
 import { analyzeUtterance, applyCoachVerdict, createRiskState, DEFAULT_RISK_CONFIG } from "@/lib/engine/risk";
 import type { CoachAdvice, Intervention, Match, RiskLevel, RiskState, Tactic, Utterance, UtteranceAnalysis } from "@/lib/engine/types";
 import { coach, summarizeCall } from "@/lib/llm/coach";
-import { getMossRuntime } from "@/lib/moss/runtime";
+import { runtimeForToken } from "@/lib/moss/visitor";
 import type { CallMeta, LatencyStats } from "@/lib/protocol";
 
 export interface CallRecord {
   meta: CallMeta;
+  /** Private runtime capability. Never included in CallMeta or browser events. */
+  runtimeToken?: string;
   transcript: Utterance[];
   analyses: UtteranceAnalysis[];
   risk: RiskState;
@@ -70,11 +72,13 @@ export class CallManager extends EventEmitter<CallEvents> {
     return this.list().filter((c) => c.meta.familyCode === code && !c.endedAt);
   }
 
-  async start(opts: Omit<CallMeta, "callId" | "startedAt">): Promise<CallRecord> {
+  async start(opts: Omit<CallMeta, "callId" | "startedAt">, runtimeToken?: string): Promise<CallRecord> {
     if (this.list().filter(c => !c.endedAt).length >= 100) throw new Error("The shield is busy. Please try again shortly.");
+    await runtimeForToken(runtimeToken);
     const meta: CallMeta = { ...opts, callId: randomUUID(), startedAt: Date.now() };
     const record: CallRecord = {
       meta,
+      runtimeToken,
       transcript: [],
       analyses: [],
       risk: createRiskState(0),
@@ -101,7 +105,7 @@ export class CallManager extends EventEmitter<CallEvents> {
     const text = input.text.trim();
     if (text.length < 3) return null;
     const t0 = performance.now();
-    const rt = await getMossRuntime();
+    const rt = await runtimeForToken(record.runtimeToken);
     const { matches, engineMs } = await rt.retriever.search(text);
     const utterance: Utterance = {
       id: randomUUID().slice(0, 8),
@@ -121,7 +125,7 @@ export class CallManager extends EventEmitter<CallEvents> {
       record.analyses.push(analysis);
       record.risk = analysis.risk;
       record.latency.add(totalMs, engineMs);
-      this.global.add(totalMs, engineMs);
+      if (!record.runtimeToken) this.global.add(totalMs, engineMs);
       record.utterancesSinceCoach += 1;
       void this.indexTurn(record, utterance);
       this.emit("analysis", callId, analysis, record.latency.stats());
@@ -148,7 +152,7 @@ export class CallManager extends EventEmitter<CallEvents> {
   private async indexTurn(record: CallRecord, u: Utterance) {
     if (u.speaker === "user" || u.text.split(/\s+/).length < 6) return;
     try {
-      const rt = await getMossRuntime();
+      const rt = await runtimeForToken(record.runtimeToken);
       if (!rt.memory || record.endedAt) return;
       const id = `${record.meta.callId}:${u.id}`;
       await rt.memory.addDocs([{ id, text: u.text, metadata: { callId: record.meta.callId, speaker: u.speaker, t: String(u.t) } }]);
@@ -233,7 +237,7 @@ export class CallManager extends EventEmitter<CallEvents> {
     const record = this.calls.get(callId);
     if (!record || record.endedAt) return { hits: [], latencyMs: 0 };
     const t0 = performance.now();
-    const rt = await getMossRuntime();
+    const rt = await runtimeForToken(record.runtimeToken);
     if (rt.memory && record.memoryDocIds.length > 0) {
       try {
         const res = await rt.memory.query(question, { topK: 4, filter: { field: "callId", condition: { $eq: callId } } });
@@ -269,7 +273,7 @@ export class CallManager extends EventEmitter<CallEvents> {
     // Forget the call's memory: delete its turns from the shared session.
     if (record.memoryDocIds.length) {
       const ids = record.memoryDocIds.splice(0);
-      void getMossRuntime()
+      void runtimeForToken(record.runtimeToken)
         .then((rt) => rt.memory?.deleteDocs(ids))
         .catch(() => {});
     }

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { FAMILY_INFO } from "@/lib/data/families";
-import { getMossRuntime } from "@/lib/moss/runtime";
+import { runtimeForRequest, safeMossError } from "@/lib/moss/visitor";
 
 export const dynamic = "force-dynamic";
 
@@ -12,11 +12,13 @@ export async function GET(req: Request) {
   if (q.length > 2000 || !Number.isInteger(k) || k < 1 || k > 20) {
     return NextResponse.json({ error: "Use a query up to 2,000 characters and k from 1 to 20." }, { status: 400 });
   }
-  const rt = await getMossRuntime();
+  try {
+  const rt = await runtimeForRequest(req);
   if (!q) {
     const families = Object.values(FAMILY_INFO).map((f) => ({ ...f, count: rt.playbook.filter((d) => d.family === f.id).length }));
-    return NextResponse.json({ docCount: rt.playbook.length, families, runtime: rt.info });
+    return NextResponse.json({ docCount: rt.playbook.length, families, runtime: rt.info }, { headers: { "Cache-Control": "private, no-store" } });
   }
   const res = await rt.retriever.search(q, { topK: k });
-  return NextResponse.json({ q, matches: res.matches, engineMs: res.engineMs, wallMs: res.wallMs, runtime: rt.info.mode });
+  return NextResponse.json({ q, matches: res.matches, engineMs: res.engineMs, wallMs: res.wallMs, runtime: rt.info.mode }, { headers: { "Cache-Control": "private, no-store" } });
+  } catch (error) { return NextResponse.json({ error: safeMossError(error) }, { status: 503, headers: { "Cache-Control": "private, no-store" } }); }
 }

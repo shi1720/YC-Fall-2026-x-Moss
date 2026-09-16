@@ -23,7 +23,7 @@ function tokenize(text: string): string[] {
 
 export class MockRetriever implements Retriever {
   readonly name = "lexical-mock";
-  readonly runtime = "Offline lexical fallback (TF-IDF). Configure MOSS_PROJECT_ID / MOSS_PROJECT_KEY for the real Moss runtime.";
+  readonly runtime = "Offline lexical fallback (TF-IDF). Connect your own Moss project in Settings for live semantic retrieval.";
   private docs: Array<{ doc: PlaybookDoc; tokens: string[]; tf: Map<string, number> }> = [];
   private df = new Map<string, number>();
   private avgLen = 1;

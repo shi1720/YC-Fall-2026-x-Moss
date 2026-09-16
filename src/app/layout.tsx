@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { RuntimeBanner } from "@/components/RuntimeBanner";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
@@ -12,11 +13,11 @@ const jetbrains = localFont({ src: "./fonts/jetbrains-mono-latin.woff2", variabl
 export const metadata: Metadata = {
   title: { default: "Raksha. the real-time scam-call shield", template: "%s · Raksha" },
   description:
-    "Every scam follows a script. Raksha listens with you, recognises the script in about 10 milliseconds with Moss, and steps in before you share the OTP.",
+    "A second listener for scam calls. Explore the guided demo or connect your own Moss project for live semantic retrieval.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://raksha-app.web.app"),
   openGraph: {
     title: "Raksha. the real-time scam-call shield",
-    description: "Scam-script recognition in about 10 ms during a live call, powered by Moss.",
+    description: "Recognise pressure, pause and bring in someone you trust. Test live retrieval with your own Moss project.",
     type: "website",
   },
 };
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jetbrains.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Nav />
+        <RuntimeBanner />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
