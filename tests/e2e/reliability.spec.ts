@@ -30,7 +30,7 @@ test("ended call remains reportable and malformed socket input does not break th
 
 test("mobile pages fit the viewport and the live entry link selects the microphone", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ["/", "/shield", "/guardian", "/playbook", "/lab"]) {
+  for (const route of ["/", "/shield", "/guardian", "/playbook", "/lab", "/settings"]) {
     await page.goto(route);
     await expect(page.locator("h1")).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), route).toBe(true);

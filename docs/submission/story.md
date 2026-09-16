@@ -12,7 +12,7 @@ Raksha is a browser-based scam-call shield. Try one of 18 scripted calls, listen
 
 As the conversation unfolds, Raksha compares its words with a 409-line playbook. The risk engine looks for combinations such as claimed authority, urgency, secrecy and a request for money, codes or remote access. It shows the evidence behind the warning and gives the person a short sentence to end the call.
 
-A trusted guardian can open a shared family link, follow the same call, send a message to the shield and search the current conversation. A separate latency lab lets anyone measure the running retrieval layer and distinguish server analysis time from browser network time.
+A trusted guardian can open a shared family link, follow the same call, send a message to the shield and search the current conversation. A separate latency lab lets anyone measure the running retrieval layer and distinguish server analysis time from browser network time. Settings lets visitors connect their own Moss project ID and project API key, create the curated playbook if needed, and test real semantic retrieval in a private session. The key-free demo is clearly labeled as an offline text detector.
 
 Raksha is a working prototype and a decision aid. It does not intercept mobile calls or hang up for you. A safe score means no recognised pattern was found, not that a caller has been verified.
 
@@ -22,7 +22,7 @@ The app uses Next.js, React and TypeScript with a custom Node.js WebSocket serve
 
 Moss loads the curated scam playbook into memory. Each fragment is embedded and retrieved in-process. A deterministic risk engine combines the detected tactics and checks legitimate look-alikes before raising an intervention. A Groq-hosted language model provides plain-language coaching outside the critical detection path.
 
-Moss sessions hold current-call context with call-specific metadata filters for guardian questions. Optional community reports add flagged caller lines to a second index. Multi-index retrieval and automatic refresh let that knowledge become available without rebuilding the application.
+Moss sessions hold current-call context with call-specific metadata filters for guardian questions. When the shared Moss runtime is enabled, optional community reports add flagged caller lines to a second index. Personal sessions use their own verified playbook and do not publish reports. Multi-index retrieval and automatic refresh let that knowledge become available without rebuilding the application.
 
 The public demo uses one bounded Cloud Run instance because the guardian connections and call state are in process memory. A distributed production deployment would require shared routing and state. Browser speech recognition powers live microphone mode, and Groq Whisper transcribes uploaded recordings.
 
@@ -32,7 +32,7 @@ The hard problem was avoiding a warning every time someone said “OTP” or “
 
 Keeping the experience responsive also meant separating detection from explanation. Retrieval and the deterministic warning run first. Coaching arrives independently.
 
-Final rollout also exhausted the Moss project's cloud credits. We preserved a clearly labeled offline detector, separated its timings from Moss benchmarks, and documented the service dependency. Earlier hosted verification had already exercised the real Moss runtime.
+Final rollout exhausted the shared Moss project's cloud credits. We kept the guided demo available with a clearly labeled offline detector, then added a bring-your-own-project flow so judges can test real Moss with their own funded project. Keys stay in server memory for a temporary session. Creating a playbook requires explicit consent, and personal sessions cannot publish community reports. Earlier hosted verification had already exercised the real Moss runtime; fallback timings are never presented as Moss benchmarks.
 
 Deployment exposed practical problems too. Firebase Hosting does not proxy the app's WebSocket connection, so the browser resolves the Cloud Run socket endpoint separately. We also fixed startup races, interrupted speech playback, post-call reporting, reconnect behaviour, input validation and mobile overflow.
 
@@ -42,7 +42,7 @@ Deployment exposed practical problems too. Firebase Hosting does not proxy the a
 - Meaningful use of Moss for playbook retrieval, filtered call memory, multi-index search and refreshed community knowledge.
 - A committed scripted evaluation covering 18 calls and 264 utterances. It detected all ten scripted scam calls and raised no danger alert on the eight genuine calls. These are fixture results, not a claim of real-world accuracy.
 - A public latency lab that shows measurements from the running server rather than presenting a fixed animation as a benchmark.
-- An accessible, responsive demo with no account required and clear error recovery.
+- An accessible, responsive demo with no account required, clear error recovery and private Moss project settings.
 
 ## What we learned
 

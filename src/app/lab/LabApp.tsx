@@ -147,7 +147,7 @@ export function LabApp() {
               </tbody>
             </table>
           </div>
-          {samples[0] && samples[0].mode !== "moss" && <div className="mt-3 text-xs text-caution">These numbers come from the offline lexical fallback, not Moss. Configure Moss credentials for the real runtime.</div>}
+          {samples[0] && samples[0].mode !== "moss" && <div className="mt-3 text-xs text-caution">These numbers come from the offline lexical fallback, not Moss. Connect your own Moss project in Settings for the real runtime.</div>}
         </div>
 
         <div className="card p-5 lg:col-span-5">

@@ -13,7 +13,7 @@ export function LiveStats() {
   const [h, setH] = useState<Health | null>(null);
   useEffect(() => {
     fetch("/api/health")
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error("Runtime unavailable"); return r.json(); })
       .then(setH)
       .catch(() => {});
   }, []);

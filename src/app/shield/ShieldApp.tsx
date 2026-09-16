@@ -387,7 +387,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
       {state.hello?.runtime.mode === "mock" && (
         <div className="mt-4 flex items-start gap-2 rounded-2xl border border-caution/30 bg-caution/10 p-3 text-sm text-caution">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-          <span>Offline detector active. Moss is unavailable, so matches use text similarity. Timings below are for this fallback, not Moss.</span>
+          <span>Offline detector active. Matches use text similarity. Timings below are not Moss benchmarks. Connect your own project in Settings to test live Moss retrieval.</span>
         </div>
       )}
 

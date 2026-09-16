@@ -38,3 +38,5 @@ Use `GCP_PROJECT=epilogue-508616 ./deploy/update.sh` after authenticating gcloud
 The stable public address is https://raksha-app.web.app. Firebase already forwards requests to the Raksha service, so an app-only container update does not require a second Hosting release.
 
 Keep this in-memory demo at one instance. Session affinity does not guarantee that independently opened phone and guardian connections will land on the same instance when the service scales out.
+
+Set `RAKSHA_DEMO_OFFLINE=1` for the shared public demo. Personal projects connect through `/settings` and remain private to a 30-minute browser session. Keep exactly one Cloud Run instance for call state and session cookies; two personal Moss runtimes are allowed inside it. Firebase forwards the `__session` cookie. Never enable CDN caching for `/api/moss`, `/api/health` or `/api/playbook`.

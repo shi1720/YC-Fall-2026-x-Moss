@@ -10,6 +10,7 @@ const links = [
   { href: "/guardian", label: "Guardian" },
   { href: "/playbook", label: "Playbook" },
   { href: "/lab", label: "Latency lab" },
+  { href: "/settings", label: "Settings" },
 ];
 
 export function Nav() {

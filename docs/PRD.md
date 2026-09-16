@@ -20,6 +20,7 @@ This document describes the shipped browser prototype. Commercial pricing, partn
 | Guardian | Join through a family-code link, follow the current call, send a message and query its context |
 | Playbook | Explore and search the curated 409-line corpus |
 | Latency lab | Compare timing categories against the active engine |
+| Settings | Connect a personal Moss project for 30 minutes, optionally create its playbook, disconnect and return to demo mode |
 | Reporting | Explicitly share flagged caller lines as community knowledge when Moss is available |
 
 The app cannot directly intercept cellular calls or hang up automatically. The person supplies a simulation, microphone input or recording. A safe score means no recognised concerning pattern was found, not that the caller is verified.
@@ -29,7 +30,7 @@ The app cannot directly intercept cellular calls or hang up automatically. The p
 | ID | Requirement | Status |
 |---|---|---|
 | F1 | Validate and analyse supported transcript fragments | Implemented |
-| F2 | Retrieve playbook evidence through in-process Moss | Implemented and previously hosted-tested; currently blocked by exhausted Moss credits |
+| F2 | Retrieve playbook evidence through in-process Moss | Implemented and previously hosted-tested; live testing now uses a visitor project with available credits |
 | F3 | Combine tactics, benign look-alikes and speaker context into explainable risk | Implemented with deterministic scoring |
 | F4 | Display and optionally speak targeted guidance | Implemented; silent mode suppresses speech |
 | F5 | Keep optional LLM coaching outside the detection path | Implemented with template fallback |
@@ -53,7 +54,7 @@ Full steps, microphone/recording instructions and runtime notes: [testing.md](su
 
 ## Acceptance evidence
 
-- 29 unit tests pass. Eight browser E2E tests passed against a freshly built local app and the final hosted revision.
+- 39 unit tests and ten browser E2E tests cover the settings release. See verification.md for local and hosted results and the limit on live funded-project verification.
 - Eighteen scripted calls cover 264 utterances. All 10 scam fixtures reached danger. None of the 8 genuine fixtures reached danger, though some can reach caution. This is not a real-world accuracy claim.
 - Call startup, end-state handling, guardian messages and reconnects, malformed input, scenarios, mobile navigation and recovery were checked.
 - A synthetic recording was transcribed through the hosted endpoint. This does not establish acoustic microphone quality across devices and accents.
@@ -69,13 +70,15 @@ Family-code links are capability tokens, not signed invitations or verified iden
 
 Resource bounds and fallbacks improve resilience, but browser speech, model and cloud retrieval services can fail. The UI must disclose the active retrieval mode and show actionable errors.
 
-## Current release limitation
+## Demo mode and personal Moss sessions
 
-Moss credits were exhausted during final rollout on 16 September 2026. The app currently runs its disclosed offline TF-IDF detector and retries the real runtime automatically. The video and submission disclose this condition. Restoring credits is required for judges to exercise the intended semantic retrieval mode.
+The shared demo intentionally uses offline TF-IDF. Visitors can enter their own Moss project ID and project API key in Settings, then load or create the current 409-line playbook with moss-minilm. Their project needs available credits. Keys stay in server memory for up to 30 minutes, until disconnect or restart. A temporary browser cookie and socket capability isolate the selected runtime. Two private sessions are allowed at once. Personal sessions do not publish community reports.
+
+Creating a new index requires explicit consent and may consume Moss credits. Existing indexes are validated against the current dataset and are never overwritten. Disconnect releases the runtime but preserves any created cloud index. The earlier video demonstrates offline mode before this settings flow was added. A newly funded visitor-project success has not been verified in this release.
 
 ## Next measurements and roadmap
 
-1. Restore Moss credits and recheck the hosted Moss path.
+1. Verify a newly funded visitor project on the hosted settings flow and measure its retrieval latency.
 2. Evaluate consented conversations beyond fixtures, false danger/caution alerts, warning timing, comprehension and guardian usefulness.
 3. Test with older adults and families, and measure speech quality across supported devices, accents and languages.
 4. Add signed guardian invitations, stronger abuse controls and moderation for community reports.

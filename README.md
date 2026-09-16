@@ -25,7 +25,7 @@ Built for the **YC Fall 2026 × Moss: Zero Latency Builder Sprint** (theme: Real
 
 > **Live:** https://raksha-app.web.app. try [the digital-arrest scenario](https://raksha-app.web.app/shield?scenario=digital-arrest) · [health](https://raksha-app.web.app/api/health)
 
-**Current runtime:** Moss Cloud credits were exhausted during final rollout on 16 September 2026. The hosted app clearly labels its offline TF-IDF fallback and automatically retries Moss recovery. Its current timings are not Moss benchmarks.
+**Current runtime:** the shared demo intentionally uses an offline TF-IDF detector. Connect your own funded Moss project in [Settings](https://raksha-app.web.app/settings) to test live semantic retrieval. Demo timings are not Moss benchmarks.
 
 **Release verification:** 29 unit tests, 8 E2E tests against both local and hosted builds, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine calls can reach caution. These are fixture results, not real-world accuracy claims. Earlier real-Moss and final fallback measurements are documented separately in [release verification](docs/submission/verification.md). Historical development measurements remain in [the evaluation report](docs/eval/REPORT.md).
 
@@ -146,6 +146,12 @@ A safe score means no recognised scam pattern, not that a caller is verified. Sc
 
 ### Current hosted service status
 
-The release is live at https://raksha-app.web.app. Moss cloud credits were exhausted during the final rollout on 16 September 2026, so the app currently labels and uses its offline detector. Restore the existing Moss project credits for automatic recovery. Fallback timings are not Moss benchmarks. See [release verification](docs/submission/verification.md) for both runs and remaining submission prerequisites.
+The release is live at https://raksha-app.web.app. No shared credit top-up is required: judges can connect a funded personal Moss project in Settings. The guided demo remains available without a key. See [release verification](docs/submission/verification.md) for evidence and verification limits.
 
 Demo with narration and captions: https://www.youtube.com/watch?v=yy0Ek4Ot_mE
+
+## Test with your own Moss project
+
+Open [Moss settings](https://raksha-app.web.app/settings). Enter your project ID and project API key, select an existing current Raksha playbook or explicitly create a new one, and wait for the connected state. Creating a playbook uploads the 409 curated lines and may consume your own project credits. Keys are used only for a temporary server-memory session, lasting up to 30 minutes or until disconnect or restart. A session cookie connects this browser to its private runtime. Existing indexes are never overwritten; created cloud indexes remain after disconnect.
+
+Shield calls, guardian recall, Playbook search and the Lab then use that runtime. Personal sessions cannot publish community reports. The shared demo intentionally stays in offline mode via `RAKSHA_DEMO_OFFLINE=1`; no shared credit top-up is required. Full steps and current verification limits are in [testing instructions](docs/submission/testing.md).

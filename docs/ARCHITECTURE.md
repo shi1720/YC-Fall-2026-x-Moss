@@ -8,9 +8,19 @@ Live app: https://raksha-app.web.app
 
 The demo runs in one Google Cloud Run instance in `asia-south1`, with 2 CPU and 1 GiB RAM. Firebase Hosting provides the public URL and forwards HTTP. The browser reads `/api/config` and connects directly to Cloud Run for WebSockets because Firebase Hosting does not proxy that connection.
 
-The real Moss runtime was verified on an earlier hosted revision. During final rollout on 16 September 2026, Moss Cloud returned credit-exhausted errors. The app therefore exposes a clearly labeled offline TF-IDF fallback and retries Moss recovery every 120 seconds. Fallback results and timings are not Moss benchmarks. Restoring credits on the configured Moss project is still required for the intended retrieval mode.
+The real Moss runtime was verified on an earlier hosted revision. During final rollout on 16 September 2026, Moss Cloud returned credit-exhausted errors. The shared deployment now intentionally uses offline TF-IDF (`RAKSHA_DEMO_OFFLINE=1`). Visitors can connect a funded personal Moss project in Settings. Fallback results and timings are not Moss benchmarks; restoring shared-project credits is not required for a visitor to test Moss.
 
 ![Raksha system architecture](submission/assets/architecture.png)
+
+## Personal Moss settings
+
+`POST /api/moss` accepts a project ID, project key, index name and explicit consent. It starts a bounded asynchronous setup job and sets an HttpOnly, SameSite=Strict session cookie, secure on HTTPS. Firebase Hosting forwards the specially named `__session` cookie. No key is returned to the browser or written to files or application logs.
+
+A visitor can explicitly create a new named playbook index, using their own Moss credits. Existing indexes are never overwritten. Setup verifies all 409 documents and metadata with the moss-minilm model, loads the index without refresh or disk caching, warms the calibrated multi-index retrieval path and opens isolated call memory. The HTTP Playbook and Lab routes select the runtime from the cookie. The direct Cloud Run socket receives a separate runtime-selection message with a random session capability, never the Moss key or a credential in its URL.
+
+The process holds at most two personal runtimes. Sessions expire after 30 minutes, on disconnect or process restart. Calls keep their own runtime selection, so guardian recall uses the protected call's project. An expired selection fails with an actionable error instead of silently querying another visitor's project. Community publishing is disabled for personal sessions. Cloud indexes created with consent remain in the visitor's Moss project after disconnect.
+
+Pending setup has a three-minute deadline, bounded input and connection-attempt limits. Provider error messages are sanitized. A failed or cancelled client is closed, and a late setup result cannot reactivate a removed session. This is a prototype control set, not an independent security assessment.
 
 ## Components
 
@@ -72,7 +82,7 @@ See [Privacy and threat model](PRIVACY.md).
 
 ## Validation and timing
 
-Release verification includes 29 unit tests, 8 browser E2E tests against both a fresh local build and the hosted app, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine fixtures may reach caution.
+Release verification includes the earlier 29 unit tests and 8 browser E2E tests against both a fresh local build and the hosted app, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine fixtures may reach caution.
 
 Earlier real-Moss hosted evaluation recorded server-analysis p50 of 16.89 ms and p95 of 82.87 ms on the then-running 1-CPU revision with mixed test traffic. The final fallback evaluation recorded p50 of 0.58 ms and p95 of 2.13 ms. These differ in environment and retrieval mode. They are not a direct performance comparison or latency guarantee. Server analysis also differs from retrieval-only latency and browser round-trip time.
 
@@ -82,4 +92,4 @@ Evidence: [release verification](submission/verification.md), [real-Moss evaluat
 
 ## Next engineering steps
 
-Restore Moss credits; evaluate consented conversations beyond fixtures; add signed guardian invitations and report moderation; design shared routing/state before scaling; test speech services and languages on real devices. Native phone integration and fully on-device operation are separate future projects.
+Verify a funded visitor project through the new settings flow; evaluate consented conversations beyond fixtures; add signed guardian invitations and report moderation; design shared routing/state before scaling; test speech services and languages on real devices. Native phone integration and fully on-device operation are separate future projects.

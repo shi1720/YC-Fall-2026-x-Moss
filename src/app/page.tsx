@@ -13,17 +13,16 @@ export default function Home() {
           <div className="max-w-3xl">
             <div className="chip chip-saffron mb-5">YC Fall 2026 × Moss · Real-Time Voice & Conversational AI</div>
             <h1 className="display text-5xl leading-[1.02] text-text sm:text-7xl">
-              Every scam follows a script.
+              A second listener.
               <br />
-              <span className="text-saffron-2">Now your phone knows the script.</span>
+              <span className="text-saffron-2">A moment to pause.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              Raksha listens with you during a call, recognises the scam playbook in <span className="mono text-moss">about 10 ms</span> with Moss, and steps in before you
-              read out the OTP. It coaches you with the exact words to say, and quietly alerts someone you trust.
+              Scam callers use fear, urgency and secrecy. Raksha helps you recognise the pressure, find the words to end the call and bring in someone you trust. Try the guided demo, or connect your own Moss project to test live semantic retrieval.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/shield?scenario=digital-arrest" className="btn btn-primary text-base">
-                <PhoneCall className="h-5 w-5" /> Watch a scam get stopped
+                <PhoneCall className="h-5 w-5" /> Try a scam-call simulation
               </Link>
               <Link href="/shield?mode=live" className="btn btn-ghost text-base">
                 Try it with your microphone <ArrowRight className="h-4 w-4" />
@@ -31,7 +30,7 @@ export default function Home() {
             </div>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-faint">
               <span>No account needed</span>
-              <span>No account or installation</span>
+              <span>Your own Moss key is optional</span>
               <span>Simulations work without a microphone</span>
             </div>
           </div>
@@ -48,19 +47,17 @@ export default function Home() {
             <div className="text-xs uppercase tracking-[0.25em] text-saffron">The problem</div>
             <h2 className="display mt-3 text-4xl leading-tight text-text">Caller-ID tells you who is calling. Raksha helps you recognise the pressure.</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              Indians reported <span className="text-text">₹22,845 crore</span> lost to cyber fraud in 2024, ten times the figure two years earlier. “Digital arrest” scams use fear and isolation to pressure people into transferring their savings. In the US, phone calls carry the highest median loss of any scam channel, and 41% of the biggest losses by older adults began
-              with a call.
+              A caller claims to be the police. A bank account will be frozen. A family member needs money now. Under pressure, even a careful person can skip the moment of verification.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-muted">
-              Every one of those calls followed a script: <em>authority → fear → secrecy → the ask</em>. Scam-blocking today is number reputation. By the time a number is
-              flagged, the crew has a new one. The pressure tactics repeat.
+              Raksha looks for familiar combinations: <em>authority → fear → secrecy → the ask</em>. It shows the conversation evidence behind a warning and gives the person a concrete next step.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {[
-              ["₹22,845 cr", "reported cyber-fraud losses, India, 2024 (MHA)"],
-              ["41%", "of $10k+ losses by older adults in the US began with a phone call (FTC, 2025)"],
-              ["$25.6M", "wired by one employee to a deepfaked CFO on a video call (Arup, 2024)"],
+              ["409 lines", "a curated playbook of scam tactics and legitimate look-alikes"],
+              ["2 views", "a shield for the person on the call and a dashboard for their guardian"],
+              ["Your Moss", "connect your own project to measure real semantic retrieval"],
               ["18 calls", "scripted scenarios include ten scams and eight genuine conversations"],
             ].map(([n, d]) => (
               <div key={n} className="card p-5">
@@ -86,13 +83,13 @@ export default function Home() {
               },
               {
                 icon: Gauge,
-                title: "2 · Recognise, in about ten milliseconds",
-                body: "Moss holds a 400-line scam playbook in memory. Each fragment is embedded and matched in-process. no vector database, no round-trip. in roughly 10 ms end-to-end, with the search itself under a millisecond. The engine credits persuasion tactics (authority, urgency, secrecy, the ask) and a noisy-OR risk model decides.",
+                title: "2 · Recognise the pattern",
+                body: "With Moss connected, each fragment is embedded and matched against the 409-line playbook inside the server process. A deterministic risk engine combines the evidence. Without a Moss connection, a clearly labeled text detector keeps the demo usable.",
               },
               {
                 icon: ShieldAlert,
-                title: "3 · Intervene, before the OTP leaves your mouth",
-                body: "When pressure meets an ask, the shield interrupts: it says stop, gives you one sentence to end the call, and alerts your guardian. An LLM coach adds plain-language context only on risk transitions.",
+                title: "3 · Pause and get support",
+                body: "When pressure meets an ask, the shield interrupts: it says stop, gives you one sentence to end the call, and alerts your guardian. An optional AI coach adds context outside the detection path.",
               },
             ].map((s) => (
               <div key={s.title} className="card p-6">
@@ -112,8 +109,7 @@ export default function Home() {
             <div className="text-xs uppercase tracking-[0.25em] text-moss">Why latency is the product</div>
             <h2 className="display mt-3 text-4xl leading-tight text-text">A scam is won or lost inside one sentence.</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              “Read me the six digits, quickly.” takes about two and a half seconds to say. Network retrieval and LLM classification add delay before an intervention can appear. Moss answers in the time it takes to say a syllable, so the shield can interrupt <em>while</em> the request is being
-              made, and it can do that for every fragment of every call without a separate vector database request. Hosting and speech or LLM providers still have costs.
+              “Read me the six digits, quickly.” A warning is useful while someone can still pause. Moss keeps embedding and search inside the server process, so detection does not wait for a remote vector database or language-model verdict. The Lab separates retrieval, analysis and network timings. Speech services and network conditions still affect the experience.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/lab" className="btn btn-ghost">
@@ -137,10 +133,10 @@ export default function Home() {
           <h2 className="display mt-3 max-w-3xl text-4xl leading-tight text-text">Four ways the retrieval layer does real work here.</h2>
           <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
             {[
-              { icon: Gauge, title: "Loaded playbook index", body: "The curated scam playbook lives in a Moss cloud index, loaded into the process at boot and queried in-memory with a raw cosine score for every fragment." },
-              { icon: Sparkles, title: "Call memory in a Moss session", body: "Every turn of a live call is written into a local, in-process Moss session tagged with the call id. The guardian can ask “what did they ask for?” and get filtered semantic recall in milliseconds. Never pushed to the cloud. a call’s turns are deleted the moment it ends." },
-              { icon: Users, title: "Community intel with hot-swap", body: "When someone reports a call, the caller’s flagged lines are upserted into a second index. Every running shield has it loaded with auto-refresh, so a new script variant reaches every device without a redeploy." },
-              { icon: Lock, title: "Multi-index, one query", body: "Playbook and community intel are searched together in one call for a single global top-K, and legitimate look-alikes in the index suppress false alarms." },
+              { icon: Gauge, title: "Loaded playbook index", body: "The curated scam playbook lives in a Moss cloud index, loaded into your session after connection and queried in-memory with a raw cosine score for every fragment." },
+              { icon: Sparkles, title: "Call memory in a Moss session", body: "Substantive caller turns are written into a local, in-process Moss session tagged with the call id. The guardian can ask “what did they ask for?” and get filtered semantic recall. This memory is not published to Moss Cloud; its turns are removed at call end." },
+              { icon: Users, title: "Community intel with hot-swap", body: "The shared-runtime integration supports explicit caller reports to a second Moss index and automatic refresh. This depends on shared-project credits. Publishing is disabled for personal project sessions." },
+              { icon: Lock, title: "Multi-index, one query", body: "The shared runtime can combine playbook and community indexes in one query. Personal sessions query only their verified playbook. Benign look-alikes help the risk engine distinguish legitimate conversations." },
             ].map((s) => (
               <div key={s.title} className="card flex gap-4 p-5">
                 <s.icon className="mt-0.5 h-5 w-5 shrink-0 text-moss" />
@@ -170,20 +166,13 @@ export default function Home() {
           </div>
           <div className="card p-6">
             <Sparkles className="h-6 w-6 text-moss" />
-            <h3 className="display mt-4 text-3xl text-text">Who pays, and why it scales</h3>
+            <h3 className="display mt-4 text-3xl text-text">Built to learn from real use</h3>
             <ul className="mt-3 space-y-2 leading-relaxed text-muted">
-              <li>
-                <span className="text-text">Banks:</span> from 2027 RBI makes banks compensate scam-induced losses; the UK already reimburses £354M a year. A shield that fires
-                before the transfer is cheaper than any refund.
-              </li>
-              <li>
-                <span className="text-text">Telcos and OEMs:</span> a differentiated “protected line”, per subscriber per month, on any phone, not just a Pixel.
-              </li>
-              <li>
-                <span className="text-text">Families:</span> a ₹99/month circle that protects parents, in the price band where family-safety apps already convert.
-              </li>
+              <li><span className="text-text">Today:</span> a browser prototype with guided calls, recording uploads, live speech input and a guardian view.</li>
+              <li><span className="text-text">Next:</span> consented testing with families, more accents and languages, and stronger guardian invitations.</li>
+              <li><span className="text-text">Before broader use:</span> evaluate real-world false alarms, strengthen abuse controls and add shared state before scaling.</li>
             </ul>
-            <p className="mt-3 text-sm text-faint">Unit cost: local Moss queries are unmetered, and the LLM runs only on risk transitions, so a protected call costs a fraction of a paisa.</p>
+            <p className="mt-3 text-sm text-faint">Raksha is a decision aid. It does not intercept cellular calls, verify identities or guarantee fraud prevention.</p>
           </div>
         </div>
       </section>
@@ -191,7 +180,7 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6">
         <div className="card card-strong flex flex-col items-start gap-4 p-8 md:flex-row md:items-center md:justify-between">
           <div>
-            <div className="display text-3xl text-text">See it stop a digital arrest in 60 seconds.</div>
+            <div className="display text-3xl text-text">See how a digital-arrest warning works.</div>
             <div className="mt-1 text-muted">Voices on. Watch the dial, the transcript and the intervention.</div>
           </div>
           <Link href="/shield?scenario=digital-arrest" className="btn btn-primary text-base">

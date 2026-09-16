@@ -10,9 +10,9 @@ Try it: https://raksha-app.web.app
 
 Source: https://github.com/shi1720/YC-Fall-2026-x-Moss
 
-Architecture: https://github.com/shi1720/YC-Fall-2026-x-Moss/blob/claude/yc-moss-hackathon-8tnweh/docs/ARCHITECTURE.md
+Architecture: https://github.com/shi1720/YC-Fall-2026-x-Moss/blob/main/docs/ARCHITECTURE.md
 
-PRD: https://github.com/shi1720/YC-Fall-2026-x-Moss/blob/claude/yc-moss-hackathon-8tnweh/docs/PRD.md
+PRD: https://github.com/shi1720/YC-Fall-2026-x-Moss/blob/main/docs/PRD.md
 
 Project story: use the complete Markdown in `story.md`.
 
