@@ -1,6 +1,6 @@
 # Devpost submission — Raksha
 
-> Copy each section into the corresponding Devpost field. Replace the deployment URL placeholder once the Space is live.
+> Copy each section into the corresponding Devpost field. Fill in the video link once it is uploaded.
 
 **Project name:** Raksha — the real-time scam-call shield
 
@@ -8,7 +8,7 @@
 
 **Links**
 
-* Deployed agent: *(Cloud Run URL, updated at submission)*
+* Deployed agent: https://raksha-469445069558.asia-south1.run.app (Google Cloud Run, Mumbai)
 * GitHub: https://github.com/shi1720/YC-Fall-2026-x-Moss
 * Architecture diagram: `docs/diagrams/architecture.png` (also in the README)
 * PRD: `docs/PRD.md` (PDF in `docs/pdf/`)

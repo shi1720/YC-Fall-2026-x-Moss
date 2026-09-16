@@ -11,7 +11,16 @@ The script enables the APIs, builds the Docker image (with your local Docker dae
 
 Options: `REGION=us-central1`, `SERVICE=raksha-demo`, `MIN_INSTANCES=1` (no cold starts, small idle cost), `BUILD_MODE=cloud` to force Cloud Build.
 
-Then set the GitHub repository variable `DEPLOY_URL` to the printed URL so `.github/workflows/keepalive.yml` pings it every 10 minutes.
+## Clean URL with Firebase Hosting (optional, one command)
+
+```bash
+./deploy/firebase.sh                      # → https://raksha.web.app (first free of raksha, raksha-shield, raksha-app, raksha-<project>)
+FIREBASE_SITE=my-name ./deploy/firebase.sh  # → https://my-name.web.app
+```
+
+Firebase Hosting rewrites every path to the Cloud Run service (`firebase.json`) and serves `/_next/static` from its CDN. Hosting cannot proxy WebSockets, so the script sets `RAKSHA_WS_ORIGIN` on the service; the browser reads it from `/api/config` and opens the shield socket directly against Cloud Run. Needs the Firebase CLI (pre-installed in Cloud Shell; `firebase login --no-localhost` if it asks).
+
+Then set the GitHub repository variable `DEPLOY_URL` to the public URL so `.github/workflows/keepalive.yml` pings it every 10 minutes.
 
 ## Any Docker host
 

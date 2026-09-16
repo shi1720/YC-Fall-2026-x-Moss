@@ -22,7 +22,12 @@ export function fmtClock(ms: number) {
   return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 }
 
-export function wsUrl(): string {
+/**
+ * WebSocket endpoint for the shield. `origin` (an http(s) URL from /api/config) overrides
+ * the page origin when pages are served through a proxy that cannot carry WebSockets.
+ */
+export function wsUrl(origin?: string | null): string {
+  if (origin) return `${origin.replace(/^http/i, "ws").replace(/\/+$/, "")}/ws`;
   if (typeof window === "undefined") return "";
   const proto = window.location.protocol === "https:" ? "wss" : "ws";
   return `${proto}://${window.location.host}/ws`;

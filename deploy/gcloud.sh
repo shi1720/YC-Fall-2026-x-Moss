@@ -38,11 +38,18 @@ REPO="raksha"
 IMAGE="${REGION}-docker.pkg.dev/${PROJECT}/${REPO}/raksha:$(git rev-parse --short HEAD 2>/dev/null || date +%s)"
 gcloud artifacts repositories create "${REPO}" --repository-format docker --location "${REGION}" --quiet >/dev/null 2>&1 || true
 
+# The service's own deterministic URL: the browser opens its WebSocket here even when the pages
+# are served through Firebase Hosting (deploy/firebase.sh), which cannot proxy WebSockets.
+RUN_URL="https://${SERVICE}-${PROJECT_NUMBER}.${REGION}.run.app"
+PUBLIC_URL="$(gcloud run services describe "${SERVICE}" --region "${REGION}" --format json 2>/dev/null | python3 -c 'import json,sys
+d=json.load(sys.stdin); env=d["spec"]["template"]["spec"]["containers"][0].get("env",[])
+print(next((e.get("value","") for e in env if e.get("name")=="RAKSHA_PUBLIC_URL"),""))' 2>/dev/null || true)"
+
 RUN_FLAGS=(
   --region "${REGION}" --platform managed --allow-unauthenticated
   --session-affinity --timeout 3600 --cpu 1 --memory 1Gi --concurrency 80
   --min-instances "${MIN_INSTANCES:-0}" --max-instances 3
-  --set-env-vars "NODE_ENV=production,HOSTNAME=0.0.0.0,MOSS_MODEL_CACHE_DIR=/tmp/moss-models,MOSS_CACHE_PATH=/tmp/moss-cache,MOSS_EMBEDDING_INTRA_OP_THREADS=2,MOSS_PROJECT_ID=${MOSS_PROJECT_ID},MOSS_PROJECT_KEY=${MOSS_PROJECT_KEY},GROQ_API_KEY=${GROQ_API_KEY}"
+  --set-env-vars "NODE_ENV=production,HOSTNAME=0.0.0.0,MOSS_MODEL_CACHE_DIR=/tmp/moss-models,MOSS_CACHE_PATH=/tmp/moss-cache,MOSS_EMBEDDING_INTRA_OP_THREADS=2,MOSS_PROJECT_ID=${MOSS_PROJECT_ID},MOSS_PROJECT_KEY=${MOSS_PROJECT_KEY},GROQ_API_KEY=${GROQ_API_KEY},RAKSHA_WS_ORIGIN=${RUN_URL}${PUBLIC_URL:+,RAKSHA_PUBLIC_URL=${PUBLIC_URL}}"
   --quiet
 )
 
@@ -78,4 +85,9 @@ for i in $(seq 1 30); do
   fi
   sleep 5
 done
-echo "Next: set the GitHub repository variable DEPLOY_URL=${URL} so the keep-alive workflow pings it every 10 minutes."
+if [[ -n "${PUBLIC_URL}" ]]; then
+  echo "Public URL (Firebase Hosting): ${PUBLIC_URL}"
+else
+  echo "Want a clean https://<name>.web.app URL? Run ./deploy/firebase.sh next."
+fi
+echo "Then set the GitHub repository variable DEPLOY_URL to the public URL so the keep-alive workflow pings it every 10 minutes."

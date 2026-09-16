@@ -9,9 +9,9 @@ Deadline: **20 Sep 2026, 11:59 PM IST** (Devpost). Everything below is ready in 
 | Architecture diagram | `docs/diagrams/architecture.png` (SVG source alongside; also in README and deck) | ✅ |
 | PRD | `docs/PRD.md` · PDF: `docs/pdf/Raksha-PRD.pdf` | ✅ |
 | GitHub repository | https://github.com/shi1720/YC-Fall-2026-x-Moss (merge the branch to `main` before submitting) | ☐ merge |
-| Deployed link of the agent | Google Cloud Run via `./deploy/gcloud.sh` (see *Deploy* below) | ☐ run the script |
+| Deployed link of the agent | https://raksha-469445069558.asia-south1.run.app (Google Cloud Run; `./deploy/firebase.sh` adds a clean `*.web.app` alias) | ✅ live |
 | Video demo | Record with `docs/VIDEO_SCRIPT.md` (3-minute cut + 60-second teaser); upload to YouTube (unlisted is fine) | ☐ record |
-| Submission text | `docs/DEVPOST.md` — paste each section into the Devpost form; update the deployed URL and video link | ☐ paste |
+| Submission text | `docs/DEVPOST.md` — paste each section into the Devpost form; add the video link | ☐ paste |
 | Pitch deck (optional, strongly recommended) | `docs/deck/Raksha-Pitch.pptx` and `.pdf` | ✅ |
 
 ## Deploy (Google Cloud Run, one command)
@@ -24,8 +24,9 @@ gcloud auth login && gcloud config set project <your-project-id>            # on
 ```
 
 The script prints the URL and waits until `/api/health` reports `"mode":"moss"`. Then:
-1. GitHub → Settings → Secrets and variables → Actions → Variables: `DEPLOY_URL` = the URL (keep-alive ping every 10 minutes).
-2. Send the URL to Claude to fold into the README, Devpost text and deck, or paste it yourself.
+1. `./deploy/firebase.sh` — puts a clean `https://<name>.web.app` address in front of the service (Firebase Hosting rewrite; the shield's WebSocket still goes straight to Cloud Run because Hosting cannot proxy sockets).
+2. GitHub → Settings → Secrets and variables → Actions → Variables: `DEPLOY_URL` = the public URL (keep-alive ping every 10 minutes).
+3. Use the public URL in the README, Devpost text and deck.
 
 ## Before you record the video
 

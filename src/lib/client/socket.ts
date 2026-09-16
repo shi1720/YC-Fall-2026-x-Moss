@@ -6,6 +6,18 @@ import { wsUrl } from "@/lib/utils";
 
 export type SocketStatus = "connecting" | "open" | "closed";
 
+let originPromise: Promise<string | null> | null = null;
+/** Resolve (once per page) where the socket should connect; same origin unless the server says otherwise. */
+function socketOrigin(): Promise<string | null> {
+  if (!originPromise) {
+    originPromise = fetch("/api/config", { cache: "no-store" })
+      .then((r) => (r.ok ? (r.json() as Promise<{ wsOrigin?: string | null }>) : null))
+      .then((cfg) => cfg?.wsOrigin ?? null)
+      .catch(() => null);
+  }
+  return originPromise;
+}
+
 /**
  * Thin WebSocket hook with auto-reconnect. Consumers subscribe to server messages via
  * `onMessage`; a stable `send` is returned for client messages.
@@ -26,7 +38,13 @@ export function useRakshaSocket(onMessage: (msg: ServerMessage) => void) {
     const connect = () => {
       if (closed) return;
       setStatus("connecting");
-      const ws = new WebSocket(wsUrl());
+      void socketOrigin().then((origin) => {
+        if (closed) return;
+        open(origin);
+      });
+    };
+    const open = (origin: string | null) => {
+      const ws = new WebSocket(wsUrl(origin));
       wsRef.current = ws;
       ws.onopen = () => {
         attempts.current = 0;
