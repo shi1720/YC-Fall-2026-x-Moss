@@ -1,5 +1,5 @@
 /**
- * Raksha risk engine — the *fast path*.
+ * Raksha risk engine. the *fast path*.
  *
  * Pure functions, no I/O, unit-tested. Given the retrieval hits for one transcript
  * fragment it updates a per-call RiskState using a noisy-OR over persuasion tactics,
@@ -43,7 +43,7 @@ export interface RiskConfig {
   creditTopN: number;
   /** Only hits whose raw score is within this band of the best tactic hit are credited. */
   creditBand: number;
-  /** Fragments shorter than this (in words) are never credited — "yes", "okay sir". */
+  /** Fragments shorter than this (in words) are never credited. "yes", "okay sir". */
   minWords: number;
 }
 
@@ -113,7 +113,7 @@ const RANK_DISCOUNT = [1, 0.75, 0.55];
 /**
  * Decide which matches get credited, applying benign suppression and speaker awareness.
  * The protected person's own words can only ever be evidence of *compliance* (reading an
- * OTP, agreeing to transfer) — never of the caller's pressure tactics.
+ * OTP, agreeing to transfer). never of the caller's pressure tactics.
  */
 export function creditMatches(
   matches: Match[],
@@ -171,7 +171,7 @@ function buildReasons(state: RiskState): string[] {
   const evs = Object.values(state.tactics).filter((e): e is TacticEvidence => !!e);
   evs.sort((a, b) => b.confidence * TACTIC_INFO[b.tactic].weight - a.confidence * TACTIC_INFO[a.tactic].weight);
   const reasons = evs.slice(0, 4).map((e) => TACTIC_INFO[e.tactic].label + ": " + TACTIC_INFO[e.tactic].description);
-  if (state.triad) reasons.unshift("Pressure followed by a request for money, codes or access — the signature of a scam.");
+  if (state.triad) reasons.unshift("Pressure followed by a request for money, codes or access. the signature of a scam.");
   if (state.dominantFamily && state.dominantFamily !== "benign") {
     reasons.unshift(`Matches the "${FAMILY_INFO[state.dominantFamily].label}" script.`);
   }
@@ -200,7 +200,7 @@ export function analyzeUtterance(
   const { credited, suppressed, reason } = tooShort
     ? { credited: [], suppressed: false, reason: undefined }
     : benignMarker
-      ? { credited: [], suppressed: true, reason: "The caller invited verification or declined details — the opposite of a scam script." }
+      ? { credited: [], suppressed: true, reason: "The caller invited verification or declined details. the opposite of a scam script." }
       : creditMatches(matches, cfg, utterance.speaker);
   const creditedTactics = new Set<Tactic>();
 
@@ -251,7 +251,7 @@ export function analyzeUtterance(
   // Base score: noisy-OR over persisted tactic evidence.
   let score = noisyOr(state.tactics, cfg);
 
-  // Rule 1 — the triad.
+  // Rule 1. the triad.
   const strong = (set: Set<Tactic>) =>
     Object.values(state.tactics).some((e) => e && set.has(e.tactic) && e.confidence >= cfg.triadConfidence);
   const hasPressure = strong(PRESSURE);
@@ -259,7 +259,7 @@ export function analyzeUtterance(
   state.triad = hasPressure && hasAsk;
   if (state.triad) score = Math.max(score, cfg.levels.danger + 15);
 
-  // Rule 2 — victim compliance while under pressure.
+  // Rule 2. victim compliance while under pressure.
   const compliance = state.tactics.victim_compliance;
   if (compliance && compliance.confidence >= cfg.triadConfidence && hasPressure) score = Math.max(score, 85);
 
@@ -326,5 +326,5 @@ export function describeRisk(state: RiskState): string {
     .slice(0, 5)
     .map((e) => `${TACTIC_INFO[e.tactic].label} (${Math.round(e.confidence * 100)}%)`)
     .join(", ");
-  return `${state.level.toUpperCase()} ${state.score}/100 — ${fam}; tactics: ${tactics || "none"}`;
+  return `${state.level.toUpperCase()} ${state.score}/100. ${fam}; tactics: ${tactics || "none"}`;
 }

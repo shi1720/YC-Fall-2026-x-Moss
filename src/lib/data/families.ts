@@ -52,7 +52,7 @@ export const FAMILY_INFO: Record<Family, FamilyInfo> = {
     label: "Courier / parcel",
     short: "'A parcel in your name contains illegal items and has been seized.'",
     description:
-      "Caller pretends to be FedEx / DHL / Blue Dart or customs; a parcel with drugs, passports or cash is 'in your name' and the case is being transferred to police — the usual on-ramp to a digital-arrest scam.",
+      "Caller pretends to be FedEx / DHL / Blue Dart or customs; a parcel with drugs, passports or cash is 'in your name' and the case is being transferred to police. the usual on-ramp to a digital-arrest scam.",
     arc: "Parcel seized → your Aadhaar was used → transfer to 'police'.",
     advice: "Couriers never transfer calls to the police. Hang up.",
     helpline: "1930",
@@ -162,7 +162,7 @@ export const FAMILY_INFO: Record<Family, FamilyInfo> = {
   family_emergency: {
     id: "family_emergency",
     label: "Family emergency / voice clone",
-    short: "'Papa, I've been in an accident — please send money now, don't tell Mummy.'",
+    short: "'Papa, I've been in an accident. please send money now, don't tell Mummy.'",
     description: "Caller (often a cloned voice) claims to be a child or grandchild in trouble and needs money immediately, secretly.",
     arc: "Distress → secrecy → urgent transfer.",
     advice: "Hang up and call the family member back on their own number. Use a family safe word.",
@@ -192,7 +192,7 @@ export const FAMILY_INFO: Record<Family, FamilyInfo> = {
   ceo_wire_fraud: {
     id: "ceo_wire_fraud",
     label: "CEO / CFO wire fraud (deepfake)",
-    short: "'This is confidential — wire the vendor today, I'll explain later.'",
+    short: "'This is confidential. wire the vendor today, I'll explain later.'",
     description: "A 'senior executive' (sometimes a deepfake on video) instructs finance staff to make an urgent, confidential payment outside normal process.",
     arc: "Authority → confidentiality → urgency → bypass controls → wire.",
     advice: "Verify on a known number or in person. Never bypass dual approval under time pressure.",
@@ -282,7 +282,7 @@ export const FAMILY_INFO: Record<Family, FamilyInfo> = {
   refund_overpayment: {
     id: "refund_overpayment",
     label: "Refund overpayment",
-    short: "'We accidentally refunded you $5,000 instead of $500 — please send back the difference.'",
+    short: "'We accidentally refunded you $5,000 instead of $500. please send back the difference.'",
     description: "After remote access, a fake refund appears (the scammer moved money between your accounts); you are pressured to 'return' the excess.",
     arc: "Refund → 'mistake' → guilt → gift cards / transfer.",
     advice: "Disconnect, call your bank on the official number, and do not send anything back.",
@@ -302,7 +302,7 @@ export const FAMILY_INFO: Record<Family, FamilyInfo> = {
   hi_mum: {
     id: "hi_mum",
     label: "'Hi Mum' new number",
-    short: "'Mum, I lost my phone, this is my new number — can you pay this bill for me?'",
+    short: "'Mum, I lost my phone, this is my new number. can you pay this bill for me?'",
     description: "A message or call claiming to be a child on a new number asking for money.",
     arc: "New number → small favour → urgent payment.",
     advice: "Call the old number first. Never pay on a new number without verifying.",
@@ -324,9 +324,9 @@ export const FAMILY_INFO: Record<Family, FamilyInfo> = {
     label: "Legitimate call",
     short: "A normal conversation that superficially resembles a scam.",
     description: "Used to teach the shield what genuine bank, courier, hospital and family calls sound like, so it does not cry wolf.",
-    arc: "—",
-    advice: "—",
-    helpline: "—",
+    arc: "-",
+    advice: "-",
+    helpline: "-",
     region: "GLOBAL",
   },
 };

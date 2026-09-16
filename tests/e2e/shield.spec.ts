@@ -5,6 +5,7 @@ test("health reports a ready retrieval runtime", async ({ request }) => {
   expect(res.ok()).toBeTruthy();
   const body = await res.json();
   expect(body.ok).toBe(true);
+  if (process.env.REQUIRE_MOSS === "1") expect(body.retrieval.mode).toBe("moss");
   expect(body.retrieval.docCount).toBeGreaterThan(300);
 });
 
@@ -31,10 +32,15 @@ test("a simulated digital-arrest call is stopped and the guardian sees it", asyn
   await expect(page.getByText("scam detected", { exact: false })).toBeVisible({ timeout: 45_000 });
   await expect(guardian.getByText("Interventions on their phone")).toBeVisible({ timeout: 20_000 });
   await expect(guardian.getByText("Danger").first()).toBeVisible();
+  const interventionRegion = guardian.getByRole("region", { name: "Interventions on their phone" });
+  const beforeRejoin = await interventionRegion.innerText();
+  await guardian.getByRole("button", { name: "Joined", exact: true }).click();
+
 
   await guardian.getByPlaceholder("What did they ask for?").fill("what money did they ask for");
   await guardian.getByRole("button", { name: "Ask", exact: true }).click();
   await expect(guardian.getByText("“what money did they ask for”")).toBeVisible({ timeout: 15_000 });
+  await expect(interventionRegion).toHaveText(beforeRejoin, { useInnerText: true });
 
   await page.getByRole("button", { name: "I hung up" }).click();
   await expect(page.getByText(/Call ended · \d/)).toBeVisible({ timeout: 20_000 });

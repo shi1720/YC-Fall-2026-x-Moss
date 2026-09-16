@@ -2,7 +2,7 @@
   <img src="src/app/icon.svg" width="72" alt="Raksha" />
 </p>
 
-<h1 align="center">Raksha — the real-time scam-call shield</h1>
+<h1 align="center">Raksha. the real-time scam-call shield</h1>
 
 <p align="center">
   <em>Every scam follows a script. Now your phone knows the script.</em><br/>
@@ -23,31 +23,31 @@
 
 Built for the **YC Fall 2026 × Moss: Zero Latency Builder Sprint** (theme: Real-Time Voice & Conversational AI, inspired by YC's *"Proving you're human"* and *"AI for the aging population"* requests). By **Shivam Gupta**, with Claude.
 
-> **Live:** https://raksha-469445069558.asia-south1.run.app — try [the digital-arrest scenario](https://raksha-469445069558.asia-south1.run.app/shield?scenario=digital-arrest) · [health](https://raksha-469445069558.asia-south1.run.app/api/health)
+> **Live:** https://raksha-app.web.app. try [the digital-arrest scenario](https://raksha-app.web.app/shield?scenario=digital-arrest) · [health](https://raksha-app.web.app/api/health)
 
 **Measured on the committed evaluation (real Moss runtime, 18 scripted calls, 264 utterances, plus 80 everyday sentences):** 10/10 scam calls caught, 0/8 genuine calls flagged, 1/80 everyday sentences credited with any tactic, retrieval p50 8.0 ms / p95 14.9 ms including on-device embedding. See [docs/eval/REPORT.md](docs/eval/REPORT.md). Under load (`npm run eval:load`, 100 concurrent conversational calls on one 4-vCPU container): zero errors, server-side analysis p50 12.8 ms / p95 58.0 ms.
 
 ## The problem
 
-Indians reported **₹22,845 crore** lost to cyber fraud in 2024 — ten times the figure two years earlier. "Digital arrest" alone took ~₹1,900 crore from 1.23 lakh people. In the US, phone calls carry the highest median loss of any scam channel, and 41% of the biggest losses by older adults began with a call. ([sources](docs/research/market-facts.md))
+Indians reported **₹22,845 crore** lost to cyber fraud in 2024. ten times the figure two years earlier. "Digital arrest" alone took ~₹1,900 crore from 1.23 lakh people. In the US, phone calls carry the highest median loss of any scam channel, and 41% of the biggest losses by older adults began with a call. ([sources](docs/research/market-facts.md))
 
 Every one of those calls followed a script: *authority → fear → secrecy → the ask*. Yet scam protection today is **number reputation** (Truecaller, Airtel, Jio, iOS call screening). By the time a number is flagged, the crew has a new one. The words never change. The only products that analyse what is actually *said* on a call ship on < 1% of Indian phones (Pixel 9+) or in the US only (Hiya, $9.99/month).
 
 ## What Raksha does
 
-Raksha listens with you during a call and checks **every spoken fragment** against a playbook of real scam scripts. When pressure meets an ask, it interrupts — before the OTP leaves your mouth — tells you exactly what to say, and quietly alerts someone you trust.
+Raksha listens with you during a call and checks **every spoken fragment** against a playbook of real scam scripts. When pressure meets an ask, it interrupts. before the OTP leaves your mouth. tells you exactly what to say, and quietly alerts someone you trust.
 
 | | |
 |---|---|
 | ![Shield](docs/screenshots/shield-intervention.png) | ![Guardian](docs/screenshots/guardian.png) |
 | **The shield** stops a digital-arrest call mid-sentence: what script it is, one sentence to say, the helpline to call. | **The guardian** sees the risk of a parent's call live, speaks through the shield, and can ask the call's memory a question. |
 
-* **Fast path (every fragment, ≈ 10 ms end-to-end, search < 1 ms):** Moss holds a 409-line scam playbook in memory. Each fragment is embedded and matched in-process — no vector database, no round-trip. A small, unit-tested risk engine credits persuasion tactics (authority, urgency, secrecy, the ask…) and a noisy-OR model decides *safe / caution / danger*.
+* **Fast path (every fragment, ≈ 10 ms end-to-end, search < 1 ms):** Moss holds a 409-line scam playbook in memory. Each fragment is embedded and matched in-process. no vector database, no round-trip. A small, unit-tested risk engine credits persuasion tactics (authority, urgency, secrecy, the ask…) and a noisy-OR model decides *safe / caution / danger*.
 * **Slow path (only on risk transitions):** an LLM coach explains in plain words, gives the exact sentence to say, and can veto a false alarm. It never sits on the critical path.
 * **Circle of trust:** a family code links a phone to a guardian's dashboard. Human and agent share the same call session.
 * **Community intel:** report a call and its flagged lines are upserted into a second Moss index; every running shield hot-swaps it in. New scam variants propagate without a redeploy.
 * **Three ways to try it:** replay one of eighteen scripted calls (ten scams, eight genuine) with two synthetic voices, use your own microphone (phone on speaker), or upload a recording (transcribed by Whisper).
-* **Privacy, precisely:** speech becomes text in the browser (Chrome uses Google's speech service, Safari transcribes on-device); the Raksha server receives text only, keeps it in RAM for the duration of the call, and discards it. Uploaded recordings go to Whisper on Groq for transcription and are not stored. Community reports are opt-in and contain only the caller's flagged lines.
+* **Privacy, precisely:** speech becomes text in the browser (Chrome uses Google's speech service, on-device availability depends on the browser and operating system); the Raksha server receives text only, keeps it in RAM for the duration of the call, and retains completed records in RAM for up to ten minutes. Uploaded recordings go to Whisper on Groq for transcription and are not stored. Community reports are opt-in and contain only the caller's flagged lines.
 
 ## How Moss is used
 
@@ -70,12 +70,12 @@ Read the full [architecture document](docs/ARCHITECTURE.md).
 ```bash
 git clone https://github.com/shi1720/YC-Fall-2026-x-Moss.git raksha && cd raksha
 npm install
-cp .env.example .env            # add MOSS_PROJECT_ID, MOSS_PROJECT_KEY, GROQ_API_KEY
+cp deploy/env.example .env            # add MOSS_PROJECT_ID, MOSS_PROJECT_KEY, GROQ_API_KEY
 npm run moss:seed               # builds the "raksha-playbook" index in Moss Cloud (once)
 npm run dev                     # http://localhost:3000
 ```
 
-Without Moss credentials the app still runs, on an offline lexical fallback (so CI and forks work) — the UI says so. Without a Groq key the coach uses templates.
+Without Moss credentials the app still runs, on an offline lexical fallback (so CI and forks work). the UI says so. Without a Groq key the coach uses templates.
 
 | Script | What it does |
 |---|---|
@@ -127,3 +127,23 @@ docs/            PRD, architecture, privacy, evaluation, research, video script,
 Built by **Shivam Gupta** with Claude for the YC Fall 2026 × Moss Zero Latency Builder Sprint. Scam playbook lines are paraphrased from public advisories (I4C, RBI, TRAI, FTC, FBI IC3, Action Fraud, Scamwatch) and news reconstructions; they are not verbatim quotes of any victim's call. If you or someone you know is on such a call in India: hang up and call **1930** or report at [cybercrime.gov.in](https://cybercrime.gov.in).
 
 License: MIT.
+
+
+## Release verification and submission
+
+The release adds validated socket messages, bounded inputs, explicit reporting consent, reliable call startup, post-call reporting, connection-loss recovery, speech cancellation recovery and responsive layouts. Local verification: 29 unit tests, 8 end-to-end tests, lint, typecheck and a production build. Hosted verification is documented in `docs/submission/verification.md`.
+
+The public demo is deliberately limited to one Cloud Run instance because call and guardian state lives in process memory. Session affinity alone does not share that state between instances. Horizontal scaling needs shared state and routing.
+
+- [Project story](docs/submission/story.md)
+- [Judge testing instructions](docs/submission/testing.md)
+- [Video title and description](docs/submission/youtube.md)
+- [Judging evidence](docs/submission/checklist.md)
+
+A safe score means no recognised scam pattern, not that a caller is verified. Scripted fixtures are not a real-world accuracy study. See [privacy](docs/PRIVACY.md) for audio providers, in-memory retention and opt-in community sharing.
+
+### Current hosted service status
+
+The release is live at https://raksha-app.web.app. Moss cloud credits were exhausted during the final rollout on 16 September 2026, so the app currently labels and uses its offline detector. Restore the existing Moss project credits for automatic recovery. Fallback timings are not Moss benchmarks. See [release verification](docs/submission/verification.md) for both runs and remaining submission prerequisites.
+
+Demo with narration and captions: https://www.youtube.com/watch?v=yy0Ek4Ot_mE

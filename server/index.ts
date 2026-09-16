@@ -35,7 +35,7 @@ async function main() {
   // Warm the Moss runtime immediately so the first call is already fast.
   const t0 = Date.now();
   getMossRuntime()
-    .then((rt) => console.log(`◆ ${rt.info.runtime} — ${rt.info.docCount} playbook docs ready in ${Date.now() - t0} ms`))
+    .then((rt) => console.log(`◆ ${rt.info.runtime}. ${rt.info.docCount} playbook docs ready in ${Date.now() - t0} ms`))
     .catch((err) => console.error("✖ Moss runtime failed to start:", err));
 }
 

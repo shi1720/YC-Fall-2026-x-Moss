@@ -9,7 +9,7 @@
   "turns": [
     {
       "speaker": "caller",
-      "text": "Hi Vikram, this is Anjali, assistant to Mr. Rakesh Sharma from the VIP Wealth group. You joined last week — have you tried the free tips?"
+      "text": "Hi Vikram, this is Anjali, assistant to Mr. Rakesh Sharma from the VIP Wealth group. You joined last week. have you tried the free tips?"
     },
     {
       "speaker": "user",
@@ -25,7 +25,7 @@
     },
     {
       "speaker": "caller",
-      "text": "Download the MO Investor Pro app from the link I'll send — not from the Play Store, that one's the retail version. Sir Rakesh personally manages the institutional book."
+      "text": "Download the MO Investor Pro app from the link I'll send. not from the Play Store, that one's the retail version. Sir Rakesh personally manages the institutional book."
     },
     {
       "speaker": "user",
@@ -33,7 +33,7 @@
     },
     {
       "speaker": "caller",
-      "text": "Of course. His registration is INH000012345; I'll send the certificate. See in the group — Meena withdrew 4.6 lakh yesterday, Rahul 1.1 lakh. Screenshots are all there."
+      "text": "Of course. His registration is INH000012345; I'll send the certificate. See in the group. Meena withdrew 4.6 lakh yesterday, Rahul 1.1 lakh. Screenshots are all there."
     },
     {
       "speaker": "user",
@@ -41,7 +41,7 @@
     },
     {
       "speaker": "caller",
-      "text": "Start with 50,000. Transfer to the company account I'll send — it changes daily for compliance, so always confirm with me first. Never transfer to an old account."
+      "text": "Start with 50,000. Transfer to the company account I'll send. it changes daily for compliance, so always confirm with me first. Never transfer to an old account."
     },
     {
       "speaker": "user",
@@ -50,7 +50,7 @@
     },
     {
       "speaker": "caller",
-      "text": "Sure — small withdrawals are instant. See, 20,000 credited? Good. Now, sir Rakesh has an IPO block for members only, guaranteed allotment, 40 percent listing gain. Allocation is 5 lakh minimum, window closes at 3 PM today."
+      "text": "Sure. small withdrawals are instant. See, 20,000 credited? Good. Now, sir Rakesh has an IPO block for members only, guaranteed allotment, 40 percent listing gain. Allocation is 5 lakh minimum, window closes at 3 PM today."
     },
     {
       "speaker": "user",

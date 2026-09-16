@@ -1,0 +1,19 @@
+[
+ {"scene":"opening","text":"A scam call can sound official, urgent, even caring. The danger begins when someone feels too frightened to hang up."},
+ {"scene":"opening","text":"Meet Raksha. A second listener that spots the script, explains the pressure, and brings in someone you trust."},
+ {"scene":"shield","text":"This is the working app at raksha app dot web dot app. No account is needed. We will start with a fictional digital arrest call."},
+ {"scene":"shield","text":"The caller claims to be an officer. As each line arrives, Moss compares it with a playbook of scam tactics inside the server process."},
+ {"scene":"danger","text":"Watch what happens when pressure turns into a request. Raksha raises a warning and shows why this conversation matches a scam pattern."},
+ {"scene":"danger","text":"The most important part is simple: the exact words to say. I will not continue this call. I am going to verify this myself. Goodbye."},
+ {"scene":"guardian","text":"Now open the guardian link in a second tab. Someone you trust sees the same call, the same risk, and the words that triggered the warning."},
+ {"scene":"guardian","text":"The guardian can send a message through the shield, or ask what the caller requested. Moss searches only this call's context to find the relevant lines."},
+ {"scene":"benign","text":"A useful shield must also know when to stay quiet. Here is a genuine hospital appointment call. It finishes without a danger alert."},
+ {"scene":"benign","text":"We test complete conversations, including legitimate mentions of money and codes. A safe score means no recognised scam pattern, not verified identity."},
+ {"scene":"playbook","text":"The playbook makes retrieval visible. Type something a scammer might say and inspect the matching lines, tactics and similarity scores."},
+ {"scene":"lab","text":"The latency lab runs real queries against the deployed app. It separates engine search, embedding plus search, and the browser round trip."},
+ {"scene":"lab","text":"That distinction matters. Fast retrieval helps the warning arrive sooner, but network delay and speech recognition still affect the complete experience."},
+ {"scene":"architecture","text":"Moss handles the fast path. A deterministic risk engine decides when to warn. The language model adds coaching separately, so detection does not wait for it."},
+ {"scene":"architecture","text":"Firebase serves the clean public address. Cloud Run hosts the app and live sockets. Call memory stays in the server process and is scoped to each conversation."},
+ {"scene":"closing","text":"Our committed evaluation caught all ten scripted scam calls and raised no danger alert on eight genuine calls. That is a starting point, not proof of real world accuracy."},
+ {"scene":"closing","text":"Next come broader testing, more languages, stronger guardian invitations and on device speech. Raksha gives people a moment to pause before a scam becomes a loss."}
+]

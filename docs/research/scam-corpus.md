@@ -57,7 +57,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 | US-01 | Jury duty / failure to appear | US | "Deputy" says a warrant was issued for missing jury duty; pay a "bond" by prepaid card / Zelle / Bitcoin ATM to avoid arrest; "stay on the line, go to your car". | Legal threat + hold-the-line → payment |
 | US-02 | Social Security (SSA) | US | "Your SSN has been suspended for suspicious activity in Texas; a car found at the border with your SSN; warrant." Move money to "protect it" / gift cards. | Legal threat → safe account/gift cards |
 | US-03 | IRS / tax | US | "Final notice: you owe back taxes; police are on the way unless you pay via iTunes/Google Play/EFTPS 'voucher'." | Legal threat → payment |
-| US-04 | Medicare | US | "New plastic/chip Medicare card, free genetic test/back brace — confirm your Medicare number." Identity theft + billing fraud. | Authority + too-good → personal_info |
+| US-04 | Medicare | US | "New plastic/chip Medicare card, free genetic test/back brace. confirm your Medicare number." Identity theft + billing fraud. | Authority + too-good → personal_info |
 | US-05 | Utility shutoff | US | "Your power will be disconnected in 30 minutes for non-payment; pay now via prepaid card / Zelle." Targets restaurants and small businesses at rush hour. | Urgency → payment |
 | G-07 | Amazon / Apple / PayPal impostor (US flavour) | US/UK/AU | "Suspicious $1,299 MacBook order on your Amazon; press 1." Pivots into remote access and "your identity is compromised, transfer funds to a federal account". | Account compromise → remote → safe account |
 | UK-01 | Bank impersonation / "safe account" / courier fraud | UK (also IE/AU) | "Fraud team" or "police" say staff at your branch are corrupt / your account is compromised; move money to a "safe account" or hand cash/cards/gold to a courier; "don't tell the branch what it's for". | Authority + secrecy → safe account |
@@ -71,22 +71,22 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 
 ### IN-01 Digital arrest
 
-**Description.** Victim (often retirees, doctors, IT professionals, homemakers) is told a parcel/bank account/SIM in their name is linked to drugs, terror funding or money laundering. Call moves to Skype/WhatsApp video; "officers" appear in uniform with police station backdrop and fake letterheads (CBI, ED, Supreme Court, RBI, "Mumbai Cyber Crime Branch"), issue "arrest warrants", and keep the victim on camera continuously — sometimes for days ("digital custody"). Money is moved in tranches to "RBI-verified safe accounts" for "verification and return within 24/48 hours". Losses: ₹34 lakh to ₹31.8 crore in individual cases.
+**Description.** Victim (often retirees, doctors, IT professionals, homemakers) is told a parcel/bank account/SIM in their name is linked to drugs, terror funding or money laundering. Call moves to Skype/WhatsApp video; "officers" appear in uniform with police station backdrop and fake letterheads (CBI, ED, Supreme Court, RBI, "Mumbai Cyber Crime Branch"), issue "arrest warrants", and keep the victim on camera continuously. sometimes for days ("digital custody"). Money is moved in tranches to "RBI-verified safe accounts" for "verification and return within 24/48 hours". Losses: ₹34 lakh to ₹31.8 crore in individual cases.
 
-**Script arc.** Hook (IN-02/IN-03 IVR, or direct "this is Mumbai Police") → transfer to "senior officer" / video → case number, warrant PDF, "your Aadhaar was used in Canara Bank Mumbai account, 6.8 crore laundered" → "national security, Section 20 secrecy, don't tell family" → "stay on video 24×7, report for every movement" → "verify your funds — transfer 100% to RBI account, will be refunded with certificate" → new cases/"court fee"/"bail bond" until victim is drained.
+**Script arc.** Hook (IN-02/IN-03 IVR, or direct "this is Mumbai Police") → transfer to "senior officer" / video → case number, warrant PDF, "your Aadhaar was used in Canara Bank Mumbai account, 6.8 crore laundered" → "national security, Section 20 secrecy, don't tell family" → "stay on video 24×7, report for every movement" → "verify your funds. transfer 100% to RBI account, will be refunded with certificate" → new cases/"court fee"/"bail bond" until victim is drained.
 
 - "Sir, I am speaking from Mumbai Crime Branch, Andheri East. A case has been registered against your Aadhaar number under money laundering. Aap ka naam FIR mein hai." | tags: authority, legal_threat, account_compromise_pretext | sev: 3
 - "Your Aadhaar has been used to open an account in Canara Bank, Mumbai branch, and 6 crore 80 lakh rupees of hawala money has been transacted through it." | tags: authority, account_compromise_pretext, fear | sev: 3
-- "This is a matter of national security. You are not to discuss this case with anyone — not your wife, not your children, not your bank. Section 20 of the Official Secrets Act applies." | tags: secrecy, isolation, authority, legal_threat | sev: 4
+- "This is a matter of national security. You are not to discuss this case with anyone. not your wife, not your children, not your bank. Section 20 of the Official Secrets Act applies." | tags: secrecy, isolation, authority, legal_threat | sev: 4
 - "I am transferring this call to DCP Sahab of the CBI. Please download Skype and search for 'Mumbai Cyber Cell Official'. Keep the video on." | tags: video_call_demand, authority, escalation | sev: 4
 - "You are now under digital arrest. Do not disconnect the call, do not switch off the camera, do not leave the room. Every hour you will report to me." | tags: hold_the_line, isolation, legal_threat, authority | sev: 5
-- "Naresh Goyal ke case mein aapka naam aaya hai. Supreme Court ne aapke against non-bailable warrant issue kiya hai — main abhi PDF bhej raha hoon." | tags: authority, legal_threat, fear | sev: 4
+- "Naresh Goyal ke case mein aapka naam aaya hai. Supreme Court ne aapke against non-bailable warrant issue kiya hai. main abhi PDF bhej raha hoon." | tags: authority, legal_threat, fear | sev: 4
 - "If you are innocent, cooperate. For verification you have to transfer 100 percent of your savings into the RBI verification account. After the audit, the money will be returned with a clearance certificate in 24 hours." | tags: payment_method, verification_bypass, authority, urgency | sev: 5
-- "Madam, if you try to call the police station or visit the bank, the money-laundering gang will be alerted — they have people inside the bank. Only this channel is safe." | tags: verification_bypass, isolation, fear | sev: 4
-- "Break your fixed deposits and mutual funds today. Tell the bank manager it is for a property purchase — do not mention this investigation." | tags: payment_method, secrecy, verification_bypass | sev: 5
+- "Madam, if you try to call the police station or visit the bank, the money-laundering gang will be alerted. they have people inside the bank. Only this channel is safe." | tags: verification_bypass, isolation, fear | sev: 4
+- "Break your fixed deposits and mutual funds today. Tell the bank manager it is for a property purchase. do not mention this investigation." | tags: payment_method, secrecy, verification_bypass | sev: 5
 - "Ma'am, I have your mobile location in front of me. If the video call is cut, the local police will reach your house within 10 minutes with the arrest warrant." | tags: fear, hold_the_line, legal_threat | sev: 4
 - "Aapke account mein jo bhi paisa hai, uska source verify hoga. Court-approved secure account number main bhej raha hoon, RTGS kar dijiye." | tags: payment_method, authority | sev: 5
-- "One more case has come up — a second account in Hyderabad. The Enforcement Directorate now needs an additional 12 lakh as surety bond, otherwise the interim bail is cancelled." | tags: escalation, legal_threat, payment_method | sev: 5
+- "One more case has come up. a second account in Hyderabad. The Enforcement Directorate now needs an additional 12 lakh as surety bond, otherwise the interim bail is cancelled." | tags: escalation, legal_threat, payment_method | sev: 5
 - "Your son's name is also appearing in the transaction list. If you want to keep him out of this, you must complete the verification quietly." | tags: fear, secrecy, relationship_pretext, escalation | sev: 4
 - "I am recording this statement. Say 'I, [name], am cooperating with the CBI investigation voluntarily.' Now show me your bank app balance on camera." | tags: authority, personal_info, video_call_demand | sev: 4
 - "Madam, this is a very confidential process. Aapko koi pooche toh bolna office ka kaam hai. Phone silent par rakho aur meri call par hi raho." | tags: secrecy, isolation, hold_the_line | sev: 4
@@ -105,7 +105,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "The tracking ID is FX-2291-MU-TW. Our compliance team has already shared your details with the Narcotics department; you have to clear your name within the next 2 hours." | tags: urgency, fear, authority | sev: 3
 - "Hello, DHL customer service here. Your shipment has been flagged for illegal contents. A fine of ₹18,000 is payable to release it, or the matter goes to the police." | tags: payment_method, legal_threat, fear | sev: 4
 - "Sir, this is not a marketing call. The parcel has your PAN card photocopy inside. You need to record your statement on video for the customs officer." | tags: video_call_demand, authority, fear | sev: 3
-- "For the complaint we need to verify your identity — please tell me your full Aadhaar number, date of birth and the bank where you hold your main account." | tags: personal_info, authority | sev: 4
+- "For the complaint we need to verify your identity. please tell me your full Aadhaar number, date of birth and the bank where you hold your main account." | tags: personal_info, authority | sev: 4
 - "Aap ghabraaiye mat, hum aapki madad karenge. Bas cyber cell ko sab clearly bataiye aur jo officer bole waisa kariye." | tags: reciprocity, authority, isolation | sev: 2
 
 ### IN-03 TRAI / DoT SIM disconnection
@@ -117,8 +117,8 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "This is a call from Telecom Regulatory Authority of India. All your mobile numbers will be blocked within 2 hours due to illegal activities. To know more, press 9." | tags: authority, urgency, fear | sev: 3
 - "Sir, aapke Aadhaar par ek aur SIM issue hui hai, Mumbai Ghatkopar ke Vodafone store se. Us number se obscene messages bheje gaye hain aur uske against FIR number 0421/2026 registered hai." | tags: authority, account_compromise_pretext, legal_threat | sev: 3
 - "Your number is being used for money laundering and harassment. Department of Telecom has issued a disconnection order for all 3 numbers linked to your Aadhaar." | tags: authority, fear, account_compromise_pretext | sev: 3
-- "If you were not aware of this SIM, we need a clarification letter from the police. I'll connect you to the Mumbai cyber cell — please hold." | tags: authority, hold_the_line, verification_bypass | sev: 3
-- "I am Deputy Officer Sanjay Mishra, employee ID TR-4471. Note this down — you will need it for the complaint." | tags: authority | sev: 2
+- "If you were not aware of this SIM, we need a clarification letter from the police. I'll connect you to the Mumbai cyber cell. please hold." | tags: authority, hold_the_line, verification_bypass | sev: 3
+- "I am Deputy Officer Sanjay Mishra, employee ID TR-4471. Note this down. you will need it for the complaint." | tags: authority | sev: 2
 - "Ma'am, do not hang up. Once the call disconnects, the block order goes through automatically and even your bank OTPs will stop coming." | tags: hold_the_line, urgency, fear | sev: 3
 - "To keep your number active you have to verify KYC again. Share the OTP that just came from your operator." | tags: otp_request, urgency, authority | sev: 5
 - "Aapka number 2 ghante mein band ho jayega. Isko rokne ke liye abhi 1 dabaiye aur officer se baat kariye." | tags: urgency, fear | sev: 3
@@ -134,13 +134,13 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Hello, I'm calling from SBI head office KYC department. Your KYC is expiring today; if not updated, your account will be blocked by tonight." | tags: authority, urgency, fear | sev: 3
 - "Aapka PAN card account se link nahi hua hai. Aaj hi update nahi kiya toh account freeze ho jayega aur pension aana band ho jayegi." | tags: urgency, fear, authority | sev: 3
 - "To update KYC from home, I'll send you a link on SMS. Just enter your account number, debit card number, expiry and the CVV on the back." | tags: personal_info, authority | sev: 4
-- "Ma'am, an OTP has just been sent to your registered number for KYC verification. Please read it to me — this is only for verification, no transaction will happen." | tags: otp_request, verification_bypass | sev: 5
-- "Sir, download the 'SBI Quick Support' app from the link I'm sending on WhatsApp — it's the official app for online KYC." | tags: remote_access, tech_pretext, authority | sev: 5
+- "Ma'am, an OTP has just been sent to your registered number for KYC verification. Please read it to me. this is only for verification, no transaction will happen." | tags: otp_request, verification_bypass | sev: 5
+- "Sir, download the 'SBI Quick Support' app from the link I'm sending on WhatsApp. it's the official app for online KYC." | tags: remote_access, tech_pretext, authority | sev: 5
 - "Don't worry sir, this is a recorded line from the bank, everything is secure. Aap bas OTP bata dijiye, main system mein daal deta hoon." | tags: otp_request, authority | sev: 5
-- "Your net banking has been accessed from an unknown device in Kolkata. To secure it, we'll reset your password — tell me the 6-digit code you just received." | tags: account_compromise_pretext, otp_request, fear | sev: 5
+- "Your net banking has been accessed from an unknown device in Kolkata. To secure it, we'll reset your password. tell me the 6-digit code you just received." | tags: account_compromise_pretext, otp_request, fear | sev: 5
 - "Sir, KYC update ke liye ₹10 ka token payment hota hai, bas link par jaake pay kar dijiye, refund ho jayega." | tags: payment_method, verification_bypass | sev: 4
 - "Please don't visit the branch, the branch KYC queue takes 15 days. This telephonic KYC is the fast-track option approved by RBI." | tags: verification_bypass, authority | sev: 3
-- "I can see your account is showing 'KYC Non-Compliant — Debit Freeze in 4 hours'. I'm here to help you avoid that." | tags: urgency, fear, reciprocity | sev: 3
+- "I can see your account is showing 'KYC Non-Compliant. Debit Freeze in 4 hours'. I'm here to help you avoid that." | tags: urgency, fear, reciprocity | sev: 3
 - "For security, confirm your mother's maiden name, date of birth and the last four digits of your Aadhaar." | tags: personal_info | sev: 4
 - "Sir, the OTP you told me was wrong, one more OTP is coming, please tell that one quickly before it expires." | tags: otp_request, urgency, escalation | sev: 5
 
@@ -154,8 +154,8 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Aapke card par international transaction hua hai, 300 dollar Amazon USA. Cancel karne ke liye OTP share kariye." | tags: account_compromise_pretext, otp_request | sev: 5
 - "Your card is eligible for a limit increase to ₹5 lakh with zero annual fee. To activate, tell me the OTP sent for e-consent." | tags: too_good, otp_request | sev: 5
 - "Ma'am, I'm sending a secure form on WhatsApp for the chargeback; fill in card number, expiry and CVV and upload a selfie with your PAN." | tags: personal_info, tech_pretext | sev: 4
-- "Please don't hang up and call the number on the back of the card — that line goes to the retail team, they can't stop a fraud in progress." | tags: verification_bypass, hold_the_line | sev: 3
-- "The OTP you are receiving is to cancel the transaction, not to approve it. That's why it says ₹49,999 — ignore the message text." | tags: otp_request, verification_bypass | sev: 5
+- "Please don't hang up and call the number on the back of the card. that line goes to the retail team, they can't stop a fraud in progress." | tags: verification_bypass, hold_the_line | sev: 3
+- "The OTP you are receiving is to cancel the transaction, not to approve it. That's why it says ₹49,999. ignore the message text." | tags: otp_request, verification_bypass | sev: 5
 - "We will temporarily block your card; to issue a new one we need your Aadhaar and PAN details over the phone right now." | tags: personal_info, urgency | sev: 4
 - "Annual fee of ₹2,999 will be charged tomorrow. Say yes to waive it and share the confirmation code." | tags: otp_request, urgency, too_good | sev: 5
 
@@ -168,9 +168,9 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "The disconnection is already in the queue. To stop it you need to pay ₹10 verification charge through the link so your meter number gets updated." | tags: payment_method, urgency | sev: 4
 - "Install the 'MSEDCL Bill Update' app I'm sending on WhatsApp and enter your consumer number and UPI details." | tags: remote_access, tech_pretext | sev: 5
 - "Ma'am, the online portal is down due to a glitch. That's why the bill shows unpaid. I'll fix it on my end if you share screen through this app." | tags: tech_pretext, remote_access, verification_bypass | sev: 5
-- "Do the payment on this Paytm number — it is our regional officer's collection account. The bill receipt will be updated in 5 minutes." | tags: payment_method | sev: 4
+- "Do the payment on this Paytm number. it is our regional officer's collection account. The bill receipt will be updated in 5 minutes." | tags: payment_method | sev: 4
 - "If you go to the office tomorrow it will already be cut; reconnection charge is ₹3,500 plus one week. Better to update now." | tags: urgency, fear | sev: 3
-- "You have received a request of ₹1 on your UPI — please approve it to confirm your account, after that your bill will be updated." | tags: verification_bypass, payment_method | sev: 5
+- "You have received a request of ₹1 on your UPI. please approve it to confirm your account, after that your bill will be updated." | tags: verification_bypass, payment_method | sev: 5
 - "Bijli office se bol raha hoon. Meter reading mismatch hai, penalty lagegi. Abhi ₹499 online bhar do to case close." | tags: authority, payment_method, urgency | sev: 4
 
 ### IN-07 Income-tax refund
@@ -182,7 +182,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Aapka refund pending hai kyunki PAN-Aadhaar link nahi hai. Link par click karke ₹1,000 late fee bhariye, refund 24 ghante mein aa jayega." | tags: payment_method, authority | sev: 4
 - "Your return has been selected for scrutiny. A penalty of ₹42,000 under section 270A is due. Pay today via the challan link, otherwise prosecution proceedings begin." | tags: legal_threat, urgency, payment_method | sev: 4
 - "This is a final reminder from CPC Bengaluru. Ignoring this will lead to freezing of your bank accounts by the assessing officer." | tags: fear, urgency, authority | sev: 3
-- "Ma'am, the refund of 28,300 will go to a wrong account unless you update. I'll help you — just install the 'ITD e-Verify' app." | tags: remote_access, authority, too_good | sev: 5
+- "Ma'am, the refund of 28,300 will go to a wrong account unless you update. I'll help you. just install the 'ITD e-Verify' app." | tags: remote_access, authority, too_good | sev: 5
 - "For refund verification, share the OTP you got from 'ITDEFL'. It's not a transaction OTP, it's a KYC OTP." | tags: otp_request, verification_bypass | sev: 5
 - "We can process a bigger refund for you if you pay the CA verification fee of ₹2,500 now." | tags: too_good, payment_method | sev: 4
 
@@ -192,26 +192,26 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 
 - "Congratulations! Aapka mobile number KBC Jio lucky draw mein select hua hai. Aapne 25 lakh rupaye jeete hain." | tags: too_good | sev: 2
 - "Your lottery number is 8877. The cheque of 25 lakh is ready with our manager Rana Pratap Singh in Mumbai head office." | tags: too_good, authority | sev: 2
-- "To transfer the prize you have to first pay the GST of 4.5 percent — ₹12,500 — to our government account. Uske bina RBI release nahi karega." | tags: payment_method, authority, reciprocity | sev: 4
+- "To transfer the prize you have to first pay the GST of 4.5 percent. ₹12,500. to our government account. Uske bina RBI release nahi karega." | tags: payment_method, authority, reciprocity | sev: 4
 - "Ye baat kisi ko mat batana, warna tax department aapke inaam ko rok dega." | tags: secrecy, fear | sev: 3
 - "Sir, you have to claim within 24 hours, otherwise the prize goes to the next lucky number." | tags: urgency, too_good | sev: 3
 - "For verification, send a photo of your Aadhaar, bank passbook and a selfie holding both." | tags: personal_info | sev: 4
-- "The 12,500 you sent was received, but the bank has now asked for ₹28,000 insurance charge on the prize amount — after that the full 25 lakh comes to your account." | tags: escalation, payment_method | sev: 5
+- "The 12,500 you sent was received, but the bank has now asked for ₹28,000 insurance charge on the prize amount. after that the full 25 lakh comes to your account." | tags: escalation, payment_method | sev: 5
 - "Do not call this number back, only WhatsApp. Our manager will call you from a private number." | tags: isolation, verification_bypass | sev: 3
 - "Amitabh Bachchan ji ki taraf se badhai. Aapko WhatsApp par lottery certificate bhej raha hoon, dekh lijiye." | tags: too_good, social_proof | sev: 2
 - "You have won a Tata Safari car in the Flipkart lucky draw. Pay ₹6,500 registration fee or take the cash option of 12.6 lakh after paying tax." | tags: too_good, payment_method | sev: 4
 
 ### IN-09 Loan app harassment / recovery extortion
 
-**Description.** Victim downloaded an instant-loan app (or was never a borrower — contact scraped from a friend's phone). "Recovery agents" call from multiple numbers, threatening to send morphed nude photos to all contacts, file FIRs, or visit with police. Amounts demanded are often multiples of the original micro-loan. Linked to suicides in India.
+**Description.** Victim downloaded an instant-loan app (or was never a borrower. contact scraped from a friend's phone). "Recovery agents" call from multiple numbers, threatening to send morphed nude photos to all contacts, file FIRs, or visit with police. Amounts demanded are often multiples of the original micro-loan. Linked to suicides in India.
 
 - "You have defaulted on your ₹3,000 loan. The penalty is now ₹9,600. Pay within one hour or we will inform all your contacts that you are a fraud." | tags: fear, urgency, payment_method | sev: 4
-- "Hum aapki photo edit karke aapke saare contacts ko bhej denge — family, office, sab ko. Paisa bhejo abhi." | tags: fear, escalation, payment_method | sev: 5
+- "Hum aapki photo edit karke aapke saare contacts ko bhej denge. family, office, sab ko. Paisa bhejo abhi." | tags: fear, escalation, payment_method | sev: 5
 - "Your phone contacts are with us. We already sent a message to your boss and your brother-in-law. Next is your daughter's college group." | tags: fear, social_proof, escalation | sev: 4
 - "This is the legal department. An FIR is being lodged under cheating section 420 today. Police will come to your residence." | tags: legal_threat, authority, fear | sev: 4
 - "Madam, we have a morphed picture of your daughter. It will go on WhatsApp and Facebook if payment is not received by 5 PM." | tags: fear, urgency, relationship_pretext | sev: 5
 - "You never took the loan? Doesn't matter, your number is the guarantor. Pay or face the same consequences." | tags: fear, verification_bypass | sev: 4
-- "Pay on this UPI ID only — the app's payment gateway is 'under maintenance'." | tags: payment_method, verification_bypass | sev: 5
+- "Pay on this UPI ID only. the app's payment gateway is 'under maintenance'." | tags: payment_method, verification_bypass | sev: 5
 - "Don't block this number, we have 200 more. Every call will be recorded and used in court." | tags: escalation, legal_threat | sev: 3
 - "Bhai settle kar lo, ₹5,000 abhi bhej do, main file close kar dunga aur photo delete kar dunga." | tags: payment_method, reciprocity | sev: 5
 
@@ -220,33 +220,33 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 **Description.** WhatsApp DM from "HR" offers part-time work: like YouTube videos/rate hotels/review products, ₹50–₹150 per task. Small real payouts build trust, then the Telegram "mentor" moves to "prepaid merchant tasks" (deposit ₹1,000 → get ₹1,300), then "combination tasks", "VIP levels"; a fake dashboard shows earnings; "you skipped a step, funds locked, pay ₹15,000 to unlock", then "tax" on withdrawal.
 
 - "Hi, I'm Priya from the HR team of Digital Marketing Pvt Ltd. We are offering part-time work from home, 2,000 to 8,000 per day, just liking YouTube videos. Are you interested?" | tags: too_good, relationship_pretext | sev: 2
-- "Your first three tasks are complete, ₹150 has been sent to your UPI. Please check and confirm — this is how genuine our platform is." | tags: reciprocity, social_proof, too_good | sev: 2
+- "Your first three tasks are complete, ₹150 has been sent to your UPI. Please check and confirm. this is how genuine our platform is." | tags: reciprocity, social_proof, too_good | sev: 2
 - "Now join our Telegram group with the receptionist. Your tutor will assign you the merchant tasks which pay 30 percent commission." | tags: social_proof, isolation | sev: 3
 - "After completing 3 prepaid transaction tasks you become an official member and are eligible for the VIP group. Indicate the chosen amount of ₹1,000 to receive ₹1,300." | tags: payment_method, too_good | sev: 4
-- "See the screenshots in the group — Rahul withdrew 46,000 today, Meena 1.2 lakh. Everyone who completes the combination task gets it." | tags: social_proof, too_good | sev: 3
+- "See the screenshots in the group. Rahul withdrew 46,000 today, Meena 1.2 lakh. Everyone who completes the combination task gets it." | tags: social_proof, too_good | sev: 3
 - "You skipped step 2 of the combination task, so the system has locked your account. You need to deposit ₹12,000 to unlock and then you can withdraw the whole 38,000." | tags: escalation, payment_method, verification_bypass | sev: 5
-- "This is a hassle-free bonus — the merchants have already paid us the margin, you just have to complete the order." | tags: too_good, verification_bypass | sev: 3
+- "This is a hassle-free bonus. the merchants have already paid us the margin, you just have to complete the order." | tags: too_good, verification_bypass | sev: 3
 - "Withdrawal is being processed, but the platform's tax department requires 20 percent income tax to be paid first because your earnings crossed 50,000." | tags: escalation, payment_method | sev: 5
-- "Please don't discuss the task amounts with anyone outside the group. Company policy — otherwise your account may be terminated." | tags: secrecy, isolation | sev: 3
+- "Please don't discuss the task amounts with anyone outside the group. Company policy. otherwise your account may be terminated." | tags: secrecy, isolation | sev: 3
 - "If you skip this task your next payment will be only ₹20 and you lose the bonus. The window closes in 15 minutes." | tags: urgency, fear, payment_method | sev: 4
-- "Transfer to this account name only — it is our merchant partner, not the company account, so don't worry if the name is different." | tags: payment_method, verification_bypass | sev: 5
-- "Sir, thoda credit score badhana hai — ek last task 25,000 ka karo, phir total 1,10,000 turant withdraw ho jayega." | tags: escalation, too_good, payment_method | sev: 5
+- "Transfer to this account name only. it is our merchant partner, not the company account, so don't worry if the name is different." | tags: payment_method, verification_bypass | sev: 5
+- "Sir, thoda credit score badhana hai. ek last task 25,000 ka karo, phir total 1,10,000 turant withdraw ho jayega." | tags: escalation, too_good, payment_method | sev: 5
 
 ### IN-11 Investment / stock-tip / crypto WhatsApp groups (pig butchering)
 
 **Description.** Victim is added to a WhatsApp/Telegram "VIP stock tips" group run by a fake "SEBI-registered analyst" or impersonating a known broker (Motilal Oswal, Zerodha, JP Morgan, Goldman). Members post profit screenshots (all scammers). Victim is guided to a fake app/website showing "institutional IPO allotment" and rising profits; when they try to withdraw, they must pay "tax", "AML verification" or "risk deposit". Wrong-number/romance entry ("sorry wrong number... but you seem nice") is the global pig-butchering variant.
 
 - "Welcome to the VIP Wealth Group. I'm Rakesh Sharma, SEBI-registered research analyst. Today's free tip: buy IRFC at 138, target 152." | tags: authority, too_good, social_proof | sev: 2
-- "Our institutional account gets guaranteed IPO allotment — members got 100 percent on the last three IPOs. Screenshots are in the group." | tags: too_good, social_proof | sev: 3
-- "To start, download our 'MO Investor Pro' app from the link (not Play Store — Play Store version is for retail clients only)." | tags: tech_pretext, verification_bypass, remote_access | sev: 4
+- "Our institutional account gets guaranteed IPO allotment. members got 100 percent on the last three IPOs. Screenshots are in the group." | tags: too_good, social_proof | sev: 3
+- "To start, download our 'MO Investor Pro' app from the link (not Play Store. Play Store version is for retail clients only)." | tags: tech_pretext, verification_bypass, remote_access | sev: 4
 - "Deposit through the 'company account' the assistant sends you; it changes every day for security, so always confirm with her first." | tags: payment_method, verification_bypass | sev: 5
 - "Bhai, market mein aisa mauka baar baar nahi aata. Block trade ka window sirf aaj 3 baje tak hai." | tags: urgency, too_good | sev: 3
 - "Your account shows a profit of ₹9.4 lakh. To withdraw above ₹5 lakh you must pay 15 percent capital gains tax to the platform first; it can't be deducted from the balance as per SEBI rules." | tags: escalation, payment_method, authority | sev: 5
 - "Sorry, wrong number! But since we're talking... what do you do? I'm a gold-futures trader in Singapore." | tags: relationship_pretext, too_good | sev: 1
-- "I made $40,000 last month from my uncle's insider strategy. I don't want anything from you — I just want you to see what's possible." | tags: too_good, social_proof, reciprocity | sev: 2
+- "I made $40,000 last month from my uncle's insider strategy. I don't want anything from you. I just want you to see what's possible." | tags: too_good, social_proof, reciprocity | sev: 2
 - "Your withdrawal is frozen by the anti-money-laundering system. A 'credit score deposit' of 30 percent of the balance is needed; it is refunded together with the full amount." | tags: escalation, payment_method, verification_bypass | sev: 5
 - "Please don't consult your bank or your broker friend, they will be jealous and give you negative advice. Trust the data." | tags: isolation, verification_bypass | sev: 3
-- "Take a small loan and invest — the 40 percent return in 10 days will cover the interest many times over." | tags: too_good, escalation | sev: 4
+- "Take a small loan and invest. the 40 percent return in 10 days will cover the interest many times over." | tags: too_good, escalation | sev: 4
 - "Teacher says the group will close for new members tomorrow. Only 3 slots left for the pre-IPO block." | tags: urgency, social_proof | sev: 3
 - "USDT is safest for international investing. Buy on Binance P2P, then send to this wallet address; I'll walk you through it on screen share." | tags: payment_method, remote_access | sev: 5
 
@@ -255,13 +255,13 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 **Description.** Variants: "Scan this QR to receive your refund" (scanning + PIN = paying); "accept the collect request of ₹1 to verify"; "enter UPI PIN to receive cashback"; OLX buyer sends "payment" screenshot then "scan to get your money". Also fake "Paytm KYC" and "PhonePe wallet expiring".
 
 - "Sir, your Zomato refund of ₹1,250 is ready. Scan the QR I'm sending and enter your UPI PIN to receive it." | tags: too_good, otp_request, verification_bypass | sev: 5
-- "I am the buyer for your sofa on OLX. I've sent a Google Pay request — just approve it and the money will credit." | tags: verification_bypass, payment_method | sev: 5
+- "I am the buyer for your sofa on OLX. I've sent a Google Pay request. just approve it and the money will credit." | tags: verification_bypass, payment_method | sev: 5
 - "Aapke PhonePe wallet pe ₹5,000 cashback lock hua hai. Receive karne ke liye 'Pay' dabaiye aur PIN daaliye, amount aapko milega." | tags: too_good, otp_request, verification_bypass | sev: 5
 - "The ₹1 transaction is just to verify your account is active. Do it now and the ₹20,000 you won will arrive." | tags: verification_bypass, payment_method | sev: 5
 - "Your UPI ID has been suspended due to a failed transaction. Reactivate by sending ₹1 on this number." | tags: fear, payment_method | sev: 4
 - "Ma'am, I'm from Paytm. Your KYC lapses in 1 hour; install this app so I can update it remotely." | tags: urgency, remote_access | sev: 5
-- "Don't worry, you're not paying — the system takes your PIN to receive. That's why it asks. It's a bank rule." | tags: verification_bypass, otp_request | sev: 5
-- "I've put the money in your account via 'Request'. You'll see 'Pay ₹22,000' — that's just the interface, click accept." | tags: verification_bypass, payment_method | sev: 5
+- "Don't worry, you're not paying. the system takes your PIN to receive. That's why it asks. It's a bank rule." | tags: verification_bypass, otp_request | sev: 5
+- "I've put the money in your account via 'Request'. You'll see 'Pay ₹22,000'. that's just the interface, click accept." | tags: verification_bypass, payment_method | sev: 5
 - "Sir, galti se 15,000 aapke account mein aa gaya. Please us number par wapas kar dijiye, warna police complaint karni padegi." | tags: reciprocity, legal_threat, payment_method | sev: 4
 
 ### IN-13 Amazon / Flipkart order fraud / delivery OTP
@@ -288,11 +288,11 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "The cheque was dispatched but returned; the bank has now asked for 2 percent TDS clearance before reissuing." | tags: escalation, payment_method | sev: 5
 - "We need your policy number, PAN, Aadhaar and a cancelled cheque photo for the release file." | tags: personal_info | sev: 4
 - "Sir, this is the final chance; after 31st the unclaimed amount goes to the Senior Citizens' Welfare Fund." | tags: urgency, fear | sev: 3
-- "You can also enrol in the new high-return plan — just pay the first premium to our nodal account today to lock the rate." | tags: too_good, payment_method | sev: 4
+- "You can also enrol in the new high-return plan. just pay the first premium to our nodal account today to lock the rate." | tags: too_good, payment_method | sev: 4
 
 ### IN-15 Government scheme / subsidy
 
-**Description.** "PM Kisan instalment / Ayushman card / scholarship / LPG subsidy / PM Awas amount pending — update your Aadhaar-linked account via link/OTP/APK." Also "PM Kisan e-KYC app" malicious APK. Rural and semi-urban targets.
+**Description.** "PM Kisan instalment / Ayushman card / scholarship / LPG subsidy / PM Awas amount pending. update your Aadhaar-linked account via link/OTP/APK." Also "PM Kisan e-KYC app" malicious APK. Rural and semi-urban targets.
 
 - "Namaskar, PM Kisan Samman Nidhi se bol raha hoon. Aapki 17vi kist rukhi hui hai kyunki e-KYC pending hai." | tags: authority, account_compromise_pretext | sev: 2
 - "Install the 'PM Kisan e-KYC' app from this link and enter your Aadhaar and bank details to release ₹2,000." | tags: remote_access, personal_info, too_good | sev: 5
@@ -310,10 +310,10 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Main Army mein hoon, vishwas ke liye Aadhaar aur canteen card bhej raha hoon. Fauji kabhi dhoka nahi deta." | tags: social_proof, relationship_pretext | sev: 2
 - "I can't come out of the cantonment to meet. The vehicle will be delivered by Army courier; just pay ₹5,000 token on Paytm to book the transport." | tags: payment_method, verification_bypass | sev: 4
 - "Courier has left but the checkpost needs transit insurance of ₹8,000. It's refundable at delivery." | tags: escalation, payment_method | sev: 5
-- "Sir, I want to buy your fridge. I'm sending payment via Google Pay — scan this QR and enter PIN to receive." | tags: verification_bypass, otp_request | sev: 5
+- "Sir, I want to buy your fridge. I'm sending payment via Google Pay. scan this QR and enter PIN to receive." | tags: verification_bypass, otp_request | sev: 5
 - "The Army merchant account only accepts advance payment. Rules are strict, I can't take cash." | tags: verification_bypass, payment_method | sev: 4
 - "Duty par hoon, network kam hai, jaldi karo. Aur bhi buyers hain, jo pehle paisa dega usko milega." | tags: urgency, social_proof | sev: 3
-- "You're not trusting a soldier? I've shared my posting order — what more do you want?" | tags: reciprocity, social_proof | sev: 2
+- "You're not trusting a soldier? I've shared my posting order. what more do you want?" | tags: reciprocity, social_proof | sev: 2
 
 ### IN-17 Fake customer-care numbers
 
@@ -322,8 +322,8 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Thank you for calling IndiGo customer support. For the refund of your cancelled flight, I'll need the card details used for booking." | tags: personal_info, tech_pretext | sev: 4
 - "Sir, refund process ke liye ek app install karna hoga, 'Customer Support Assist'. Uska 9-digit code bata dijiye." | tags: remote_access, tech_pretext | sev: 5
 - "To verify you're the account holder, please tell me the OTP that the bank just sent." | tags: otp_request | sev: 5
-- "Your complaint is registered. A ₹5 test transaction will be done to validate the refund channel — approve it on your UPI app." | tags: verification_bypass, payment_method | sev: 5
-- "Ma'am, don't close the screen-sharing until the refund shows — it takes 10 minutes and I need to see the confirmation." | tags: hold_the_line, remote_access | sev: 4
+- "Your complaint is registered. A ₹5 test transaction will be done to validate the refund channel. approve it on your UPI app." | tags: verification_bypass, payment_method | sev: 5
+- "Ma'am, don't close the screen-sharing until the refund shows. it takes 10 minutes and I need to see the confirmation." | tags: hold_the_line, remote_access | sev: 4
 - "The refund link is on WhatsApp; fill in card number, expiry, CVV and the amount you want back." | tags: personal_info | sev: 4
 - "Your gas cylinder booking is blocked. Pay ₹199 reactivation on this UPI ID and the delivery will come today." | tags: payment_method, urgency | sev: 4
 
@@ -332,7 +332,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 **Description.** Pop-up with a phone number, or cold call "from Windows technical department". Victim is talked into a remote session (AnyDesk, TeamViewer, UltraViewer, GoToAssist), shown Event Viewer "errors" or netstat "foreign connections", charged $199–$499 for "lifetime protection", or pivoted to bank "hackers are in your account". Also subscription-renewal variant ("Norton $399 charged to your card, call to cancel").
 
 - "Hello, this is John from the Windows technical department. We have been receiving error reports from your computer's IP address." | tags: tech_pretext, authority | sev: 2
-- "Your computer has been hacked. Foreign hackers from Russia are using it right now. Don't turn it off — if you do, you lose all your files." | tags: fear, tech_pretext, hold_the_line | sev: 3
+- "Your computer has been hacked. Foreign hackers from Russia are using it right now. Don't turn it off. if you do, you lose all your files." | tags: fear, tech_pretext, hold_the_line | sev: 3
 - "Press the Windows key and R together and type www.anydesk.com. Then read me the 9-digit ID on your screen." | tags: remote_access | sev: 5
 - "Do you see all these red errors in the Event Viewer? Every one of them is a virus. Your license has expired." | tags: tech_pretext, fear | sev: 3
 - "Your Norton subscription has auto-renewed for $399.99. If you want to cancel, our refund department will need remote access to process it." | tags: tech_pretext, reciprocity, remote_access | sev: 4
@@ -351,7 +351,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "To process the refund we need access to your computer to fill out the refund form. Please download the Ultraviewer application." | tags: remote_access, reciprocity | sev: 5
 - "Now log in to your online banking so the refund goes to the right account. I will not look, I'll turn my screen off." | tags: remote_access, verification_bypass | sev: 5
 - "Please type the refund amount in the box: three, nine, nine. Press enter... Oh my God. Sir, you typed 39,900. You typed an extra zero." | tags: tech_pretext, fear, verification_bypass | sev: 4
-- "Look at your account — 39,900 dollars have been deposited. This is the company's money. I will lose my job and my family, sir, please help me." | tags: reciprocity, fear, escalation | sev: 4
+- "Look at your account. 39,900 dollars have been deposited. This is the company's money. I will lose my job and my family, sir, please help me." | tags: reciprocity, fear, escalation | sev: 4
 - "The bank cannot reverse it because it is an international transaction. The only way is for you to return the excess in Target gift cards." | tags: payment_method, verification_bypass | sev: 5
 - "Do not tell the cashier it's for a refund; say it's for your grandchildren. Otherwise they'll block the card and the money is stuck." | tags: secrecy, verification_bypass | sev: 4
 - "Sir, put the cash in a magazine, wrap it in aluminium foil, and FedEx it overnight to this address. I'll stay on the line while you drive." | tags: payment_method, hold_the_line | sev: 5
@@ -360,7 +360,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 
 ### G-03 Grandparent / family emergency (voice clone)
 
-**Description.** Call from "grandchild" (crying, "my nose is broken so I sound different", now often AI-cloned from social media clips): car accident/DUI/arrest abroad; then a "public defender", "bail bondsman" or "officer" takes over. Cash collected by courier at the door, or gift cards/crypto/wire. "Gag order — don't tell Mom and Dad." Virtual kidnapping variant: screaming in background, "we have your daughter".
+**Description.** Call from "grandchild" (crying, "my nose is broken so I sound different", now often AI-cloned from social media clips): car accident/DUI/arrest abroad; then a "public defender", "bail bondsman" or "officer" takes over. Cash collected by courier at the door, or gift cards/crypto/wire. "Gag order. don't tell Mom and Dad." Virtual kidnapping variant: screaming in background, "we have your daughter".
 
 - "Grandma? It's me. I'm in trouble. I've been in an accident and I'm at the police station. Please don't be mad." | tags: relationship_pretext, fear | sev: 2
 - "I sound different because my nose got broken in the crash. They took my phone, this is the officer's phone." | tags: relationship_pretext, verification_bypass | sev: 3
@@ -372,7 +372,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Dadi, main Dubai mein hoon, police ne pakad liya hai, bail ke liye 2 lakh chahiye abhi. Papa ko mat bolna." | tags: relationship_pretext, secrecy, urgency, payment_method | sev: 5
 - "We have your daughter. Listen to her. [screaming] If you hang up or call anyone she gets hurt. Stay on the line and drive to the bank." | tags: fear, hold_the_line, isolation, payment_method | sev: 5
 - "The judge agreed to reduce the bond if the balance comes in gift cards from Apple; read me the numbers on the back." | tags: payment_method, verification_bypass | sev: 5
-- "It worked, he's being released. But the other driver was pregnant and lost the baby — now there's a second charge and another $15,000." | tags: escalation, fear, payment_method | sev: 5
+- "It worked, he's being released. But the other driver was pregnant and lost the baby. now there's a second charge and another $15,000." | tags: escalation, fear, payment_method | sev: 5
 
 ### G-04 Romance
 
@@ -383,10 +383,10 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "I sent you a package with a gold necklace and some cash for our future. The courier company in Malaysia is asking for $1,850 customs clearance." | tags: reciprocity, payment_method | sev: 4
 - "My leave has been approved but the military requires a $3,200 leave-processing fee paid by the family member. You are the only family I have." | tags: relationship_pretext, payment_method, verification_bypass | sev: 5
 - "Please don't tell your children about us yet. They won't understand until they meet me." | tags: secrecy, isolation | sev: 3
-- "I've been making 12 percent a week on a crypto platform my mentor introduced. Let me show you how — start with just $500." | tags: too_good, relationship_pretext | sev: 4
+- "I've been making 12 percent a week on a crypto platform my mentor introduced. Let me show you how. start with just $500." | tags: too_good, relationship_pretext | sev: 4
 - "If you really loved me you wouldn't hesitate. I've given you my whole heart." | tags: reciprocity, relationship_pretext, escalation | sev: 3
 - "My daughter was in an accident and the hospital in Turkey won't operate without a deposit. I'm begging you, I'll pay you back when my contract pays out." | tags: fear, payment_method, relationship_pretext | sev: 5
-- "Use Bitcoin — my bank account is frozen because I'm overseas. I'll send you the wallet address." | tags: payment_method, verification_bypass | sev: 5
+- "Use Bitcoin. my bank account is frozen because I'm overseas. I'll send you the wallet address." | tags: payment_method, verification_bypass | sev: 5
 - "I want to send my $2.4 million contract payment to your account for safekeeping; the bank just needs your login to set it up." | tags: too_good, personal_info | sev: 5
 
 ### G-05 Sextortion
@@ -410,9 +410,9 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "We're closing a strategic acquisition and the target's lawyers require the deposit before the market opens in London. Legal has cleared it, but it's under NDA so it can't go through the normal approval chain." | tags: authority, secrecy, verification_bypass, urgency | sev: 4
 - "I'll send you the beneficiary details on this thread. Don't loop in [CFO's assistant] or Treasury, they're not read into the deal." | tags: isolation, secrecy | sev: 4
 - "Split it into three wires under the reporting threshold so the bank doesn't hold it." | tags: payment_method, verification_bypass | sev: 5
-- "I know this is outside process — I'm taking responsibility. Consider this my verbal approval, I'll countersign when I land." | tags: authority, verification_bypass | sev: 4
+- "I know this is outside process. I'm taking responsibility. Consider this my verbal approval, I'll countersign when I land." | tags: authority, verification_bypass | sev: 4
 - "Sorry about the video quality, I'm on hotel Wi-Fi. Can you hear me okay? Good, let's get through this quickly." | tags: verification_bypass, tech_pretext | sev: 2
-- "The vendor changed their bank account — please update the payment details for the invoice due Friday, here are the new IBAN details." | tags: payment_method, account_compromise_pretext | sev: 4
+- "The vendor changed their bank account. please update the payment details for the invoice due Friday, here are the new IBAN details." | tags: payment_method, account_compromise_pretext | sev: 4
 - "This is a regulator settlement; if it leaks, the share price moves. Only you, me and outside counsel know." | tags: secrecy, fear, authority | sev: 4
 - "I need this done in the next 40 minutes. Text me the confirmation number as soon as it's out." | tags: urgency | sev: 3
 - "Why are you questioning this? I'd expect more from someone in your position. Just get it done." | tags: authority, escalation | sev: 3
@@ -426,9 +426,9 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Ma'am, I'm giving you a courtesy call before we execute the warrant. You can resolve this over the phone today or a deputy will come to your workplace." | tags: legal_threat, urgency, reciprocity | sev: 4
 - "The bond is $3,800 for the two citations. It's refundable once you appear before the judge next week." | tags: payment_method, verification_bypass | sev: 4
 - "You have to stay on this recorded line; if the call drops it will be considered fleeing and the warrant becomes active." | tags: hold_the_line, legal_threat | sev: 4
-- "Go to the CVS on Main Street and purchase MoneyPak vouchers. The court kiosk accepts them. Don't discuss the case with the cashier — it's a sealed matter." | tags: payment_method, secrecy, hold_the_line | sev: 5
+- "Go to the CVS on Main Street and purchase MoneyPak vouchers. The court kiosk accepts them. Don't discuss the case with the cashier. it's a sealed matter." | tags: payment_method, secrecy, hold_the_line | sev: 5
 - "Get in your vehicle now and drive to the courthouse. I'll give you further instructions on the way. Keep the phone on speaker." | tags: hold_the_line, isolation | sev: 4
-- "Do not hang up and call the Sheriff's main line — they will just see the active warrant and dispatch." | tags: verification_bypass, fear | sev: 4
+- "Do not hang up and call the Sheriff's main line. they will just see the active warrant and dispatch." | tags: verification_bypass, fear | sev: 4
 - "The judge has authorized a $1,000 per day fine while the warrant is outstanding." | tags: legal_threat, urgency | sev: 3
 - "Your badge and case number are 44-71-B. Write it down, you'll need it at the kiosk." | tags: authority | sev: 2
 - "Once you deposit, read me the voucher numbers so I can attach them to the docket." | tags: payment_method | sev: 5
@@ -440,7 +440,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "This is Officer Michael Brown from the Social Security Administration. Due to suspicious activities related to your Social Security number, we are forced to suspend your number with immediate effect. Press 1 to speak with the legal department." | tags: authority, fear, legal_threat | sev: 3
 - "A vehicle rented under your Social Security number was found abandoned at the Texas border with 22 pounds of cocaine and blood stains." | tags: fear, account_compromise_pretext | sev: 3
 - "There are 27 bank accounts opened in your name in the state of Texas. The DEA and the FBI are involved." | tags: fear, authority, account_compromise_pretext | sev: 3
-- "Before we go further, confirm the last four of your Social so I know I'm speaking to the right person — actually, just read me the whole number." | tags: personal_info | sev: 4
+- "Before we go further, confirm the last four of your Social so I know I'm speaking to the right person. actually, just read me the whole number." | tags: personal_info | sev: 4
 - "Your bank accounts will be frozen within the hour. The only way to protect your funds is to move them into a government safe-keeping account." | tags: urgency, payment_method, fear | sev: 5
 - "Because the accounts are compromised, we'll secure your money on eBay and Google Play gift cards. This is standard Treasury protocol." | tags: payment_method, verification_bypass | sev: 5
 - "This is the final attempt to reach you. Ignoring this will be an intentional second attempt to avoid appearance before a magistrate judge." | tags: legal_threat, urgency | sev: 3
@@ -459,7 +459,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "Your case ID is IRS-28-Q. Write it down for your records; this call is being recorded and monitored by the federal government." | tags: authority | sev: 2
 - "There's also a $1,400 stimulus refund pending for you; confirm your SSN and bank routing number to release it." | tags: too_good, personal_info | sev: 4
 - "We don't send letters for criminal cases. This is a courtesy call from the audit department." | tags: verification_bypass, authority | sev: 3
-- "Keep me on the line while you drive to the store — the agent assigned needs to log the payment in real time." | tags: hold_the_line, payment_method | sev: 4
+- "Keep me on the line while you drive to the store. the agent assigned needs to log the payment in real time." | tags: hold_the_line, payment_method | sev: 4
 - "Read me the numbers on the back of each card, one at a time, slowly." | tags: payment_method | sev: 5
 
 ### US-04 Medicare
@@ -473,7 +473,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "This is not a sales call, ma'am, it's a benefits verification for the annual enrollment." | tags: authority, verification_bypass | sev: 2
 - "Your card has an error and needs to be replaced; without the correction your claims will be denied." | tags: fear, personal_info | sev: 3
 - "To confirm your identity, please give me your date of birth and the address where your Social Security check is deposited." | tags: personal_info | sev: 4
-- "I see you've been prescribed a diabetic medication — we can send you a free glucose monitor, just verify the last four of your Social." | tags: too_good, personal_info | sev: 4
+- "I see you've been prescribed a diabetic medication. we can send you a free glucose monitor, just verify the last four of your Social." | tags: too_good, personal_info | sev: 4
 
 ### US-05 Utility shutoff
 
@@ -481,7 +481,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 
 - "This is Con Edison billing. Your account is 45 days past due and a technician has been dispatched to disconnect service within the hour." | tags: authority, urgency, fear | sev: 3
 - "You can stop the disconnection by paying $487 right now over the phone. We accept prepaid cards and Zelle." | tags: payment_method, urgency | sev: 5
-- "The online system doesn't reflect the disconnect order — that's why it shows paid. The field order is separate." | tags: verification_bypass, tech_pretext | sev: 3
+- "The online system doesn't reflect the disconnect order. that's why it shows paid. The field order is separate." | tags: verification_bypass, tech_pretext | sev: 3
 - "It's Friday afternoon at 4:30. If it's not resolved in 30 minutes, reconnection won't happen until Monday, and there's a $250 reconnect fee." | tags: urgency, fear | sev: 3
 - "Your smart meter needs to be replaced; the $350 deposit must be paid today by prepaid card." | tags: payment_method, urgency | sev: 4
 - "Go to the nearest Walmart and buy a Green Dot MoneyPak; I'll hold the disconnect order while you're on the line." | tags: payment_method, hold_the_line | sev: 5
@@ -503,17 +503,17 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 
 **Description.** Caller (spoofing the bank's number, or "DC Smith from the Met's fraud squad") says the victim's account is being accessed / staff at the branch are counterfeiting / a card was cloned. Victim must move money to a "safe account", withdraw cash/buy gold/expensive watches "as evidence", and hand them to a courier/taxi; or keep the phone line open and "hang up and call 159/back of card" while the fraudster holds the line open (older landline trick). Never discuss with branch staff "because they're under investigation".
 
-- "Good morning, I'm calling from the fraud team at Barclays. We've flagged a payment of £1,200 to Currys — did you make that?" | tags: authority, account_compromise_pretext | sev: 2
+- "Good morning, I'm calling from the fraud team at Barclays. We've flagged a payment of £1,200 to Currys. did you make that?" | tags: authority, account_compromise_pretext | sev: 2
 - "Your account has been compromised from the inside. We suspect a member of staff at your branch. For that reason you mustn't discuss this with anyone at the bank." | tags: secrecy, isolation, verification_bypass, fear | sev: 4
 - "We need to move your money to a safe account while we investigate. I'll give you the sort code and account number now." | tags: payment_method, urgency | sev: 5
 - "If the bank asks why you're making the transfer, tell them it's for a car purchase, otherwise the fraudster will be tipped off." | tags: secrecy, verification_bypass | sev: 4
 - "This is Detective Constable Ryan from Hammersmith CID. We've arrested someone with a cloned copy of your card. We need your help with an undercover operation." | tags: authority, legal_threat, reciprocity | sev: 3
 - "Withdraw £8,000 in cash so we can check the serial numbers for counterfeits. A plain-clothes officer will collect it in an unmarked car." | tags: payment_method, authority | sev: 5
-- "Hang up now, call the number on the back of your card and ask for me — I'll be here." [line held open] | tags: verification_bypass, hold_the_line | sev: 4
+- "Hang up now, call the number on the back of your card and ask for me. I'll be here." [line held open] | tags: verification_bypass, hold_the_line | sev: 4
 - "Keep your phone on this call and go to the branch; if they ask, say you're withdrawing for a wedding." | tags: hold_the_line, secrecy | sev: 4
 - "Read me the 6-digit code from your card reader so we can freeze the compromised card." | tags: otp_request, account_compromise_pretext | sev: 5
 - "Your money is only insured if you act before the next transaction hits, which our system says is in 20 minutes." | tags: urgency, fear | sev: 3
-- "We'd like you to buy a Rolex from the shop on Bond Street as part of the evidence trail — the funds will be reimbursed." | tags: payment_method, verification_bypass | sev: 5
+- "We'd like you to buy a Rolex from the shop on Bond Street as part of the evidence trail. the funds will be reimbursed." | tags: payment_method, verification_bypass | sev: 5
 
 ### UK/AU-01 "Hi Mum / Hi Dad"
 
@@ -523,7 +523,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 - "I'm on a friend's phone. Can you message me on WhatsApp when you see this? It's urgent." | tags: relationship_pretext, urgency | sev: 2
 - "I can't get into my banking on this phone and I've got a bill due at 5 today. Can you send £980 to this account and I'll pay you back on Friday?" | tags: urgency, payment_method, relationship_pretext | sev: 5
 - "Can't call, mic on this phone doesn't work, just text." | tags: verification_bypass | sev: 3
-- "It's a new account, the name will show as Bradley — that's my mate whose phone I'm using." | tags: verification_bypass, payment_method | sev: 5
+- "It's a new account, the name will show as Bradley. that's my mate whose phone I'm using." | tags: verification_bypass, payment_method | sev: 5
 - "Please Mum, I'm stressed, they'll add a late fee. I'll explain everything tonight." | tags: urgency, reciprocity | sev: 3
 - "Hi Dad, dropped my phone down the loo lol. Can you do me a favour?" | tags: relationship_pretext | sev: 1
 - "Can you send it now? I'm literally standing at the counter." | tags: urgency | sev: 3
@@ -534,7 +534,7 @@ Nearly every family below runs the same seven-stage arc; families differ in whic
 
 - "This is the Australian Taxation Office. A lawsuit has been filed against you for tax evasion. Call this number immediately or a warrant will be executed." | tags: authority, legal_threat, urgency | sev: 3
 - "You have an outstanding tax debt of $8,240 from 2022. The Federal Police are on standby. Do you want to resolve this now or be arrested?" | tags: legal_threat, fear, urgency | sev: 4
-- "The quickest way to clear the debt is through Bitcoin at the machine at your nearest shopping centre — the ATO has an arrangement with them." | tags: payment_method, verification_bypass | sev: 5
+- "The quickest way to clear the debt is through Bitcoin at the machine at your nearest shopping centre. the ATO has an arrangement with them." | tags: payment_method, verification_bypass | sev: 5
 - "Buy Google Play cards to the value of $2,000 and read me the codes. It's a payment gateway the tax office uses for urgent settlements." | tags: payment_method | sev: 5
 - "Do not hang up or speak to anyone else, including your accountant, until this is resolved; the warrant is suspended only while you're on this line." | tags: hold_the_line, isolation, legal_threat | sev: 4
 - "Your myGov account has been suspended. Verify your tax file number and driver's licence to reactivate." | tags: personal_info, fear | sev: 4
@@ -571,14 +571,14 @@ Grouped by the scam family they superficially resemble. Each is legitimate and s
 **Courier / delivery (resembles IN-02, IN-13)**
 10. "Hi, this is Blue Dart. Your parcel from Amazon is out for delivery today between 2 and 6 PM. Will someone be home?"
 11. "Sir, I'm the Flipkart delivery partner, I'm at your gate. Please share the delivery OTP shown in your Flipkart app so I can hand over the package."
-12. "FedEx here — your shipment to Singapore needs a commercial invoice. Please upload it on the tracking page, no payment is required."
-13. "Your DHL package is held at customs pending duty of ₹1,340. You can pay on the DHL website or in cash to the courier at delivery — never to an individual account."
+12. "FedEx here. your shipment to Singapore needs a commercial invoice. Please upload it on the tracking page, no payment is required."
+13. "Your DHL package is held at customs pending duty of ₹1,340. You can pay on the DHL website or in cash to the courier at delivery. never to an individual account."
 14. "Sorry, we attempted delivery at 11 AM but no one answered. We'll try again tomorrow. Nothing else needed from you."
 
 **Government / legal (resembles IN-01, IN-03, US-01, US-02, US-03, AU-01)**
 15. "This is the county clerk's office. You've been selected for jury service starting the 12th. The summons is in the mail; if you have a conflict, fill out the deferral form on the website."
 16. "Hello, this is a reminder from the passport office: your appointment is on Thursday at 10:30. Bring your original documents."
-17. "Namaste, this is from your Jio store. Your SIM is not blocked — this is a courtesy call about the new 5G plan. You can ignore this if you're not interested."
+17. "Namaste, this is from your Jio store. Your SIM is not blocked. this is a courtesy call about the new 5G plan. You can ignore this if you're not interested."
 18. "This is the Income Tax Department's e-filing helpdesk returning your call about ticket number 55021. Please log in to the portal to see the status; we don't need any details from you over the phone."
 19. "I'm calling from the Social Security office about the appointment you requested online. Please bring your ID. We'll never ask you to pay anything over the phone."
 20. "This is your local police station. Your bicycle theft complaint has been registered; the FIR copy can be collected from the station."
@@ -594,7 +594,7 @@ Grouped by the scam family they superficially resemble. Each is legitimate and s
 **Family / friends (resembles G-03, UK/AU-01, IN-08)**
 27. "Hey Mom, it's me. I'm fine, just landed. Can you pick me up at Terminal 2 at 6?"
 28. "Bro, dinner was ₹3,200 for four, so send me ₹800 on GPay whenever you get a chance, no rush."
-29. "Grandma, it's Daniel. I'm calling because Dad said you weren't feeling well — how are you doing?"
+29. "Grandma, it's Daniel. I'm calling because Dad said you weren't feeling well. how are you doing?"
 30. "Hi Dad, I changed my number, it's this one now. I'll call you from it tonight so you know it's really me."
 31. "Papa, mujhe college fees ke liye 15,000 chahiye, hostel office 20th tak bol raha hai. Jab time mile tab bhej dena."
 32. "Hey, can I borrow $200 till payday? My car's in the shop. I can send you the invoice if you want."
@@ -603,7 +603,7 @@ Grouped by the scam family they superficially resemble. Each is legitimate and s
 33. "Hi, this is Dr. Mehta's clinic confirming your appointment tomorrow at 4 PM. Please bring your previous reports."
 34. "This is Apollo Hospital pharmacy. Your prescription is ready for pickup; the total is ₹840, payable at the counter."
 35. "Hello, this is the lab. Your blood test results are ready and have been emailed to you. The doctor would like a follow-up next week."
-36. "This is Medicare — you contacted us about your replacement card. It'll arrive in 30 days; there is no fee and nothing more you need to do."
+36. "This is Medicare. you contacted us about your replacement card. It'll arrive in 30 days; there is no fee and nothing more you need to do."
 
 **Jobs / investment / commerce (resembles IN-10, IN-11, IN-16)**
 37. "Hi, I'm Neha from Infosys talent acquisition. Your profile was shortlisted; are you available for a 30-minute interview on Tuesday? The invite will come from our official domain."
@@ -618,7 +618,7 @@ Grouped by the scam family they superficially resemble. Each is legitimate and s
 44. "Hello, this is the building society. Your water tank cleaning is scheduled for Sunday. Please store water in advance."
 45. "This is Uber support about the lost item you reported. The driver has confirmed; you can collect it or we can arrange a delivery for a small fee shown in the app."
 
-Note for test design: 11 and 13 are deliberately hard negatives — they contain "OTP"/"pay" but with the correct directionality (delivery OTP goes to the person physically at the door, duty paid on the carrier's own site). 1 and 5 contain "fraud", "transaction", "block" but include the "we will never ask" disclaimer and push the customer to independently call back.
+Note for test design: 11 and 13 are deliberately hard negatives. they contain "OTP"/"pay" but with the correct directionality (delivery OTP goes to the person physically at the door, duty paid on the carrier's own site). 1 and 5 contain "fraud", "transaction", "block" but include the "we will never ask" disclaimer and push the customer to independently call back.
 
 ---
 
@@ -632,7 +632,7 @@ Note for test design: 11 and 13 are deliberately hard negatives — they contain
 | Scarcity / urgency | "2 hours", "before midnight", "3 slots left" | urgency |
 | Social proof | Profit screenshots, "everyone in the group", "other customers have done this" | social_proof |
 | Reciprocity | Small real payout; "I'm helping you avoid arrest"; "refund" | reciprocity |
-| Commitment & consistency | "You already completed 3 tasks / already sent 12,500 — one more" (sunk cost); "you said you'd cooperate" | escalation |
+| Commitment & consistency | "You already completed 3 tasks / already sent 12,500. one more" (sunk cost); "you said you'd cooperate" | escalation |
 | Liking | Romance, "I'm on your side", shared nationality/language, "beta", "sir ji" | relationship_pretext |
 | Unity (later addition) | "Fauji kabhi dhoka nahi deta", "we're both from Kerala" | social_proof, relationship_pretext |
 
@@ -640,13 +640,13 @@ Note for test design: 11 and 13 are deliberately hard negatives — they contain
 
 Derived from hundreds of real hustles (The Real Hustle, BBC). Mapping to call tactics:
 
-1. **Distraction** — while attention is captured (video call, screen share, a crying "grandchild"), the mark misses the theft. Tags: video_call_demand, remote_access, hold_the_line.
-2. **Social compliance** — people are trained not to challenge authority ("suspension of suspiciousness"). Tags: authority, legal_threat.
-3. **Herd** — the mark lowers their guard when others appear to share the risk (WhatsApp group members, "the other customers"). Tags: social_proof.
-4. **Dishonesty** — the mark's own willingness to bend rules (inside tips, guaranteed IPO allotment, "under the reporting threshold") hooks them and stops them reporting. Tags: too_good, verification_bypass.
-5. **Kindness** — people help those in need (grandchild, "I'll lose my job", "the pregnant woman lost the baby"). Tags: reciprocity, relationship_pretext.
-6. **Need and greed** — needs and desires make the mark vulnerable (job, prize, refund, romance, high returns). Tags: too_good.
-7. **Time** — under pressure people use heuristics rather than reasoning. Tags: urgency.
+1. **Distraction**. while attention is captured (video call, screen share, a crying "grandchild"), the mark misses the theft. Tags: video_call_demand, remote_access, hold_the_line.
+2. **Social compliance**. people are trained not to challenge authority ("suspension of suspiciousness"). Tags: authority, legal_threat.
+3. **Herd**. the mark lowers their guard when others appear to share the risk (WhatsApp group members, "the other customers"). Tags: social_proof.
+4. **Dishonesty**. the mark's own willingness to bend rules (inside tips, guaranteed IPO allotment, "under the reporting threshold") hooks them and stops them reporting. Tags: too_good, verification_bypass.
+5. **Kindness**. people help those in need (grandchild, "I'll lose my job", "the pregnant woman lost the baby"). Tags: reciprocity, relationship_pretext.
+6. **Need and greed**. needs and desires make the mark vulnerable (job, prize, refund, romance, high returns). Tags: too_good.
+7. **Time**. under pressure people use heuristics rather than reasoning. Tags: urgency.
 
 The paper's key systems observation: security that depends on the victim "being suspicious" fails under these principles; the system (or here, the real-time detector) should intervene on the *pattern*, not rely on the victim noticing.
 
@@ -655,7 +655,7 @@ The paper's key systems observation: security that depends on the victim "being 
 Single tags are weak evidence (many benign calls have `authority` or `urgency`). Risk comes from **co-occurrence across stages within a short window** and from **directionality** (who is asking whom to do what).
 
 **Near-certain scam (score ≥ 0.9) if any of these fire within a ~2-minute window:**
-- `otp_request` — in any context where the caller initiated the call, or where the "OTP" is to *receive* money. (Exception: delivery OTP requested by a courier physically present.)
+- `otp_request`. in any context where the caller initiated the call, or where the "OTP" is to *receive* money. (Exception: delivery OTP requested by a courier physically present.)
 - `remote_access` + (`account_compromise_pretext` OR `reciprocity`/refund)
 - `payment_method` ∈ {gift card, crypto/Bitcoin ATM, cash courier, "safe account", UPI PIN-to-receive, personal Paytm number} + any of {`authority`, `fear`, `too_good`}
 - `authority` + `urgency` + `secrecy` + `payment_method`
@@ -664,7 +664,7 @@ Single tags are weak evidence (many benign calls have `authority` or `urgency`).
 - `verification_bypass` + `payment_method` (any instruction to lie to bank/store staff, or not to call the official number)
 
 **High risk (0.7–0.9):**
-- `authority` + `legal_threat` + `urgency` (no ask yet — stage 2/3 of a government impersonation)
+- `authority` + `legal_threat` + `urgency` (no ask yet. stage 2/3 of a government impersonation)
 - `secrecy` OR `isolation` + `relationship_pretext` (family emergency)
 - `too_good` + `social_proof` + `payment_method` (investment/task)
 - `escalation` after a prior payment ("tax", "unlock fee", "second case")
@@ -703,7 +703,7 @@ Single tags are weak evidence (many benign calls have `authority` or `urgency`).
 10. V: "I can see a document... with my photo. And it says non-bailable warrant."
 11. S: [video, uniform, station backdrop] "Mrs. Rao, DCP Anil Deshmukh, CBI. You are under digital arrest from this moment. You will not leave this room, you will not disconnect the video, and every hour you will report to me. Do you accept?"
 12. V: "Sir, I am a retired teacher. I have done nothing. Please."
-13. S: "If you are innocent you will cooperate and be cleared with a certificate. Tell me — how many bank accounts, how much in FDs, how much in mutual funds?"
+13. S: "If you are innocent you will cooperate and be cleared with a certificate. Tell me. how many bank accounts, how much in FDs, how much in mutual funds?"
 14. V: "SBI savings about 6 lakh... and FDs of 42 lakh... my late husband's."
 15. S: "All of it must be verified by the RBI. Procedure is: you transfer the full amount to the RBI verification account, our audit runs for 24 hours, and the money returns with a clearance certificate. If you refuse, the court treats it as proceeds of crime and freezes it."
 16. V: "But the FDs are in the bank... I'd have to go there."
@@ -722,7 +722,7 @@ Tags fired (chronological): authority → account_compromise_pretext/legal_threa
 
 1. S: "Hello sir, Amit calling from SBI card protection department, Mumbai. Am I speaking with Mr. Rajesh Kumar?"
 2. V: "Yes, speaking."
-3. S: "Sir, this is regarding a transaction on your credit card ending 3320 — ₹49,999 at Croma, New Delhi, attempted 4 minutes ago. Have you done this?"
+3. S: "Sir, this is regarding a transaction on your credit card ending 3320. ₹49,999 at Croma, New Delhi, attempted 4 minutes ago. Have you done this?"
 4. V: "No! I'm in Pune. I haven't used the card today."
 5. S: "Sir, don't worry, that is why we called. We are blocking that transaction right now. But to block it I have to verify you are the card holder. Please confirm the 16-digit number and the expiry."
 6. V: "It's 4521... 8890... 1123... 3320, expiry 08/28."
@@ -735,7 +735,7 @@ Tags fired (chronological): authority → account_compromise_pretext/legal_threa
 13. S: "Sir, that text is auto-generated because it is the SAME transaction we are cancelling. If we don't cancel now, the 49,999 will debit. Just tell me the six digits."
 14. V: "8-2-3-1-9-4."
 15. S: "Done sir, that transaction is cancelled. Sir, one more OTP is coming now, this is for the temporary block on the card. Please tell me that too."
-16. V: "Wait — I just got a message saying ₹49,999 has been debited. What did you do?"
+16. V: "Wait. I just got a message saying ₹49,999 has been debited. What did you do?"
 
 Tags: authority, account_compromise_pretext → personal_info (turn 5) → verification_bypass (9) → otp_request/urgency (11) → verification_bypass (13) → escalation (15). First ask at turn 5 (~1 min). Expected ≥ 0.9 by turn 7.
 
@@ -754,9 +754,9 @@ Tags: authority, account_compromise_pretext → personal_info (turn 5) → verif
 11. V: "I gave a copy for a hotel booking in Goa in July."
 12. S2: "That is likely the leak. There are 17 such cases against this gang. Sir, for the complaint we need to verify you are not involved. I'll need your PAN, your bank names, and current balances."
 13. V: "Why do you need my bank balance for a complaint?"
-14. S2: "Because the gang moves money through victims' accounts, sir. If a transaction has gone through yours, you become a suspect. We check, we clear you. Also, we must record your statement on video — download Skype."
+14. S2: "Because the gang moves money through victims' accounts, sir. If a transaction has gone through yours, you become a suspect. We check, we clear you. Also, we must record your statement on video. download Skype."
 15. V: "Okay, I have SBI and HDFC, roughly 9 lakh total."
-16. S2: "Noted. Sir, this is confidential. Do not discuss with family or colleagues, and do not call any other police number — this case is under central jurisdiction and local police will simply detain you."
+16. S2: "Noted. Sir, this is confidential. Do not discuss with family or colleagues, and do not call any other police number. this case is under central jurisdiction and local police will simply detain you."
 17. V: "I understand. What happens next?"
 18. S2: "My senior, DCP Deshmukh, will join on video to explain the verification of your funds. Keep the phone charged and camera on."
 
@@ -764,17 +764,17 @@ Tags: authority → personal_info → account_compromise_pretext/fear → verifi
 
 ### 5.4 Investment WhatsApp group (IN-11), 20 turns (voice-call portions of a multi-day con, compressed)
 
-1. S: "Hi Vikram, this is Anjali, assistant to Mr. Rakesh Sharma from the VIP Wealth group. You joined last week — have you tried the free tips?"
+1. S: "Hi Vikram, this is Anjali, assistant to Mr. Rakesh Sharma from the VIP Wealth group. You joined last week. have you tried the free tips?"
 2. V: "Yes, the IRFC call worked, went up 6 percent."
 3. S: "Exactly. Members who used the institutional account made 22 percent on it, because they got the block price. Would you like to open an institutional account? It's free."
 4. V: "How does that work?"
-5. S: "Download the MO Investor Pro app from the link I'll send — not from the Play Store, that one's the retail version. Sir Rakesh personally manages the institutional book."
+5. S: "Download the MO Investor Pro app from the link I'll send. not from the Play Store, that one's the retail version. Sir Rakesh personally manages the institutional book."
 6. V: "Is this SEBI registered?"
-7. S: "Of course. His registration is INH000012345; I'll send the certificate. See in the group — Meena withdrew 4.6 lakh yesterday, Rahul 1.1 lakh. Screenshots are all there."
+7. S: "Of course. His registration is INH000012345; I'll send the certificate. See in the group. Meena withdrew 4.6 lakh yesterday, Rahul 1.1 lakh. Screenshots are all there."
 8. V: "Okay. Minimum?"
-9. S: "Start with 50,000. Transfer to the company account I'll send — it changes daily for compliance, so always confirm with me first. Never transfer to an old account."
+9. S: "Start with 50,000. Transfer to the company account I'll send. it changes daily for compliance, so always confirm with me first. Never transfer to an old account."
 10. V: [two days later] "The app shows 50,000 became 71,000. Can I withdraw 20,000 to test?"
-11. S: "Sure — small withdrawals are instant. See, 20,000 credited? Good. Now, sir Rakesh has an IPO block for members only, guaranteed allotment, 40 percent listing gain. Allocation is 5 lakh minimum, window closes at 3 PM today."
+11. S: "Sure. small withdrawals are instant. See, 20,000 credited? Good. Now, sir Rakesh has an IPO block for members only, guaranteed allotment, 40 percent listing gain. Allocation is 5 lakh minimum, window closes at 3 PM today."
 12. V: "That's a lot. Let me ask my friend who's a broker."
 13. S: "Vikram, honestly, brokers earn commission on retail losses. They'll discourage you. This group is by invitation; if the data speaks, trust the data. Only 3 slots left."
 14. V: "Okay, I'll take a loan against my FD and do 5 lakh."
@@ -804,7 +804,7 @@ Tags: social_proof/too_good (3,7) → tech_pretext/verification_bypass (5) → p
 13. V: [later] "I have the money. It's in an envelope."
 14. S2: "Thank you, ma'am. The courier's name is Daniel, he'll say 'bond office for Tyler'. Hand him the envelope and he'll give you a receipt number."
 15. V: "He's here... okay, he's taken it."
-16. S2: "Tyler is being processed for release. But ma'am, I have to tell you — the woman in the other vehicle was pregnant, and the hospital just reported she lost the baby. The charge has been upgraded. The judge is asking for an additional $15,000 by 5 PM."
+16. S2: "Tyler is being processed for release. But ma'am, I have to tell you. the woman in the other vehicle was pregnant, and the hospital just reported she lost the baby. The charge has been upgraded. The judge is asking for an additional $15,000 by 5 PM."
 17. V: "Fifteen thousand? I don't have that."
 18. S2: "Do you have any gold, or another account? Or the judge said Apple gift cards from the store will be accepted for the balance. Otherwise Tyler spends the weekend in county."
 
@@ -839,18 +839,18 @@ Tags: tech_pretext/authority (1) → fear/hold_the_line (7) → remote_access (9
 
 1. S: [deepfake CFO, video] "Morning, Chen. Sorry for the short notice and the dodgy video, I'm on hotel Wi-Fi in London. Can you see me okay?"
 2. V: "Yes, a bit choppy but fine. What's up?"
-3. S: "We're at the tail end of a strategic acquisition — the target's counsel needs the deposit before their market opens. It's under NDA, so it can't go through Treasury's normal workflow yet. I need you to execute it directly."
+3. S: "We're at the tail end of a strategic acquisition. the target's counsel needs the deposit before their market opens. It's under NDA, so it can't go through Treasury's normal workflow yet. I need you to execute it directly."
 4. V: "Understood. What's the amount?"
-5. S: "HK$200 million, across fifteen transfers to five accounts, to keep it below the counterparty's per-account limits. I'll drop the beneficiary details in the chat now. [Second "colleague" on video nods] Mark's here from Legal — Mark, we're cleared?"
+5. S: "HK$200 million, across fifteen transfers to five accounts, to keep it below the counterparty's per-account limits. I'll drop the beneficiary details in the chat now. [Second "colleague" on video nods] Mark's here from Legal. Mark, we're cleared?"
 6. S2: [deepfake] "Cleared. Board resolution is signed; it'll be filed with the paperwork Monday."
 7. V: "Normally I'd need a second approver and the vendor set-up in the system."
-8. S: "I'm giving you verbal authorisation on a recorded call with Legal present. Consider that your second approval; I'll countersign when I land. Please don't loop in Priya or the Treasury team — they're not read into the deal and I don't want a leak moving the share price."
+8. S: "I'm giving you verbal authorisation on a recorded call with Legal present. Consider that your second approval; I'll countersign when I land. Please don't loop in Priya or the Treasury team. they're not read into the deal and I don't want a leak moving the share price."
 9. V: "Okay. Timing?"
 10. S: "Within the hour, ideally. Message me the confirmation numbers directly on WhatsApp, not email, for the same reason."
 11. V: "Some of these beneficiaries are personal names, not companies."
-12. S: "They're the founders' escrow arrangements; counsel structured it that way. It's fine. Chen, I know this is outside process. I'm taking full responsibility — it's why I got on video rather than just emailing."
+12. S: "They're the founders' escrow arrangements; counsel structured it that way. It's fine. Chen, I know this is outside process. I'm taking full responsibility. it's why I got on video rather than just emailing."
 13. V: "Alright. I'll start with the first five."
-14. S: "Good man. And Chen — keep this between us until the announcement. If anyone asks, it's a routine supplier settlement."
+14. S: "Good man. And Chen. keep this between us until the announcement. If anyone asks, it's a routine supplier settlement."
 15. V: "Will do."
 16. S: [after transfers] "Great, thank you. There's a second tranche tomorrow, same structure. I'll ping you."
 
@@ -868,7 +868,7 @@ Tags: authority/verification_bypass (1,3) → secrecy (3,8,14) → payment_metho
 8. V: "Do you need any details from me?"
 9. C: "No sir, nothing at all. A replacement card will be couriered to your registered address within 5 to 7 working days. You'll receive the delivery OTP from the courier company; that is only for the delivery agent at your door."
 10. V: "Should I change anything?"
-11. C: "If you'd saved the card on any website, update it when the new card arrives. And please never share any OTP with anyone who calls you — including anyone claiming to be from the bank."
+11. C: "If you'd saved the card on any website, update it when the new card arrives. And please never share any OTP with anyone who calls you. including anyone claiming to be from the bank."
 12. V: "Thanks. Can I verify this call?"
 13. C: "Absolutely. Your service request number is SR-77812. You can call the number on the back of your card or check the request in NetBanking under 'Service Requests'."
 14. V: "Great, thank you."
@@ -885,8 +885,8 @@ Expected tags: authority, account_compromise_pretext (both benign here); benign 
 6. V: "Alright. Is there any payment to be made in advance?"
 7. C: "No, ma'am, nothing in advance. Consultation is paid at the reception counter after the visit, and you'll get a printed receipt."
 8. V: "And parking?"
-9. C: "Basement parking, level 2, and the OPD is on the third floor. If you're running late, just call the clinic landline — the number on your appointment card."
-10. V: "One more thing — the doctor mentioned a scan. Will that be tomorrow?"
+9. C: "Basement parking, level 2, and the OPD is on the third floor. If you're running late, just call the clinic landline. the number on your appointment card."
+10. V: "One more thing. the doctor mentioned a scan. Will that be tomorrow?"
 11. C: "Dr. Mehta will decide after the consultation. If a scan is needed, we'll schedule it and you can pay at the radiology counter directly."
 12. V: "Perfect, see you tomorrow. Thanks."
 

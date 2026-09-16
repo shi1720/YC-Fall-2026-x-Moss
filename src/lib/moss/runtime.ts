@@ -170,7 +170,7 @@ function buildFallback(playbook: PlaybookDoc[], reason: string, t0: number): Mos
 /**
  * Process-wide runtime. If Moss Cloud cannot be reached at boot (credit limit, network,
  * bad key) the app degrades to the offline retriever and retries Moss in the background
- * every two minutes, swapping it in once it loads — the shield never goes dark.
+ * every two minutes, swapping it in once it loads. the shield never goes dark.
  */
 export function getMossRuntime(): Promise<MossRuntime> {
   const g = globalThis as G;

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Put a clean https://<site>.web.app URL in front of the Cloud Run service — one command.
+# Put a clean https://<site>.web.app URL in front of the Cloud Run service. one command.
 #
 #   ./deploy/gcloud.sh      # first: the app itself, on Cloud Run
 #   ./deploy/firebase.sh    # then: Firebase Hosting rewrite → Cloud Run
@@ -31,7 +31,7 @@ fi
 
 fb() { firebase --non-interactive --project "${PROJECT}" "$@"; }
 
-echo "▲ Firebase Hosting for ${SERVICE} (${RUN_URL}) — project ${PROJECT}"
+echo "▲ Firebase Hosting for ${SERVICE} (${RUN_URL}). project ${PROJECT}"
 # Is the CLI signed in? (Cloud Shell's default credentials usually work; otherwise log in.)
 if ! projects="$(fb projects:list --json 2>&1)"; then
   echo "${projects}" >&2

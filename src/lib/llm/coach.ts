@@ -45,7 +45,7 @@ Your job:
 - Decide: "scam" (a known script is being run), "suspicious" (worrying but not conclusive), or "benign" (a normal call).
 - Explain in at most 2 short sentences, in simple words a 70-year-old can understand while stressed. No jargon.
 - Give ONE exact sentence the person can say right now ("say_this"). It must end the pressure without arguing, e.g. "I will call the bank myself on the number on my card. Goodbye." For a benign call, a normal polite sentence is fine.
-- Give ONE concrete next action ("action"), e.g. "Hang up and call 1930." Use the official helpline for the region (India: 1930).
+- Give ONE concrete next action ("action"), e.g. "Hang up and call 1930." Do not invent phone numbers, websites or contact sources. India: 1930 is the cyber financial fraud helpline, not a general police number.
 Respond ONLY with JSON: {"verdict":"scam|suspicious|benign","confidence":0..1,"explanation":"...","say_this":"...","action":"...","family":"<family id or null>"}`;
 
 export interface CoachInput {
@@ -61,6 +61,18 @@ function familyIdOrNull(id: string | null | undefined): Family | null {
   return (FAMILIES as readonly string[]).includes(id) ? (id as Family) : null;
 }
 
+/** Keep contact instructions out of generated text, even when the model invents a number. */
+export function safeNextStep(verdict: CoachAdvice["verdict"], region: CoachInput["region"] = "IN") {
+  return {
+    sayThis: verdict === "benign"
+      ? "Thank you. I will verify the details through the official channel."
+      : "I will not continue this call. I am going to verify this myself. Goodbye.",
+    action: verdict === "benign"
+      ? "Verify independently before sharing sensitive information or paying. A safe score does not verify identity."
+      : `Hang up. Use an official website or a number you already trust to verify.${region === "IN" ? " If money was lost, report cyber fraud on 1930." : " Report any loss to your bank and local fraud reporting service."}`,
+  };
+}
+
 export function templateCoach(input: CoachInput): CoachAdvice {
   const { risk } = input;
   const fam = risk.dominantFamily ? FAMILY_INFO[risk.dominantFamily] : null;
@@ -74,16 +86,11 @@ export function templateCoach(input: CoachInput): CoachAdvice {
       : fam
         ? `${fam.short} ${strongest ? `The caller is using ${TACTIC_INFO[strongest.tactic].label.toLowerCase()}.` : ""}`.trim()
         : `The caller is using pressure tactics${strongest ? ` (${TACTIC_INFO[strongest.tactic].label.toLowerCase()})` : ""}.`;
-  const helpline = fam?.helpline && fam.helpline !== "—" ? fam.helpline : "1930";
   return {
     verdict,
     confidence: verdict === "scam" ? 0.85 : verdict === "suspicious" ? 0.6 : 0.7,
     explanation,
-    sayThis:
-      verdict === "benign"
-        ? "Thank you, I will call you back on the official number."
-        : "I am not comfortable continuing. I will verify this myself on the official number. Goodbye.",
-    action: verdict === "scam" ? `Hang up now and call ${helpline}.` : verdict === "suspicious" ? "Do not share any code or send money. Verify on the official number." : "Continue, but never share OTPs or PINs.",
+    ...safeNextStep(verdict, input.region),
     family: risk.dominantFamily,
     model: "template",
     latencyMs: 0,
@@ -117,8 +124,7 @@ ${matches || "(none)"}`;
       verdict: parsed.verdict,
       confidence: parsed.confidence,
       explanation: parsed.explanation,
-      sayThis: parsed.say_this,
-      action: parsed.action,
+      ...safeNextStep(parsed.verdict, input.region),
       family: familyIdOrNull(parsed.family) ?? input.risk.dominantFamily,
       model: res.model,
       latencyMs: Math.round(res.latencyMs),

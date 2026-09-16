@@ -30,7 +30,7 @@ export function useRakshaSocket(onMessage: (msg: ServerMessage) => void) {
     handler.current = onMessage;
   }, [onMessage]);
   const attempts = useRef(0);
-  const queue = useRef<string[]>([]);
+
 
   useEffect(() => {
     let closed = false;
@@ -48,19 +48,25 @@ export function useRakshaSocket(onMessage: (msg: ServerMessage) => void) {
       wsRef.current = ws;
       ws.onopen = () => {
         attempts.current = 0;
-        setStatus("open");
-        for (const m of queue.current.splice(0)) ws.send(m);
+
+
       };
       ws.onmessage = (ev) => {
         try {
-          handler.current(JSON.parse(ev.data as string) as ServerMessage);
+          const message = JSON.parse(ev.data as string) as ServerMessage;
+          // The TCP connection can open while Moss is still warming up.
+          // Enable call controls only after the server confirms its runtime is ready.
+          if (message.type === "hello") setStatus("open");
+          handler.current(message);
         } catch (err) {
           console.warn("bad message", err);
         }
       };
       ws.onclose = () => {
-        setStatus("closed");
         if (closed) return;
+        setStatus("closed");
+        originPromise = null;
+        handler.current({ type: "error", message: "Connection lost. This call has stopped. Reconnect and start a new call." });
         const delay = Math.min(8000, 500 * 2 ** attempts.current++);
         timer = setTimeout(connect, delay);
       };
@@ -78,7 +84,7 @@ export function useRakshaSocket(onMessage: (msg: ServerMessage) => void) {
     const data = JSON.stringify(msg);
     const ws = wsRef.current;
     if (ws && ws.readyState === WebSocket.OPEN) ws.send(data);
-    else queue.current.push(data);
+    else handler.current({ type: "error", message: "The shield is reconnecting. Please wait and try again." });
   }, []);
 
   return { status, send };

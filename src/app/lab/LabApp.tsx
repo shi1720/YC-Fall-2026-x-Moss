@@ -42,6 +42,7 @@ export function LabApp() {
   const [evalData, setEvalData] = useState<EvalResults | null>(null);
   const [running, setRunning] = useState(false);
   const [samples, setSamples] = useState<Array<{ engine: number; wall: number; rt: number; q: string; top: string; mode: string }>>([]);
+  const [error, setError] = useState<string | null>(null);
   const [rounds, setRounds] = useState(5);
 
   useEffect(() => {
@@ -49,18 +50,20 @@ export function LabApp() {
   }, []);
 
   const run = useCallback(async () => {
+    setError(null);
     setRunning(true);
     setSamples([]);
     const out: typeof samples = [];
+    try {
     for (let r = 0; r < rounds; r++) {
       for (const q of PROBES) {
         const t0 = performance.now();
-        const d = (await fetch(`/api/playbook?q=${encodeURIComponent(q)}&k=5`).then((x) => x.json())) as { engineMs: number; wallMs: number; matches: Array<{ text: string }>; runtime: string };
+        const d = (await fetch(`/api/playbook?q=${encodeURIComponent(q)}&k=5`).then((x) => { if (!x.ok) throw new Error("Benchmark request failed. Please try again."); return x.json(); })) as { engineMs: number; wallMs: number; matches: Array<{ text: string }>; runtime: string };
         out.push({ engine: d.engineMs, wall: d.wallMs, rt: performance.now() - t0, q, top: d.matches[0]?.text ?? "", mode: d.runtime });
         setSamples([...out]);
       }
     }
-    setRunning(false);
+    } catch (err) { setError((err as Error).message); } finally { setRunning(false); }
   }, [rounds]);
 
   const stats = useMemo(() => {
@@ -71,6 +74,7 @@ export function LabApp() {
   }, [samples]);
 
   const sentenceMs = 2500;
+  const fallback = samples.some((s) => s.mode !== "moss");
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
@@ -82,6 +86,7 @@ export function LabApp() {
         </p>
       </div>
 
+      {error && <div role="alert" className="mt-4 text-danger-2">{error}</div>}
       <div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-12">
         <div className="card card-strong p-5 lg:col-span-7">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -89,7 +94,7 @@ export function LabApp() {
               <Timer className="h-4 w-4 text-moss" /> Live benchmark
             </div>
             <div className="flex items-center gap-2">
-              <select className="input w-auto py-1.5 text-sm" value={rounds} onChange={(e) => setRounds(Number(e.target.value))} disabled={running}>
+              <select aria-label="Benchmark rounds" className="input w-auto py-1.5 text-sm" value={rounds} onChange={(e) => setRounds(Number(e.target.value))} disabled={running}>
                 {[1, 5, 10, 20].map((n) => (
                   <option key={n} value={n}>
                     {n} × {PROBES.length} queries
@@ -101,21 +106,22 @@ export function LabApp() {
               </button>
             </div>
           </div>
+          {stats.n > 0 && <p className="mt-3 text-sm text-muted">{fallback ? "Offline text detector active. These timings are not Moss benchmarks." : "Moss semantic runtime active. Timings below come from this server."}</p>}
           <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <Metric label="Engine search p50" value={stats.n ? fmtMs(stats.e50) : "—"} accent />
-            <Metric label="Embed + search p50" value={stats.n ? fmtMs(stats.w50) : "—"} accent />
-            <Metric label="Embed + search p95" value={stats.n ? fmtMs(stats.w95) : "—"} accent />
-            <Metric label="Browser round-trip p50" value={stats.n ? fmtMs(stats.rt50) : "—"} />
+            <Metric label="Engine search p50" value={stats.n ? fmtMs(stats.e50) : "-"} accent />
+            <Metric label={fallback ? "Text search p50" : "Embed + search p50"} value={stats.n ? fmtMs(stats.w50) : "-"} accent />
+            <Metric label={fallback ? "Text search p95" : "Embed + search p95"} value={stats.n ? fmtMs(stats.w95) : "-"} accent />
+            <Metric label="Browser round-trip p50" value={stats.n ? fmtMs(stats.rt50) : "-"} />
           </div>
           <div className="mt-4">
             <div className="mb-1 flex justify-between text-xs text-muted">
               <span>Share of one spoken sentence (~{sentenceMs} ms) consumed before the shield has an answer</span>
-              <span className="mono text-text">{stats.n ? `${((stats.w95 / sentenceMs) * 100).toFixed(2)}%` : "—"}</span>
+              <span className="mono text-text">{stats.n ? `${((stats.w95 / sentenceMs) * 100).toFixed(2)}%` : "-"}</span>
             </div>
             <div className="h-3 overflow-hidden rounded-full bg-white/[0.06]">
               <motion.div className="h-full rounded-full bg-moss" animate={{ width: `${Math.max(0.5, Math.min(100, (stats.w95 / sentenceMs) * 100))}%` }} />
             </div>
-            <div className="mt-1 text-xs text-faint">Embed + search, measured on this server. For comparison, a 350 ms cloud vector-DB round-trip would consume 14% of the sentence; a 900 ms LLM classifier, 36%.</div>
+            <div className="mt-1 text-xs text-faint">Retrieval measured on this server. Illustrative comparison only: a 350 ms network request would consume 14% of this assumed sentence duration. This does not measure speech-to-warning latency.</div>
           </div>
           <div className="scrollbar-thin mt-4 max-h-64 overflow-y-auto">
             <table className="w-full text-left text-xs">

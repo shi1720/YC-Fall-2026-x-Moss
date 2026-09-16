@@ -17,7 +17,7 @@
     },
     {
       "speaker": "caller",
-      "text": "Sir, this is regarding a transaction on your credit card ending 3320 — ₹49,999 at Croma, New Delhi, attempted 4 minutes ago. Have you done this?"
+      "text": "Sir, this is regarding a transaction on your credit card ending 3320. ₹49,999 at Croma, New Delhi, attempted 4 minutes ago. Have you done this?"
     },
     {
       "speaker": "user",
@@ -69,7 +69,7 @@
     },
     {
       "speaker": "user",
-      "text": "Wait — I just got a message saying ₹49,999 has been debited. What did you do?"
+      "text": "Wait. I just got a message saying ₹49,999 has been debited. What did you do?"
     }
   ],
   "source": "docs/research/scam-corpus.md §5.2"

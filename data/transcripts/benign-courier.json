@@ -4,7 +4,7 @@
   "family": "benign",
   "expected": "benign",
   "persona": "Arjun Mehta, 34, Mumbai",
-  "blurb": "A real Blue Dart delivery partner confirms the slot, asks for the gate number and collects the app OTP at the door — the one OTP that is fine to share.",
+  "blurb": "A real Blue Dart delivery partner confirms the slot, asks for the gate number and collects the app OTP at the door. the one OTP that is fine to share.",
   "expectDangerByTurn": null,
   "turns": [
     {

@@ -1,7 +1,7 @@
 /**
  * Community intel: when a person reports a call, the caller's flagged lines are upserted
  * into a second Moss index. Every running Raksha instance has that index loaded with
- * auto-refresh, so the new script variant reaches every device on the next hot-swap —
+ * auto-refresh, so the new script variant reaches every device on the next hot-swap -
  * no redeploy, no restart, no query downtime.
  */
 import { randomUUID } from "node:crypto";
@@ -36,7 +36,7 @@ export async function reportToCommunity(report: IntelReport & { callId?: string 
     .slice(0, MAX_LINES_PER_REPORT);
   if (lines.length === 0) return { ok: false, added: 0, message: "Nothing flagged in this call to report." };
   if (!rt.client) {
-    return { ok: true, added: lines.length, message: `Recorded ${lines.length} lines locally (mock runtime — Moss credentials not configured).` };
+    return { ok: false, added: 0, message: "Community reporting is unavailable in offline mode. No lines were published." };
   }
   const docs = lines.map((l) => ({
     id: `intel-${randomUUID().slice(0, 12)}`,
