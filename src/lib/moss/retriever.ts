@@ -17,7 +17,7 @@ export interface MossRetrieverConfig {
 
 /**
  * Production retriever: queries one or more Moss indexes that are already loaded in
- * this process. No network on the query path — embedding and search both run in the
+ * this process. No network on the query path. embedding and search both run in the
  * Moss runtime, typically in single-digit milliseconds.
  */
 export class MossRetriever implements Retriever {

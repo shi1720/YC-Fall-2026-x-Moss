@@ -1,12 +1,13 @@
 /**
- * CallManager — owns every live call in this process.
+ * CallManager. owns every live call in this process.
  *
  * Per call we keep: the transcript, the fast-path RiskState, the call's turns in the
  * process's shared Moss *session* (a local, in-memory index; each turn is tagged with the
- * callId and recalled with a metadata filter — the "live-call context" pattern), the
+ * callId and recalled with a metadata filter. the "live-call context" pattern), the
  * interventions raised, and the coach's advice. Nothing is persisted; when the call ends
  * its turns are deleted from the session and the memory is gone unless the person reports.
  */
+import { searchTranscript } from "@/lib/engine/transcriptSearch";
 import { EventEmitter } from "node:events";
 import { randomUUID } from "node:crypto";
 import { FAMILY_INFO, TACTIC_INFO } from "@/lib/data/families";
@@ -70,6 +71,7 @@ export class CallManager extends EventEmitter<CallEvents> {
   }
 
   async start(opts: Omit<CallMeta, "callId" | "startedAt">): Promise<CallRecord> {
+    if (this.list().filter(c => !c.endedAt).length >= 100) throw new Error("The shield is busy. Please try again shortly.");
     const meta: CallMeta = { ...opts, callId: randomUUID(), startedAt: Date.now() };
     const record: CallRecord = {
       meta,
@@ -93,6 +95,9 @@ export class CallManager extends EventEmitter<CallEvents> {
   async analyze(callId: string, input: { text: string; speaker: Utterance["speaker"]; final: boolean; t?: number }): Promise<UtteranceAnalysis | null> {
     const record = this.calls.get(callId);
     if (!record || record.endedAt) return null;
+    if (record.transcript.length >= 1000 || Date.now() - record.meta.startedAt > 3600_000) {
+      await this.end(callId); return null;
+    }
     const text = input.text.trim();
     if (text.length < 3) return null;
     const t0 = performance.now();
@@ -147,7 +152,8 @@ export class CallManager extends EventEmitter<CallEvents> {
       if (!rt.memory || record.endedAt) return;
       const id = `${record.meta.callId}:${u.id}`;
       await rt.memory.addDocs([{ id, text: u.text, metadata: { callId: record.meta.callId, speaker: u.speaker, t: String(u.t) } }]);
-      record.memoryDocIds.push(id);
+      if (record.endedAt) await rt.memory.deleteDocs([id]);
+      else record.memoryDocIds.push(id);
     } catch (err) {
       console.warn("[calls] memory addDocs failed:", (err as Error).message);
     }
@@ -157,7 +163,7 @@ export class CallManager extends EventEmitter<CallEvents> {
     const risk = record.risk;
     const now = analysis.utterance.t;
     const fam = risk.dominantFamily ? FAMILY_INFO[risk.dominantFamily] : null;
-    const helpline = fam?.helpline && fam.helpline !== "—" ? fam.helpline : "1930";
+    const helpline = fam?.helpline && fam.helpline !== "-" ? fam.helpline : "1930";
     const emit = (i: Omit<Intervention, "t" | "reasons" | "family" | "level">) => {
       const intervention: Intervention = { ...i, level: risk.level, reasons: risk.reasons.slice(0, 3), family: risk.dominantFamily, t: now };
       record.interventions.push(intervention);
@@ -168,7 +174,7 @@ export class CallManager extends EventEmitter<CallEvents> {
     // 1. Level transitions.
     if (risk.level === "danger" && prevLevel !== "danger") {
       emit({
-        headline: fam ? `Stop — this is the "${fam.label}" scam script.` : "Stop — this call follows a scam script.",
+        headline: fam ? `Stop. this is the "${fam.label}" scam script.` : "Stop. this call follows a scam script.",
         body: fam ? fam.short : "The caller is combining pressure with a request for money, codes or access.",
         sayThis: "I will not continue this call. I am going to verify this myself. Goodbye.",
         action: fam ? fam.advice : `Hang up and call ${helpline}.`,
@@ -177,7 +183,7 @@ export class CallManager extends EventEmitter<CallEvents> {
     }
     if (risk.level === "caution" && prevLevel === "safe") {
       emit({
-        headline: "Careful — this call is starting to sound like a scam.",
+        headline: "Careful. this call is starting to sound like a scam.",
         body: fam ? `It resembles the "${fam.label}" script. ${fam.short}` : "The caller is using pressure tactics.",
         sayThis: "Please give me a reference number. I will call back on the official number.",
         action: "Do not share any code or send money until you have verified independently.",
@@ -222,10 +228,10 @@ export class CallManager extends EventEmitter<CallEvents> {
     }
   }
 
-  /** Semantic recall over the call's own turns — used by the guardian's "what did they ask for?". */
+  /** Semantic recall over the call's own turns. used by the guardian's "what did they ask for?". */
   async ask(callId: string, question: string): Promise<{ hits: Array<{ text: string; speaker: Utterance["speaker"]; score: number; t: number }>; latencyMs: number }> {
     const record = this.calls.get(callId);
-    if (!record) return { hits: [], latencyMs: 0 };
+    if (!record || record.endedAt) return { hits: [], latencyMs: 0 };
     const t0 = performance.now();
     const rt = await getMossRuntime();
     if (rt.memory && record.memoryDocIds.length > 0) {
@@ -244,14 +250,8 @@ export class CallManager extends EventEmitter<CallEvents> {
         console.warn("[calls] session query failed:", (err as Error).message);
       }
     }
-    // Fallback (mock runtime): naive keyword overlap over the transcript.
-    const q = new Set(question.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
-    const hits = record.transcript
-      .map((u) => ({ u, score: u.text.toLowerCase().split(/\W+/).filter((w) => q.has(w)).length }))
-      .filter((x) => x.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 4)
-      .map((x) => ({ text: x.u.text, speaker: x.u.speaker, score: x.score / Math.max(1, q.size), t: x.u.t }));
+    // Offline search expands the three suggested questions and ignores filler words.
+    const hits = searchTranscript(record.transcript, question);
     return { hits, latencyMs: round2(performance.now() - t0) };
   }
 

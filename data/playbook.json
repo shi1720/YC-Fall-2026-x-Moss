@@ -32,7 +32,7 @@
     },
     {
       "id": "digital_arrest-003",
-      "text": "This is a matter of national security. You are not to discuss this case with anyone — not your wife, not your children, not your bank. Section 20 of the Official Secrets Act applies.",
+      "text": "This is a matter of national security. You are not to discuss this case with anyone. not your wife, not your children, not your bank. Section 20 of the Official Secrets Act applies.",
       "family": "digital_arrest",
       "tactics": [
         "secrecy",
@@ -76,7 +76,7 @@
     },
     {
       "id": "digital_arrest-006",
-      "text": "Naresh Goyal ke case mein aapka naam aaya hai. Supreme Court ne aapke against non-bailable warrant issue kiya hai — main abhi PDF bhej raha hoon.",
+      "text": "Naresh Goyal ke case mein aapka naam aaya hai. Supreme Court ne aapke against non-bailable warrant issue kiya hai. main abhi PDF bhej raha hoon.",
       "family": "digital_arrest",
       "tactics": [
         "authority",
@@ -105,7 +105,7 @@
     },
     {
       "id": "digital_arrest-008",
-      "text": "Madam, if you try to call the police station or visit the bank, the money-laundering gang will be alerted — they have people inside the bank. Only this channel is safe.",
+      "text": "Madam, if you try to call the police station or visit the bank, the money-laundering gang will be alerted. they have people inside the bank. Only this channel is safe.",
       "family": "digital_arrest",
       "tactics": [
         "verification_bypass",
@@ -119,7 +119,7 @@
     },
     {
       "id": "digital_arrest-009",
-      "text": "Break your fixed deposits and mutual funds today. Tell the bank manager it is for a property purchase — do not mention this investigation.",
+      "text": "Break your fixed deposits and mutual funds today. Tell the bank manager it is for a property purchase. do not mention this investigation.",
       "family": "digital_arrest",
       "tactics": [
         "payment_method",
@@ -160,7 +160,7 @@
     },
     {
       "id": "digital_arrest-012",
-      "text": "One more case has come up — a second account in Hyderabad. The Enforcement Directorate now needs an additional 12 lakh as surety bond, otherwise the interim bail is cancelled.",
+      "text": "One more case has come up. a second account in Hyderabad. The Enforcement Directorate now needs an additional 12 lakh as surety bond, otherwise the interim bail is cancelled.",
       "family": "digital_arrest",
       "tactics": [
         "escalation",
@@ -330,7 +330,7 @@
     },
     {
       "id": "courier_parcel-009",
-      "text": "For the complaint we need to verify your identity — please tell me your full Aadhaar number, date of birth and the bank where you hold your main account.",
+      "text": "For the complaint we need to verify your identity. please tell me your full Aadhaar number, date of birth and the bank where you hold your main account.",
       "family": "courier_parcel",
       "tactics": [
         "personal_info",
@@ -399,7 +399,7 @@
     },
     {
       "id": "sim_disconnection-004",
-      "text": "If you were not aware of this SIM, we need a clarification letter from the police. I'll connect you to the Mumbai cyber cell — please hold.",
+      "text": "If you were not aware of this SIM, we need a clarification letter from the police. I'll connect you to the Mumbai cyber cell. please hold.",
       "family": "sim_disconnection",
       "tactics": [
         "authority",
@@ -413,7 +413,7 @@
     },
     {
       "id": "sim_disconnection-005",
-      "text": "I am Deputy Officer Sanjay Mishra, employee ID TR-4471. Note this down — you will need it for the complaint.",
+      "text": "I am Deputy Officer Sanjay Mishra, employee ID TR-4471. Note this down. you will need it for the complaint.",
       "family": "sim_disconnection",
       "tactics": [
         "authority"
@@ -534,7 +534,7 @@
     },
     {
       "id": "bank_kyc-004",
-      "text": "Ma'am, an OTP has just been sent to your registered number for KYC verification. Please read it to me — this is only for verification, no transaction will happen.",
+      "text": "Ma'am, an OTP has just been sent to your registered number for KYC verification. Please read it to me. this is only for verification, no transaction will happen.",
       "family": "bank_kyc",
       "tactics": [
         "otp_request",
@@ -547,7 +547,7 @@
     },
     {
       "id": "bank_kyc-005",
-      "text": "Sir, download the 'SBI Quick Support' app from the link I'm sending on WhatsApp — it's the official app for online KYC.",
+      "text": "Sir, download the 'SBI Quick Support' app from the link I'm sending on WhatsApp. it's the official app for online KYC.",
       "family": "bank_kyc",
       "tactics": [
         "remote_access",
@@ -574,7 +574,7 @@
     },
     {
       "id": "bank_kyc-007",
-      "text": "Your net banking has been accessed from an unknown device in Kolkata. To secure it, we'll reset your password — tell me the 6-digit code you just received.",
+      "text": "Your net banking has been accessed from an unknown device in Kolkata. To secure it, we'll reset your password. tell me the 6-digit code you just received.",
       "family": "bank_kyc",
       "tactics": [
         "account_compromise",
@@ -614,7 +614,7 @@
     },
     {
       "id": "bank_kyc-010",
-      "text": "I can see your account is showing 'KYC Non-Compliant — Debit Freeze in 4 hours'. I'm here to help you avoid that.",
+      "text": "I can see your account is showing 'KYC Non-Compliant. Debit Freeze in 4 hours'. I'm here to help you avoid that.",
       "family": "bank_kyc",
       "tactics": [
         "urgency",
@@ -734,7 +734,7 @@
     },
     {
       "id": "card_fraud_dept-007",
-      "text": "Please don't hang up and call the number on the back of the card — that line goes to the retail team, they can't stop a fraud in progress.",
+      "text": "Please don't hang up and call the number on the back of the card. that line goes to the retail team, they can't stop a fraud in progress.",
       "family": "card_fraud_dept",
       "tactics": [
         "verification_bypass",
@@ -747,7 +747,7 @@
     },
     {
       "id": "card_fraud_dept-008",
-      "text": "The OTP you are receiving is to cancel the transaction, not to approve it. That's why it says ₹49,999 — ignore the message text.",
+      "text": "The OTP you are receiving is to cancel the transaction, not to approve it. That's why it says ₹49,999. ignore the message text.",
       "family": "card_fraud_dept",
       "tactics": [
         "otp_request",
@@ -855,7 +855,7 @@
     },
     {
       "id": "utility_disconnection-006",
-      "text": "Do the payment on this Paytm number — it is our regional officer's collection account. The bill receipt will be updated in 5 minutes.",
+      "text": "Do the payment on this Paytm number. it is our regional officer's collection account. The bill receipt will be updated in 5 minutes.",
       "family": "utility_disconnection",
       "tactics": [
         "payment_method"
@@ -880,7 +880,7 @@
     },
     {
       "id": "utility_disconnection-008",
-      "text": "You have received a request of ₹1 on your UPI — please approve it to confirm your account, after that your bill will be updated.",
+      "text": "You have received a request of ₹1 on your UPI. please approve it to confirm your account, after that your bill will be updated.",
       "family": "utility_disconnection",
       "tactics": [
         "verification_bypass",
@@ -974,7 +974,7 @@
     },
     {
       "id": "tax_refund-006",
-      "text": "Ma'am, the refund of 28,300 will go to a wrong account unless you update. I'll help you — just install the 'ITD e-Verify' app.",
+      "text": "Ma'am, the refund of 28,300 will go to a wrong account unless you update. I'll help you. just install the 'ITD e-Verify' app.",
       "family": "tax_refund",
       "tactics": [
         "remote_access",
@@ -1039,7 +1039,7 @@
     },
     {
       "id": "lottery_prize-003",
-      "text": "To transfer the prize you have to first pay the GST of 4.5 percent — ₹12,500 — to our government account. Uske bina RBI release nahi karega.",
+      "text": "To transfer the prize you have to first pay the GST of 4.5 percent. ₹12,500. to our government account. Uske bina RBI release nahi karega.",
       "family": "lottery_prize",
       "tactics": [
         "payment_method",
@@ -1091,7 +1091,7 @@
     },
     {
       "id": "lottery_prize-007",
-      "text": "The 12,500 you sent was received, but the bank has now asked for ₹28,000 insurance charge on the prize amount — after that the full 25 lakh comes to your account.",
+      "text": "The 12,500 you sent was received, but the bank has now asked for ₹28,000 insurance charge on the prize amount. after that the full 25 lakh comes to your account.",
       "family": "lottery_prize",
       "tactics": [
         "escalation",
@@ -1157,7 +1157,7 @@
     },
     {
       "id": "loan_app-002",
-      "text": "Hum aapki photo edit karke aapke saare contacts ko bhej denge — family, office, sab ko. Paisa bhejo abhi.",
+      "text": "Hum aapki photo edit karke aapke saare contacts ko bhej denge. family, office, sab ko. Paisa bhejo abhi.",
       "family": "loan_app",
       "tactics": [
         "fear",
@@ -1226,7 +1226,7 @@
     },
     {
       "id": "loan_app-007",
-      "text": "Pay on this UPI ID only — the app's payment gateway is 'under maintenance'.",
+      "text": "Pay on this UPI ID only. the app's payment gateway is 'under maintenance'.",
       "family": "loan_app",
       "tactics": [
         "payment_method",
@@ -1278,7 +1278,7 @@
     },
     {
       "id": "job_task-002",
-      "text": "Your first three tasks are complete, ₹150 has been sent to your UPI. Please check and confirm — this is how genuine our platform is.",
+      "text": "Your first three tasks are complete, ₹150 has been sent to your UPI. Please check and confirm. this is how genuine our platform is.",
       "family": "job_task",
       "tactics": [
         "reciprocity",
@@ -1318,7 +1318,7 @@
     },
     {
       "id": "job_task-005",
-      "text": "See the screenshots in the group — Rahul withdrew 46,000 today, Meena 1.2 lakh. Everyone who completes the combination task gets it.",
+      "text": "See the screenshots in the group. Rahul withdrew 46,000 today, Meena 1.2 lakh. Everyone who completes the combination task gets it.",
       "family": "job_task",
       "tactics": [
         "social_proof",
@@ -1345,7 +1345,7 @@
     },
     {
       "id": "job_task-007",
-      "text": "This is a hassle-free bonus — the merchants have already paid us the margin, you just have to complete the order.",
+      "text": "This is a hassle-free bonus. the merchants have already paid us the margin, you just have to complete the order.",
       "family": "job_task",
       "tactics": [
         "too_good",
@@ -1371,7 +1371,7 @@
     },
     {
       "id": "job_task-009",
-      "text": "Please don't discuss the task amounts with anyone outside the group. Company policy — otherwise your account may be terminated.",
+      "text": "Please don't discuss the task amounts with anyone outside the group. Company policy. otherwise your account may be terminated.",
       "family": "job_task",
       "tactics": [
         "secrecy",
@@ -1398,7 +1398,7 @@
     },
     {
       "id": "job_task-011",
-      "text": "Transfer to this account name only — it is our merchant partner, not the company account, so don't worry if the name is different.",
+      "text": "Transfer to this account name only. it is our merchant partner, not the company account, so don't worry if the name is different.",
       "family": "job_task",
       "tactics": [
         "payment_method",
@@ -1411,7 +1411,7 @@
     },
     {
       "id": "job_task-012",
-      "text": "Sir, thoda credit score badhana hai — ek last task 25,000 ka karo, phir total 1,10,000 turant withdraw ho jayega.",
+      "text": "Sir, thoda credit score badhana hai. ek last task 25,000 ka karo, phir total 1,10,000 turant withdraw ho jayega.",
       "family": "job_task",
       "tactics": [
         "escalation",
@@ -1439,7 +1439,7 @@
     },
     {
       "id": "investment-002",
-      "text": "Our institutional account gets guaranteed IPO allotment — members got 100 percent on the last three IPOs. Screenshots are in the group.",
+      "text": "Our institutional account gets guaranteed IPO allotment. members got 100 percent on the last three IPOs. Screenshots are in the group.",
       "family": "investment",
       "tactics": [
         "too_good",
@@ -1452,7 +1452,7 @@
     },
     {
       "id": "investment-003",
-      "text": "To start, download our 'MO Investor Pro' app from the link (not Play Store — Play Store version is for retail clients only).",
+      "text": "To start, download our 'MO Investor Pro' app from the link (not Play Store. Play Store version is for retail clients only).",
       "family": "investment",
       "tactics": [
         "tech_pretext",
@@ -1519,7 +1519,7 @@
     },
     {
       "id": "investment-008",
-      "text": "I made $40,000 last month from my uncle's insider strategy. I don't want anything from you — I just want you to see what's possible.",
+      "text": "I made $40,000 last month from my uncle's insider strategy. I don't want anything from you. I just want you to see what's possible.",
       "family": "investment",
       "tactics": [
         "too_good",
@@ -1560,7 +1560,7 @@
     },
     {
       "id": "investment-011",
-      "text": "Take a small loan and invest — the 40 percent return in 10 days will cover the interest many times over.",
+      "text": "Take a small loan and invest. the 40 percent return in 10 days will cover the interest many times over.",
       "family": "investment",
       "tactics": [
         "too_good",
@@ -1613,7 +1613,7 @@
     },
     {
       "id": "upi_cashback-002",
-      "text": "I am the buyer for your sofa on OLX. I've sent a Google Pay request — just approve it and the money will credit.",
+      "text": "I am the buyer for your sofa on OLX. I've sent a Google Pay request. just approve it and the money will credit.",
       "family": "upi_cashback",
       "tactics": [
         "verification_bypass",
@@ -1679,7 +1679,7 @@
     },
     {
       "id": "upi_cashback-007",
-      "text": "Don't worry, you're not paying — the system takes your PIN to receive. That's why it asks. It's a bank rule.",
+      "text": "Don't worry, you're not paying. the system takes your PIN to receive. That's why it asks. It's a bank rule.",
       "family": "upi_cashback",
       "tactics": [
         "verification_bypass",
@@ -1692,7 +1692,7 @@
     },
     {
       "id": "upi_cashback-008",
-      "text": "I've put the money in your account via 'Request'. You'll see 'Pay ₹22,000' — that's just the interface, click accept.",
+      "text": "I've put the money in your account via 'Request'. You'll see 'Pay ₹22,000'. that's just the interface, click accept.",
       "family": "upi_cashback",
       "tactics": [
         "verification_bypass",
@@ -1916,7 +1916,7 @@
     },
     {
       "id": "insurance_policy-008",
-      "text": "You can also enrol in the new high-return plan — just pay the first premium to our nodal account today to lock the rate.",
+      "text": "You can also enrol in the new high-return plan. just pay the first premium to our nodal account today to lock the rate.",
       "family": "insurance_policy",
       "tactics": [
         "too_good",
@@ -2075,7 +2075,7 @@
     },
     {
       "id": "olx_army-005",
-      "text": "Sir, I want to buy your fridge. I'm sending payment via Google Pay — scan this QR and enter PIN to receive.",
+      "text": "Sir, I want to buy your fridge. I'm sending payment via Google Pay. scan this QR and enter PIN to receive.",
       "family": "olx_army",
       "tactics": [
         "verification_bypass",
@@ -2114,7 +2114,7 @@
     },
     {
       "id": "olx_army-008",
-      "text": "You're not trusting a soldier? I've shared my posting order — what more do you want?",
+      "text": "You're not trusting a soldier? I've shared my posting order. what more do you want?",
       "family": "olx_army",
       "tactics": [
         "reciprocity",
@@ -2165,7 +2165,7 @@
     },
     {
       "id": "fake_customer_care-004",
-      "text": "Your complaint is registered. A ₹5 test transaction will be done to validate the refund channel — approve it on your UPI app.",
+      "text": "Your complaint is registered. A ₹5 test transaction will be done to validate the refund channel. approve it on your UPI app.",
       "family": "fake_customer_care",
       "tactics": [
         "verification_bypass",
@@ -2178,7 +2178,7 @@
     },
     {
       "id": "fake_customer_care-005",
-      "text": "Ma'am, don't close the screen-sharing until the refund shows — it takes 10 minutes and I need to see the confirmation.",
+      "text": "Ma'am, don't close the screen-sharing until the refund shows. it takes 10 minutes and I need to see the confirmation.",
       "family": "fake_customer_care",
       "tactics": [
         "hold_the_line",
@@ -2229,7 +2229,7 @@
     },
     {
       "id": "tech_support-002",
-      "text": "Your computer has been hacked. Foreign hackers from Russia are using it right now. Don't turn it off — if you do, you lose all your files.",
+      "text": "Your computer has been hacked. Foreign hackers from Russia are using it right now. Don't turn it off. if you do, you lose all your files.",
       "family": "tech_support",
       "tactics": [
         "fear",
@@ -2414,7 +2414,7 @@
     },
     {
       "id": "refund_overpayment-005",
-      "text": "Look at your account — 39,900 dollars have been deposited. This is the company's money. I will lose my job and my family, sir, please help me.",
+      "text": "Look at your account. 39,900 dollars have been deposited. This is the company's money. I will lose my job and my family, sir, please help me.",
       "family": "refund_overpayment",
       "tactics": [
         "reciprocity",
@@ -2628,7 +2628,7 @@
     },
     {
       "id": "family_emergency-011",
-      "text": "It worked, he's being released. But the other driver was pregnant and lost the baby — now there's a second charge and another $15,000.",
+      "text": "It worked, he's being released. But the other driver was pregnant and lost the baby. now there's a second charge and another $15,000.",
       "family": "family_emergency",
       "tactics": [
         "escalation",
@@ -2707,7 +2707,7 @@
     },
     {
       "id": "romance-006",
-      "text": "I've been making 12 percent a week on a crypto platform my mentor introduced. Let me show you how — start with just $500.",
+      "text": "I've been making 12 percent a week on a crypto platform my mentor introduced. Let me show you how. start with just $500.",
       "family": "romance",
       "tactics": [
         "too_good",
@@ -2748,7 +2748,7 @@
     },
     {
       "id": "romance-009",
-      "text": "Use Bitcoin — my bank account is frozen because I'm overseas. I'll send you the wallet address.",
+      "text": "Use Bitcoin. my bank account is frozen because I'm overseas. I'll send you the wallet address.",
       "family": "romance",
       "tactics": [
         "payment_method",
@@ -2940,7 +2940,7 @@
     },
     {
       "id": "ceo_wire_fraud-005",
-      "text": "I know this is outside process — I'm taking responsibility. Consider this my verbal approval, I'll countersign when I land.",
+      "text": "I know this is outside process. I'm taking responsibility. Consider this my verbal approval, I'll countersign when I land.",
       "family": "ceo_wire_fraud",
       "tactics": [
         "authority",
@@ -2966,7 +2966,7 @@
     },
     {
       "id": "ceo_wire_fraud-007",
-      "text": "The vendor changed their bank account — please update the payment details for the invoice due Friday, here are the new IBAN details.",
+      "text": "The vendor changed their bank account. please update the payment details for the invoice due Friday, here are the new IBAN details.",
       "family": "ceo_wire_fraud",
       "tactics": [
         "payment_method",
@@ -3085,7 +3085,7 @@
     },
     {
       "id": "jury_duty-005",
-      "text": "Go to the CVS on Main Street and purchase MoneyPak vouchers. The court kiosk accepts them. Don't discuss the case with the cashier — it's a sealed matter.",
+      "text": "Go to the CVS on Main Street and purchase MoneyPak vouchers. The court kiosk accepts them. Don't discuss the case with the cashier. it's a sealed matter.",
       "family": "jury_duty",
       "tactics": [
         "payment_method",
@@ -3112,7 +3112,7 @@
     },
     {
       "id": "jury_duty-007",
-      "text": "Do not hang up and call the Sheriff's main line — they will just see the active warrant and dispatch.",
+      "text": "Do not hang up and call the Sheriff's main line. they will just see the active warrant and dispatch.",
       "family": "jury_duty",
       "tactics": [
         "verification_bypass",
@@ -3203,7 +3203,7 @@
     },
     {
       "id": "social_security-004",
-      "text": "Before we go further, confirm the last four of your Social so I know I'm speaking to the right person — actually, just read me the whole number.",
+      "text": "Before we go further, confirm the last four of your Social so I know I'm speaking to the right person. actually, just read me the whole number.",
       "family": "social_security",
       "tactics": [
         "personal_info"
@@ -3387,7 +3387,7 @@
     },
     {
       "id": "irs-008",
-      "text": "Keep me on the line while you drive to the store — the agent assigned needs to log the payment in real time.",
+      "text": "Keep me on the line while you drive to the store. the agent assigned needs to log the payment in real time.",
       "family": "irs",
       "tactics": [
         "hold_the_line",
@@ -3502,7 +3502,7 @@
     },
     {
       "id": "medicare-008",
-      "text": "I see you've been prescribed a diabetic medication — we can send you a free glucose monitor, just verify the last four of your Social.",
+      "text": "I see you've been prescribed a diabetic medication. we can send you a free glucose monitor, just verify the last four of your Social.",
       "family": "medicare",
       "tactics": [
         "too_good",
@@ -3542,7 +3542,7 @@
     },
     {
       "id": "utility_disconnection-012",
-      "text": "The online system doesn't reflect the disconnect order — that's why it shows paid. The field order is separate.",
+      "text": "The online system doesn't reflect the disconnect order. that's why it shows paid. The field order is separate.",
       "family": "utility_disconnection",
       "tactics": [
         "verification_bypass",
@@ -3699,7 +3699,7 @@
     },
     {
       "id": "safe_account-001",
-      "text": "Good morning, I'm calling from the fraud team at Barclays. We've flagged a payment of £1,200 to Currys — did you make that?",
+      "text": "Good morning, I'm calling from the fraud team at Barclays. We've flagged a payment of £1,200 to Currys. did you make that?",
       "family": "safe_account",
       "tactics": [
         "authority",
@@ -3819,7 +3819,7 @@
     },
     {
       "id": "safe_account-010",
-      "text": "We'd like you to buy a Rolex from the shop on Bond Street as part of the evidence trail — the funds will be reimbursed.",
+      "text": "We'd like you to buy a Rolex from the shop on Bond Street as part of the evidence trail. the funds will be reimbursed.",
       "family": "safe_account",
       "tactics": [
         "payment_method",
@@ -3883,7 +3883,7 @@
     },
     {
       "id": "hi_mum-005",
-      "text": "It's a new account, the name will show as Bradley — that's my mate whose phone I'm using.",
+      "text": "It's a new account, the name will show as Bradley. that's my mate whose phone I'm using.",
       "family": "hi_mum",
       "tactics": [
         "verification_bypass",
@@ -3961,7 +3961,7 @@
     },
     {
       "id": "irs-012",
-      "text": "The quickest way to clear the debt is through Bitcoin at the machine at your nearest shopping centre — the ATO has an arrangement with them.",
+      "text": "The quickest way to clear the debt is through Bitcoin at the machine at your nearest shopping centre. the ATO has an arrangement with them.",
       "family": "irs",
       "tactics": [
         "payment_method",
@@ -4205,7 +4205,7 @@
     },
     {
       "id": "benign-012",
-      "text": "FedEx here — your shipment to Singapore needs a commercial invoice. Please upload it on the tracking page, no payment is required.",
+      "text": "FedEx here. your shipment to Singapore needs a commercial invoice. Please upload it on the tracking page, no payment is required.",
       "family": "benign",
       "tactics": [],
       "severity": 1,
@@ -4214,7 +4214,7 @@
     },
     {
       "id": "benign-013",
-      "text": "Your DHL package is held at customs pending duty of ₹1,340. You can pay on the DHL website or in cash to the courier at delivery — never to an individual account.",
+      "text": "Your DHL package is held at customs pending duty of ₹1,340. You can pay on the DHL website or in cash to the courier at delivery. never to an individual account.",
       "family": "benign",
       "tactics": [],
       "severity": 1,
@@ -4250,7 +4250,7 @@
     },
     {
       "id": "benign-017",
-      "text": "Namaste, this is from your Jio store. Your SIM is not blocked — this is a courtesy call about the new 5G plan. You can ignore this if you're not interested.",
+      "text": "Namaste, this is from your Jio store. Your SIM is not blocked. this is a courtesy call about the new 5G plan. You can ignore this if you're not interested.",
       "family": "benign",
       "tactics": [],
       "severity": 1,
@@ -4358,7 +4358,7 @@
     },
     {
       "id": "benign-029",
-      "text": "Grandma, it's Daniel. I'm calling because Dad said you weren't feeling well — how are you doing?",
+      "text": "Grandma, it's Daniel. I'm calling because Dad said you weren't feeling well. how are you doing?",
       "family": "benign",
       "tactics": [],
       "severity": 1,
@@ -4421,7 +4421,7 @@
     },
     {
       "id": "benign-036",
-      "text": "This is Medicare — you contacted us about your replacement card. It'll arrive in 30 days; there is no fee and nothing more you need to do.",
+      "text": "This is Medicare. you contacted us about your replacement card. It'll arrive in 30 days; there is no fee and nothing more you need to do.",
       "family": "benign",
       "tactics": [],
       "severity": 1,

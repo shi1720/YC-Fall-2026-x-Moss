@@ -41,11 +41,11 @@
     },
     {
       "speaker": "caller",
-      "text": "Basement parking, level 2, and the OPD is on the third floor. If you're running late, just call the clinic landline — the number on your appointment card."
+      "text": "Basement parking, level 2, and the OPD is on the third floor. If you're running late, just call the clinic landline. the number on your appointment card."
     },
     {
       "speaker": "user",
-      "text": "One more thing — the doctor mentioned a scan. Will that be tomorrow?"
+      "text": "One more thing. the doctor mentioned a scan. Will that be tomorrow?"
     },
     {
       "speaker": "caller",

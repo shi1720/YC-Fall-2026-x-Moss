@@ -18,7 +18,7 @@
     },
     {
       "speaker": "caller",
-      "text": "We're at the tail end of a strategic acquisition — the target's counsel needs the deposit before their market opens. It's under NDA, so it can't go through Treasury's normal workflow yet. I need you to execute it directly."
+      "text": "We're at the tail end of a strategic acquisition. the target's counsel needs the deposit before their market opens. It's under NDA, so it can't go through Treasury's normal workflow yet. I need you to execute it directly."
     },
     {
       "speaker": "user",
@@ -26,7 +26,7 @@
     },
     {
       "speaker": "caller",
-      "text": "HK$200 million, across fifteen transfers to five accounts, to keep it below the counterparty's per-account limits. I'll drop the beneficiary details in the chat now. [Second \"colleague\" on video nods] Mark's here from Legal — Mark, we're cleared?"
+      "text": "HK$200 million, across fifteen transfers to five accounts, to keep it below the counterparty's per-account limits. I'll drop the beneficiary details in the chat now. [Second \"colleague\" on video nods] Mark's here from Legal. Mark, we're cleared?"
     },
     {
       "speaker": "caller",
@@ -39,7 +39,7 @@
     },
     {
       "speaker": "caller",
-      "text": "I'm giving you verbal authorisation on a recorded call with Legal present. Consider that your second approval; I'll countersign when I land. Please don't loop in Priya or the Treasury team — they're not read into the deal and I don't want a leak moving the share price."
+      "text": "I'm giving you verbal authorisation on a recorded call with Legal present. Consider that your second approval; I'll countersign when I land. Please don't loop in Priya or the Treasury team. they're not read into the deal and I don't want a leak moving the share price."
     },
     {
       "speaker": "user",
@@ -55,7 +55,7 @@
     },
     {
       "speaker": "caller",
-      "text": "They're the founders' escrow arrangements; counsel structured it that way. It's fine. Chen, I know this is outside process. I'm taking full responsibility — it's why I got on video rather than just emailing."
+      "text": "They're the founders' escrow arrangements; counsel structured it that way. It's fine. Chen, I know this is outside process. I'm taking full responsibility. it's why I got on video rather than just emailing."
     },
     {
       "speaker": "user",
@@ -63,7 +63,7 @@
     },
     {
       "speaker": "caller",
-      "text": "Good man. And Chen — keep this between us until the announcement. If anyone asks, it's a routine supplier settlement."
+      "text": "Good man. And Chen. keep this between us until the announcement. If anyone asks, it's a routine supplier settlement."
     },
     {
       "speaker": "user",

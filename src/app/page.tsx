@@ -25,14 +25,14 @@ export default function Home() {
               <Link href="/shield?scenario=digital-arrest" className="btn btn-primary text-base">
                 <PhoneCall className="h-5 w-5" /> Watch a scam get stopped
               </Link>
-              <Link href="/shield" className="btn btn-ghost text-base">
+              <Link href="/shield?mode=live" className="btn btn-ghost text-base">
                 Try it with your microphone <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-faint">
               <span>No account needed</span>
-              <span>Nothing is stored</span>
-              <span>Works in any browser</span>
+              <span>No account or installation</span>
+              <span>Simulations work without a microphone</span>
             </div>
           </div>
           <div className="mt-14">
@@ -46,15 +46,14 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-saffron">The problem</div>
-            <h2 className="display mt-3 text-4xl leading-tight text-text">Caller-ID tells you who is calling. Nobody tells you what they are doing to you.</h2>
+            <h2 className="display mt-3 text-4xl leading-tight text-text">Caller-ID tells you who is calling. Raksha helps you recognise the pressure.</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              Indians reported <span className="text-text">₹22,845 crore</span> lost to cyber fraud in 2024, ten times the figure two years earlier. “Digital arrest” alone took
-              ₹1,900 crore from 1.23 lakh people. In the US, phone calls carry the highest median loss of any scam channel, and 41% of the biggest losses by older adults began
+              Indians reported <span className="text-text">₹22,845 crore</span> lost to cyber fraud in 2024, ten times the figure two years earlier. “Digital arrest” scams use fear and isolation to pressure people into transferring their savings. In the US, phone calls carry the highest median loss of any scam channel, and 41% of the biggest losses by older adults began
               with a call.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-muted">
               Every one of those calls followed a script: <em>authority → fear → secrecy → the ask</em>. Scam-blocking today is number reputation. By the time a number is
-              flagged, the crew has a new one. The words never change.
+              flagged, the crew has a new one. The pressure tactics repeat.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -62,7 +61,7 @@ export default function Home() {
               ["₹22,845 cr", "reported cyber-fraud losses, India, 2024 (MHA)"],
               ["41%", "of $10k+ losses by older adults in the US began with a phone call (FTC, 2025)"],
               ["$25.6M", "wired by one employee to a deepfaked CFO on a video call (Arup, 2024)"],
-              ["< 1%", "of Indian phones can run the only shipping on-device scam detector (Pixel 9+)"],
+              ["18 calls", "scripted scenarios include ten scams and eight genuine conversations"],
             ].map(([n, d]) => (
               <div key={n} className="card p-5">
                 <div className="display text-4xl text-saffron-2">{n}</div>
@@ -77,18 +76,18 @@ export default function Home() {
       <section className="border-y border-line bg-ink-2/60">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="text-xs uppercase tracking-[0.25em] text-moss">How it works</div>
-          <h2 className="display mt-3 max-w-3xl text-4xl leading-tight text-text">A fast path that never waits for the cloud, and a slow path that knows what to say.</h2>
+          <h2 className="display mt-3 max-w-3xl text-4xl leading-tight text-text">Fast recognition. Clear advice. A person you trust.</h2>
           <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
               {
                 icon: Ear,
                 title: "1 · Listen",
-                body: "Speech becomes text in the browser (its built-in speech engine; Whisper for uploaded recordings). Raksha's server only ever sees text, holds it in memory for the call, and forgets it. Every fragment, even mid-sentence, is a query.",
+                body: "Speech becomes text in the browser (its built-in speech engine; Whisper for uploaded recordings). Live mode sends text to Raksha. Uploaded audio passes through the server to Groq for transcription. Call details stay in RAM for up to ten minutes after the call ends. Every fragment, even mid-sentence, is a query.",
               },
               {
                 icon: Gauge,
                 title: "2 · Recognise, in about ten milliseconds",
-                body: "Moss holds a 400-line scam playbook in memory. Each fragment is embedded and matched in-process — no vector database, no round-trip — in roughly 10 ms end-to-end, with the search itself under a millisecond. The engine credits persuasion tactics (authority, urgency, secrecy, the ask) and a noisy-OR risk model decides.",
+                body: "Moss holds a 400-line scam playbook in memory. Each fragment is embedded and matched in-process. no vector database, no round-trip. in roughly 10 ms end-to-end, with the search itself under a millisecond. The engine credits persuasion tactics (authority, urgency, secrecy, the ask) and a noisy-OR risk model decides.",
               },
               {
                 icon: ShieldAlert,
@@ -113,9 +112,8 @@ export default function Home() {
             <div className="text-xs uppercase tracking-[0.25em] text-moss">Why latency is the product</div>
             <h2 className="display mt-3 text-4xl leading-tight text-text">A scam is won or lost inside one sentence.</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              “Read me the six digits, quickly.” takes about two and a half seconds to say. A cloud vector search spends a third of that on the network before it has an
-              answer; an LLM classifier spends all of it. Moss answers in the time it takes to say a syllable, so the shield can interrupt <em>while</em> the request is being
-              made, and it can do that for every fragment of every call at zero marginal cost, because local queries are never metered.
+              “Read me the six digits, quickly.” takes about two and a half seconds to say. Network retrieval and LLM classification add delay before an intervention can appear. Moss answers in the time it takes to say a syllable, so the shield can interrupt <em>while</em> the request is being
+              made, and it can do that for every fragment of every call without a separate vector database request. Hosting and speech or LLM providers still have costs.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/lab" className="btn btn-ghost">
@@ -140,7 +138,7 @@ export default function Home() {
           <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
             {[
               { icon: Gauge, title: "Loaded playbook index", body: "The curated scam playbook lives in a Moss cloud index, loaded into the process at boot and queried in-memory with a raw cosine score for every fragment." },
-              { icon: Sparkles, title: "Call memory in a Moss session", body: "Every turn of a live call is written into a local, in-process Moss session tagged with the call id. The guardian can ask “what did they ask for?” and get filtered semantic recall in milliseconds. Never pushed to the cloud — a call’s turns are deleted the moment it ends." },
+              { icon: Sparkles, title: "Call memory in a Moss session", body: "Every turn of a live call is written into a local, in-process Moss session tagged with the call id. The guardian can ask “what did they ask for?” and get filtered semantic recall in milliseconds. Never pushed to the cloud. a call’s turns are deleted the moment it ends." },
               { icon: Users, title: "Community intel with hot-swap", body: "When someone reports a call, the caller’s flagged lines are upserted into a second index. Every running shield has it loaded with auto-refresh, so a new script variant reaches every device without a redeploy." },
               { icon: Lock, title: "Multi-index, one query", body: "Playbook and community intel are searched together in one call for a single global top-K, and legitimate look-alikes in the index suppress false alarms." },
             ].map((s) => (

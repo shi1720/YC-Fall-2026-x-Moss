@@ -4,6 +4,7 @@ import { useState, useSyncExternalStore } from "react";
 import { Copy, ExternalLink, Users } from "lucide-react";
 
 export function GuardianPanel({ familyCode, onChangeCode, messages, disabled }: { familyCode: string; onChangeCode: (c: string) => void; messages: Array<{ text: string; from: string; t: number }>; disabled?: boolean }) {
+  const [copyError, setCopyError] = useState(false);
   const [copied, setCopied] = useState(false);
   const origin = useSyncExternalStore(
     () => () => {},
@@ -28,16 +29,18 @@ export function GuardianPanel({ familyCode, onChangeCode, messages, disabled }: 
         />
         <button
           className="btn btn-ghost btn-sm"
-          onClick={() => {
-            void navigator.clipboard?.writeText(guardianUrl);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1500);
+          disabled={familyCode.length < 6}
+          onClick={async () => {
+            try { await navigator.clipboard.writeText(guardianUrl); setCopied(true); setCopyError(false); setTimeout(() => setCopied(false), 1500); }
+            catch { setCopyError(true); }
           }}
           title="Copy guardian link"
         >
           <Copy className="h-4 w-4" /> {copied ? "Copied" : "Copy link"}
         </button>
       </div>
+      {familyCode.length < 6 && <p className="text-xs text-caution">Use 6 to 8 letters or numbers.</p>}
+      {copyError && <p role="status" className="text-xs text-caution">Copying was unavailable. Open the guardian link below.</p>}
       <a href={guardianUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm text-saffron hover:underline">
         Open the guardian view in a new tab <ExternalLink className="h-3.5 w-3.5" />
       </a>

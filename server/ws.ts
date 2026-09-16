@@ -9,12 +9,16 @@ import { getCallManager, type CallRecord } from "@/lib/engine/calls";
 import { llmConfig } from "@/lib/llm/client";
 import { reportToCommunity } from "@/lib/moss/intel";
 import { getMossRuntime } from "@/lib/moss/runtime";
-import type { ClientMessage, ServerMessage } from "@/lib/protocol";
+import { clientMessageSchema, type ClientMessage, type ServerMessage } from "@/lib/protocol";
 
 interface Conn {
   ws: WebSocket;
   role: "shield" | "guardian" | "unknown";
   callId?: string;
+  lastCallId?: string;
+  pending: number;
+  messages: number;
+  windowAt: number;
   familyCode?: string;
   name?: string;
   /** Messages from one socket are handled strictly in order (call.start before utterances). */
@@ -38,7 +42,7 @@ function normaliseCode(code: string) {
 }
 
 export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: (req: IncomingMessage, socket: Duplex, head: Buffer) => void } {
-  const wss = new WebSocketServer({ noServer: true });
+  const wss = new WebSocketServer({ noServer: true, maxPayload: 16 * 1024 });
   const calls = getCallManager();
 
   // ---- fan out engine events to the right sockets ----
@@ -77,8 +81,9 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
     broadcastGuardians(record.meta.familyCode, msg);
   });
 
-  wss.on("connection", async (ws) => {
-    const conn: Conn = { ws, role: "unknown", queue: Promise.resolve() };
+  wss.on("connection", (ws) => {
+    const conn: Conn = { ws, role: "unknown", queue: Promise.resolve(), pending: 0, messages: 0, windowAt: Date.now() };
+    const ready = (async () => {
     try {
       const rt = await getMossRuntime();
       const llm = llmConfig();
@@ -91,17 +96,27 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
       send(ws, { type: "error", message: `Runtime not ready: ${(err as Error).message}` });
     }
 
-    ws.on("message", async (raw) => {
+    })();
+
+    ws.on("message", (raw) => {
       let msg: ClientMessage;
       try {
-        msg = JSON.parse(raw.toString()) as ClientMessage;
+        const parsed = clientMessageSchema.safeParse(JSON.parse(raw.toString()));
+        if (!parsed.success) return send(ws, { type: "error", message: "Invalid message. Check the fields and try again." });
+        msg = parsed.data;
+        if (Date.now() - conn.windowAt > 60_000) { conn.messages = 0; conn.windowAt = Date.now(); }
+        if (++conn.messages > 600 || conn.pending >= 40) return send(ws, { type: "error", message: "Too many requests. Please slow down." });
       } catch {
         return send(ws, { type: "error", message: "Malformed message" });
       }
-      conn.queue = conn.queue.then(() => handle(conn, msg)).catch((err) => {
+      conn.pending++;
+      conn.queue = conn.queue.then(async () => {
+        await ready;
+        if (ws.readyState === WebSocket.OPEN) await handle(conn, msg);
+      }).catch((err) => {
         console.error("[ws] handler error", err);
-        send(ws, { type: "error", message: (err as Error).message });
-      });
+        send(ws, { type: "error", message: "The request could not be completed. Please try again." });
+      }).finally(() => { conn.pending--; });
     });
 
     ws.on("close", () => {
@@ -119,7 +134,8 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
         return send(conn.ws, { type: "pong", t: Date.now() });
 
       case "call.start": {
-        if (conn.callId) await calls.end(conn.callId);
+        if (conn.role === "guardian") return send(conn.ws, { type: "error", message: "Open the Shield page to start a call." });
+        if (conn.callId) { await calls.end(conn.callId); shields.delete(conn.callId); }
         const record = await calls.start({
           mode: msg.mode,
           scenarioId: msg.scenarioId,
@@ -145,13 +161,14 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
         if (!conn.callId) return;
         const id = conn.callId;
         await calls.end(id); // emits call.ended to this socket before we forget it
+        conn.lastCallId = id;
         conn.callId = undefined;
         shields.delete(id);
         return;
       }
 
       case "call.report": {
-        const id = conn.callId ?? [...shields.entries()].find(([, c]) => c === conn)?.[0];
+        const id = conn.callId ?? conn.lastCallId;
         if (!id) return send(conn.ws, { type: "error", message: "No call to report." });
         const rec = calls.get(id);
         const result = await reportToCommunity({ lines: calls.flaggedLines(id), region: rec?.meta.region, callId: id });
@@ -159,8 +176,9 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
       }
 
       case "guardian.join": {
+        if (conn.role === "shield") return send(conn.ws, { type: "error", message: "Open the Guardian page to join a family." });
         const code = normaliseCode(msg.familyCode);
-        if (code.length < 3) return send(conn.ws, { type: "error", message: "Family code must be at least 3 characters." });
+        if (code.length < 6) return send(conn.ws, { type: "error", message: "Family code must be at least 6 characters." });
         if (conn.familyCode) guardians.get(conn.familyCode)?.delete(conn);
         conn.role = "guardian";
         conn.familyCode = code;
@@ -203,6 +221,11 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
   }
 
   const handleUpgrade = (req: IncomingMessage, socket: Duplex, head: Buffer) => {
+    const origin = req.headers.origin;
+    const allowed = [process.env.RAKSHA_PUBLIC_URL, process.env.RAKSHA_WS_ORIGIN].filter(Boolean);
+    if (process.env.NODE_ENV === "production" && allowed.length && origin && !allowed.includes(origin)) {
+      socket.write("HTTP/1.1 403 Forbidden\r\n\r\n"); socket.destroy(); return;
+    }
     wss.handleUpgrade(req, socket, head, (ws) => wss.emit("connection", ws, req));
   };
   return { wss, handleUpgrade };

@@ -45,6 +45,7 @@ export function startRecognition(opts: {
   };
   rec.onerror = (ev) => {
     if (ev.error === "no-speech" || ev.error === "aborted") return;
+    stopped = true;
     opts.onError?.(ev.error);
   };
   rec.onend = () => {
@@ -108,23 +109,29 @@ function pickVoice(role: VoiceRole): SpeechSynthesisVoice | undefined {
   return byName(/Google US English|Victoria|Tessa|Female|Zira/i) ?? pool[Math.min(1, pool.length - 1)];
 }
 
+const pendingSpeech = new Set<() => void>();
+
 export function speak(text: string, role: VoiceRole = "shield", opts: { rate?: number; pitch?: number; interrupt?: boolean } = {}): Promise<void> {
   return new Promise((resolve) => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return resolve();
     const synth = window.speechSynthesis;
-    if (opts.interrupt) synth.cancel();
+    if (opts.interrupt) stopSpeaking();
     const u = new SpeechSynthesisUtterance(text);
     const v = pickVoice(role);
     if (v) u.voice = v;
     u.rate = opts.rate ?? (role === "shield" ? 1.0 : 1.02);
     u.pitch = opts.pitch ?? (role === "caller" ? 0.85 : role === "user" ? 1.1 : 1.0);
-    u.onend = () => resolve();
-    u.onerror = () => resolve();
+    const done = () => { clearTimeout(timeout); pendingSpeech.delete(done); resolve(); };
+    const timeout = setTimeout(done, Math.max(10000, text.length * 160));
+    pendingSpeech.add(done);
+    u.onend = done;
+    u.onerror = done;
     synth.speak(u);
   });
 }
 
 export function stopSpeaking() {
+  for (const done of pendingSpeech) done();
   if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
 }
 

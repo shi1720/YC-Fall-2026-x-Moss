@@ -8,8 +8,8 @@
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
   --text: #e8ebf3;
-  --muted: #8f97ad;
-  --faint: #5b637a;
+  --muted: #a6afc2;
+  --faint: #8d98af;
   --saffron: #f5a524;
   --saffron-2: #ffc75f;
   --moss: #34d399;
@@ -182,3 +182,12 @@ body {
 .danger-flash { animation: danger-flash 1.2s ease-in-out infinite; }
 
 .prose-tight p { margin: 0 0 0.6rem; }
+
+/* Keep keyboard focus visible and long content inside narrow phone layouts. */
+:focus-visible { outline: 2px solid var(--saffron); outline-offset: 4px; }
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+.input { min-width: 0; }
+.chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
