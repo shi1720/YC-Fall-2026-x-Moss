@@ -33,32 +33,37 @@ echo "▲ Deploying ${SERVICE} to Cloud Run — project ${PROJECT}, region ${REG
 gcloud config set project "${PROJECT}" >/dev/null
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com --quiet
 
-# On new projects Cloud Build runs as the default compute service account, which lacks
-# the roles it needs to read the uploaded source, push the image and write logs.
 PROJECT_NUMBER="$(gcloud projects describe "${PROJECT}" --format 'value(projectNumber)')"
-BUILD_SA="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
-echo "Granting build roles to ${BUILD_SA}"
-for role in roles/cloudbuild.builds.builder roles/run.builder roles/artifactregistry.writer roles/storage.objectAdmin roles/logging.logWriter; do
-  gcloud projects add-iam-policy-binding "${PROJECT}" --member "serviceAccount:${BUILD_SA}" --role "${role}" --quiet >/dev/null 2>&1 || true
-done
-sleep 10  # IAM propagation
+REPO="raksha"
+IMAGE="${REGION}-docker.pkg.dev/${PROJECT}/${REPO}/raksha:$(git rev-parse --short HEAD 2>/dev/null || date +%s)"
+gcloud artifacts repositories create "${REPO}" --repository-format docker --location "${REGION}" --quiet >/dev/null 2>&1 || true
 
-# Build with Cloud Build (no local Docker needed) and deploy in one step.
-# - session affinity + 1h timeout keep WebSockets stable
-# - 1 vCPU / 1 GiB fits the Moss runtime (~300 MB RSS with the model loaded)
-# - min-instances 0 keeps it inside the free tier; the GitHub keep-alive ping keeps it warm
-gcloud run deploy "${SERVICE}" \
-  --source . \
-  --region "${REGION}" \
-  --platform managed \
-  --allow-unauthenticated \
-  --session-affinity \
-  --timeout 3600 \
-  --cpu 1 --memory 1Gi \
-  --concurrency 80 \
-  --min-instances "${MIN_INSTANCES:-0}" --max-instances 3 \
-  --set-env-vars "NODE_ENV=production,HOSTNAME=0.0.0.0,MOSS_MODEL_CACHE_DIR=/tmp/moss-models,MOSS_CACHE_PATH=/tmp/moss-cache,MOSS_EMBEDDING_INTRA_OP_THREADS=2,MOSS_PROJECT_ID=${MOSS_PROJECT_ID},MOSS_PROJECT_KEY=${MOSS_PROJECT_KEY},GROQ_API_KEY=${GROQ_API_KEY}" \
+RUN_FLAGS=(
+  --region "${REGION}" --platform managed --allow-unauthenticated
+  --session-affinity --timeout 3600 --cpu 1 --memory 1Gi --concurrency 80
+  --min-instances "${MIN_INSTANCES:-0}" --max-instances 3
+  --set-env-vars "NODE_ENV=production,HOSTNAME=0.0.0.0,MOSS_MODEL_CACHE_DIR=/tmp/moss-models,MOSS_CACHE_PATH=/tmp/moss-cache,MOSS_EMBEDDING_INTRA_OP_THREADS=2,MOSS_PROJECT_ID=${MOSS_PROJECT_ID},MOSS_PROJECT_KEY=${MOSS_PROJECT_KEY},GROQ_API_KEY=${GROQ_API_KEY}"
   --quiet
+)
+
+if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1 && [[ "${BUILD_MODE:-local}" == "local" ]]; then
+  # Build with the local Docker daemon (Cloud Shell has one) using YOUR credentials —
+  # avoids the Cloud Build service-account permissions that fresh projects often lack.
+  echo "Building ${IMAGE} with local Docker…"
+  gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+  docker build -t "${IMAGE}" .
+  docker push "${IMAGE}"
+  gcloud run deploy "${SERVICE}" --image "${IMAGE}" "${RUN_FLAGS[@]}"
+else
+  # Cloud Build path: needs the build service account to hold these roles.
+  BUILD_SA="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
+  echo "Granting build roles to ${BUILD_SA}"
+  for role in roles/cloudbuild.builds.builder roles/run.builder roles/artifactregistry.writer roles/storage.objectAdmin roles/logging.logWriter; do
+    gcloud projects add-iam-policy-binding "${PROJECT}" --member "serviceAccount:${BUILD_SA}" --role "${role}" --quiet >/dev/null || echo "  could not grant ${role}"
+  done
+  sleep 10
+  gcloud run deploy "${SERVICE}" --source . "${RUN_FLAGS[@]}"
+fi
 
 URL="$(gcloud run services describe "${SERVICE}" --region "${REGION}" --format 'value(status.url)')"
 echo
