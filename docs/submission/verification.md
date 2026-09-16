@@ -3,7 +3,7 @@
 Date: 16 September 2026
 Public app: https://raksha-app.web.app
 
-## Automated checks
+## Initial release checks (historical)
 
 - Unit tests: 29 passed.
 - End-to-end tests: 8 passed locally and 8 passed against Firebase Hosting.
@@ -33,17 +33,17 @@ A synthetic WAV containing the demo's opening sentence was submitted to the host
 
 ## Submission readiness
 
-The story, video metadata and judge instructions are included in `docs/submission`; current architecture and product requirements are in `docs/ARCHITECTURE.md` and `docs/PRD.md`. Devpost confirmed submission at https://devpost.com/software/raksha-0g1hyf. HiDevs profile completion, LinkedIn connection and hackathon registration are verified. HiDevs also saved the architecture and PRD as the current Raksha submission at 1:12 PM IST on 16 September. Final project and Dr. Agent repository submissions still await GitHub OAuth approval; see `devpost-fields.md` for current status.
+The story, video metadata and judge instructions are included in `docs/submission`; current architecture and product requirements are in `docs/ARCHITECTURE.md` and `docs/PRD.md`. Devpost confirmed submission at https://devpost.com/software/raksha-0g1hyf. HiDevs profile completion, LinkedIn connection and hackathon registration are verified. HiDevs also saved the architecture and PRD as the current Raksha submission at 1:12 PM IST on 16 September. The user subsequently completed GitHub OAuth. The final project answers and Dr. Agent repository submission have now been updated; see the current settings-release status below.
 
-## Final rollout dependency
+## Initial rollout dependency (historical)
 
-The final rollout encountered Moss HTTP 429 with `USAGE_LIMIT_EXCEEDED` and `credit_exhausted`. The app recovered through its offline text detector. The earlier successful real-Moss replay is preserved in `hosted-moss-evaluation.json`. No fallback timing is presented as a Moss benchmark. Restoring the existing project's cloud credits is required for cloud-index startup; no additional credit purchase was made.
+The final rollout encountered Moss HTTP 429 with `USAGE_LIMIT_EXCEEDED` and `credit_exhausted`. The app recovered through its offline text detector. The earlier successful real-Moss replay is preserved in `hosted-moss-evaluation.json`. No fallback timing is presented as a Moss benchmark. That shared project would need credits for cloud-index startup. The current deployment intentionally stays in demo mode and supports visitor-funded projects instead; no additional shared credits were purchased.
 
 The supported local Moss session API was also checked. Session indexing worked, but its rank-normalized scores cannot safely replace the detector's calibrated cosine scores. The production detector was not switched to an uncalibrated scoring path.
 
 During visual verification, generated coach advice invented an inappropriate contact source. The app now fixes the exit sentence and next action in code, while retaining model explanations. Two regression tests verify invented contact and payment instructions are not relayed. Offline guardian search now filters filler words and expands the three suggested questions, with two evidence-relevance tests.
 
-## Final deployed revision
+## Initial deployed revision (historical)
 
 Cloud Run revision: `raksha-00007-9c7`, 2 vCPU, one bounded instance, behind https://raksha-app.web.app.
 
@@ -61,6 +61,16 @@ The shared demo intentionally uses `RAKSHA_DEMO_OFFLINE=1`. Judges can connect t
 
 Local validation: 40 unit tests, eleven E2E tests, ESLint, TypeScript and a production build pass. New tests cover session isolation, expiry, cancellation, bounded setup, credential sanitization, SDK setup and index validation, private call/guardian runtime selection, connection consent, no key storage in the browser, request origins and bounded request bodies. Browser layout checks now include Settings. A real Moss request with deliberately invalid test credentials returned the expected sanitized rejection, and disconnect restored demo mode.
 
-Positive SDK orchestration is verified with test doubles. No newly funded visitor-project credentials were available, so a successful live BYO connection is not claimed. Earlier hosted real-Moss evidence remains separate. Hosted checks for this release are recorded after deployment.
+Positive SDK orchestration is verified with test doubles. No newly funded visitor-project credentials were available, so a successful live BYO connection is not claimed. Earlier hosted real-Moss evidence remains separate. All 11 E2E checks subsequently passed against Firebase Hosting after the bundle-error correction below.
 
 Hosted verification found that the Next route bundle and custom WebSocket bundle used different error-class constructors. The shared session store now brands safe errors across both bundles, preserving useful expiry messages and active-call cleanup. A regression test loads two independent module copies.
+
+## Current settings release deployment and submissions
+
+- Cloud Run revision `raksha-00009-n7w` serves 100% of traffic at https://raksha-app.web.app. Image source commit: `d793387`.
+- ESLint, TypeScript, production build, 40 unit tests and all 11 local browser E2E tests pass. All 11 E2E tests also pass on Firebase Hosting, including cross-bundle expired-session errors, guardian flow, genuine-call control and mobile widths. GitHub CI passes.
+- Hosted Settings returned a sanitized real-Moss rejection for deliberately invalid credentials. Disconnect cleared the session and restored the key-free form. No funded personal-project success is claimed.
+- Devpost remains submitted. Its public page now includes personal Moss setup, verification limits, main-branch links and a fifth gallery image showing Settings.
+- The public YouTube description explains the new Settings flow and that the recording predates it. The recording has burned captions. The English caption track was submitted through Studio, but public selectable CC availability was not confirmed.
+- HiDevs confirmed the finale project update and shows the revised architecture/PRD as the current version saved at 2:35 PM IST on 16 September. Dr. Agent confirmed the correct repository was submitted for Round 2 feedback. Evaluation opens on 17 September 2026 at 9:00 PM IST; the site says a LinkedIn post is needed to unlock the full report afterward. No promotional post was published.
+- All development and release changes are preserved on the default `main` branch. Other local and remote branches were removed.

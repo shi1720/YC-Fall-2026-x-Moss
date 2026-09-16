@@ -54,7 +54,7 @@ Full steps, microphone/recording instructions and runtime notes: [testing.md](su
 
 ## Acceptance evidence
 
-- 39 unit tests and ten browser E2E tests cover the settings release. See verification.md for local and hosted results and the limit on live funded-project verification.
+- 40 unit tests and eleven browser E2E tests on both local and hosted builds cover the settings release. See verification.md for local and hosted results and the limit on live funded-project verification.
 - Eighteen scripted calls cover 264 utterances. All 10 scam fixtures reached danger. None of the 8 genuine fixtures reached danger, though some can reach caution. This is not a real-world accuracy claim.
 - Call startup, end-state handling, guardian messages and reconnects, malformed input, scenarios, mobile navigation and recovery were checked.
 - A synthetic recording was transcribed through the hosted endpoint. This does not establish acoustic microphone quality across devices and accents.

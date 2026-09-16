@@ -27,7 +27,7 @@ Built for the **YC Fall 2026 × Moss: Zero Latency Builder Sprint** (theme: Real
 
 **Current runtime:** the shared demo intentionally uses an offline TF-IDF detector. Connect your own funded Moss project in [Settings](https://raksha-app.web.app/settings) to test live semantic retrieval. Demo timings are not Moss benchmarks.
 
-**Release verification:** 29 unit tests, 8 E2E tests against both local and hosted builds, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine calls can reach caution. These are fixture results, not real-world accuracy claims. Earlier real-Moss and final fallback measurements are documented separately in [release verification](docs/submission/verification.md). Historical development measurements remain in [the evaluation report](docs/eval/REPORT.md).
+**Release verification:** 40 unit tests, 11 E2E tests against both local and hosted builds, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine calls can reach caution. These are fixture results, not real-world accuracy claims. Earlier real-Moss and final fallback measurements are documented separately in [release verification](docs/submission/verification.md). Historical development measurements remain in [the evaluation report](docs/eval/REPORT.md).
 
 [Submitted Devpost project](https://devpost.com/software/raksha-0g1hyf) · [Narrated demo with captions](https://www.youtube.com/watch?v=yy0Ek4Ot_mE)
 
@@ -133,7 +133,7 @@ License: MIT.
 
 ## Release verification and submission
 
-The release adds validated socket messages, bounded inputs, explicit reporting consent, reliable call startup, post-call reporting, connection-loss recovery, speech cancellation recovery and responsive layouts. Local verification: 29 unit tests, 8 end-to-end tests, lint, typecheck and a production build. Hosted verification is documented in `docs/submission/verification.md`.
+The release adds validated socket messages, bounded inputs, explicit reporting consent, reliable call startup, post-call reporting, connection-loss recovery, speech cancellation recovery and responsive layouts. Local verification: 40 unit tests, 11 end-to-end tests, lint, typecheck and a production build. Hosted verification is documented in `docs/submission/verification.md`.
 
 The public demo is deliberately limited to one Cloud Run instance because call and guardian state lives in process memory. Session affinity alone does not share that state between instances. Horizontal scaling needs shared state and routing.
 

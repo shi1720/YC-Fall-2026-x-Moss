@@ -82,7 +82,7 @@ See [Privacy and threat model](PRIVACY.md).
 
 ## Validation and timing
 
-Release verification includes the earlier 29 unit tests and 8 browser E2E tests against both a fresh local build and the hosted app, and 18 scripted calls covering 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine fixtures may reach caution.
+The settings release passes 40 unit tests and 11 browser E2E tests against both a fresh local build and the hosted app. Earlier detector evaluation covers 18 scripted calls and 264 utterances. All 10 scam fixtures reached danger; none of the 8 genuine fixtures reached danger. Some genuine fixtures may reach caution.
 
 Earlier real-Moss hosted evaluation recorded server-analysis p50 of 16.89 ms and p95 of 82.87 ms on the then-running 1-CPU revision with mixed test traffic. The final fallback evaluation recorded p50 of 0.58 ms and p95 of 2.13 ms. These differ in environment and retrieval mode. They are not a direct performance comparison or latency guarantee. Server analysis also differs from retrieval-only latency and browser round-trip time.
 

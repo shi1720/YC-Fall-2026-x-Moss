@@ -32,4 +32,12 @@ All project fields, testing instructions, four captioned gallery images and the 
 
 The official rules explicitly require both registration and submission on HiDevs: https://yc-fall-2026-x-moss.devpost.com/rules. Completing Devpost does not replace that requirement.
 
-HiDevs onboarding, required profile fields and LinkedIn connection are complete. HiDevs displayed "Successfully registered for the hackathon!" on 16 September 2026. The final project answers are filled. GitHub OAuth approval is pending because HiDevs requires read/write access to public repositories before allowing repository selection. HiDevs saved the separate architecture and PRD submission as the current version at 1:12 PM IST on 16 September 2026. Its Architecture tab shows Raksha, the selected voice track, the complete solution summary and links to session `1ecad245-eb1a-45c5-b8d2-3459831f1570`. Dr. Agent repository submission also requires GitHub OAuth; its feedback unlocks on 17 September at 9:00 PM IST. No LinkedIn promotional post has been authorized or published.
+HiDevs onboarding, profile fields, LinkedIn connection and hackathon registration are complete. The user completed GitHub authorization. HiDevs confirmed "Finale project submission updated successfully" for the revised personal-Moss answers, and "Repository submitted for Round 2 feedback" for `shi1720/YC-Fall-2026-x-Moss`. The repository default is main and includes the deployed settings release.
+
+The linked Architecture Copilot session `1ecad245-eb1a-45c5-b8d2-3459831f1570` contains the updated personal-project diagram and corrected PRD. HiDevs shows this as the current architecture submission, saved at 2:35 PM IST on 16 September 2026. The solution summary includes the final 40 unit tests and 11 local/hosted E2E checks, plus the explicit funded-project verification limit.
+
+Dr. Agent evaluation opens on 17 September 2026 at 9:00 PM IST. HiDevs says a LinkedIn post will be required to unlock the full report after evaluation. No promotional LinkedIn post has been authorized or published.
+
+Personal Moss settings: https://raksha-app.web.app/settings
+
+The Devpost story, judge instructions, main-branch links, fifth gallery image and public YouTube description were updated for this release. The app's shared demo stays in labeled TF-IDF mode. Visitors need their own funded Moss project for live semantic retrieval.
