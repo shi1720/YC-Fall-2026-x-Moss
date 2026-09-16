@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
-const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], display: "swap", axes: ["opsz", "SOFT"] });
-const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], display: "swap" });
+// Self-hosted (latin, variable) so the production build never depends on fonts.googleapis.com.
+const inter = localFont({ src: "./fonts/inter-latin.woff2", variable: "--font-inter", weight: "100 900", display: "swap" });
+const fraunces = localFont({ src: "./fonts/fraunces-latin.woff2", variable: "--font-fraunces", weight: "100 900", display: "swap" });
+const jetbrains = localFont({ src: "./fonts/jetbrains-mono-latin.woff2", variable: "--font-jetbrains", weight: "100 800", display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: "Raksha — the real-time scam-call shield", template: "%s · Raksha" },
