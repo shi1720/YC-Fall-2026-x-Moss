@@ -9,7 +9,7 @@ import { getCallManager, type CallRecord } from "@/lib/engine/calls";
 import { llmConfig } from "@/lib/llm/client";
 import { reportToCommunity } from "@/lib/moss/intel";
 import { getMossRuntime } from "@/lib/moss/runtime";
-import { runtimeForToken, MossSettingsError } from "@/lib/moss/visitor";
+import { runtimeForToken, isMossSettingsError } from "@/lib/moss/visitor";
 import { clientMessageSchema, type ClientMessage, type ServerMessage } from "@/lib/protocol";
 
 interface Conn {
@@ -117,8 +117,8 @@ export function attachWebSocketServer(): { wss: WebSocketServer; handleUpgrade: 
         if (ws.readyState === WebSocket.OPEN) await handle(conn, msg);
       }).catch(async (err) => {
         console.warn("[ws] request could not be completed");
-        send(ws, { type: "error", message: err instanceof MossSettingsError ? err.message : "The request could not be completed. Please try again." });
-        if (err instanceof MossSettingsError && conn.callId) {
+        send(ws, { type: "error", message: isMossSettingsError(err) ? err.message : "The request could not be completed. Please try again." });
+        if (isMossSettingsError(err) && conn.callId) {
           const id = conn.callId;
           conn.callId = undefined;
           await calls.end(id);

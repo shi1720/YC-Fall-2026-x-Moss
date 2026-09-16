@@ -21,13 +21,20 @@ interface Entry {
   runtime?: MossRuntime; error?: string; dispose?: () => Promise<void>;
   timer?: ReturnType<typeof setTimeout>;
 }
+const SETTINGS_ERROR = Symbol.for("raksha.moss.settings.error");
 export class MossSettingsError extends Error {
+  readonly [SETTINGS_ERROR] = true;
   constructor(message: string, public status = 400) { super(message); }
+}
+// Next routes and the custom server are bundled separately but share this store.
+// A global symbol keeps trusted errors identifiable across both module copies.
+export function isMossSettingsError(error: unknown): error is MossSettingsError {
+  return error instanceof Error && SETTINGS_ERROR in error && error[SETTINGS_ERROR] === true;
 }
 
 // Never return SDK error text: provider responses can include credentials or URLs.
 export function safeMossError(error: unknown): string {
-  if (error instanceof MossSettingsError) return error.message;
+  if (isMossSettingsError(error)) return error.message;
   const message = error instanceof Error ? error.message : "";
   if (/429|credit|quota|USAGE_LIMIT/i.test(message)) return "This Moss project has no available credits or has reached its usage limit. Use a funded project, or disconnect to continue the demo without Moss.";
   if (/401|403|unauthori|forbidden|authenticat|invalid.*key/i.test(message)) return "Moss rejected these credentials. Check the project ID and project API key in your Moss dashboard.";

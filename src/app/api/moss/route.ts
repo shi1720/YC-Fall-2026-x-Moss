@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getMossRuntime } from "@/lib/moss/runtime";
-import { MOSS_COOKIE, SESSION_MS, mossSettingsSchema, mossToken, visitorMoss, MossSettingsError } from "@/lib/moss/visitor";
+import { MOSS_COOKIE, SESSION_MS, mossSettingsSchema, mossToken, visitorMoss, isMossSettingsError } from "@/lib/moss/visitor";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     const response = NextResponse.json({ status: "connecting" }, { status: 202, headers });
     return cookie(response, req, token, SESSION_MS / 1000);
   } catch (error) {
-    return NextResponse.json({ error: error instanceof MossSettingsError ? error.message : "Could not start Moss setup." }, { status: error instanceof MossSettingsError ? error.status : 500, headers });
+    return NextResponse.json({ error: isMossSettingsError(error) ? error.message : "Could not start Moss setup." }, { status: isMossSettingsError(error) ? error.status : 500, headers });
   }
 }
 export async function DELETE(req: Request) {

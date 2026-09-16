@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { VisitorMossStore, mossSettingsSchema, safeMossError, SESSION_MS } from "@/lib/moss/visitor";
+import { VisitorMossStore, mossSettingsSchema, safeMossError, SESSION_MS, MossSettingsError, isMossSettingsError } from "@/lib/moss/visitor";
 import type { MossRuntime } from "@/lib/moss/runtime";
 import { MockRetriever } from "@/lib/engine/mockRetriever";
 const settings = { projectId: "test-project", projectKey: "secret-test-key", indexName: "raksha-playbook", createIndex: false, consent: true as const };
@@ -8,6 +8,15 @@ function runtime(name: string): MossRuntime {
 }
 afterEach(() => vi.useRealTimers());
 describe("private Moss sessions", () => {
+  it("preserves safe errors across separately bundled copies of the session store", async () => {
+    vi.resetModules();
+    const copy = await import("@/lib/moss/visitor");
+    const error = new copy.MossSettingsError("Your Moss session ended.", 409);
+    expect(error instanceof MossSettingsError).toBe(false);
+    expect(isMossSettingsError(error)).toBe(true);
+    expect(safeMossError(error)).toBe("Your Moss session ended.");
+    expect(isMossSettingsError(new Error("upstream response"))).toBe(false);
+  });
   it("requires explicit consent and bounds credentials and index names", () => {
     expect(mossSettingsSchema.safeParse(settings).success).toBe(true);
     for (const changes of [{ consent: false }, { projectKey: "short" }, { projectId: "https://host" }, { indexName: "../private" }, { projectKey: "x".repeat(513) }, { endpoint: "https://attacker" }]) expect(mossSettingsSchema.safeParse({ ...settings, ...changes }).success).toBe(false);
