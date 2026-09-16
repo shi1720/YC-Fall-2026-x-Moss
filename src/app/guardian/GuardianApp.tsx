@@ -48,7 +48,7 @@ function reducer(state: State, msg: ServerMessage): State {
     case "risk":
       return upsert(msg.callId, (c) => ({ ...c, risk: msg.risk }));
     case "intervention":
-      return upsert(msg.callId, (c) => ({ ...c, interventions: [...c.interventions, msg.intervention] }));
+      return upsert(msg.callId, (c) => ({ ...c, interventions: [...c.interventions.filter(iv => iv.t !== msg.intervention.t || iv.headline !== msg.intervention.headline || iv.level !== msg.intervention.level), msg.intervention] }));
     case "coach":
       return upsert(msg.callId, (c) => ({ ...c, advice: msg.advice }));
     case "call.ended":
@@ -241,7 +241,7 @@ export function GuardianApp({ initialCode }: { initialCode?: string }) {
 
           <div className="space-y-5 lg:col-span-8">
             {focus.interventions.length > 0 && (
-              <div className="card border-danger/40 p-4">
+              <div role="region" aria-label="Interventions on their phone" className="card border-danger/40 p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-danger-2">
                   <ShieldAlert className="h-4 w-4" /> Interventions on their phone
                 </div>

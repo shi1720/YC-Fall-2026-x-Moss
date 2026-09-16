@@ -14,9 +14,9 @@ export default defineConfig({
     headless: true,
   },
   webServer: process.env.E2E_BASE_URL ? undefined : {
-    command: `PORT=${port} npm run start`,
+    command: `npm run build && PORT=${port} npm run start`,
     url: `http://localhost:${port}/api/health`,
     timeout: 120_000,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
   },
 });

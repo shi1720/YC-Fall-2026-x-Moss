@@ -141,3 +141,7 @@ The public demo is deliberately limited to one Cloud Run instance because call a
 - [Judging evidence](docs/submission/checklist.md)
 
 A safe score means no recognised scam pattern, not that a caller is verified. Scripted fixtures are not a real-world accuracy study. See [privacy](docs/PRIVACY.md) for audio providers, in-memory retention and opt-in community sharing.
+
+### Current hosted service status
+
+The release is live at https://raksha-app.web.app. Moss cloud credits were exhausted during the final rollout on 16 September 2026, so the app currently labels and uses its offline detector. Restore the existing Moss project credits for automatic recovery. Fallback timings are not Moss benchmarks. See [release verification](docs/submission/verification.md) for both runs and remaining submission prerequisites.

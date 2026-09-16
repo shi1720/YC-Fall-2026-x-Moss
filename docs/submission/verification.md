@@ -42,3 +42,13 @@ The final rollout encountered Moss HTTP 429 with `USAGE_LIMIT_EXCEEDED` and `cre
 The supported local Moss session API was also checked. Session indexing worked, but its rank-normalized scores cannot safely replace the detector's calibrated cosine scores. The production detector was not switched to an uncalibrated scoring path.
 
 During visual verification, generated coach advice invented an inappropriate contact source. The app now fixes the exit sentence and next action in code, while retaining model explanations. Two regression tests verify invented contact and payment instructions are not relayed. Offline guardian search now filters filler words and expands the three suggested questions, with two evidence-relevance tests.
+
+## Final deployed revision
+
+Cloud Run revision: `raksha-00007-9c7`, 2 vCPU, one bounded instance, behind https://raksha-app.web.app.
+
+All eight end-to-end tests pass against the final source and hosted release. Local end-to-end runs now build the application first and refuse to reuse a potentially stale server. The suite also verifies that rejoining a guardian code does not duplicate intervention history.
+
+The final detector replay passed all 18 scenarios and 264 utterances in disclosed offline mode: p50 0.58 ms, p95 2.13 ms. These are text-detector server timings, not Moss benchmarks. The earlier real-Moss run is recorded separately above.
+
+Video verification: 116.76 seconds, 1920 x 1080 H.264, AAC narration, burned captions and an embedded English subtitle track. Peak audio level -1.4 dB. Key frames were visually reviewed. The narration and on-screen labels disclose fallback mode.
