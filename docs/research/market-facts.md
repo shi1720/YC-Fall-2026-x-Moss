@@ -6,7 +6,7 @@
 ## 1. India
 
 ### Total cyber-fraud losses (MHA / I4C)
-- Losses reported on cybercrime.gov.in / 1930: **₹2,290 cr (2022) → ₹7,465 cr (2023) → ₹22,845 cr (2024)** — ~10x in two years; 2024 up 206% YoY. (Lok Sabha Q.432, 2 Dec 2025) https://www.mha.gov.in/MHA1/Par2017/pdfs/par2025-pdfs/LS02122025/432.pdf ; https://scroll.in/latest/1084796/indians-lost-rs-22845-crore-to-cyber-fraud-in-2024-a-206-rise-from-previous-year-centre
+- Losses reported on cybercrime.gov.in / 1930: **₹2,290 cr (2022) → ₹7,465 cr (2023) → ₹22,845 cr (2024)**. ~10x in two years; 2024 up 206% YoY. (Lok Sabha Q.432, 2 Dec 2025) https://www.mha.gov.in/MHA1/Par2017/pdfs/par2025-pdfs/LS02122025/432.pdf ; https://scroll.in/latest/1084796/indians-lost-rs-22845-crore-to-cyber-fraud-in-2024-a-206-rise-from-previous-year-centre
 - Complaints on NCRP: 4.52 lakh (2021) → 10.29 lakh (2022) → 15.96 lakh (2023) → **22.68 lakh (2024)**. (same reply)
 - **2025: ₹22,495 cr lost across 28.15 lakh complaints**; investment fraud = 76% of losses, digital arrest = 9%, sextortion = 4%. https://theprint.in/india/cybercrime-saw-24-spike-in-2025-indians-lost-rs-22495-crore-mainly-in-investment-scams/2859930/
 - Implied average loss per complaint ≈ ₹1.0 lakh (2024). Cumulative ≈ ₹53,000 cr over six years (I4C). https://www.orfonline.org/expert-speak/digital-arrest-scams-and-the-limits-of-domestic-enforcement
@@ -27,7 +27,7 @@
 - DoT caller-tune campaign from 19 Dec 2024 in 12 languages, incl. a "Digital Arrest" version. (Rajya Sabha Q.1349)
 
 ### Courts
-- Supreme Court suo motu cognisance (Oct 2025), *In Re: Victims of Digital Arrest Related to Forged Documents*, SMW(Crl) 3/2025 — "a direct assault on judicial dignity"; CBI probe ordered Dec 2025; bench mooted a distinct penal offence. https://www.theweek.in/news/india/2025/10/17/sc-takes-suo-motu-case-on-digital-arrest-scams-calls-court-order-forgery-direct-assault-on-judicial-dignity.html ; https://www.barandbench.com/news/supreme-court-calls-for-separate-offence-on-digital-arrests-harsher-punishment-against-accused
+- Supreme Court suo motu cognisance (Oct 2025), *In Re: Victims of Digital Arrest Related to Forged Documents*, SMW(Crl) 3/2025. "a direct assault on judicial dignity"; CBI probe ordered Dec 2025; bench mooted a distinct penal offence. https://www.theweek.in/news/india/2025/10/17/sc-takes-suo-motu-case-on-digital-arrest-scams-calls-court-order-forgery-direct-assault-on-judicial-dignity.html ; https://www.barandbench.com/news/supreme-court-calls-for-separate-offence-on-digital-arrests-harsher-punishment-against-accused
 
 ### Regulator / telco initiatives
 - RBI "bank.in" exclusive domain (deadline 31 Oct 2025). https://www.business-standard.com/amp/finance/news/rbi-asks-banks-to-complete-migration-to-bank-in-domain-by-october-31-2025-125042201515_1.html
@@ -39,13 +39,13 @@
 
 ## 2. Global
 
-### United States — FTC
+### United States. FTC
 - **2024: $12.5B reported fraud losses (+25%)**; imposter scams $2.95B; phone was the #2 contact method; phone-call losses ≈ $948M. https://www.ftc.gov/news-events/news/press-releases/2025/03/new-ftc-data-show-big-jump-reported-losses-fraud-125-billion-2024 ; https://www.ftc.gov/system/files/ftc_gov/pdf/csn-annual-data-book-2024.pdf
 - **2025: $15.9B (record); imposter scams #1 at $3.5B; for people 80+, phone calls ranked first by losses.** https://www.cnbc.com/2026/06/26/imposter-scams-led-fraud-reports-to-ftc-in-2025-3point5-billion-losses.html
 - 2025: phone calls had the highest median loss of any contact method, **$1,835**. https://www.experian.com/blogs/ask-experian/identity-theft-statistics/
 - FTC Data Spotlight (Aug 2025): **41% of $10k+ losses by older adults began with a phone call**; older-adult reported losses $600M (2020) → $2.4B (2024). https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2025/08/false-alarm-real-scam-how-scammers-are-stealing-older-adults-life-savings
 
-### United States — FBI IC3
+### United States. FBI IC3
 - 2024: $16.6B losses; 60+ victims $4.885B (+43%). https://www.ic3.gov/AnnualReport/Reports/2024_IC3Report.pdf
 - **2025: $20.9B losses; 60+ victims > $7.7B, average > $38,000; > 12,400 seniors lost > $100k each.** https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf
 
@@ -86,9 +86,9 @@ Sources: https://blog.google/products-and-platforms/devices/pixel/pixel-drop-mar
 ## 4. Business-model evidence
 - Global FI spend on fraud detection & prevention: $21B (2025) → $39B (2030). https://www.juniperresearch.com/press/fraud-detection-and-prevention-spending-reaches-21bn/
 - LexisNexis Fraud Multiplier: every $1 of fraud costs a financial institution > $5.00 (2025). https://risk.lexisnexis.com/about-us/press-room/press-release/20250910-fraud-multiplier
-- India: RBI 2017 circular — zero customer liability for unauthorised transactions reported within 3 days; burden of proof on the bank. https://www.rbi.org.in/commonman/english/scripts/Notification.aspx?Id=2336
-- **RBI final directions (Jun 2026, effective 1 Jan 2027): first mandated compensation for scam-induced (authorised) losses ≤ ₹50,000** — banks now carry P&L exposure to social-engineering. https://www.business-standard.com/industry/banking/rbi-finalises-fraud-compensation-framework-for-victims-of-digital-fraud-126062401240_1.html
-- UK banks reimbursed £354.3M of APP losses in 2025 under the PSR regime — prevention has direct payback. https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release
+- India: RBI 2017 circular. zero customer liability for unauthorised transactions reported within 3 days; burden of proof on the bank. https://www.rbi.org.in/commonman/english/scripts/Notification.aspx?Id=2336
+- **RBI final directions (Jun 2026, effective 1 Jan 2027): first mandated compensation for scam-induced (authorised) losses ≤ ₹50,000**. banks now carry P&L exposure to social-engineering. https://www.business-standard.com/industry/banking/rbi-finalises-fraud-compensation-framework-for-victims-of-digital-fraud-126062401240_1.html
+- UK banks reimbursed £354.3M of APP losses in 2025 under the PSR regime. prevention has direct payback. https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release
 - Family-safety WTP: Life360 Gold $14.99/mo; 2.8M paying circles; ARPPC $143/yr. https://investors.life360.com/news-releases/news-release-details/life360-reports-record-q4-2025-results
 - Scam-protection WTP: Hiya AI Phone $9.99/mo; Truecaller Premium; Truecaller's recurring revenue grew 46% in 2025 while ads fell. https://www.prnewswire.com/news-releases/truecaller-ab-entering-the-next-phase-of-growth-302689303.html
 - Senior-care demand: Khyaal × Truecaller (Aug 2025); HelpAge India: cybercrime against seniors up 86% (2020–22). https://www.tribuneindia.com/news/business/truecaller-partners-with-khyaal-to-protect-senior-citizens-from-scams/
@@ -98,10 +98,10 @@ Sources: https://blog.google/products-and-platforms/devices/pixel/pixel-drop-mar
 - FTC "False alarm, real scam" (Aug 2025): fabricated emergency → "move your money to keep it safe" → transfer. https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2025/08/false-alarm-real-scam-how-scammers-are-stealing-older-adults-life-savings
 - Cialdini's six principles; Ferreira, Coventry & Lenzini (2015) found authority and strong affect (fear/urgency) the most used. https://link.springer.com/chapter/10.1007/978-3-319-20376-8_4
 - Stajano & Wilson, "Understanding scam victims: seven principles" (CACM 2011): distraction, social compliance, herd, dishonesty, kindness, need & greed, time pressure. https://cacm.acm.org/research/understanding-scam-victims-seven-principles-for-systems-security/
-- AARP / Shadel — "the ether": scammers induce a heightened emotional state in which judgment shuts down; AARP (2021): victims felt "out of control" during the encounter → argues for an external real-time circuit breaker. https://www.aarp.org/press/releases/2021-10-27-aarp-research-details-risk-factors-that-can-lead-to-fraud-victimization/
+- AARP / Shadel. "the ether": scammers induce a heightened emotional state in which judgment shuts down; AARP (2021): victims felt "out of control" during the encounter → argues for an external real-time circuit breaker. https://www.aarp.org/press/releases/2021-10-27-aarp-research-details-risk-factors-that-can-lead-to-fraud-victimization/
 - Digital-arrest script anatomy: parcel/Aadhaar pretext → officer transfer → video call in uniform → forged court orders → continuous video "arrest" → isolation → "verification" transfers. https://www.orfonline.org/expert-speak/digital-arrest-scams-and-the-limits-of-domestic-enforcement
 
 ## Caveats
-- Digital-arrest 2024 losses: ₹1,918 cr vs ₹1,935 cr across reports — we say "~₹1,900 crore".
+- Digital-arrest 2024 losses: ₹1,918 cr vs ₹1,935 cr across reports. we say "~₹1,900 crore".
 - GASA 2024 ($1.03T) and 2025 ($442B, 42 countries) are not like-for-like.
 - Per-victim averages are derived (losses ÷ complaints), not published by MHA.

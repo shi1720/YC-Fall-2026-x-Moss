@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { MessageSquare, PhoneCall, Search, Send, ShieldAlert, Users } from "lucide-react";
 import { RiskDial } from "@/components/shield/RiskDial";
@@ -39,9 +39,9 @@ function reducer(state: State, msg: ServerMessage): State {
   };
   switch (msg.type) {
     case "guardian.joined": {
-      const calls = { ...state.calls };
+      const calls = state.joined === msg.familyCode ? { ...state.calls } : {};
       for (const m of msg.activeCalls) if (!calls[m.callId]) calls[m.callId] = { meta: m, risk: createRiskState(), lines: [], interventions: [] };
-      return { ...state, joined: msg.familyCode, calls, error: undefined };
+      return { ...state, joined: msg.familyCode, calls, error: undefined, ...(state.joined !== msg.familyCode ? { messages: [], answers: [] } : {}) };
     }
     case "analysis":
       return upsert(msg.callId, (c) => (msg.analysis.utterance.final ? { ...c, risk: msg.analysis.risk, lines: [...c.lines.filter((l) => l.utterance.id !== msg.analysis.utterance.id), msg.analysis].slice(-200) } : c));
@@ -58,7 +58,7 @@ function reducer(state: State, msg: ServerMessage): State {
     case "guardian.answer":
       return { ...state, answers: [{ question: msg.question, hits: msg.hits, latencyMs: msg.latencyMs, answer: msg.answer }, ...state.answers].slice(0, 5) };
     case "error":
-      return { ...state, error: msg.message };
+      return { ...state, error: msg.message, ...(/Connection lost/.test(msg.message) ? { joined: undefined, calls: {}, messages: [], answers: [] } : {}) };
     default:
       return state;
   }
@@ -80,13 +80,17 @@ export function GuardianApp({ initialCode }: { initialCode?: string }) {
   const { status, send } = useRakshaSocket(onMessage);
 
   const join = useCallback(() => {
-    if (code.length < 3) return;
+    if (code.length < 6) return;
     send({ type: "guardian.join", familyCode: code, name: name || "Guardian" });
   }, [code, name, send]);
 
+  const lastJoined = useRef(initialCode);
+  useEffect(() => { if (state.joined) lastJoined.current = state.joined; }, [state.joined]);
   useEffect(() => {
-    if (status === "open" && initialCode && !state.joined) join();
-  }, [status, initialCode, state.joined, join]);
+    if (status === "open" && lastJoined.current && !state.joined) {
+      send({ type: "guardian.join", familyCode: lastJoined.current, name: name || "Guardian" });
+    }
+  }, [status, state.joined, send, name]);
 
   const calls = useMemo(() => Object.values(state.calls).sort((a, b) => b.meta.startedAt - a.meta.startedAt), [state.calls]);
   const live = calls.find((c) => !c.ended);
@@ -98,7 +102,7 @@ export function GuardianApp({ initialCode }: { initialCode?: string }) {
         <div>
           <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted">
             <span className={cn("inline-block h-2 w-2 rounded-full", status === "open" ? "bg-safe" : "bg-caution")} />
-            {state.joined ? `watching ${state.joined}` : "not joined"}
+            {status !== "open" ? status : state.joined ? `watching ${state.joined}` : "not joined"}
           </div>
           <h1 className="display mt-1 text-3xl text-text sm:text-4xl">Guardian</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted">Live view of a protected phone. You see risk as it changes, can speak through the shield, and can ask the call’s memory a question.</p>
@@ -118,7 +122,7 @@ export function GuardianApp({ initialCode }: { initialCode?: string }) {
             Family code
             <input className="input mono mt-1 w-40 uppercase tracking-[0.25em]" value={code} onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8))} placeholder="ABC123" />
           </label>
-          <button className="btn btn-primary" type="submit" disabled={code.length < 3 || status !== "open"}>
+          <button className="btn btn-primary" type="submit" disabled={code.length < 6 || status !== "open"}>
             <Users className="h-4 w-4" /> {state.joined === code ? "Joined" : "Join"}
           </button>
         </form>
@@ -165,8 +169,8 @@ export function GuardianApp({ initialCode }: { initialCode?: string }) {
                   setSay("");
                 }}
               >
-                <input className="input" value={say} onChange={(e) => setSay(e.target.value)} placeholder="Mummy, hang up. I’m calling you now." />
-                <button className="btn btn-primary btn-sm" type="submit" disabled={!state.joined || !say.trim()}>
+                <input className="input" maxLength={300} aria-label="Message to protected phone" value={say} onChange={(e) => setSay(e.target.value)} placeholder="Mummy, hang up. I’m calling you now." />
+                <button className="btn btn-primary btn-sm" type="submit" aria-label="Send message" disabled={!state.joined || !live || status !== "open" || !say.trim()}>
                   <Send className="h-4 w-4" />
                 </button>
               </form>
@@ -192,7 +196,7 @@ export function GuardianApp({ initialCode }: { initialCode?: string }) {
               <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted">
                 <Search className="h-3.5 w-3.5 text-moss" /> Ask the call
               </div>
-              <p className="mb-3 text-sm text-muted">Semantic recall over this call’s own turns, from its Moss session.</p>
+              <p className="mb-3 text-sm text-muted">Find relevant words in this call. Moss powers semantic memory when available; offline mode uses text matching. Memory is cleared when the call ends.</p>
               <form
                 className="flex gap-2"
                 onSubmit={(e) => {
@@ -202,8 +206,8 @@ export function GuardianApp({ initialCode }: { initialCode?: string }) {
                   setQuestion("");
                 }}
               >
-                <input className="input" value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="What did they ask for?" />
-                <button className="btn btn-ghost btn-sm" type="submit" disabled={!state.joined || !question.trim()}>
+                <input className="input" maxLength={500} aria-label="Question about the call" value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="What did they ask for?" />
+                <button className="btn btn-ghost btn-sm" type="submit" disabled={!state.joined || !live || status !== "open" || !question.trim()}>
                   Ask
                 </button>
               </form>

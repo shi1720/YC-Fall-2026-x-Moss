@@ -111,7 +111,7 @@ function reducer(state: State, action: Action): State {
         case "call.reported":
           return { ...state, reported: { ok: m.ok, added: m.added, message: m.message } };
         case "error":
-          return { ...state, error: m.message };
+          return { ...state, error: m.message, phase: state.phase === "starting" ? "idle" : state.phase };
         default:
           return state;
       }
@@ -127,12 +127,12 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function randomCode() {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  return Array.from({ length: 6 }, () => alphabet[Math.floor(Math.random() * alphabet.length)]).join("");
+  return Array.from({ length: 8 }, () => alphabet[crypto.getRandomValues(new Uint32Array(1))[0] % alphabet.length]).join("");
 }
 
-export function ShieldApp({ initialScenario, initialSilent = false, initialFast = false }: { initialScenario?: string; initialSilent?: boolean; initialFast?: boolean }) {
+export function ShieldApp({ initialScenario, initialSilent = false, initialFast = false, initialMode = "simulation" }: { initialScenario?: string; initialSilent?: boolean; initialFast?: boolean; initialMode?: Mode }) {
   const [state, dispatch] = useReducer(reducer, initial);
-  const [mode, setMode] = useState<Mode>("simulation");
+  const [mode, setMode] = useState<Mode>(initialMode);
   const [scenarios, setScenarios] = useState<ScenarioMeta[]>([]);
   const [scenarioId, setScenarioId] = useState<string | undefined>(initialScenario);
   const [audio, setAudio] = useState(!initialSilent);
@@ -150,14 +150,29 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
   const recognition = useRef<RecognitionHandle | null>(null);
   const lastInterimSent = useRef(0);
 
+  const callReady = useRef<{ resolve: () => void; reject: (error: Error) => void } | null>(null);
+  const audioEnabled = useRef(audio);
+  useEffect(() => { audioEnabled.current = audio; }, [audio]);
+
   const onMessage = useCallback((msg: ServerMessage) => {
     dispatch({ type: "server", msg });
+    if (msg.type === "call.started") { callReady.current?.resolve(); callReady.current = null; }
+    if (msg.type === "error") {
+      callReady.current?.reject(new Error(msg.message)); callReady.current = null;
+      if (/Connection lost|reconnecting/.test(msg.message)) {
+        player.current.cancelled = true;
+        recognition.current?.stop(); recognition.current = null;
+        stopSpeaking();
+        for (const waiter of player.current.waiters.splice(0)) waiter();
+        dispatch({ type: "phase", phase: "idle" });
+      }
+    }
     if (msg.type === "intervention" && msg.intervention.level === "danger") {
       player.current.paused = true;
       setPaused(true);
-      if (ttsSupported()) void speak(`${msg.intervention.headline} ${msg.intervention.sayThis}`, "shield", { interrupt: true });
+      if (audioEnabled.current && ttsSupported()) void speak(`${msg.intervention.headline} ${msg.intervention.sayThis}`, "shield", { interrupt: true });
     }
-    if (msg.type === "guardian.message" && ttsSupported()) void speak(`Message from ${msg.from}: ${msg.text}`, "shield", { interrupt: true });
+    if (msg.type === "guardian.message" && audioEnabled.current && ttsSupported()) void speak(`Message from ${msg.from}: ${msg.text}`, "shield", { interrupt: true });
   }, []);
   const { status, send } = useRakshaSocket(onMessage);
 
@@ -171,9 +186,9 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
       .then((r) => r.json())
       .then((list: ScenarioMeta[]) => {
         setScenarios(list);
-        setScenarioId((cur) => cur ?? list[0]?.id);
+        setScenarioId((cur) => list.some(s => s.id === cur) ? cur : list[0]?.id);
       })
-      .catch(() => {});
+      .catch(() => dispatch({ type: "server", msg: { type: "error", message: "Could not load scenarios. Refresh the page to retry." } }));
   }, []);
 
   // Call clock.
@@ -216,7 +231,12 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
     (m: Mode, scenario?: string) => {
       dispatch({ type: "reset" });
       dispatch({ type: "phase", phase: "starting" });
-      send({ type: "call.start", mode: m, scenarioId: scenario, familyCode, region, displayName: "Protected phone" });
+      setClock(0);
+      return new Promise<void>((resolve, reject) => {
+        const timer = setTimeout(() => { callReady.current = null; reject(new Error("The call could not start. Please retry.")); }, 15000);
+        callReady.current = { resolve: () => { clearTimeout(timer); resolve(); }, reject: (err) => { clearTimeout(timer); reject(err); } };
+        send({ type: "call.start", mode: m, scenarioId: scenario, familyCode, region, displayName: "Protected phone" });
+      });
     },
     [send, familyCode, region],
   );
@@ -261,20 +281,27 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
 
   const runSimulation = useCallback(async () => {
     if (!scenarioId) return;
-    const sc = (await fetch(`/api/scenarios?id=${scenarioId}`).then((r) => r.json())) as Scenario;
-    startCall("simulation", scenarioId);
-    await sleep(400);
-    void playTurns(sc.turns, { tts: audio && ttsSupported(), gapMs: fast ? 250 : 650 });
+    dispatch({ type: "phase", phase: "starting" });
+    try {
+      const response = await fetch(`/api/scenarios?id=${encodeURIComponent(scenarioId)}`);
+      if (!response.ok) throw new Error("Could not load this scenario. Please try again.");
+      const sc = await response.json() as Scenario;
+      await startCall("simulation", scenarioId);
+      void playTurns(sc.turns, { tts: audio && ttsSupported(), gapMs: fast ? 250 : 650 });
+    } catch (error) {
+      dispatch({ type: "phase", phase: "idle" });
+      dispatch({ type: "server", msg: { type: "error", message: (error as Error).message } });
+    }
   }, [audio, fast, playTurns, scenarioId, startCall]);
 
   // ---------- Live microphone ----------
-  const runLive = useCallback(() => {
+  const runLive = useCallback(async () => {
     setMicError(null);
     if (!speechRecognitionSupported()) {
       setMicError("Live transcription needs the Web Speech API (Chrome, Edge or Safari). Use Simulation or Upload instead.");
       return;
     }
-    startCall("live");
+    try { await startCall("live"); } catch (error) { setMicError((error as Error).message); dispatch({ type: "phase", phase: "idle" }); return; }
     const startedAt = Date.now();
     recognition.current = startRecognition({
       lang: region === "IN" ? "en-IN" : region === "UK" ? "en-GB" : region === "AU" ? "en-AU" : "en-US",
@@ -290,13 +317,16 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
         dispatch({ type: "interim", text: undefined });
         send({ type: "utterance", text, speaker: "unknown", final: true, t: Date.now() - startedAt });
       },
-      onError: (err) => setMicError(err === "not-allowed" ? "Microphone permission was denied." : `Microphone error: ${err}`),
+      onError: (err) => { setMicError(err === "not-allowed" ? "Microphone permission was denied. Enable it in your browser or try a simulation." : `Microphone error: ${err}`); endCall(); },
     });
-  }, [region, send, startCall]);
+  }, [region, send, startCall, endCall]);
 
   // ---------- Upload a recording ----------
   const runUpload = useCallback(
     async (file: File) => {
+      setMicError(null);
+      if (file.size > 25 * 1024 * 1024) { setMicError("Choose a recording smaller than 25 MB."); return; }
+      if (!file.size) { setMicError("This recording is empty. Choose another file."); return; }
       setUploadBusy(true);
       try {
         const fd = new FormData();
@@ -305,11 +335,12 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
         const data = (await res.json()) as { text?: string; segments?: Array<{ text: string }>; error?: string };
         if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
         const turns = (data.segments?.length ? data.segments.map((s) => s.text.trim()) : (data.text ?? "").split(/(?<=[.?!])\s+/)).filter((t) => t.length > 2).map((text) => ({ speaker: "unknown" as Speaker, text }));
-        startCall("upload");
-        await sleep(400);
+        if (!turns.length) throw new Error("No speech was found. Try a clearer recording.");
+        await startCall("upload");
         void playTurns(turns, { tts: false, gapMs: 200 });
       } catch (err) {
         setMicError((err as Error).message);
+        dispatch({ type: "phase", phase: "idle" });
       } finally {
         setUploadBusy(false);
       }
@@ -348,6 +379,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
             )}
           </div>
           <h1 className="display mt-1 text-3xl text-text sm:text-4xl">The shield</h1>
+          <p className="mt-2 text-sm text-muted">Hear the warning. Know what to say. Bring someone you trust.</p>
         </div>
         <LatencyTicker last={state.lastLatency} stats={state.stats} mode={runtimeMode} />
       </div>
@@ -355,15 +387,18 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
       {state.hello?.runtime.mode === "mock" && (
         <div className="mt-4 flex items-start gap-2 rounded-2xl border border-caution/30 bg-caution/10 p-3 text-sm text-caution">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-          <span>Running on the offline fallback retriever. Set Moss credentials on the server to enable the real sub-10 ms semantic runtime.</span>
+          <span>Offline detector active. Moss is unavailable, so matches use text similarity. Timings below are for this fallback, not Moss.</span>
         </div>
       )}
 
-      <div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-12">
+      <div className="mt-5 flex flex-wrap gap-2 text-xs text-muted" aria-label="Demo guide">
+        <span className="chip chip-saffron">1. Choose a call</span><span className="chip">2. Watch the risk change</span><span className="chip">3. Open Guardian to help</span>
+      </div>
+      <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-12">
         {/* Left: controls */}
-        <div className="space-y-5 lg:col-span-3">
+        <div className="min-w-0 space-y-5 lg:col-span-3">
           <div className="card p-4">
-            <div className="flex rounded-full border border-line bg-white/[0.03] p-1 text-sm">
+            <div className="flex rounded-2xl border border-line bg-white/[0.03] p-1 text-xs">
               {(
                 [
                   ["simulation", "Simulate", Play],
@@ -374,7 +409,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
                 <button
                   key={m}
                   disabled={active}
-                  onClick={() => setMode(m)}
+                  onClick={() => { setMode(m); setMicError(null); }}
                   className={cn("flex flex-1 items-center justify-center gap-1.5 rounded-full px-2 py-1.5 transition disabled:opacity-50", mode === m ? "bg-white/10 text-text" : "text-muted hover:text-text")}
                 >
                   <Icon className="h-3.5 w-3.5" /> {label}
@@ -384,7 +419,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
 
             {mode === "simulation" && (
               <div className="mt-4 space-y-3">
-                <p className="text-sm text-muted">Replay a realistic scam call (both voices) and watch the shield recognise the script as it unfolds.</p>
+                <p className="text-sm text-muted">Choose a call, then watch the shield recognise the pressure.</p>
                 <ScenarioPicker scenarios={scenarios} selected={scenarioId} onSelect={setScenarioId} disabled={active} />
                 <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
                   <button className={cn("chip", audio && "chip-saffron")} onClick={() => setAudio((a) => !a)} disabled={active}>
@@ -395,7 +430,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
                   </button>
                 </div>
                 {!active ? (
-                  <button className="btn btn-primary w-full" onClick={() => void runSimulation()} disabled={!scenarioId || status !== "open"}>
+                  <button className="btn btn-primary w-full" onClick={() => void runSimulation()} disabled={!scenarioId || status !== "open" || familyCode.length < 6}>
                     <Play className="h-4 w-4" /> Start the call
                   </button>
                 ) : (
@@ -413,7 +448,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
 
             {mode === "live" && (
               <div className="mt-4 space-y-3">
-                <p className="text-sm text-muted">Put the phone on speaker next to this device. Your browser turns speech into text; only text reaches the shield, and it is forgotten when the call ends. Nothing is stored.</p>
+                <p className="text-sm text-muted">Put the phone on speaker next to this device. Your browser turns speech into text; text reaches the shield. Browser speech services may process the audio. Call details stay in server memory for up to 10 minutes after the call ends.</p>
                 <label className="block text-xs text-muted">
                   Region
                   <select className="input mt-1" value={region} onChange={(e) => setRegion(e.target.value as CallMeta["region"])} disabled={active}>
@@ -425,7 +460,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
                 </label>
                 {micError && <div className="rounded-xl border border-danger/40 bg-danger/10 p-2 text-xs text-danger-2">{micError}</div>}
                 {!active ? (
-                  <button className="btn btn-primary w-full" onClick={runLive} disabled={status !== "open"}>
+                  <button className="btn btn-primary w-full" onClick={() => void runLive()} disabled={status !== "open"}>
                     <Mic className="h-4 w-4" /> Start listening
                   </button>
                 ) : (
@@ -442,7 +477,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
                 {micError && <div className="rounded-xl border border-danger/40 bg-danger/10 p-2 text-xs text-danger-2">{micError}</div>}
                 <label className={cn("btn btn-primary w-full cursor-pointer", (active || uploadBusy) && "pointer-events-none opacity-50")}>
                   <FileAudio className="h-4 w-4" /> {uploadBusy ? "Transcribing…" : "Choose a recording"}
-                  <input type="file" accept="audio/*" className="hidden" onChange={(e) => e.target.files?.[0] && void runUpload(e.target.files[0])} />
+                  <input type="file" accept="audio/*" className="hidden" onChange={(e) => { const file = e.target.files?.[0]; e.target.value = ""; if (file) void runUpload(file); }} />
                 </label>
                 {active && (
                   <button className="btn btn-danger w-full" onClick={endCall}>
@@ -459,7 +494,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
         </div>
 
         {/* Centre: dial + transcript */}
-        <div className="space-y-5 lg:col-span-6">
+        <div className="min-w-0 space-y-5 lg:col-span-6">
           <div className="card card-strong p-5">
             <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[auto_1fr]">
               <RiskDial risk={state.risk} />
@@ -494,7 +529,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
           </div>
 
           <div className="card p-4">
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3 flex flex-wrap gap-2 items-center justify-between">
               <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted">
                 <Activity className="h-3.5 w-3.5 text-teal" /> Live transcript
               </div>
@@ -502,7 +537,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
                 {state.lines.length} lines · {dangerLines} flagged · {state.interventionCount} interventions
               </div>
             </div>
-            <Transcript lines={state.lines} interim={state.interim} className="h-[28rem]" />
+            <Transcript lines={state.lines} interim={state.interim} className="h-[23rem] sm:h-[28rem]" />
           </div>
 
           <AnimatePresence>
@@ -520,8 +555,8 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-3">
                   {state.ended.risk.level !== "safe" && !state.reported && (
-                    <button className="btn btn-ghost" onClick={() => send({ type: "call.report", consent: true })}>
-                      <Flag className="h-4 w-4 text-saffron" /> Report this script to protect others
+                    <button className="btn btn-ghost whitespace-normal text-left" onClick={() => send({ type: "call.report", consent: true })}>
+                      <Flag className="h-4 w-4 text-saffron" /> Share flagged caller lines with Moss
                     </button>
                   )}
                   {state.reported && <span className={cn("text-sm", state.reported.ok ? "text-moss" : "text-danger-2")}>{state.reported.message}</span>}
@@ -535,7 +570,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
         </div>
 
         {/* Right: evidence + coach */}
-        <div className="space-y-5 lg:col-span-3">
+        <div className="min-w-0 space-y-5 lg:col-span-3">
           <div className="card p-4">
             <div className="mb-3 text-xs uppercase tracking-[0.2em] text-muted">Coach</div>
             <CoachCard advice={state.advice} llmModel={state.hello?.llm.model} />
@@ -554,7 +589,7 @@ export function ShieldApp({ initialScenario, initialSilent = false, initialFast 
           )}
         </div>
       </div>
-      {state.error && <div className="mt-4 rounded-xl border border-danger/40 bg-danger/10 p-3 text-sm text-danger-2">{state.error}</div>}
+      {state.error && <div role="alert" className="mt-4 rounded-xl border border-danger/40 bg-danger/10 p-3 text-sm text-danger-2">{state.error}</div>}
     </div>
   );
 }

@@ -7,5 +7,5 @@ export default async function ShieldPage({ searchParams }: { searchParams: Promi
   const sp = await searchParams;
   const scenario = typeof sp.scenario === "string" ? sp.scenario : undefined;
   const flag = (k: string) => sp[k] === "1" || sp[k] === "true";
-  return <ShieldApp initialScenario={scenario} initialSilent={flag("silent")} initialFast={flag("fast")} />;
+  return <ShieldApp initialMode={sp.mode === "live" ? "live" : "simulation"} initialScenario={scenario} initialSilent={flag("silent")} initialFast={flag("fast")} />;
 }

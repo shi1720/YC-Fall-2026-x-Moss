@@ -47,6 +47,6 @@
     "typescript": "^5",
     "vitest": "^5.0.1"
   },
-  "description": "Raksha — the real-time scam-call shield. Sub-10 ms script recognition with Moss.",
+  "description": "Raksha: the real-time scam-call shield. Sub-10 ms script recognition with Moss.",
   "type": "module"
 }

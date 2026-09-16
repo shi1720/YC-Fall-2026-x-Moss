@@ -1,3 +1,4 @@
+import { z } from "zod";
 /**
  * WebSocket protocol shared by the browser and the server. Every message is JSON with a
  * `type` discriminator. Kept intentionally small and explicit.
@@ -57,3 +58,15 @@ export type ServerMessage =
 export function encode(msg: ServerMessage | ClientMessage): string {
   return JSON.stringify(msg);
 }
+
+/** Validate every untrusted socket message before it reaches the engine. */
+export const clientMessageSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("call.start"), mode: z.enum(["live", "simulation", "upload"]), scenarioId: z.string().max(100).optional(), familyCode: z.string().regex(/^[A-Z0-9]{6,8}$/i).optional(), region: z.enum(["IN", "US", "UK", "AU", "GLOBAL"]).optional(), displayName: z.string().max(80).optional() }),
+  z.object({ type: z.literal("utterance"), text: z.string().min(1).max(4000), speaker: z.enum(["caller", "user", "unknown"]), final: z.boolean(), t: z.number().finite().min(0).max(86400000).optional() }),
+  z.object({ type: z.literal("call.end") }),
+  z.object({ type: z.literal("call.report"), consent: z.literal(true) }),
+  z.object({ type: z.literal("guardian.join"), familyCode: z.string().regex(/^[A-Z0-9]{6,8}$/i), name: z.string().max(80).optional() }),
+  z.object({ type: z.literal("guardian.say"), text: z.string().trim().min(1).max(300) }),
+  z.object({ type: z.literal("guardian.ask"), question: z.string().trim().min(1).max(500) }),
+  z.object({ type: z.literal("ping") }),
+]);

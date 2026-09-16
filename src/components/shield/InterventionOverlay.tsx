@@ -28,13 +28,15 @@ export function InterventionOverlay({
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-[#2a0608]/90 p-4 backdrop-blur-md"
           role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="intervention-title"
           aria-live="assertive"
         >
           <motion.div
             initial={{ scale: 0.92, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 220, damping: 22 }}
-            className="w-full max-w-2xl rounded-3xl border border-danger/50 bg-[#1a0507] p-6 shadow-[0_0_80px_-10px_rgba(239,68,68,0.6)] sm:p-8"
+            className="max-h-[90dvh] overflow-y-auto w-full max-w-2xl rounded-3xl border border-danger/50 bg-[#1a0507] p-6 shadow-[0_0_80px_-10px_rgba(239,68,68,0.6)] sm:p-8"
           >
             <div className="flex items-center gap-3 text-danger-2">
               <span className="pulse-ring relative flex h-10 w-10 items-center justify-center rounded-full bg-danger/20">
@@ -42,7 +44,7 @@ export function InterventionOverlay({
               </span>
               <span className="text-xs font-bold uppercase tracking-[0.25em]">Raksha · scam detected</span>
             </div>
-            <h2 className="display mt-4 text-3xl leading-tight text-white sm:text-4xl">{intervention.headline}</h2>
+            <h2 id="intervention-title" className="display mt-4 text-3xl leading-tight text-white sm:text-4xl">{intervention.headline}</h2>
             <p className="mt-3 text-lg leading-snug text-white/85">{intervention.body}</p>
             <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 p-4">
               <div className="text-[11px] font-semibold uppercase tracking-wider text-white/60">Say this, then hang up</div>

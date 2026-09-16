@@ -104,7 +104,7 @@
     "family": "benign",
     "expected": "benign",
     "persona": "Arjun Mehta, 34, Mumbai",
-    "blurb": "A real Blue Dart delivery partner confirms the slot, asks for the gate number and collects the app OTP at the door — the one OTP that is fine to share.",
+    "blurb": "A real Blue Dart delivery partner confirms the slot, asks for the gate number and collects the app OTP at the door. the one OTP that is fine to share.",
     "expectDangerByTurn": null,
     "turns": 12,
     "source": "authored for evaluation (paraphrased from public advisories)"
@@ -126,7 +126,7 @@
     "family": "benign",
     "expected": "benign",
     "persona": "Grandma Lakshmi, 74",
-    "blurb": "Her grandson calls from college: he needs money for a hostel fee, says take your time, and will send the receipt — everything a scammer never does.",
+    "blurb": "Her grandson calls from college: he needs money for a hostel fee, says take your time, and will send the receipt. everything a scammer never does.",
     "expectDangerByTurn": null,
     "turns": 12,
     "source": "authored for evaluation (paraphrased from public advisories)"

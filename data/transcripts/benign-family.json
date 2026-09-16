@@ -4,7 +4,7 @@
   "family": "benign",
   "expected": "benign",
   "persona": "Grandma Lakshmi, 74",
-  "blurb": "Her grandson calls from college: he needs money for a hostel fee, says take your time, and will send the receipt — everything a scammer never does.",
+  "blurb": "Her grandson calls from college: he needs money for a hostel fee, says take your time, and will send the receipt. everything a scammer never does.",
   "expectDangerByTurn": null,
   "turns": [
     {

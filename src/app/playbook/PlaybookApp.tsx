@@ -17,9 +17,10 @@ interface Catalog {
 export function PlaybookApp() {
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [q, setQ] = useState("");
-  const [result, setResult] = useState<{ q: string; matches: Match[]; engineMs: number; wallMs: number; roundTripMs: number } | null>(null);
+  const [result, setResult] = useState<{ q: string; matches: Match[]; engineMs: number; wallMs: number; roundTripMs: number; runtime: string } | null>(null);
   const [family, setFamily] = useState<Family | null>(null);
   const seq = useRef(0);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/playbook").then((r) => r.json()).then(setCatalog).catch(() => {});
@@ -27,22 +28,24 @@ export function PlaybookApp() {
 
   const setQuery = (v: string) => {
     setQ(v);
+    setError(null);
     if (!v.trim()) setResult(null);
   };
 
   useEffect(() => {
-    if (!q.trim()) return;
     const id = ++seq.current;
+    if (!q.trim()) return;
+    let cancelled = false;
     const t0 = performance.now();
     const timer = setTimeout(() => {
       fetch(`/api/playbook?q=${encodeURIComponent(q)}&k=8`)
-        .then((r) => r.json())
+        .then((r) => { if (!r.ok) throw new Error("Search is unavailable. Please try again."); return r.json(); })
         .then((d) => {
-          if (id === seq.current) setResult({ ...d, roundTripMs: performance.now() - t0 });
+          if (!cancelled && id === seq.current) setResult({ ...d, roundTripMs: performance.now() - t0 });
         })
-        .catch(() => {});
+        .catch((err) => { if (!cancelled && id === seq.current) setError((err as Error).message); });
     }, 60);
-    return () => clearTimeout(timer);
+    return () => { clearTimeout(timer); cancelled = true; };
   }, [q]);
 
   const famInfo = useMemo(() => catalog?.families.find((f) => f.id === family) ?? null, [catalog, family]);
@@ -61,7 +64,7 @@ export function PlaybookApp() {
       <div className="card card-strong mt-6 p-4">
         <div className="relative">
           <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-faint" />
-          <input className="input py-3.5 pl-12 pr-12 text-lg" value={q} onChange={(e) => setQuery(e.target.value)} placeholder="Try: your parcel has drugs, share the OTP to cancel, install AnyDesk…" autoFocus />
+          <input aria-label="Search the scam playbook" maxLength={2000} className="input py-3.5 pl-12 pr-12 text-lg" value={q} onChange={(e) => setQuery(e.target.value)} placeholder="Try: your parcel has drugs, share the OTP to cancel, install AnyDesk…" autoFocus />
           {q && (
             <button className="absolute right-4 top-1/2 -translate-y-1/2 text-faint hover:text-text" onClick={() => setQuery("")} aria-label="Clear">
               <X className="h-5 w-5" />
@@ -75,6 +78,8 @@ export function PlaybookApp() {
             </button>
           ))}
         </div>
+        {(result?.runtime ?? catalog?.runtime.mode) === "mock" && <p className="mt-3 text-sm text-caution">Offline text detector active. Matches and timings below are not from Moss.</p>}
+        {error && <p role="alert" className="mt-3 text-danger-2">{error}</p>}
         <AnimatePresence mode="wait">
           {result && (
             <motion.div key={result.q} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mt-4">
@@ -83,7 +88,7 @@ export function PlaybookApp() {
                   engine search <span className="mono text-moss">{fmtMs(result.engineMs)}</span>
                 </span>
                 <span>
-                  embed + search in process <span className="mono text-moss">{fmtMs(result.wallMs)}</span>
+                  {result.runtime === "moss" ? "embed + search in process" : "text search in process"} <span className="mono text-moss">{fmtMs(result.wallMs)}</span>
                 </span>
                 <span>
                   browser round-trip <span className="mono text-text">{fmtMs(result.roundTripMs)}</span>

@@ -29,7 +29,7 @@ fi
 set -a; source ./.env; set +a
 : "${MOSS_PROJECT_ID:?missing in .env}" "${MOSS_PROJECT_KEY:?missing in .env}" "${GROQ_API_KEY:?missing in .env}"
 
-echo "▲ Deploying ${SERVICE} to Cloud Run — project ${PROJECT}, region ${REGION}"
+echo "▲ Deploying ${SERVICE} to Cloud Run. project ${PROJECT}, region ${REGION}"
 gcloud config set project "${PROJECT}" >/dev/null
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com --quiet
 
@@ -47,14 +47,14 @@ print(next((e.get("value","") for e in env if e.get("name")=="RAKSHA_PUBLIC_URL"
 
 RUN_FLAGS=(
   --region "${REGION}" --platform managed --allow-unauthenticated
-  --session-affinity --timeout 3600 --cpu 1 --memory 1Gi --concurrency 80
-  --min-instances "${MIN_INSTANCES:-0}" --max-instances 3
+  --session-affinity --timeout 3600 --cpu 2 --memory 1Gi --concurrency 80
+  --min-instances "${MIN_INSTANCES:-0}" --max-instances 1
   --set-env-vars "NODE_ENV=production,HOSTNAME=0.0.0.0,MOSS_MODEL_CACHE_DIR=/tmp/moss-models,MOSS_CACHE_PATH=/tmp/moss-cache,MOSS_EMBEDDING_INTRA_OP_THREADS=2,MOSS_PROJECT_ID=${MOSS_PROJECT_ID},MOSS_PROJECT_KEY=${MOSS_PROJECT_KEY},GROQ_API_KEY=${GROQ_API_KEY},RAKSHA_WS_ORIGIN=${RUN_URL}${PUBLIC_URL:+,RAKSHA_PUBLIC_URL=${PUBLIC_URL}}"
   --quiet
 )
 
 if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1 && [[ "${BUILD_MODE:-local}" == "local" ]]; then
-  # Build with the local Docker daemon (Cloud Shell has one) using YOUR credentials —
+  # Build with the local Docker daemon (Cloud Shell has one) using YOUR credentials -
   # avoids the Cloud Build service-account permissions that fresh projects often lack.
   echo "Building ${IMAGE} with local Docker…"
   gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet

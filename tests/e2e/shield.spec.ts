@@ -5,6 +5,7 @@ test("health reports a ready retrieval runtime", async ({ request }) => {
   expect(res.ok()).toBeTruthy();
   const body = await res.json();
   expect(body.ok).toBe(true);
+  if (process.env.REQUIRE_MOSS === "1") expect(body.retrieval.mode).toBe("moss");
   expect(body.retrieval.docCount).toBeGreaterThan(300);
 });
 

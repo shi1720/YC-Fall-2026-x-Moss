@@ -1,4 +1,4 @@
-# Raksha — Architecture
+# Raksha. Architecture
 
 > One utterance in, one verdict out, in single-digit milliseconds. This document explains how the pieces fit, why the retrieval layer sits where it does, and what the latency budget looks like.
 
@@ -20,7 +20,7 @@ Hence a **fast path** (Moss + a small deterministic risk engine, on every fragme
 
 | Component | Where | Responsibility |
 |---|---|---|
-| Speech → text | Browser (Web Speech API), or Groq Whisper for recordings | Streams interim + final fragments. Nothing is stored. |
+| Speech → text | Browser (Web Speech API), or Groq Whisper for recordings | Streams interim + final fragments. Audio is not written to disk by Raksha. |
 | Shield UI | Browser (`/shield`) | Risk dial, transcript with tactic chips, playbook matches, coach card, full-screen intervention with spoken coaching. Modes: simulation (scripted call with two TTS voices), live microphone, uploaded recording. |
 | WebSocket gateway | `server/ws.ts` | One socket per protected phone or guardian. Routes utterances in, fans engine events out. Guardian rooms keyed by family code, with state replay on late join. |
 | Call manager | `src/lib/engine/calls.ts` | Per-call state in RAM: transcript, `RiskState`, interventions, coach advice, latency percentiles. Writes each turn into the shared memory session tagged with the call id, and deletes them at call end. |
@@ -80,7 +80,7 @@ The engine is intentionally small and inspectable (see `src/lib/engine/risk.ts`,
 
 **Calibration.** Moss is queried with `alpha: 1.0` so scores are raw cosine similarities and comparable across queries. A score is mapped to a confidence with a linear ramp between a floor (noise) and a ceiling (near-paraphrase): `RAKSHA_SCORE_FLOOR` / `RAKSHA_SCORE_CEIL`, tuned by the eval harness.
 
-**Crediting.** For one fragment we take the top hits, apply benign suppression (if a *legitimate look-alike* line scores as high as the best tactic line, the fragment is ignored — this is how *"we will never ask for your OTP"* stays quiet), apply a rank discount (the top hit is what the fragment *is*; the rest is what it *resembles*), and make it speaker-aware: the protected person's own words can only ever be evidence of **compliance** (reading an OTP, agreeing to transfer), never of the caller's pressure tactics — and vice-versa.
+**Crediting.** For one fragment we take the top hits, apply benign suppression (if a *legitimate look-alike* line scores as high as the best tactic line, the fragment is ignored. this is how *"we will never ask for your OTP"* stays quiet), apply a rank discount (the top hit is what the fragment *is*; the rest is what it *resembles*), and make it speaker-aware: the protected person's own words can only ever be evidence of **compliance** (reading an OTP, agreeing to transfer), never of the caller's pressure tactics. and vice-versa.
 
 **Accumulating.** Each of 21 tactics keeps the best confidence seen in the call (evidence persists; a scam does not un-happen because the caller went quiet). The base score is a noisy-OR:
 
@@ -120,7 +120,7 @@ For one spoken sentence (~2.5 s at conversational pace):
 | WebSocket hop | 20–80 ms | yes |
 | **Moss embed + search** | **≈ 10–18 ms on a shared 4-vCPU container (search itself < 1 ms)** | yes |
 | Risk engine | < 0.1 ms | yes |
-| LLM coach | 300–800 ms | **no** — async, on transitions only |
+| LLM coach | 300–800 ms | **no**. async, on transitions only |
 
 The `Latency lab` page measures the Moss numbers live against the running instance; `docs/eval/REPORT.md` records them for the committed evaluation.
 
@@ -162,7 +162,7 @@ Implemented in `src/lib/moss/intel.ts` and wired to the `call.report` WebSocket 
 
 ## 8. Security & privacy
 
-* **Speech-to-text** happens in the browser via the Web Speech API. Chrome and Edge send audio to the vendor's speech service; Safari transcribes on-device. Raksha's server never receives audio in live mode, only text fragments, which it holds in RAM for the duration of the call and discards at call end. Roadmap: an on-device Whisper build (WebGPU) for browsers, and platform STT in the mobile app, so no audio leaves the phone at all.
+* **Speech-to-text** happens in the browser via the Web Speech API. Chrome and Edge send audio to the vendor's speech service; On-device support varies. Raksha's server never receives audio in live mode, only text fragments, which it holds in RAM for the duration of the call and retains in RAM for up to ten minutes after call end. Roadmap: an on-device Whisper build (WebGPU) for browsers, and platform STT in the mobile app, so no audio leaves the phone at all.
 * Recordings uploaded in "Recording" mode are streamed to Whisper on Groq for transcription (Groq's API does not retain audio) and are not stored by Raksha.
 * The LLM coach receives only the recent transcript text and the risk summary, never audio, and only on risk transitions.
 * Community reporting is opt-in per call and shares only the *caller's* flagged lines, never the protected person's words.
@@ -187,3 +187,8 @@ scripts/           seed-moss, moss-status, eval, build-server
 tests/             unit (vitest) and e2e (Playwright)
 docs/              PRD, this document, eval report, research, video script, deck
 ```
+
+
+## Public demo deployment boundary
+
+Firebase Hosting serves the public HTTPS URL; WebSockets connect directly to Cloud Run through `/api/config`. The demo runs one Cloud Run instance. Calls, guardians and Moss sessions are in process memory, so a multi-instance deployment must add shared state and explicit session routing. Input schemas, message budgets, size limits and explicit report consent protect the public demo boundary. These are prototype controls, not a production security certification.

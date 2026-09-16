@@ -1,0 +1,54 @@
+[
+  {
+    "scene": "opening",
+    "text": "A scam call can sound official, urgent, even caring. The danger begins when someone feels too frightened to hang up."
+  },
+  {
+    "scene": "opening",
+    "text": "Meet Raksha. A second listener that spots the script, explains the pressure, and brings in someone you trust."
+  },
+  {
+    "scene": "shield",
+    "text": "This is the deployed app. Moss cloud credits are exhausted, so this recording uses the clearly labeled offline detector."
+  },
+  {
+    "scene": "danger",
+    "text": "Watch what happens when pressure turns into a request. Raksha raises a warning and shows why this conversation matches a scam pattern."
+  },
+  {
+    "scene": "danger",
+    "text": "The most important part is simple: the exact words to say. I will not continue this call. I am going to verify this myself. Goodbye."
+  },
+  {
+    "scene": "guardian",
+    "text": "Now open the guardian link in a second tab. Someone you trust sees the same call, the same risk, and the words that triggered the warning."
+  },
+  {
+    "scene": "guardian",
+    "text": "The guardian can send a message through the shield, or search for relevant words in the current call. Call memory is cleared when the call ends."
+  },
+  {
+    "scene": "benign",
+    "text": "A useful shield must also know when to stay quiet. Here is a genuine hospital appointment call. It finishes without a danger alert."
+  },
+  {
+    "scene": "playbook",
+    "text": "The playbook makes retrieval visible. Type something a scammer might say and inspect the matching lines, tactics and similarity scores."
+  },
+  {
+    "scene": "lab",
+    "text": "The latency lab shows the active engine and separates search time from the browser round trip. These fallback timings are not Moss benchmarks."
+  },
+  {
+    "scene": "architecture",
+    "text": "In the full architecture, Moss handles retrieval. A deterministic risk engine decides when to warn. The language model explains the evidence separately, so detection does not wait for it."
+  },
+  {
+    "scene": "closing",
+    "text": "Our committed evaluation caught all ten scripted scam calls and raised no danger alert on eight genuine calls. That is a starting point, not proof of real world accuracy."
+  },
+  {
+    "scene": "closing",
+    "text": "Next come broader testing, more languages, stronger guardian invitations and on device speech. Raksha gives people a moment to pause before a scam becomes a loss."
+  }
+]

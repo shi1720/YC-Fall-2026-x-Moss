@@ -1,11 +1,11 @@
-# Raksha — Product Requirements Document
+# Raksha. Product Requirements Document
 
 | | |
 |---|---|
-| **Product** | Raksha — the real-time scam-call shield |
+| **Product** | Raksha. the real-time scam-call shield |
 | **Version** | 1.0 (hackathon MVP, production-shaped) |
 | **Authors** | Shivam Gupta, with Claude |
-| **Event** | YC Fall 2026 × Moss — Zero Latency Builder Sprint |
+| **Event** | YC Fall 2026 × Moss. Zero Latency Builder Sprint |
 | **Theme** | Real-Time Voice & Conversational AI (with Local-First and Multiplayer elements) |
 | **YC RFS inspiration** | *Proving You're Human* (Max Kolysh) · *AI for the Aging Population* (Max Kolysh) |
 | **Status** | Built, tested, deployed |
@@ -21,7 +21,7 @@ Phone scams are conversations with a script. Nobody protects people *during* the
 ### 1.2 Evidence
 
 * Indians reported **₹22,845 crore** lost to cyber fraud in 2024 (up 206% year-on-year, ~10× 2022) across 22.68 lakh complaints; 2025 was flat at ₹22,495 crore. Cumulatively ≈ ₹53,000 crore over six years. *(MHA, Lok Sabha Q.432, Dec 2025)*
-* **Digital arrest** — fake police/CBI/customs officers who keep a victim on a video call and drain their savings — took **₹1,918 crore from 1,23,672 people in 2024** (+465% year-on-year); average loss per case ≈ ₹1.5–3.7 lakh. The Supreme Court took *suo motu* cognisance in October 2025. *(MHA data; SMW(Crl) 3/2025)*
+* **Digital arrest**. fake police/CBI/customs officers who keep a victim on a video call and drain their savings. took **₹1,918 crore from 1,23,672 people in 2024** (+465% year-on-year); average loss per case ≈ ₹1.5–3.7 lakh. The Supreme Court took *suo motu* cognisance in October 2025. *(MHA data; SMW(Crl) 3/2025)*
 * Losses concentrate on the elderly: single victims have lost ₹1.5 cr (a senior couple), ₹3.09 cr (Karnataka), ₹2 cr (a 92-year-old).
 * Globally: FTC 2025 reported **$15.9B** in fraud losses; phone calls have the **highest median loss of any channel ($1,835)**, and **41% of $10k+ losses by older adults began with a phone call**. FBI IC3 2025: victims aged 60+ lost **$7.7B**, average > $38,000. *(FTC, IC3)*
 * The Arup case: one finance employee wired **US$25.6M** after a video call with a deepfaked CFO and colleagues. *(CNN, 2024)*
@@ -43,7 +43,7 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 ### 1.4 Why now
 
 * Token and embedding costs fall ~10×/year; on-device semantic search now runs in single-digit milliseconds (Moss).
-* Regulation is moving liability onto banks: UK PSR mandatory reimbursement (Oct 2024, £354M reimbursed in 2025); **RBI's June 2026 directions make Indian banks compensate scam-induced losses from 1 Jan 2027** — the first time authorised-push-payment fraud carries a mandated cost for the bank.
+* Regulation is moving liability onto banks: UK PSR mandatory reimbursement (Oct 2024, £354M reimbursed in 2025); **RBI's June 2026 directions make Indian banks compensate scam-induced losses from 1 Jan 2027**. the first time authorised-push-payment fraud carries a mandated cost for the bank.
 * Deepfake voice makes "trust the voice" obsolete; the only durable signal left is the *script*.
 
 ## 2. Users
@@ -89,10 +89,10 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 
 | Level | Trigger | What the person experiences |
 |---|---|---|
-| **Caution** (25–59) | First pressure tactics with confidence, or a coach "suspicious" | Amber toast: *"Careful — this call is starting to sound like a scam."* + one sentence to say. Guardian notified. |
+| **Caution** (25–59) | First pressure tactics with confidence, or a coach "suspicious" | Amber toast: *"Careful. this call is starting to sound like a scam."* + one sentence to say. Guardian notified. |
 | **Danger** (≥ 60) | The triad (pressure + ask), 4 distinct tactics, or coach "scam" | Full-screen red overlay, spoken aloud: script name, why, *"Say this, then hang up"*, helpline. Simulation pauses. Guardian alerted. |
 | **Targeted ask** (at danger) | A new ask tactic (OTP, transfer, remote access, personal info) | Louder, specific: *"Do NOT read out the OTP."* |
-| **Compliance** (≥ 85) | The person begins to comply under pressure | *"STOP. Put the phone down."* — immediate, not rate-limited. |
+| **Compliance** (≥ 85) | The person begins to comply under pressure | *"STOP. Put the phone down."*. immediate, not rate-limited. |
 
 ### 4.3 Functional requirements
 
@@ -128,7 +128,7 @@ Full sourced fact sheet: [research/market-facts.md](research/market-facts.md).
 
 ### 4.5 Onboarding flow (no accounts)
 
-1. The protected person opens the shield once; a six-character **family code** is generated and stored on that device only.
+1. The protected person opens the shield once; a eight-character **family code** is generated and stored on that device only.
 2. They tap *Copy link* and send it to a trusted person on WhatsApp, or read the code out.
 3. The guardian opens the link; their browser joins the code's room and stays subscribed. Late joiners receive a replay of the current call state.
 4. Every later call on the protected device broadcasts to that room automatically. Either side can rotate the code at any time; there is nothing to revoke because there is nothing stored.
@@ -146,7 +146,7 @@ The 0–100 score is a **noisy-OR over persuasion tactics**: each retrieval hit'
 | Transcript text | Raksha server RAM, per call; the process's Moss *session* (local, in-process, turns tagged by call id) for recall | Turns deleted from the session at call end; record discarded after a 10-minute grace for the guardian summary |
 | Coach prompts | Recent transcript text + risk summary to the LLM provider over TLS, only on risk transitions | Not stored by Raksha |
 | Community reports | Caller's flagged lines only, opt-in, into the `raksha-intel` Moss index | Retained (shared knowledge); no personal data of the protected person |
-| Identity | None. No accounts, cookies or analytics; family codes are random capability tokens | — |
+| Identity | None. No accounts, cookies or analytics; family codes are random capability tokens |. |
 
 Full privacy and threat model: [PRIVACY.md](PRIVACY.md).
 
@@ -169,7 +169,7 @@ North-star metric for the product: **₹ of transfers prevented per 1,000 protec
 
 1. **Banks and payment apps (B2B2C, primary).** From 1 Jan 2027 RBI makes banks compensate scam-induced losses; UK banks already reimburse ~61% of APP fraud. LexisNexis puts the all-in cost of $1 of fraud at > $5. A per-protected-customer licence (₹5–15/month) that stops even a fraction of transfers is cheaper than any refund, and the bank gets a "transfer hold" signal it can act on in real time (the CBA–Telstra pattern, but with content).
 2. **Telcos and OEMs.** A "protected line" add-on (₹49–99/month) on any Android phone, not just a Pixel; DoT's kill-switch ambitions need exactly this signal.
-3. **Families (B2C).** A ₹99/month circle that protects parents — the price band where family-safety apps already convert (Life360: 2.8M paying circles, ARPPC $143/yr).
+3. **Families (B2C).** A ₹99/month circle that protects parents. the price band where family-safety apps already convert (Life360: 2.8M paying circles, ARPPC $143/yr).
 
 **Unit cost per protected call** (10-minute call, ~120 fragments):
 
@@ -196,7 +196,7 @@ Go-to-market: start B2C in India with the family circle (the emotional wedge: *p
 
 ## 7. Competitive positioning
 
-*"Truecaller tells you who is calling. Raksha tells you what they are doing to you — and what to say back."*
+*"Truecaller tells you who is calling. Raksha tells you what they are doing to you. and what to say back."*
 
 Defensibility comes from (a) the tactic-tagged playbook and the benign counter-set, which improve with every report, (b) the intervention UX validated on real people under stress, and (c) distribution through banks who now carry the liability.
 
@@ -222,15 +222,15 @@ Defensibility comes from (a) the tactic-tagged playbook and the benign counter-s
 
 ## 10. Open questions
 
-* What is the right default for *who* can add a guardian — the protected person, or a family member during setup?
+* What is the right default for *who* can add a guardian. the protected person, or a family member during setup?
 * How should the bank-side signal be priced: per protected customer, or per prevented transfer?
-* Should the intervention ever auto-disconnect the call (Truecaller's family-protection can hang up remotely)? Our current stance: never without a human — the guardian or the person — in the loop.
+* Should the intervention ever auto-disconnect the call (Truecaller's family-protection can hang up remotely)? Our current stance: never without a human. the guardian or the person. in the loop.
 
-## Appendix A — The playbook
+## Appendix A. The playbook
 
 409 lines across 31 families (17 India-specific, 8 global, 5 US, 2 UK/AU), each tagged with 1–4 of 21 tactics, a severity (1–5), a script stage and a region; 75 benign look-alikes; 26 "victim about to comply" lines. Source and methodology: [research/scam-corpus.md](research/scam-corpus.md). Data file: [`data/playbook.json`](../data/playbook.json).
 
-## Appendix B — The tactic taxonomy
+## Appendix B. The tactic taxonomy
 
 Authority · Urgency · Fear · Secrecy · Isolation · Payment demand · OTP/PIN request · Remote access · Skip verification · Too good to be true · Reciprocity · Personal-info request · Social proof · Escalation · Keep you on the line · Video-call demand · Legal threat · Account compromised · Relationship pretext · Tech pretext · You are about to comply.
 
