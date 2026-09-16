@@ -22,3 +22,6 @@ The app is a prototype. Scripted evaluation results are not real-world accuracy 
 Narration is AI-generated using OpenAI text to speech. Captions are included. Call scenarios use fictional people and scripted conversations.
 
 Created by Shivam Gupta.
+
+# Published demo
+https://www.youtube.com/watch?v=yy0Ek4Ot_mE

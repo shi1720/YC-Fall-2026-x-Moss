@@ -22,6 +22,8 @@ Project image: `assets/thumbnail.png`
 
 Architecture image: `assets/architecture.png`
 
+Demo video: https://www.youtube.com/watch?v=yy0Ek4Ot_mE
+
 Video title and description: `youtube.md`
 
 A CAPTCHA blocks project creation. These fields are prepared but have not been saved or submitted on Devpost. HiDevs separately requires the participant's profile and LinkedIn sync before registration.

@@ -52,3 +52,5 @@ All eight end-to-end tests pass against the final source and hosted release. Loc
 The final detector replay passed all 18 scenarios and 264 utterances in disclosed offline mode: p50 0.58 ms, p95 2.13 ms. These are text-detector server timings, not Moss benchmarks. The earlier real-Moss run is recorded separately above.
 
 Video verification: 116.76 seconds, 1920 x 1080 H.264, AAC narration, burned captions and an embedded English subtitle track. Peak audio level -1.4 dB. Key frames were visually reviewed. The narration and on-screen labels disclose fallback mode.
+
+The public video is https://www.youtube.com/watch?v=yy0Ek4Ot_mE. YouTube reported no copyright or Community Guidelines issues, and playback was verified. GitHub CI passed for the release changes.

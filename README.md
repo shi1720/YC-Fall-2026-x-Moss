@@ -145,3 +145,5 @@ A safe score means no recognised scam pattern, not that a caller is verified. Sc
 ### Current hosted service status
 
 The release is live at https://raksha-app.web.app. Moss cloud credits were exhausted during the final rollout on 16 September 2026, so the app currently labels and uses its offline detector. Restore the existing Moss project credits for automatic recovery. Fallback timings are not Moss benchmarks. See [release verification](docs/submission/verification.md) for both runs and remaining submission prerequisites.
+
+Demo with narration and captions: https://www.youtube.com/watch?v=yy0Ek4Ot_mE
